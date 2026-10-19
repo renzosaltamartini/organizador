@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizador Personal</title>
+  
+  <!-- Fonts: Poppins & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            mono: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            cardBg: 'rgba(12, 25, 56, 0.65)',
+            cardBorder: 'rgba(255, 255, 255, 0.12)',
+            inputBg: 'rgba(4, 15, 36, 0.8)',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#020b18] text-slate-100 min-h-screen font-sans antialiased pb-16 selection:bg-blue-500/30 selection:text-blue-200 relative overflow-x-hidden">
+
+  <!-- PANTALLA DE BLOQUEO / LOGIN CON GOOGLE -->
+  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#020b18]/95 backdrop-blur-2xl flex items-center justify-center p-4">
+    <div class="bg-cardBg border border-cardBorder rounded-[28px] p-8 max-w-sm w-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-center space-y-6">
+      <div class="w-20 h-20 mx-auto rounded-full bg-slate-900 border-2 border-blue-500/40 p-2 shadow-lg flex items-center justify-center overflow-hidden">
+        <img src="https://www.ligaprofesional.ar/wp-content/uploads/2023/10/gimnasia-y-esgrima-de-la-plata-logo.png" 
+             alt="GELP" class="w-full h-full object-contain">
+      </div>
+      <div>
+        <h2 class="text-xl font-bold text-white tracking-tight">Acceso Restringido</h2>
+        <p class="text-xs text-slate-400 mt-1">Inicia sesión con tu cuenta autorizada de Google</p>
+      </div>
+
+      <div class="space-y-3">
+        <button id="btn-google-login" class="w-full bg-white hover:bg-slate-100 text-slate-800 py-3 px-4 rounded-xl text-xs font-semibold transition shadow-lg flex items-center justify-center gap-2 active:scale-95">
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/>
+          </svg>
+          Iniciar sesión con Google
+        </button>
+        <p id="error-login" class="text-[11px] text-rose-400 hidden mt-2">Acceso denegado: tu correo no está autorizado.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL (Oculto hasta autenticarse) -->
+  <div id="app-content" class="hidden">
+
+    <!-- Fondo Dark Blue Wave -->
+    <div class="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#004499] via-[#02183c] to-[#010712]"></div>
+    <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-[#0a3880]/30 via-transparent to-transparent"></div>
+
+    <!-- Topbar -->
+    <header class="w-full bg-[#020d22]/70 backdrop-blur-2xl border-b border-white/10 sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center text-xs font-normal text-slate-300">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="layout-dashboard" class="w-4 h-4 text-blue-400"></i>
+          <span class="font-bold text-white tracking-tight text-sm">Organizador</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="flex items-center gap-1.5 text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 text-[11px] font-medium backdrop-blur-md">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado
+          </span>
+          <button id="btn-logout" title="Cerrar sesión" class="p-1.5 bg-slate-800/80 hover:bg-rose-500/20 hover:text-rose-400 border border-white/10 rounded-xl transition text-slate-400">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Principal -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-8 space-y-6">
+
+      <!-- FILA 1: Header de Perfil & Métricas -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        
+        <!-- Card Perfil -->
+        <div class="md:col-span-5 bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl flex flex-col justify-between">
+          <div class="flex items-center gap-4">
+            <div class="relative group">
+              <div class="w-16 h-16 rounded-full bg-slate-900 border-2 border-blue-500/40 p-1.5 shadow-lg flex items-center justify-center overflow-hidden">
+                <img src="https://www.ligaprofesional.ar/wp-content/uploads/2023/10/gimnasia-y-esgrima-de-la-plata-logo.png" 
+                     alt="GELP" class="w-full h-full object-contain">
+              </div>
+              <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#07132b] rounded-full"></span>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold text-white tracking-tight">Renzo</h2>
+              <p class="text-xs text-blue-400 font-medium mt-0.5">Panel Personal</p>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center text-xs text-slate-400">
+            <span class="font-medium">Estado del sistema</span>
+            <span class="text-blue-400 font-semibold bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full text-[11px]">En Línea</span>
+          </div>
+        </div>
+
+        <!-- Card Estadísticas Rápidas -->
+        <div class="md:col-span-7 bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl grid grid-cols-2 gap-4">
+          <div class="bg-inputBg border border-white/5 rounded-2xl p-4 flex flex-col justify-between hover:border-white/10 transition">
+            <div class="flex items-center gap-2 text-emerald-400">
+              <span class="p-2 bg-emerald-500/10 rounded-xl border border-emerald-500/20"><i data-lucide="wallet" class="w-4 h-4"></i></span>
+              <span class="text-xs font-semibold text-slate-300">Gastos Totales</span>
+            </div>
+            <span id="widget-total-gastos" class="text-2xl font-bold font-mono text-white tracking-tight mt-2">$0</span>
+          </div>
+
+          <div class="bg-inputBg border border-white/5 rounded-2xl p-4 flex flex-col justify-between hover:border-white/10 transition">
+            <div class="flex items-center gap-2 text-amber-400">
+              <span class="p-2 bg-amber-500/10 rounded-xl border border-amber-500/20"><i data-lucide="check-square" class="w-4 h-4"></i></span>
+              <span class="text-xs font-semibold text-slate-300">Pendientes</span>
+            </div>
+            <span id="widget-pendientes" class="text-2xl font-bold font-mono text-white tracking-tight mt-2">0</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FILA 2: FECHAS DE PARCIALES -->
+      <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex items-center gap-2.5">
+            <span class="p-2 bg-purple-500/10 text-purple-400 rounded-xl border border-purple-500/20">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </span>
+            <div>
+              <h3 class="font-bold text-base text-white tracking-tight">Fechas de Parciales</h3>
+              <p class="text-[11px] text-slate-400">Exámenes y entregas de la universidad</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario Parciales -->
+        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-5">
+          <input type="text" id="parcial-materia" placeholder="Materia (ej. Álgebra)" required 
+                 class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-purple-500 text-slate-100 placeholder-slate-500 transition">
+          <input type="date" id="parcial-fecha" required 
+                 class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-300 focus:outline-none focus:border-purple-500 transition">
+          <div class="flex gap-2">
+            <input type="text" id="parcial-detalle" placeholder="Detalle / Temas (opcional)" 
+                   class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-purple-500 text-slate-100 placeholder-slate-500 transition">
+            <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-purple-600/20 active:scale-95">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Grid de Parciales -->
+        <div id="grid-parciales" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <!-- Dinámico -->
+        </div>
+      </section>
+
+      <!-- FILA 3: Recordatorios & Gastos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Recordatorios -->
+        <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-2.5">
+              <span class="p-2 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
+                <i data-lucide="check-square" class="w-4 h-4"></i>
+              </span>
+              <h3 class="font-bold text-base text-white tracking-tight">Recordatorios</h3>
+            </div>
+          </div>
+
+          <!-- Formulario Recordatorios -->
+          <form id="form-recordatorio" class="flex gap-2 mb-4">
+            <input type="text" id="rec-titulo" placeholder="Nuevo recordatorio..." required 
+                   class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 transition">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20 active:scale-95">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+            </button>
+          </form>
+
+          <!-- Lista Recordatorios -->
+          <ul id="lista-recordatorios" class="space-y-2 max-h-[260px] overflow-y-auto pr-1">
+            <!-- Dinámico -->
+          </ul>
+        </section>
+
+        <!-- Control de Gastos -->
+        <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl">
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-2.5">
+              <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
+                <i data-lucide="credit-card" class="w-4 h-4"></i>
+              </span>
+              <h3 class="font-bold text-base text-white tracking-tight">Control de Gastos</h3>
+            </div>
+            <!-- Muestra de total dentro de la sección de gastos -->
+            <div class="bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-xl text-xs font-semibold text-emerald-400">
+              Total: <span id="section-total-gastos" class="font-mono">$0</span>
+            </div>
+          </div>
+
+          <!-- Formulario Gastos -->
+          <form id="form-gasto" class="flex gap-2 mb-4">
+            <input type="text" id="gasto-concepto" placeholder="Concepto" required 
+                   class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
+            <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
+                   class="bg-inputBg border border-white/10 text-xs font-mono rounded-xl px-3 py-2.5 w-24 focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
+            <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-emerald-600/20 active:scale-95">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+            </button>
+          </form>
+
+          <!-- Lista Gastos -->
+          <ul id="lista-gastos" class="space-y-2 max-h-[260px] overflow-y-auto pr-1">
+            <!-- Dinámico -->
+          </ul>
+        </section>
+
+      </div>
+
+      <!-- FILA 4: ORGANIZADOR MDQ 2027 -->
+      <section class="bg-cardBg border border-cyan-500/30 rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-2.5">
+            <span class="p-2.5 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/20">
+              <i data-lucide="palmtree" class="w-5 h-5"></i>
+            </span>
+            <div>
+              <h3 class="font-bold text-lg text-white tracking-tight">Organizador MDQ 2027 🏖️</h3>
+              <p class="text-xs text-cyan-300/80">Control de pagos individual en USD / PESOS y logística</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3 bg-inputBg border border-white/10 px-4 py-2 rounded-2xl text-xs">
+            <span class="text-slate-400 font-medium">Falta Cobrar:</span>
+            <span id="mdq-total-usd" class="font-mono font-bold text-emerald-400">$0 USD</span>
+            <span class="text-slate-600">|</span>
+            <span id="mdq-total-ars" class="font-mono font-bold text-cyan-400">$0 ARS</span>
+          </div>
+        </div>
+
+        <div class="bg-inputBg border border-white/10 rounded-2xl p-4">
+          <h4 class="text-xs font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+            <i data-lucide="users" class="w-4 h-4"></i> Estado de Pagos por Persona
+          </h4>
+
+          <form id="form-mdq-pago" class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-4">
+            <input type="text" id="mdq-nombre" placeholder="Nombre (ej. Santi)" required
+                   class="bg-[#020b18]/80 border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
+            <input type="number" id="mdq-usd" placeholder="Monto USD" step="0.01"
+                   class="bg-[#020b18]/80 border border-white/10 text-xs font-mono rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
+            <input type="number" id="mdq-ars" placeholder="Monto PESOS" step="0.01"
+                   class="bg-[#020b18]/80 border border-white/10 text-xs font-mono rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
+            <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1">
+              <i data-lucide="plus" class="w-4 h-4"></i> Agregar
+            </button>
+          </form>
+
+          <ul id="lista-mdq-pagos" class="space-y-2 max-h-[220px] overflow-y-auto pr-1">
+            <!-- Dinámico -->
+          </ul>
+        </div>
+
+        <div class="bg-inputBg border border-white/10 rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2 text-xs font-semibold text-cyan-400">
+              <i data-lucide="file-text" class="w-4 h-4"></i> Notas & Preparativos
+            </div>
+            <span id="estado-mdq" class="text-[10px] text-slate-400">Autoguardado</span>
+          </div>
+          <textarea id="notas-mdq" placeholder="Detalles del alquiler, señas, distribución de habitaciones, transporte, compras generales..."
+                    class="w-full h-28 bg-transparent text-xs text-slate-200 focus:outline-none transition resize-none placeholder-slate-500 leading-relaxed"></textarea>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue, remove, set, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAz1S8GIgCSBBVeWkCsPGaj9Hf1nSjDW3Q",
+      authDomain: "uadeweek.firebaseapp.com",
+      databaseURL: "https://uadeweek-default-rtdb.firebaseio.com",
+      projectId: "uadeweek",
+      storageBucket: "uadeweek.firebasestorage.app",
+      messagingSenderId: "609296121090",
+      appId: "1:609296121090:web:85d5693013964b99a2561b",
+      measurementId: "G-3ZN359T40E"
+    };
+
+    const ALLOWED_EMAIL = "renzosalta07@gmail.com";
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+    let db = null;
+
+    lucide.createIcons();
+
+    const loginModal = document.getElementById('login-modal');
+    const appContent = document.getElementById('app-content');
+    const btnGoogleLogin = document.getElementById('btn-google-login');
+    const errorLogin = document.getElementById('error-login');
+    const btnLogout = document.getElementById('btn-logout');
+
+    // --- MANEJO DE ESTADO DE AUTENTICACIÓN DE GOOGLE ---
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (user.email === ALLOWED_EMAIL) {
+          desbloquearApp();
+        } else {
+          errorLogin.innerText = "Acceso denegado: Tu correo (" + user.email + ") no está autorizado.";
+          errorLogin.classList.remove('hidden');
+          signOut(auth);
+        }
+      } else {
+        bloquearApp();
+      }
+    });
+
+    btnGoogleLogin.addEventListener('click', () => {
+      errorLogin.classList.add('hidden');
+      signInWithPopup(auth, provider)
+        .catch((error) => {
+          console.error("Error al iniciar sesión:", error);
+          errorLogin.innerText = "Error al iniciar sesión con Google.";
+          errorLogin.classList.remove('hidden');
+        });
+    });
+
+    btnLogout.addEventListener('click', () => {
+      signOut(auth).then(() => {
+        location.reload();
+      });
+    });
+
+    function desbloquearApp() {
+      loginModal.classList.add('hidden');
+      appContent.classList.remove('hidden');
+      if (!db) {
+        iniciarFirebase();
+      }
+    }
+
+    function bloquearApp() {
+      loginModal.classList.remove('hidden');
+      appContent.classList.add('hidden');
+    }
+
+    // --- INICIALIZAR FIREBASE Y LISTENERS ---
+    function iniciarFirebase() {
+      db = getDatabase(app);
+
+      const gastosRef = ref(db, 'gastos');
+      const recordatoriosRef = ref(db, 'recordatorios');
+      const parcialesRef = ref(db, 'parciales');
+      const notasMdqRef = ref(db, 'notas_mdq');
+      const pagosMdqRef = ref(db, 'pagos_mdq');
+
+      // --- PARCIALES ---
+      onValue(parcialesRef, (snapshot) => {
+        const data = snapshot.val();
+        const grid = document.getElementById('grid-parciales');
+        grid.innerHTML = '';
+
+        if (data) {
+          Object.keys(data).forEach((key) => {
+            const item = data[key];
+            grid.innerHTML += `
+              <div class="bg-inputBg border border-purple-500/20 hover:border-purple-500/40 p-4 rounded-2xl flex justify-between items-start transition">
+                <div>
+                  <h4 class="font-bold text-sm text-purple-300">${item.materia}</h4>
+                  <p class="text-xs text-slate-300 font-semibold font-mono mt-1"><i data-lucide="calendar" class="w-3 h-3 inline mr-1"></i>${item.fecha}</p>
+                  ${item.detalle ? `<p class="text-[11px] text-slate-400 mt-2 leading-tight">${item.detalle}</p>` : ''}
+                </div>
+                <button data-id="${key}" class="btn-del-parcial text-slate-500 hover:text-rose-400 p-1 transition">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            `;
+          });
+        } else {
+          grid.innerHTML = '<p class="text-xs text-slate-500 col-span-3 text-center py-4">No hay parciales agendados</p>';
+        }
+
+        lucide.createIcons();
+        bindDelete('btn-del-parcial', 'parciales');
+      });
+
+      document.getElementById('form-parcial').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const materia = document.getElementById('parcial-materia').value;
+        const fecha = document.getElementById('parcial-fecha').value;
+        const detalle = document.getElementById('parcial-detalle').value;
+
+        push(parcialesRef, { materia, fecha, detalle });
+        e.target.reset();
+      });
+
+      // --- RECORDATORIOS ---
+      onValue(recordatoriosRef, (snapshot) => {
+        const data = snapshot.val();
+        const lista = document.getElementById('lista-recordatorios');
+        const widgetPendientes = document.getElementById('widget-pendientes');
+        lista.innerHTML = '';
+
+        if (data) {
+          const arr = Object.keys(data).map(key => ({ key, ...data[key] }));
+          widgetPendientes.innerText = arr.length;
+
+          arr.forEach((item) => {
+            lista.innerHTML += `
+              <li class="flex justify-between items-center bg-inputBg border border-white/5 hover:border-white/10 px-4 py-2.5 rounded-2xl text-xs text-slate-200 transition">
+                <span class="font-medium">${item.titulo}</span>
+                <button data-id="${item.key}" class="btn-del-rec text-slate-500 hover:text-rose-400 p-1 transition">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </li>
+            `;
+          });
+        } else {
+          widgetPendientes.innerText = '0';
+          lista.innerHTML = '<p class="text-center py-6 text-xs text-slate-500">Sin recordatorios</p>';
+        }
+
+        lucide.createIcons();
+        bindDelete('btn-del-rec', 'recordatorios');
+      });
+
+      document.getElementById('form-recordatorio').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const titulo = document.getElementById('rec-titulo').value;
+
+        push(recordatoriosRef, { titulo });
+        e.target.reset();
+      });
+
+      // --- GASTOS ---
+      onValue(gastosRef, (snapshot) => {
+        const data = snapshot.val();
+        const lista = document.getElementById('lista-gastos');
+        const widgetTotal = document.getElementById('widget-total-gastos');
+        const sectionTotal = document.getElementById('section-total-gastos');
+        lista.innerHTML = '';
+        let total = 0;
+
+        if (data) {
+          Object.keys(data).reverse().forEach((key) => {
+            const item = data[key];
+            total += parseFloat(item.monto || 0);
+            lista.innerHTML += `
+              <li class="flex justify-between items-center bg-inputBg border border-white/5 hover:border-white/10 px-4 py-2.5 rounded-2xl text-xs text-slate-200 transition">
+                <span>${item.concepto}</span>
+                <div class="flex items-center gap-3">
+                  <span class="font-bold font-mono text-emerald-400">$${Number(item.monto).toLocaleString()}</span>
+                  <button data-id="${key}" class="btn-del-gasto text-slate-500 hover:text-rose-400 p-1 transition">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </li>
+            `;
+          });
+        } else {
+          lista.innerHTML = '<p class="text-center py-6 text-xs text-slate-500">Sin gastos registrados</p>';
+        }
+
+        const formattedTotal = `$${total.toLocaleString()}`;
+        widgetTotal.innerText = formattedTotal;
+        sectionTotal.innerText = formattedTotal;
+        
+        lucide.createIcons();
+        bindDelete('btn-del-gasto', 'gastos');
+      });
+
+      document.getElementById('form-gasto').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const concepto = document.getElementById('gasto-concepto').value;
+        const monto = parseFloat(document.getElementById('gasto-monto').value);
+
+        push(gastosRef, { concepto, monto });
+        e.target.reset();
+      });
+
+      // --- PAGOS MDQ (USD / PESOS) ---
+      onValue(pagosMdqRef, (snapshot) => {
+        const data = snapshot.val();
+        const lista = document.getElementById('lista-mdq-pagos');
+        const totalUsdEl = document.getElementById('mdq-total-usd');
+        const totalArsEl = document.getElementById('mdq-total-ars');
+        lista.innerHTML = '';
+        
+        let faltanteUsd = 0;
+        let faltanteArs = 0;
+
+        if (data) {
+          Object.keys(data).forEach((key) => {
+            const item = data[key];
+            const usd = parseFloat(item.usd || 0);
+            const ars = parseFloat(item.ars || 0);
+            const pagado = item.pagado || false;
+
+            if (!pagado) {
+              faltanteUsd += usd;
+              faltanteArs += ars;
+            }
+
+            lista.innerHTML += `
+              <li class="flex justify-between items-center bg-[#020b18]/60 border border-white/5 px-3.5 py-2 rounded-xl text-xs">
+                <div class="flex items-center gap-2.5">
+                  <button data-id="${key}" data-status="${pagado}" class="btn-toggle-pago p-1 rounded-lg ${pagado ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-500 bg-slate-800'}">
+                    <i data-lucide="${pagado ? 'check-circle' : 'circle'}" class="w-4 h-4"></i>
+                  </button>
+                  <span class="font-medium ${pagado ? 'line-through text-slate-500' : 'text-slate-200'}">${item.nombre}</span>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                  <div class="flex items-center gap-2 font-mono text-[11px]">
+                    ${usd > 0 ? `<span class="${pagado ? 'text-slate-500' : 'text-emerald-400 font-semibold'}">$${usd} USD</span>` : ''}
+                    ${ars > 0 ? `<span class="${pagado ? 'text-slate-500' : 'text-cyan-400 font-semibold'}">$${ars.toLocaleString()} ARS</span>` : ''}
+                  </div>
+                  <button data-id="${key}" class="btn-del-pago text-slate-500 hover:text-rose-400 p-0.5 transition">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </li>
+            `;
+          });
+        } else {
+          lista.innerHTML = '<p class="text-xs text-slate-500 text-center py-2">No hay personas registradas</p>';
+        }
+
+        totalUsdEl.innerText = `$${faltanteUsd} USD`;
+        totalArsEl.innerText = `$${faltanteArs.toLocaleString()} ARS`;
+
+        lucide.createIcons();
+        bindDelete('btn-del-pago', 'pagos_mdq');
+
+        document.querySelectorAll('.btn-toggle-pago').forEach(btn => {
+          btn.onclick = () => {
+            const id = btn.getAttribute('data-id');
+            const currentStatus = btn.getAttribute('data-status') === 'true';
+            update(ref(db, `pagos_mdq/${id}`), { pagado: !currentStatus });
+          };
+        });
+      });
+
+      document.getElementById('form-mdq-pago').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nombre = document.getElementById('mdq-nombre').value;
+        const usd = parseFloat(document.getElementById('mdq-usd').value || 0);
+        const ars = parseFloat(document.getElementById('mdq-ars').value || 0);
+
+        push(pagosMdqRef, { nombre, usd, ars, pagado: false });
+        e.target.reset();
+      });
+
+      // --- NOTAS MDQ ---
+      const notasMdq = document.getElementById('notas-mdq');
+      const estadoMdq = document.getElementById('estado-mdq');
+      let timerMdq = null;
+
+      onValue(notasMdqRef, (snapshot) => {
+        const val = snapshot.val();
+        if (val !== null && document.activeElement !== notasMdq) {
+          notasMdq.value = val;
+        }
+      });
+
+      notasMdq.addEventListener('input', () => {
+        estadoMdq.innerText = 'Guardando...';
+        clearTimeout(timerMdq);
+        timerMdq = setTimeout(() => {
+          set(notasMdqRef, notasMdq.value);
+          estadoMdq.innerText = 'Guardado';
+        }, 500);
+      });
+    }
+
+    function bindDelete(className, node) {
+      document.querySelectorAll(`.${className}`).forEach(btn => {
+        btn.onclick = () => {
+          const id = btn.getAttribute('data-id');
+          if (db) {
+            remove(ref(db, `${node}/${id}`));
+          }
+        };
+      });
+    }
+  </script>
+</body>
+</html>
