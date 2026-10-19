@@ -189,23 +189,30 @@
               </span>
               <h3 class="font-bold text-base text-white tracking-tight">Recordatorios</h3>
             </div>
+            <span id="label-edit-rec" class="text-[10px] text-amber-400 hidden font-semibold bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-lg">Modo Edición</span>
           </div>
 
-          <!-- Formulario Recordatorios con Título Opcional -->
+          <!-- Formulario Recordatorios (Soporta múltiples líneas y Edición) -->
           <form id="form-recordatorio" class="space-y-2 mb-4">
-            <input type="text" id="rec-titulo" placeholder="Título (Opcional)" 
+            <input type="hidden" id="rec-edit-id" value="">
+            <input type="text" id="rec-titulo" placeholder="Título (ej. Álgebra) - Opcional" 
                    class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2 w-full focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 transition">
-            <div class="flex gap-2">
-              <input type="text" id="rec-detalle" placeholder="Recordatorio..." required 
-                     class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 transition">
-              <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20 active:scale-95">
-                <i data-lucide="plus" class="w-4 h-4"></i>
-              </button>
+            <div class="flex gap-2 items-start">
+              <textarea id="rec-detalle" placeholder="Recordatorios (un punto por línea)..." required rows="2"
+                        class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-blue-500 text-slate-100 placeholder-slate-500 transition resize-none leading-relaxed"></textarea>
+              <div class="flex flex-col gap-1">
+                <button type="submit" id="btn-rec-submit" title="Agregar" class="bg-blue-600 hover:bg-blue-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20 active:scale-95">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
+                <button type="button" id="btn-cancel-edit" title="Cancelar edición" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-400 p-2.5 rounded-xl text-xs transition flex items-center justify-center shrink-0">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
             </div>
           </form>
 
           <!-- Lista Recordatorios -->
-          <ul id="lista-recordatorios" class="space-y-2 max-h-[260px] overflow-y-auto pr-1">
+          <ul id="lista-recordatorios" class="space-y-3 max-h-[300px] overflow-y-auto pr-1">
             <!-- Dinámico -->
           </ul>
         </section>
@@ -426,7 +433,9 @@
         e.target.reset();
       });
 
-      // --- RECORDATORIOS ---
+      // --- RECORDATORIOS CON EDICIÓN Y MULTILÍNEA ---
+      const cacheRecordatorios = {};
+
       onValue(recordatoriosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-recordatorios');
@@ -434,23 +443,41 @@
         lista.innerHTML = '';
 
         if (data) {
-          const arr = Object.keys(data).map(key => ({ key, ...data[key] }));
+          const arr = Object.keys(data).map(key => {
+            cacheRecordatorios[key] = data[key];
+            return { key, ...data[key] };
+          });
           widgetPendientes.innerText = arr.length;
 
           arr.forEach((item) => {
-            // Compatibilidad con registros guardados anteriormente (titulo vs detalle)
             const tituloText = item.tituloOpcional || '';
             const detalleText = item.detalle || item.titulo || '';
 
+            // Convertir saltos de línea a lista de ítems
+            const lineas = detalleText.split('\n').filter(l => l.trim() !== '');
+            let itemsHtml = '';
+            if (lineas.length > 1) {
+              itemsHtml = '<ul class="list-disc list-inside space-y-1 text-slate-300 mt-1 pl-1">' + 
+                lineas.map(linea => `<li>${linea}</li>`).join('') + 
+                '</ul>';
+            } else {
+              itemsHtml = `<p class="font-medium text-slate-200 leading-snug">${detalleText}</p>`;
+            }
+
             lista.innerHTML += `
-              <li class="flex justify-between items-start bg-inputBg border border-white/5 hover:border-white/10 px-4 py-2.5 rounded-2xl text-xs text-slate-200 transition">
-                <div class="space-y-0.5">
-                  ${tituloText ? `<h5 class="font-bold text-amber-300/90 text-xs">${tituloText}</h5>` : ''}
-                  <p class="font-medium text-slate-200 leading-snug">${detalleText}</p>
+              <li class="flex justify-between items-start bg-inputBg border border-white/5 hover:border-white/10 px-4 py-3 rounded-2xl text-xs text-slate-200 transition group">
+                <div class="space-y-1 w-full pr-2">
+                  ${tituloText ? `<h5 class="font-bold text-amber-300/90 text-xs flex items-center gap-1.5"><i data-lucide="bookmark" class="w-3 h-3 text-amber-400 shrink-0"></i>${tituloText}</h5>` : ''}
+                  ${itemsHtml}
                 </div>
-                <button data-id="${item.key}" class="btn-del-rec text-slate-500 hover:text-rose-400 p-1 transition shrink-0 ml-2">
-                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                </button>
+                <div class="flex items-center gap-1 shrink-0">
+                  <button data-id="${item.key}" class="btn-edit-rec text-slate-500 hover:text-amber-400 p-1 transition">
+                    <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <button data-id="${item.key}" class="btn-del-rec text-slate-500 hover:text-rose-400 p-1 transition">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
               </li>
             `;
           });
@@ -461,15 +488,54 @@
 
         lucide.createIcons();
         bindDelete('btn-del-rec', 'recordatorios');
+        bindEditRec();
       });
+
+      function bindEditRec() {
+        document.querySelectorAll('.btn-edit-rec').forEach(btn => {
+          btn.onclick = () => {
+            const id = btn.getAttribute('data-id');
+            const item = cacheRecordatorios[id];
+            if (item) {
+              document.getElementById('rec-edit-id').value = id;
+              document.getElementById('rec-titulo').value = item.tituloOpcional || '';
+              document.getElementById('rec-detalle').value = item.detalle || item.titulo || '';
+              
+              document.getElementById('label-edit-rec').classList.remove('hidden');
+              document.getElementById('btn-cancel-edit').classList.remove('hidden');
+              document.getElementById('btn-rec-submit').innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
+              document.getElementById('btn-rec-submit').className = 'bg-amber-600 hover:bg-amber-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-amber-600/20 active:scale-95';
+              lucide.createIcons();
+            }
+          };
+        });
+      }
+
+      function resetRecForm() {
+        document.getElementById('rec-edit-id').value = '';
+        document.getElementById('rec-titulo').value = '';
+        document.getElementById('rec-detalle').value = '';
+        document.getElementById('label-edit-rec').classList.add('hidden');
+        document.getElementById('btn-cancel-edit').classList.add('hidden');
+        document.getElementById('btn-rec-submit').innerHTML = '<i data-lucide="plus" class="w-4 h-4"></i>';
+        document.getElementById('btn-rec-submit').className = 'bg-blue-600 hover:bg-blue-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20 active:scale-95';
+        lucide.createIcons();
+      }
+
+      document.getElementById('btn-cancel-edit').addEventListener('click', resetRecForm);
 
       document.getElementById('form-recordatorio').addEventListener('submit', (e) => {
         e.preventDefault();
+        const editId = document.getElementById('rec-edit-id').value;
         const tituloOpcional = document.getElementById('rec-titulo').value.trim();
         const detalle = document.getElementById('rec-detalle').value.trim();
 
-        push(recordatoriosRef, { tituloOpcional, detalle });
-        e.target.reset();
+        if (editId) {
+          update(ref(db, `recordatorios/${editId}`), { tituloOpcional, detalle });
+        } else {
+          push(recordatoriosRef, { tituloOpcional, detalle });
+        }
+        resetRecForm();
       });
 
       // --- GASTOS ---
