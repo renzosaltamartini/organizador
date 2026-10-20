@@ -147,7 +147,7 @@
 
       </div>
 
-      <!-- NUEVA SECCIÓN: CALENDARIO MENSUAL INTERACTIVO 📅 -->
+      <!-- CALENDARIO MENSUAL INTERACTIVO 📅 -->
       <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-4">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div class="flex items-center gap-2.5">
@@ -183,7 +183,7 @@
         </div>
       </section>
 
-      <!-- FILA 2: FECHAS DE PARCIALES -->
+      <!-- FECHAS DE PARCIALES -->
       <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
@@ -216,7 +216,7 @@
         </div>
       </section>
 
-      <!-- FILA 3: Recordatorios & Gastos -->
+      <!-- Recordatorios & Gastos -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <!-- Recordatorios -->
@@ -265,7 +265,6 @@
               </span>
               <h3 class="font-bold text-base text-white tracking-tight">Control de Gastos</h3>
             </div>
-            <!-- Muestra de total dentro de la sección de gastos -->
             <div class="bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-xl text-xs font-semibold text-emerald-400">
               Total: <span id="section-total-gastos" class="font-mono">$0</span>
             </div>
@@ -290,7 +289,7 @@
 
       </div>
 
-      <!-- PANEL INDEPENDIENTE: ALERTAS DIARIAS PERSONALIZADAS ⏰ -->
+      <!-- PANEL INDEPENDIENTE: ALERTAS PERSONALIZADAS ⏰ -->
       <section class="bg-cardBg border border-blue-500/30 rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
@@ -299,12 +298,12 @@
             </span>
             <div>
               <h3 class="font-bold text-base text-white tracking-tight">Panel de Alertas Personalizadas ⏰</h3>
-              <p class="text-xs text-blue-300/80">Crea alertas eligiendo el día exacto o repetición semanal</p>
+              <p class="text-xs text-blue-300/80">Elige fecha exacta o repetición fija (Lunes a Domingo)</p>
             </div>
           </div>
         </div>
 
-        <!-- Formulario Alertas Custom -->
+        <!-- Formulario Alertas Custom Actualizado -->
         <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-2 bg-inputBg border border-white/10 p-4 rounded-2xl">
           <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
                  class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
@@ -315,16 +314,13 @@
           <input type="time" id="alerta-hora" required
                  class="sm:col-span-2 bg-[#020b18] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
           
-          <select id="alerta-dia" class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs text-slate-200 rounded-xl px-2 py-2 focus:outline-none focus:border-blue-500">
-            <option value="todos">Todos los días</option>
-            <option value="1">Lunes</option>
-            <option value="2">Martes</option>
-            <option value="3">Miércoles</option>
-            <option value="4">Jueves</option>
-            <option value="5">Viernes</option>
-            <option value="6">Sábado</option>
-            <option value="0">Domingo</option>
+          <select id="alerta-modo" class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs text-slate-200 rounded-xl px-2 py-2 focus:outline-none focus:border-blue-500">
+            <option value="fecha">Fecha exacta</option>
+            <option value="diaria">Repetir de Lunes a Domingo</option>
           </select>
+
+          <input type="date" id="alerta-fecha-exacta" 
+                 class="sm:col-span-11 bg-[#020b18] border border-white/10 text-xs text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
 
           <button type="submit" class="sm:col-span-1 bg-blue-600 hover:bg-blue-500 text-white p-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1 shadow-lg shadow-blue-600/20 active:scale-95">
             <i data-lucide="plus" class="w-4 h-4"></i>
@@ -392,7 +388,7 @@
 
       const permission = await Notification.requestPermission();
       if (permission === 'granted') {
-        alert('¡Notificaciones permitidas con éxito en tu iPhone!');
+        alert('¡Notificaciones permitidas con éxito!');
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.ready.then(reg => {
             reg.showNotification('Organizador Personal 🔔', {
@@ -402,13 +398,26 @@
           });
         }
       } else {
-        alert('Permiso denegado. Habilítalas en los Ajustes de tu iPhone.');
+        alert('Permiso denegado. Habilítalas en los Ajustes.');
       }
     });
 
-    // --- GESTIÓN DE ALERTAS PERSONALIZADAS INDEPENDIENTES ---
+    // --- GESTIÓN DE ALERTAS PERSONALIZADAS ---
     const formAlertaCustom = document.getElementById('form-alerta-custom');
     const listaAlertasCustom = document.getElementById('lista-alertas-custom');
+    const alertaModoSelect = document.getElementById('alerta-modo');
+    const alertaFechaInput = document.getElementById('alerta-fecha-exacta');
+
+    // Setear por defecto la fecha de hoy
+    alertaFechaInput.value = new Date().toISOString().split('T')[0];
+
+    alertaModoSelect.addEventListener('change', () => {
+      if (alertaModoSelect.value === 'diaria') {
+        alertaFechaInput.classList.add('hidden');
+      } else {
+        alertaFechaInput.classList.remove('hidden');
+      }
+    });
 
     function obtenerAlertas() {
       return JSON.parse(localStorage.getItem('misAlertasCustom') || '[]');
@@ -417,6 +426,18 @@
     function guardarAlertas(alertas) {
       localStorage.setItem('misAlertasCustom', JSON.stringify(alertas));
       renderizarAlertasCustom();
+    }
+
+    function formatearFechaLegible(fechaIso) {
+      if (!fechaIso) return '';
+      const partes = fechaIso.split('-');
+      if (partes.length === 3) {
+        const dia = parseInt(partes[2], 10);
+        const mesIndex = parseInt(partes[1], 10) - 1;
+        const meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+        return `${dia} ${meses[mesIndex] || ''}`;
+      }
+      return fechaIso;
     }
 
     function renderizarAlertasCustom() {
@@ -428,26 +449,17 @@
         return;
       }
 
-      const nombresDias = {
-        'todos': 'Todos los días',
-        '1': 'Lunes',
-        '2': 'Martes',
-        '3': 'Miércoles',
-        '4': 'Jueves',
-        '5': 'Viernes',
-        '6': 'Sábado',
-        '0': 'Domingo'
-      };
-
       alertas.forEach((alerta, index) => {
-        const textoDia = nombresDias[alerta.dia] || 'Programada';
+        let textoTipo = alerta.modo === 'diaria' 
+          ? '<span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">Lun - Dom</span>'
+          : `<span class="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-md">${formatearFechaLegible(alerta.fecha)}</span>`;
 
         listaAlertasCustom.innerHTML += `
           <li class="flex justify-between items-center bg-[#020b18]/60 border border-white/5 px-3.5 py-2.5 rounded-xl text-xs">
             <div class="space-y-0.5">
               <div class="flex items-center gap-2">
                 <span class="font-bold text-blue-300">${alerta.titulo}</span>
-                <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${textoDia}</span>
+                ${textoTipo}
               </div>
               ${alerta.desc ? `<p class="text-[11px] text-slate-300">${alerta.desc}</p>` : ''}
             </div>
@@ -474,29 +486,35 @@
       const titulo = document.getElementById('alerta-titulo').value.trim();
       const desc = document.getElementById('alerta-desc').value.trim();
       const hora = document.getElementById('alerta-hora').value;
-      const dia = document.getElementById('alerta-dia').value;
+      const modo = alertaModoSelect.value; // 'fecha' o 'diaria'
+      const fecha = alertaFechaInput.value;
 
       let alertas = obtenerAlertas();
-      alertas.push({ titulo, desc, hora, dia });
+      alertas.push({ titulo, desc, hora, modo, fecha });
       guardarAlertas(alertas);
 
       formAlertaCustom.reset();
-      alert(`¡Alerta "${titulo}" guardada con éxito!`);
+      alertaFechaInput.value = new Date().toISOString().split('T')[0];
+      alertaFechaInput.classList.remove('hidden');
+      alert(`¡Alerta "${titulo}" creada exitosamente!`);
     });
 
+    // Motor de revisión constante de hora y fecha
     setInterval(() => {
       let alertas = obtenerAlertas();
       if (alertas.length === 0 || Notification.permission !== 'granted') return;
 
       const ahora = new Date();
-      const diaActual = ahora.getDay().toString();
       const horaActual = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
       const fechaHoy = ahora.toISOString().split('T')[0];
 
       let huboCambios = false;
 
       alertas = alertas.filter((alerta) => {
-        if (alerta.hora === horaActual && (alerta.dia === 'todos' || alerta.dia === diaActual)) {
+        const coincideHora = (alerta.hora === horaActual);
+        const coincideFecha = (alerta.modo === 'diaria' || alerta.fecha === fechaHoy);
+
+        if (coincideHora && coincideFecha) {
           const claveUnica = `custom_${alerta.titulo}_${alerta.hora}_${fechaHoy}`;
           if (localStorage.getItem(claveUnica) !== 'enviado') {
             localStorage.setItem(claveUnica, 'enviado');
@@ -511,7 +529,8 @@
               });
             }
 
-            if (alerta.dia !== 'todos') {
+            // Si fue con fecha exacta única, se elimina automáticamente una vez avisado
+            if (alerta.modo === 'fecha') {
               huboCambios = true;
               return false;
             }
@@ -757,20 +776,17 @@
       const grid = document.getElementById('cal-grid');
       grid.innerHTML = '';
 
-      // Primer día del mes y total de días
-      const primerDiaIndex = (new Date(anio, mes, 1).getDay() + 6) % 7; // Ajustado a lunes como inicio
+      const primerDiaIndex = (new Date(anio, mes, 1).getDay() + 6) % 7;
       const totalDiasMes = new Date(anio, mes + 1, 0).getDate();
       const totalDiasMesAnterior = new Date(anio, mes, 0).getDate();
 
       const hoy = new Date();
 
-      // Días del mes anterior (relleno)
       for (let i = primerDiaIndex; i > 0; i--) {
         const diaNum = totalDiasMesAnterior - i + 1;
         grid.innerHTML += `<div class="bg-inputBg/40 border border-white/5 rounded-xl p-1.5 min-h-[70px] opacity-30 text-slate-500 text-[10px] font-mono">${diaNum}</div>`;
       }
 
-      // Días del mes actual
       for (let dia = 1; dia <= totalDiasMes; dia++) {
         const mesStr = String(mes + 1).padStart(2, '0');
         const diaStr = String(dia).padStart(2, '0');
@@ -778,7 +794,6 @@
 
         const esHoy = (dia === hoy.getDate() && mes === hoy.getMonth() && anio === hoy.getFullYear());
 
-        // Buscar parciales en esta fecha
         const parcialesDelDia = eventosParcialesGlobal.filter(p => p.fecha === fechaIso);
 
         let eventosHtml = '';
