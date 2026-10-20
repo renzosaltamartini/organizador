@@ -275,7 +275,7 @@
             <input type="text" id="gasto-concepto" placeholder="Concepto" required 
                    class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
             <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
-                   class="bg-inputBg border border-white/10 text-xs font-mono rounded-xl px-3.5 py-2.5 w-24 focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
+                   class="bg-inputBg border border-white/10 text-xs font-mono rounded-xl px-3 py-2.5 w-24 focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
             <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-emerald-600/20 active:scale-95">
               <i data-lucide="plus" class="w-4 h-4"></i>
             </button>
@@ -298,7 +298,7 @@
             </span>
             <div>
               <h3 class="font-bold text-base text-white tracking-tight">Panel de Alertas Personalizadas ⏰</h3>
-              <p class="text-xs text-blue-300/80">Elige fecha exacta o repetición fija (Lunes a Domingo)</p>
+              <p class="text-xs text-blue-300/80">Elige fecha exacta o selecciona un día específico / todos los días</p>
             </div>
           </div>
         </div>
@@ -316,9 +316,17 @@
           
           <select id="alerta-modo" class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs text-slate-200 rounded-xl px-2 py-2 focus:outline-none focus:border-blue-500">
             <option value="fecha">Fecha exacta</option>
-            <option value="diaria">Repetir de Lunes a Domingo</option>
+            <option value="todos">Todos los días (Lun - Dom)</option>
+            <option value="1">Todos los Lunes</option>
+            <option value="2">Todos los Martes</option>
+            <option value="3">Todos los Miércoles</option>
+            <option value="4">Todos los Jueves</option>
+            <option value="5">Todos los Viernes</option>
+            <option value="6">Todos los Sábados</option>
+            <option value="0">Todos los Domingos</option>
           </select>
 
+          <!-- Input de fecha que se oculta automáticamente si elige repetir por día de semana -->
           <input type="date" id="alerta-fecha-exacta" 
                  class="sm:col-span-11 bg-[#020b18] border border-white/10 text-xs text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
 
@@ -408,14 +416,13 @@
     const alertaModoSelect = document.getElementById('alerta-modo');
     const alertaFechaInput = document.getElementById('alerta-fecha-exacta');
 
-    // Setear por defecto la fecha de hoy
     alertaFechaInput.value = new Date().toISOString().split('T')[0];
 
     alertaModoSelect.addEventListener('change', () => {
-      if (alertaModoSelect.value === 'diaria') {
-        alertaFechaInput.classList.add('hidden');
-      } else {
+      if (alertaModoSelect.value === 'fecha') {
         alertaFechaInput.classList.remove('hidden');
+      } else {
+        alertaFechaInput.classList.add('hidden');
       }
     });
 
@@ -449,10 +456,24 @@
         return;
       }
 
+      const nombresModos = {
+        'todos': 'Todos los días',
+        '1': 'Todos los Lunes',
+        '2': 'Todos los Martes',
+        '3': 'Todos los Miércoles',
+        '4': 'Todos los Jueves',
+        '5': 'Todos los Viernes',
+        '6': 'Todos los Sábados',
+        '0': 'Todos los Domingos'
+      };
+
       alertas.forEach((alerta, index) => {
-        let textoTipo = alerta.modo === 'diaria' 
-          ? '<span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">Lun - Dom</span>'
-          : `<span class="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-md">${formatearFechaLegible(alerta.fecha)}</span>`;
+        let textoTipo = '';
+        if (alerta.modo === 'fecha') {
+          textoTipo = `<span class="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-md">${formatearFechaLegible(alerta.fecha)}</span>`;
+        } else {
+          textoTipo = `<span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${nombresModos[alerta.modo] || 'Recurrente'}</span>`;
+        }
 
         listaAlertasCustom.innerHTML += `
           <li class="flex justify-between items-center bg-[#020b18]/60 border border-white/5 px-3.5 py-2.5 rounded-xl text-xs">
@@ -486,7 +507,7 @@
       const titulo = document.getElementById('alerta-titulo').value.trim();
       const desc = document.getElementById('alerta-desc').value.trim();
       const hora = document.getElementById('alerta-hora').value;
-      const modo = alertaModoSelect.value; // 'fecha' o 'diaria'
+      const modo = alertaModoSelect.value; // 'fecha', 'todos', '0', '1', etc.
       const fecha = alertaFechaInput.value;
 
       let alertas = obtenerAlertas();
@@ -499,12 +520,13 @@
       alert(`¡Alerta "${titulo}" creada exitosamente!`);
     });
 
-    // Motor de revisión constante de hora y fecha
+    // Motor de revisión constante de hora, fecha y días de la semana
     setInterval(() => {
       let alertas = obtenerAlertas();
       if (alertas.length === 0 || Notification.permission !== 'granted') return;
 
       const ahora = new Date();
+      const diaActual = ahora.getDay().toString(); // '0' domingo a '6' sábado
       const horaActual = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
       const fechaHoy = ahora.toISOString().split('T')[0];
 
@@ -512,9 +534,17 @@
 
       alertas = alertas.filter((alerta) => {
         const coincideHora = (alerta.hora === horaActual);
-        const coincideFecha = (alerta.modo === 'diaria' || alerta.fecha === fechaHoy);
+        
+        let coincideMomento = false;
+        if (alerta.modo === 'fecha') {
+          coincideMomento = (alerta.fecha === fechaHoy);
+        } else if (alerta.modo === 'todos') {
+          coincideMomento = true;
+        } else {
+          coincideMomento = (alerta.modo === diaActual);
+        }
 
-        if (coincideHora && coincideFecha) {
+        if (coincideHora && coincideMomento) {
           const claveUnica = `custom_${alerta.titulo}_${alerta.hora}_${fechaHoy}`;
           if (localStorage.getItem(claveUnica) !== 'enviado') {
             localStorage.setItem(claveUnica, 'enviado');
@@ -529,7 +559,7 @@
               });
             }
 
-            // Si fue con fecha exacta única, se elimina automáticamente una vez avisado
+            // Si es de fecha exacta única, se borra automáticamente al dispararse
             if (alerta.modo === 'fecha') {
               huboCambios = true;
               return false;
