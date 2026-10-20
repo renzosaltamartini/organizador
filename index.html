@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Organizador Personal Pro | Ultra UI</title>
+  <title>Organizador Personal OS | Aura Pro</title>
   
   <!-- Icono Web / PWA -->
   <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
   <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#020617" />
+  <meta name="theme-color" content="#070714" />
 
   <!-- Fonts: Plus Jakarta Sans & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,10 +29,10 @@
             mono: ['Space Grotesk', 'sans-serif'],
           },
           colors: {
-            appDark: '#020617',
-            appCard: 'rgba(15, 23, 42, 0.75)',
-            appBorder: 'rgba(255, 255, 255, 0.08)',
-            appInput: 'rgba(8, 15, 30, 0.9)',
+            auraDark: '#070714',
+            auraCard: 'rgba(18, 16, 38, 0.75)',
+            auraBorder: 'rgba(168, 85, 247, 0.15)',
+            auraInput: 'rgba(12, 10, 28, 0.9)',
           }
         }
       }
@@ -42,25 +42,25 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* Estilo Ultra Clean Glassmorphism */
-    .glass-card {
-      background: rgba(13, 22, 41, 0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    /* Nueva Estética Aura Glass & Neon Glow */
+    .aura-panel {
+      background: rgba(18, 16, 38, 0.65);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(168, 85, 247, 0.18);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
     }
     
-    .glass-card-glow {
+    .aura-panel-glow {
       position: relative;
     }
-    .glass-card-glow::before {
+    .aura-panel-glow::before {
       content: '';
       position: absolute;
       inset: -1px;
       border-radius: 28px;
       padding: 1px;
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.4), rgba(139, 92, 246, 0.25), rgba(255, 255, 255, 0.02));
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(6, 182, 212, 0.3), rgba(255, 255, 255, 0.03));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -68,34 +68,34 @@
     }
 
     ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: rgba(2, 6, 23, 0.5); }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(6, 182, 212, 0.4); }
+    ::-webkit-scrollbar-track { background: rgba(7, 7, 20, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.25); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(6, 182, 212, 0.5); }
 
     .schedule-hour-row {
-      transition: height 0.2s ease, min-height 0.2s ease;
+      transition: all 0.2s ease;
     }
   </style>
 </head>
-<body class="bg-[#020617] text-slate-100 min-h-screen font-sans antialiased pb-24 selection:bg-cyan-500/30 selection:text-cyan-200 relative overflow-x-hidden">
+<body class="bg-[#070714] text-slate-100 min-h-screen font-sans antialiased pb-24 selection:bg-purple-500/30 selection:text-purple-200 relative overflow-x-hidden">
 
   <!-- PANTALLA DE BLOQUEO / LOGIN CON GOOGLE -->
-  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#020617]/98 backdrop-blur-2xl flex items-center justify-center p-4">
-    <div class="glass-card glass-card-glow rounded-[32px] p-8 max-w-sm w-full text-center space-y-6">
+  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#070714]/98 backdrop-blur-2xl flex items-center justify-center p-4">
+    <div class="aura-panel aura-panel-glow rounded-[32px] p-8 max-w-sm w-full text-center space-y-6">
       <div class="relative w-24 h-24 mx-auto">
-        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-500 to-violet-600 blur opacity-75 animate-pulse"></div>
-        <div class="relative w-full h-full rounded-full bg-slate-950 border-2 border-cyan-500/50 p-1 flex items-center justify-center overflow-hidden">
+        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-600 via-cyan-500 to-indigo-600 blur opacity-80 animate-pulse"></div>
+        <div class="relative w-full h-full rounded-full bg-slate-950 border-2 border-purple-500/50 p-1 flex items-center justify-center overflow-hidden">
           <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
                alt="Perfil" class="w-full h-full object-cover rounded-full">
         </div>
       </div>
       <div>
-        <h2 class="text-2xl font-bold text-white tracking-tight font-mono">Organizador OS</h2>
-        <p class="text-xs text-slate-400 mt-1">Inicia sesión con tu cuenta autorizada de Google</p>
+        <h2 class="text-2xl font-bold text-white tracking-tight font-mono">Organizador Aura</h2>
+        <p class="text-xs text-purple-300/70 mt-1">Inicia sesión con tu cuenta de Google autorizada</p>
       </div>
 
       <div class="space-y-3">
-        <button id="btn-google-login" class="w-full bg-slate-100 hover:bg-white text-slate-950 py-3.5 px-4 rounded-2xl text-xs font-bold transition shadow-lg flex items-center justify-center gap-2.5 active:scale-95">
+        <button id="btn-google-login" class="w-full bg-slate-100 hover:bg-white text-slate-950 py-3.5 px-4 rounded-2xl text-xs font-bold transition shadow-lg shadow-purple-500/20 flex items-center justify-center gap-2.5 active:scale-95">
           <svg class="w-4 h-4" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
             <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/>
@@ -112,28 +112,28 @@
   <!-- CONTENIDO PRINCIPAL -->
   <div id="app-content" class="hidden">
 
-    <!-- Fondos de neón dinámicos -->
-    <div class="fixed top-0 left-1/4 -z-10 w-[500px] h-[400px] bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="fixed bottom-0 right-1/4 -z-10 w-[600px] h-[500px] bg-violet-600/10 rounded-full blur-[160px] pointer-events-none"></div>
+    <!-- Ambient Glows -->
+    <div class="fixed top-0 left-1/3 -z-10 w-[600px] h-[450px] bg-purple-600/15 rounded-full blur-[160px] pointer-events-none"></div>
+    <div class="fixed bottom-0 right-1/4 -z-10 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[160px] pointer-events-none"></div>
 
-    <!-- Topbar Header -->
-    <header class="w-full bg-[#020617]/80 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center text-xs font-normal text-slate-300">
+    <!-- Header Topbar -->
+    <header class="w-full bg-[#070714]/80 backdrop-blur-xl border-b border-purple-500/20 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center text-xs font-normal text-slate-300">
         <div class="flex items-center gap-3">
-          <div class="p-2 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-xl text-white shadow-lg shadow-cyan-500/20">
-            <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <div class="p-2.5 bg-gradient-to-tr from-purple-600 via-indigo-600 to-cyan-500 rounded-2xl text-white shadow-lg shadow-purple-500/25">
+            <i data-lucide="orbit" class="w-4 h-4"></i>
           </div>
-          <span class="font-bold text-white tracking-tight text-base font-mono">Organizador <span class="text-cyan-400 text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20">PRO</span></span>
+          <span class="font-bold text-white tracking-tight text-base font-mono">Organizador <span class="text-cyan-300 text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30">AURA</span></span>
         </div>
         <div class="flex items-center gap-2.5">
-          <button id="btn-navbar-notif" title="Permitir notificaciones" class="p-2.5 bg-slate-900/80 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-xl transition-all shadow-sm active:scale-95 flex items-center justify-center">
+          <button id="btn-navbar-notif" title="Permitir notificaciones" class="p-2.5 bg-purple-950/50 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-2xl transition active:scale-95 flex items-center justify-center">
             <i data-lucide="bell" class="w-4 h-4"></i>
           </button>
           
-          <span class="hidden sm:flex items-center gap-2 text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-xl border border-emerald-500/20 text-[11px] font-mono">
+          <span class="hidden sm:flex items-center gap-2 text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-2xl border border-emerald-500/20 text-[11px] font-mono">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Firebase Sincronizado
           </span>
-          <button id="btn-logout" title="Cerrar sesión" class="p-2.5 bg-slate-900/80 hover:bg-rose-500/20 hover:text-rose-400 border border-white/10 rounded-xl transition text-slate-400 active:scale-95">
+          <button id="btn-logout" title="Cerrar sesión" class="p-2.5 bg-purple-950/50 hover:bg-rose-500/20 hover:text-rose-400 border border-white/10 rounded-2xl transition text-slate-400 active:scale-95">
             <i data-lucide="log-out" class="w-4 h-4"></i>
           </button>
         </div>
@@ -147,29 +147,29 @@
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
         
         <!-- Card Perfil -->
-        <div class="md:col-span-5 glass-panel glass-panel-glow rounded-[32px] p-6 flex flex-col justify-between relative overflow-hidden group">
+        <div class="md:col-span-5 aura-panel aura-panel-glow rounded-[32px] p-6 flex flex-col justify-between relative overflow-hidden group">
           <div class="flex items-center gap-4">
             <div class="relative">
-              <div class="w-16 h-16 rounded-full bg-slate-950 border-2 border-cyan-500/40 p-1 shadow-lg flex items-center justify-center overflow-hidden">
+              <div class="w-16 h-16 rounded-full bg-slate-950 border-2 border-purple-500/40 p-1 shadow-lg flex items-center justify-center overflow-hidden">
                 <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
                      alt="Perfil" class="w-full h-full object-cover rounded-full">
               </div>
-              <span class="absolute bottom-0 right-0 w-4 h-4 bg-emerald-400 border-2 border-[#020617] rounded-full"></span>
+              <span class="absolute bottom-0 right-0 w-4 h-4 bg-emerald-400 border-2 border-[#070714] rounded-full"></span>
             </div>
             <div>
               <h2 class="text-2xl font-bold text-white tracking-tight">Renzo</h2>
-              <p class="text-xs text-cyan-400 font-mono font-medium mt-0.5">Control & Sincronización en la Nube</p>
+              <p class="text-xs text-purple-300 font-mono font-medium mt-0.5">Control & Sincronización Global</p>
             </div>
           </div>
-          <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center text-xs text-slate-400 font-mono">
+          <div class="mt-6 pt-4 border-t border-purple-500/10 flex justify-between items-center text-xs text-slate-400 font-mono">
             <span>Estado del Sistema</span>
-            <span class="text-cyan-400 font-bold bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-xl">En Línea</span>
+            <span class="text-purple-300 font-bold bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-xl">En Línea</span>
           </div>
         </div>
 
         <!-- Card Métricas -->
-        <div class="md:col-span-7 glass-panel glass-panel-glow rounded-[32px] p-6 grid grid-cols-2 gap-4">
-          <div class="bg-appInput border border-white/5 rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/30 transition-all group">
+        <div class="md:col-span-7 aura-panel aura-panel-glow rounded-[32px] p-6 grid grid-cols-2 gap-4">
+          <div class="bg-auraInput border border-purple-500/10 rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/30 transition-all group">
             <div class="flex items-center gap-2.5 text-emerald-400">
               <span class="p-2.5 bg-emerald-500/10 rounded-xl border border-emerald-500/20 group-hover:scale-110 transition"><i data-lucide="wallet" class="w-4 h-4"></i></span>
               <span class="text-xs font-semibold text-slate-300">Gastos Totales</span>
@@ -177,7 +177,7 @@
             <span id="widget-total-gastos" class="text-3xl font-bold font-mono text-white tracking-tight mt-3">$0</span>
           </div>
 
-          <div class="bg-appInput border border-white/5 rounded-2xl p-4 flex flex-col justify-between hover:border-amber-500/30 transition-all group">
+          <div class="bg-auraInput border border-purple-500/10 rounded-2xl p-4 flex flex-col justify-between hover:border-amber-500/30 transition-all group">
             <div class="flex items-center gap-2.5 text-amber-400">
               <span class="p-2.5 bg-amber-500/10 rounded-xl border border-amber-500/20 group-hover:scale-110 transition"><i data-lucide="check-square" class="w-4 h-4"></i></span>
               <span class="text-xs font-semibold text-slate-300">Pendientes</span>
@@ -188,32 +188,33 @@
 
       </div>
 
-      <!-- NUEVO PANEL: TU DÍA / SCHEDULE SEMANAL CON HORA EN VIVO 🗓️ -->
-      <section class="glass-panel glass-panel-glow rounded-[32px] p-6 space-y-6">
+      <!-- PANEL: TU DÍA CON RELOJ EN SEGUNDOS ⏱️ -->
+      <section class="aura-panel aura-panel-glow rounded-[32px] p-6 space-y-6">
         
-        <!-- Banner con Hora Local Actual -->
-        <div class="bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-transparent border border-cyan-500/20 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <!-- Banner con Reloj Digital con Segundos -->
+        <div class="bg-gradient-to-r from-purple-900/30 via-indigo-900/20 to-transparent border border-purple-500/30 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
           <div class="flex items-center gap-4">
-            <div class="p-3 bg-cyan-500/20 border border-cyan-500/30 rounded-2xl text-cyan-400 shrink-0">
-              <i data-lucide="clock" class="w-6 h-6"></i>
+            <div class="p-3.5 bg-purple-500/20 border border-purple-500/40 rounded-2xl text-purple-300 shrink-0">
+              <i data-lucide="clock" class="w-7 h-7"></i>
             </div>
             <div>
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold">Hora Actual en Vivo</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-purple-300 font-bold">Tiempo Real en Vivo</span>
               </div>
-              <div id="live-clock" class="text-3xl sm:text-4xl font-extrabold font-mono text-white tracking-tight mt-0.5">00:00:00</div>
-              <p id="live-date" class="text-xs text-slate-400 mt-0.5 capitalize"></p>
+              <!-- Muestra Horas : Minutos : Segundos -->
+              <div id="live-clock" class="text-3xl sm:text-4xl font-black font-mono text-cyan-300 tracking-tight mt-0.5">00:00:00</div>
+              <p id="live-date" class="text-xs text-slate-400 mt-0.5 capitalize font-medium"></p>
             </div>
           </div>
 
-          <!-- Controles de Zoom -->
+          <!-- Controles de Zoom del Cronograma -->
           <div class="flex items-center gap-2 self-end sm:self-center">
-            <div class="flex items-center bg-appInput border border-white/10 p-1 rounded-2xl">
+            <div class="flex items-center bg-auraInput border border-purple-500/20 p-1 rounded-2xl">
               <button id="schedule-zoom-out" title="Reducir zoom" class="p-2 hover:bg-white/10 rounded-xl text-slate-300 transition active:scale-95">
                 <i data-lucide="zoom-out" class="w-4 h-4"></i>
               </button>
-              <span id="schedule-zoom-label" class="text-xs font-mono text-cyan-400 px-2.5 font-bold">100%</span>
+              <span id="schedule-zoom-label" class="text-xs font-mono text-purple-300 px-2.5 font-bold">100%</span>
               <button id="schedule-zoom-in" title="Aumentar zoom" class="p-2 hover:bg-white/10 rounded-xl text-slate-300 transition active:scale-95">
                 <i data-lucide="zoom-in" class="w-4 h-4"></i>
               </button>
@@ -224,25 +225,25 @@
           </div>
         </div>
 
-        <!-- Pestañas Selectoras de Días de la Semana -->
+        <!-- Pestañas de Días de la Semana -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="schedule-day-tabs">
           <!-- Dinámico -->
         </div>
 
-        <!-- Formulario para agregar Actividad -->
-        <form id="form-schedule-item" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-appInput border border-white/10 p-4 rounded-2xl">
-          <input type="text" id="sch-titulo" placeholder="Actividad / Título (ej. Clase de Algoritmos)" required 
-                 class="sm:col-span-4 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
+        <!-- Formulario Agregar Actividad a "Tu Día" -->
+        <form id="form-schedule-item" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-auraInput border border-purple-500/20 p-4 rounded-2xl">
+          <input type="text" id="sch-titulo" placeholder="Actividad / Título (ej. Algoritmos)" required 
+                 class="sm:col-span-4 bg-[#070714] border border-purple-500/20 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-purple-500 placeholder-slate-500">
           
           <div class="sm:col-span-3 flex items-center gap-1.5">
             <input type="time" id="sch-hora-inicio" required 
-                   class="bg-[#030712] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-2.5 py-2.5 w-full focus:outline-none focus:border-cyan-500">
+                   class="bg-[#070714] border border-purple-500/20 text-xs font-mono text-slate-200 rounded-xl px-2.5 py-2.5 w-full focus:outline-none focus:border-purple-500">
             <span class="text-slate-500 text-xs">a</span>
             <input type="time" id="sch-hora-fin" required 
-                   class="bg-[#030712] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-2.5 py-2.5 w-full focus:outline-none focus:border-cyan-500">
+                   class="bg-[#070714] border border-purple-500/20 text-xs font-mono text-slate-200 rounded-xl px-2.5 py-2.5 w-full focus:outline-none focus:border-purple-500">
           </div>
 
-          <select id="sch-categoria" class="sm:col-span-2 bg-[#030712] border border-white/10 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-cyan-500">
+          <select id="sch-categoria" class="sm:col-span-2 bg-[#070714] border border-purple-500/20 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-purple-500">
             <option value="cyan">Estudio / Universidad</option>
             <option value="violet">Trabajo / Proyectos</option>
             <option value="emerald">Deporte / Salud</option>
@@ -251,47 +252,47 @@
           </select>
 
           <input type="text" id="sch-notas" placeholder="Notas (opcional)" 
-                 class="sm:col-span-2 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
+                 class="sm:col-span-2 bg-[#070714] border border-purple-500/20 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-purple-500 placeholder-slate-500">
 
-          <button type="submit" class="sm:col-span-1 bg-cyan-600 hover:bg-cyan-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1 active:scale-95">
+          <button type="submit" class="sm:col-span-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1 active:scale-95 shadow-md">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
 
-        <!-- Cronograma por Horas de Tu Día -->
-        <div class="bg-[#030712]/80 border border-white/10 rounded-2xl p-4 overflow-x-auto">
+        <!-- Timeline Cronograma -->
+        <div class="bg-[#070714]/80 border border-purple-500/20 rounded-2xl p-4 overflow-x-auto">
           <div id="schedule-timeline-container" class="min-w-[600px] relative space-y-1">
-            <!-- Bloques por Hora generados dinámicamente -->
+            <!-- Bloques por hora -->
           </div>
         </div>
       </section>
 
-      <!-- PANEL ALERTAS PERSONALIZADAS SINCRONIZADAS ⏰ -->
-      <section class="glass-panel glass-panel-glow rounded-[32px] p-6 space-y-5">
+      <!-- PANEL ALERTAS PERSONALIZADAS SINCRONIZADAS EN FIREBASE ⏰ -->
+      <section class="aura-panel aura-panel-glow rounded-[32px] p-6 space-y-5">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <span class="p-3 bg-blue-500/10 text-blue-400 rounded-2xl border border-blue-500/20">
+            <span class="p-3 bg-purple-500/10 text-purple-300 rounded-2xl border border-purple-500/20">
               <i data-lucide="bell-ring" class="w-5 h-5"></i>
             </span>
             <div>
-              <h3 class="font-bold text-lg text-white tracking-tight">Panel de Alertas Personalizadas ⏰</h3>
-              <p class="text-xs text-blue-300/80">Sincronizadas con Firebase. Elige en qué dispositivo deseas recibir la notificación push.</p>
+              <h3 class="font-bold text-lg text-white tracking-tight">Panel de Alertas Sincronizadas ⏰</h3>
+              <p class="text-xs text-purple-300/80">Visualízalas en Celular, Tablet y Computadora. Activa o desactiva la notificación local en cada equipo.</p>
             </div>
           </div>
         </div>
 
         <!-- Formulario Alertas Custom -->
-        <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-appInput border border-white/10 p-4 rounded-2xl">
+        <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-auraInput border border-purple-500/20 p-4 rounded-2xl">
           <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
-                 class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
+                 class="sm:col-span-3 bg-[#070714] border border-purple-500/20 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-purple-500 placeholder-slate-500">
           
           <input type="text" id="alerta-desc" placeholder="Descripción (opcional)"
-                 class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
+                 class="sm:col-span-3 bg-[#070714] border border-purple-500/20 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-purple-500 placeholder-slate-500">
           
           <input type="time" id="alerta-hora" required
-                 class="sm:col-span-2 bg-[#030712] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-cyan-500">
+                 class="sm:col-span-2 bg-[#070714] border border-purple-500/20 text-xs font-mono text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-purple-500">
           
-          <select id="alerta-modo" class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-cyan-500">
+          <select id="alerta-modo" class="sm:col-span-3 bg-[#070714] border border-purple-500/20 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-purple-500">
             <option value="fecha">Fecha exacta</option>
             <option value="todos">Todos los días (Lun - Dom)</option>
             <option value="1">Todos los Lunes</option>
@@ -304,27 +305,27 @@
           </select>
 
           <input type="date" id="alerta-fecha-exacta" 
-                 class="sm:col-span-11 bg-[#030712] border border-white/10 text-xs text-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-cyan-500">
+                 class="sm:col-span-11 bg-[#070714] border border-purple-500/20 text-xs text-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-purple-500">
 
-          <button type="submit" class="sm:col-span-1 bg-cyan-600 hover:bg-cyan-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1 active:scale-95">
+          <button type="submit" class="sm:col-span-1 bg-purple-600 hover:bg-purple-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1 active:scale-95 shadow-md">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
 
-        <!-- Lista de Alertas -->
+        <!-- Lista de Alertas Sincronizadas -->
         <div class="space-y-3.5">
-          <h4 class="text-xs font-semibold font-mono text-slate-400">Mis Alertas Programadas (Sincronizadas):</h4>
+          <h4 class="text-xs font-semibold font-mono text-slate-400">Mis Alertas Guardadas (Nube Firebase):</h4>
           <ul id="lista-alertas-custom" class="space-y-2.5 max-h-[260px] overflow-y-auto pr-1">
             <!-- Dinámico desde Firebase -->
           </ul>
         </div>
       </section>
 
-      <!-- CALENDARIO MENSUAL INTERACTIVO 📅 -->
-      <section class="glass-panel glass-panel-glow rounded-[32px] p-6 space-y-4">
+      <!-- CALENDARIO MENSUAL 📅 -->
+      <section class="aura-panel aura-panel-glow rounded-[32px] p-6 space-y-4">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div class="flex items-center gap-3">
-            <span class="p-3 bg-cyan-500/10 text-cyan-400 rounded-2xl border border-cyan-500/20">
+            <span class="p-3 bg-cyan-500/10 text-cyan-300 rounded-2xl border border-cyan-500/20">
               <i data-lucide="calendar-days" class="w-5 h-5"></i>
             </span>
             <div>
@@ -333,7 +334,7 @@
             </div>
           </div>
           
-          <div class="flex items-center gap-2 bg-appInput border border-white/10 px-3.5 py-2 rounded-2xl">
+          <div class="flex items-center gap-2 bg-auraInput border border-purple-500/20 px-3.5 py-2 rounded-2xl">
             <button id="cal-prev" class="p-1.5 hover:bg-white/10 rounded-xl text-slate-300 transition active:scale-90">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
@@ -344,7 +345,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-7 gap-1.5 text-center font-semibold font-mono text-xs text-slate-400 py-2 border-b border-white/5">
+        <div class="grid grid-cols-7 gap-1.5 text-center font-semibold font-mono text-xs text-slate-400 py-2 border-b border-purple-500/10">
           <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
         </div>
 
@@ -354,10 +355,10 @@
       </section>
 
       <!-- FECHAS DE PARCIALES -->
-      <section class="glass-panel glass-panel-glow rounded-[32px] p-6 space-y-5">
+      <section class="aura-panel aura-panel-glow rounded-[32px] p-6 space-y-5">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <span class="p-3 bg-violet-500/10 text-violet-400 rounded-2xl border border-violet-500/20">
+            <span class="p-3 bg-indigo-500/10 text-indigo-300 rounded-2xl border border-indigo-500/20">
               <i data-lucide="graduation-cap" class="w-5 h-5"></i>
             </span>
             <div>
@@ -367,14 +368,14 @@
           </div>
         </div>
 
-        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-appInput border border-white/10 p-4 rounded-2xl">
+        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-auraInput border border-purple-500/20 p-4 rounded-2xl">
           <input type="text" id="parcial-materia" placeholder="Materia (ej. Álgebra)" required 
-                 class="sm:col-span-4 bg-[#030712] border border-white/10 text-xs rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-violet-500 transition">
+                 class="sm:col-span-4 bg-[#070714] border border-purple-500/20 text-xs rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
           <input type="date" id="parcial-fecha" required 
-                 class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs font-mono rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-violet-500 transition">
+                 class="sm:col-span-3 bg-[#070714] border border-purple-500/20 text-xs font-mono text-slate-300 px-4 py-3 rounded-xl focus:outline-none focus:border-indigo-500 transition">
           <input type="text" id="parcial-detalle" placeholder="Detalle / Temas (opcional)" 
-                 class="sm:col-span-4 bg-[#030712] border border-white/10 text-xs rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-violet-500 transition">
-          <button type="submit" class="sm:col-span-1 bg-violet-600 hover:bg-violet-500 text-white p-3 rounded-xl text-xs font-medium transition flex items-center justify-center active:scale-95">
+                 class="sm:col-span-4 bg-[#070714] border border-purple-500/20 text-xs rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
+          <button type="submit" class="sm:col-span-1 bg-indigo-600 hover:bg-indigo-500 text-white p-3 rounded-xl text-xs font-medium transition flex items-center justify-center active:scale-95 shadow-md">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
@@ -388,7 +389,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <!-- Recordatorios -->
-        <section class="glass-panel glass-panel-glow rounded-[32px] p-6 flex flex-col justify-between">
+        <section class="aura-panel aura-panel-glow rounded-[32px] p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-5">
               <div class="flex items-center gap-3">
@@ -401,11 +402,11 @@
 
             <form id="form-recordatorio" class="space-y-2.5 mb-4">
               <input type="text" id="rec-titulo" placeholder="Título (ej. Álgebra) - Opcional" 
-                     class="bg-appInput border border-white/10 text-xs rounded-xl px-4 py-2.5 w-full focus:outline-none focus:border-cyan-500 text-slate-100 placeholder-slate-500 transition">
+                     class="bg-auraInput border border-purple-500/20 text-xs rounded-xl px-4 py-2.5 w-full focus:outline-none focus:border-amber-500 text-slate-100 placeholder-slate-500 transition">
               <div class="flex gap-2 items-start">
                 <textarea id="rec-detalle" placeholder="Recordatorio..." required rows="2"
-                          class="bg-appInput border border-white/10 text-xs rounded-xl px-4 py-2.5 w-full focus:outline-none focus:border-cyan-500 text-slate-100 placeholder-slate-500 transition resize-none leading-relaxed"></textarea>
-                <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white p-3 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 active:scale-95">
+                          class="bg-auraInput border border-purple-500/20 text-xs rounded-xl px-4 py-2.5 w-full focus:outline-none focus:border-amber-500 text-slate-100 placeholder-slate-500 transition resize-none leading-relaxed"></textarea>
+                <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-white p-3 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 active:scale-95 shadow-md">
                   <i data-lucide="plus" class="w-4 h-4"></i>
                 </button>
               </div>
@@ -418,7 +419,7 @@
         </section>
 
         <!-- Control de Gastos -->
-        <section class="glass-panel glass-panel-glow rounded-[32px] p-6 flex flex-col justify-between">
+        <section class="aura-panel aura-panel-glow rounded-[32px] p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-5">
               <div class="flex items-center gap-3">
@@ -434,10 +435,10 @@
 
             <form id="form-gasto" class="flex gap-2.5 mb-4">
               <input type="text" id="gasto-concepto" placeholder="Concepto" required 
-                     class="bg-appInput border border-white/10 text-xs rounded-xl px-4 py-3 w-full focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
+                     class="bg-auraInput border border-purple-500/20 text-xs rounded-xl px-4 py-3 w-full focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
               <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
-                     class="bg-appInput border border-white/10 text-xs font-mono rounded-xl px-3.5 py-3 w-28 focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
-              <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 active:scale-95">
+                     class="bg-auraInput border border-purple-500/20 text-xs font-mono rounded-xl px-3.5 py-3 w-28 focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
+              <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 active:scale-95 shadow-md">
                 <i data-lucide="plus" class="w-4 h-4"></i>
               </button>
             </form>
@@ -453,7 +454,7 @@
     </main>
   </div>
 
-  <!-- SCRIPT INTEGRADO COMPLETO -->
+  <!-- SCRIPT INTEGRADO CON CONEXIÓN FIREBASE & RELOJ SEGUNDOS -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -498,10 +499,10 @@
     btnNavbarNotif.addEventListener('click', async () => {
       if (!('Notification' in window)) return alert('Este dispositivo no soporta notificaciones.');
       const permission = await Notification.requestPermission();
-      if (permission === 'granted') alert('¡Notificaciones permitidas!');
+      if (permission === 'granted') alert('¡Notificaciones activadas en este dispositivo!');
     });
 
-    // RELOJ EN VIVO
+    // RELOJ EN VIVO CON SEGUNDOS
     function actualizarReloj() {
       const ahora = new Date();
       const h = String(ahora.getHours()).padStart(2, '0');
@@ -556,8 +557,8 @@
         const esSeleccionado = (d.id === diaSeleccionadoTuDia);
 
         let activeClasses = esSeleccionado 
-          ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border-cyan-500/50 font-bold' 
-          : 'bg-appInput text-slate-400 border-white/10 hover:text-white';
+          ? 'bg-gradient-to-r from-purple-600/30 to-indigo-600/30 text-cyan-300 border-purple-500/50 font-bold' 
+          : 'bg-auraInput text-slate-400 border-purple-500/10 hover:text-white';
 
         scheduleDayTabs.innerHTML += `
           <button type="button" onclick="window.cambiarDiaTuDia('${d.id}')" 
@@ -605,7 +606,7 @@
 
       const coloresCategoria = {
         cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-300', badge: 'bg-cyan-500/20 text-cyan-300' },
-        violet: { bg: 'bg-violet-500/10', border: 'border-violet-500/30', text: 'text-violet-300', badge: 'bg-violet-500/20 text-violet-300' },
+        violet: { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-300', badge: 'bg-purple-500/20 text-purple-300' },
         emerald: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-300', badge: 'bg-emerald-500/20 text-emerald-300' },
         amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-300', badge: 'bg-amber-500/20 text-amber-300' },
         rose: { bg: 'bg-rose-500/10', border: 'border-rose-500/30', text: 'text-rose-300', badge: 'bg-rose-500/20 text-rose-300' }
@@ -639,10 +640,10 @@
         });
 
         scheduleTimelineContainer.innerHTML += `
-          <div class="schedule-hour-row flex items-start gap-4 border-b border-white/5 py-1 ${esHoraActual ? 'bg-emerald-500/10 rounded-2xl border-2 border-emerald-500/40 p-2' : ''}" style="min-height: ${baseRowHeight}px;">
+          <div class="schedule-hour-row flex items-start gap-4 border-b border-purple-500/10 py-1 ${esHoraActual ? 'bg-emerald-500/10 rounded-2xl border-2 border-emerald-500/40 p-2' : ''}" style="min-height: ${baseRowHeight}px;">
             <div class="w-20 shrink-0 flex flex-col pt-1">
               <span class="text-[11px] font-mono ${esHoraActual ? 'text-emerald-400 font-extrabold' : 'text-slate-500'} font-semibold">${horaFormatted}</span>
-              ${esHoraActual ? `<span class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest font-mono">AHORA</span>` : ''}
+              ${esHoraActual ? `<span class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest font-mono">HOY / AHORA</span>` : ''}
             </div>
             <div class="w-full flex-1 min-h-[30px]">${itemsHtml}</div>
           </div>
@@ -675,8 +676,6 @@
     });
 
     renderizarScheduleTuDia();
-
-    // Actualizar indicador de hora actual cada minuto
     setInterval(renderizarScheduleTuDia, 60000);
 
     // --- AUTENTICACIÓN GOOGLE ---
@@ -716,7 +715,7 @@
       appContent.classList.add('hidden');
     }
 
-    // --- SINCRONIZACIÓN FIREBASE Y ALERTAS ---
+    // --- SINCRONIZACIÓN FIREBASE REALTIME ---
     let eventosParcialesGlobal = [];
     let cacheAlertasGlobales = {};
 
@@ -728,7 +727,7 @@
       const parcialesRef = ref(db, 'parciales');
       const alertasCustomRef = ref(db, 'alertas_custom');
 
-      // 1. ALERTAS PERSONALIZADAS SINCRONIZADAS
+      // 1. ALERTAS PERSONALIZADAS SINCRONIZADAS EN LA NUBE
       const formAlertaCustom = document.getElementById('form-alerta-custom');
       const listaAlertasCustom = document.getElementById('lista-alertas-custom');
       const alertaModoSelect = document.getElementById('alerta-modo');
@@ -766,11 +765,11 @@
             const desactivadaLocal = localStorage.getItem(`notif_off_${key}`) === 'true';
 
             let textoTipo = (alerta.modo === 'fecha')
-              ? `<span class="text-[10px] font-mono bg-violet-500/10 text-violet-400 border border-violet-500/20 px-2 py-0.5 rounded-md">${alerta.fecha}</span>`
-              : `<span class="text-[10px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded-md">${nombresModos[alerta.modo] || 'Recurrente'}</span>`;
+              ? `<span class="text-[10px] font-mono bg-purple-500/10 text-purple-300 border border-purple-500/20 px-2 py-0.5 rounded-md">${alerta.fecha}</span>`
+              : `<span class="text-[10px] font-mono bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 px-2 py-0.5 rounded-md">${nombresModos[alerta.modo] || 'Recurrente'}</span>`;
 
             listaAlertasCustom.innerHTML += `
-              <li class="flex justify-between items-center bg-appInput border border-white/5 px-4 py-3 rounded-2xl text-xs hover:border-white/10 transition">
+              <li class="flex justify-between items-center bg-auraInput border border-purple-500/10 px-4 py-3 rounded-2xl text-xs hover:border-purple-500/30 transition">
                 <div class="space-y-0.5 pr-2">
                   <div class="flex items-center gap-2">
                     <span class="font-bold text-cyan-300">${alerta.titulo}</span>
@@ -779,10 +778,10 @@
                   ${alerta.desc ? `<p class="text-[11px] text-slate-300">${alerta.desc}</p>` : ''}
                 </div>
                 <div class="flex items-center gap-3 shrink-0">
-                  <span class="font-mono text-cyan-400 font-semibold bg-cyan-500/10 px-2.5 py-1 rounded-xl border border-cyan-500/20">${alerta.hora} hs</span>
+                  <span class="font-mono text-cyan-300 font-semibold bg-cyan-500/10 px-2.5 py-1 rounded-xl border border-cyan-500/20">${alerta.hora} hs</span>
                   
                   <button onclick="window.toggleNotifLocal('${key}')" title="${desactivadaLocal ? 'Aviso desactivado en este equipo' : 'Aviso activo en este equipo'}" 
-                          class="p-2 rounded-xl border transition ${desactivadaLocal ? 'bg-slate-800 border-white/10 text-slate-500' : 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'}">
+                          class="p-2 rounded-xl border transition ${desactivadaLocal ? 'bg-slate-800 border-white/10 text-slate-500' : 'bg-purple-500/20 border-purple-500/40 text-purple-300'}">
                     <i data-lucide="${desactivadaLocal ? 'bell-off' : 'bell'}" class="w-3.5 h-3.5"></i>
                   </button>
 
@@ -825,7 +824,7 @@
         alertaFechaInput.classList.remove('hidden');
       });
 
-      // MOTOR DE REVISIÓN DE ALERTAS
+      // MOTOR DE ALERTAS NOTIFICACIONES PUSH
       setInterval(() => {
         if (!cacheAlertasGlobales || Notification.permission !== 'granted') return;
 
@@ -891,11 +890,11 @@
             eventosParcialesGlobal.push({ id: key, ...item });
 
             grid.innerHTML += `
-              <div class="bg-appInput border border-violet-500/20 hover:border-violet-500/40 p-4 rounded-2xl flex justify-between items-start transition">
+              <div class="bg-auraInput border border-indigo-500/20 hover:border-indigo-500/40 p-4 rounded-2xl flex justify-between items-start transition">
                 <div>
-                  <h4 class="font-bold text-sm text-violet-300">${item.materia}</h4>
+                  <h4 class="font-bold text-sm text-indigo-300">${item.materia}</h4>
                   <p class="text-xs text-slate-200 font-semibold font-mono mt-1 flex items-center gap-1.5">
-                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-violet-400"></i> ${item.fecha}
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400"></i> ${item.fecha}
                   </p>
                   ${item.detalle ? `<p class="text-[11px] text-slate-400 mt-2 leading-relaxed">${item.detalle}</p>` : ''}
                 </div>
@@ -939,7 +938,7 @@
             const detalleText = item.detalle || item.titulo || '';
 
             lista.innerHTML += `
-              <li class="flex justify-between items-start bg-appInput border border-white/5 px-4 py-3.5 rounded-2xl text-xs text-slate-200 transition">
+              <li class="flex justify-between items-start bg-auraInput border border-purple-500/10 px-4 py-3.5 rounded-2xl text-xs text-slate-200 transition">
                 <div class="space-y-1 w-full pr-2">
                   ${tituloText ? `<h5 class="font-bold text-amber-300 text-xs flex items-center gap-1.5"><i data-lucide="bookmark" class="w-3 h-3 text-amber-400 shrink-0"></i>${tituloText}</h5>` : ''}
                   <p class="font-medium text-slate-200 leading-snug">${detalleText}</p>
@@ -981,7 +980,7 @@
             const item = data[key];
             total += parseFloat(item.monto || 0);
             lista.innerHTML += `
-              <li class="flex justify-between items-center bg-appInput border border-white/5 px-4 py-3 rounded-2xl text-xs text-slate-200 transition">
+              <li class="flex justify-between items-center bg-auraInput border border-purple-500/10 px-4 py-3 rounded-2xl text-xs text-slate-200 transition">
                 <span class="font-medium">${item.concepto}</span>
                 <div class="flex items-center gap-3">
                   <span class="font-bold font-mono text-emerald-400">$${Number(item.monto).toLocaleString()}</span>
@@ -1031,7 +1030,7 @@
 
       for (let i = primerDiaIndex; i > 0; i--) {
         const diaNum = totalDiasMesAnterior - i + 1;
-        grid.innerHTML += `<div class="bg-appInput/30 border border-white/5 rounded-2xl p-2 min-h-[75px] opacity-25 text-slate-500 text-[10px] font-mono">${diaNum}</div>`;
+        grid.innerHTML += `<div class="bg-auraInput/30 border border-purple-500/10 rounded-2xl p-2 min-h-[75px] opacity-25 text-slate-500 text-[10px] font-mono">${diaNum}</div>`;
       }
 
       for (let dia = 1; dia <= totalDiasMes; dia++) {
@@ -1043,13 +1042,13 @@
         const parcialesDelDia = eventosParcialesGlobal.filter(p => p.fecha === fechaIso);
         let eventosHtml = '';
         parcialesDelDia.forEach(p => {
-          eventosHtml += `<div class="bg-violet-500/20 border border-violet-500/40 text-violet-200 text-[9px] px-2 py-0.5 rounded-lg mt-1 truncate font-medium" title="${p.materia}">${p.materia}</div>`;
+          eventosHtml += `<div class="bg-purple-500/20 border border-purple-500/40 text-purple-200 text-[9px] px-2 py-0.5 rounded-lg mt-1 truncate font-medium" title="${p.materia}">${p.materia}</div>`;
         });
 
         grid.innerHTML += `
-          <div class="bg-appInput border ${esHoy ? 'border-cyan-500 shadow-lg shadow-cyan-500/20' : 'border-white/5'} rounded-2xl p-2 min-h-[75px] flex flex-col justify-between transition hover:border-white/20">
+          <div class="bg-auraInput border ${esHoy ? 'border-cyan-400 shadow-lg shadow-cyan-500/20' : 'border-purple-500/10'} rounded-2xl p-2 min-h-[75px] flex flex-col justify-between transition hover:border-purple-500/30">
             <div class="flex justify-between items-center">
-              <span class="text-xs font-mono font-bold ${esHoy ? 'bg-cyan-500 text-slate-950 px-2 py-0.5 rounded-lg' : 'text-slate-300'}">${dia}</span>
+              <span class="text-xs font-mono font-bold ${esHoy ? 'bg-cyan-400 text-slate-950 px-2 py-0.5 rounded-lg' : 'text-slate-300'}">${dia}</span>
             </div>
             <div class="overflow-y-auto max-h-[50px] space-y-1">${eventosHtml}</div>
           </div>
