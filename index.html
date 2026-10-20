@@ -268,7 +268,7 @@
           </div>
         </div>
 
-        <!-- Formulario Alertas Custom (Título, Desc opcional, Hora, Selector de Día y Repetición) -->
+        <!-- Formulario Alertas Custom (Título, Desc opcional, Hora, Selector de Día) -->
         <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-2 bg-inputBg border border-white/10 p-4 rounded-2xl">
           <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
                  class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
@@ -304,67 +304,12 @@
         </div>
       </section>
 
-      <!-- FILA 4: ORGANIZADOR MDQ 2027 -->
-      <section class="bg-cardBg border border-cyan-500/30 rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-6">
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div class="flex items-center gap-2.5">
-            <span class="p-2.5 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/20">
-              <i data-lucide="palmtree" class="w-5 h-5"></i>
-            </span>
-            <div>
-              <h3 class="font-bold text-lg text-white tracking-tight">Organizador MDQ 2027 🏖️</h3>
-              <p class="text-xs text-cyan-300/80">Control de pagos individual en USD / PESOS y logística</p>
-            </div>
-          </div>
-          
-          <div class="flex items-center gap-3 bg-inputBg border border-white/10 px-4 py-2 rounded-2xl text-xs">
-            <span class="text-slate-400 font-medium">Falta Cobrar:</span>
-            <span id="mdq-total-usd" class="font-mono font-bold text-emerald-400">$0 USD</span>
-            <span class="text-slate-600">|</span>
-            <span id="mdq-total-ars" class="font-mono font-bold text-cyan-400">$0 ARS</span>
-          </div>
-        </div>
-
-        <div class="bg-inputBg border border-white/10 rounded-2xl p-4">
-          <h4 class="text-xs font-semibold text-cyan-400 mb-3 flex items-center gap-2">
-            <i data-lucide="users" class="w-4 h-4"></i> Estado de Pagos por Persona
-          </h4>
-
-          <form id="form-mdq-pago" class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-4">
-            <input type="text" id="mdq-nombre" placeholder="Nombre (ej. Santi)" required
-                   class="bg-[#020b18]/80 border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
-            <input type="number" id="mdq-usd" placeholder="Monto USD" step="0.01"
-                   class="bg-[#020b18]/80 border border-white/10 text-xs font-mono rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
-            <input type="number" id="mdq-ars" placeholder="Monto PESOS" step="0.01"
-                   class="bg-[#020b18]/80 border border-white/10 text-xs font-mono rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
-            <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1">
-              <i data-lucide="plus" class="w-4 h-4"></i> Agregar
-            </button>
-          </form>
-
-          <ul id="lista-mdq-pagos" class="space-y-2 max-h-[220px] overflow-y-auto pr-1">
-            <!-- Dinámico -->
-          </ul>
-        </div>
-
-        <div class="bg-inputBg border border-white/10 rounded-2xl p-4">
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center gap-2 text-xs font-semibold text-cyan-400">
-              <i data-lucide="file-text" class="w-4 h-4"></i> Notas & Preparativos
-            </div>
-            <span id="estado-mdq" class="text-[10px] text-slate-400">Autoguardado</span>
-          </div>
-          <textarea id="notas-mdq" placeholder="Detalles del alquiler, señas, distribución de habitaciones, transporte, compras generales..."
-                    class="w-full h-28 bg-transparent text-xs text-slate-200 focus:outline-none transition resize-none placeholder-slate-500 leading-relaxed"></textarea>
-        </div>
-      </section>
-
     </main>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue, remove, set, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -493,7 +438,7 @@
       const titulo = document.getElementById('alerta-titulo').value.trim();
       const desc = document.getElementById('alerta-desc').value.trim();
       const hora = document.getElementById('alerta-hora').value;
-      const dia = document.getElementById('alerta-dia').value; // 'todos' o '0' a '6'
+      const dia = document.getElementById('alerta-dia').value;
 
       let alertas = obtenerAlertas();
       alertas.push({ titulo, desc, hora, dia });
@@ -509,14 +454,13 @@
       if (alertas.length === 0 || Notification.permission !== 'granted') return;
 
       const ahora = new Date();
-      const diaActual = ahora.getDay().toString(); // '0' (domingo) al '6' (sábado)
+      const diaActual = ahora.getDay().toString();
       const horaActual = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
       const fechaHoy = ahora.toISOString().split('T')[0];
 
       let huboCambios = false;
 
       alertas = alertas.filter((alerta) => {
-        // Verifica si la hora coincide y si es para "todos los días" o coincide exactamente con el día actual de la semana
         if (alerta.hora === horaActual && (alerta.dia === 'todos' || alerta.dia === diaActual)) {
           const claveUnica = `custom_${alerta.titulo}_${alerta.hora}_${fechaHoy}`;
           if (localStorage.getItem(claveUnica) !== 'enviado') {
@@ -532,10 +476,9 @@
               });
             }
 
-            // Si no es "todos los días" (es decir, eligió un día específico de la semana), se borra automáticamente al cumplirse
             if (alerta.dia !== 'todos') {
               huboCambios = true;
-              return false; // se elimina
+              return false;
             }
           }
         }
@@ -601,8 +544,6 @@
       const gastosRef = ref(db, 'gastos');
       const recordatoriosRef = ref(db, 'recordatorios');
       const parcialesRef = ref(db, 'parciales');
-      const notasMdqRef = ref(db, 'notas_mdq');
-      const pagosMdqRef = ref(db, 'pagos_mdq');
 
       // --- PARCIALES (Formato legible DD-MM sin año) ---
       onValue(parcialesRef, (snapshot) => {
@@ -760,100 +701,6 @@
 
         push(gastosRef, { concepto, monto });
         e.target.reset();
-      });
-
-      // --- PAGOS MDQ ---
-      onValue(pagosMdqRef, (snapshot) => {
-        const data = snapshot.val();
-        const lista = document.getElementById('lista-mdq-pagos');
-        const totalUsdEl = document.getElementById('mdq-total-usd');
-        const totalArsEl = document.getElementById('mdq-total-ars');
-        lista.innerHTML = '';
-        
-        let faltanteUsd = 0;
-        let faltanteArs = 0;
-
-        if (data) {
-          Object.keys(data).forEach((key) => {
-            const item = data[key];
-            const usd = parseFloat(item.usd || 0);
-            const ars = parseFloat(item.ars || 0);
-            const pagado = item.pagado || false;
-
-            if (!pagado) {
-              faltanteUsd += usd;
-              faltanteArs += ars;
-            }
-
-            lista.innerHTML += `
-              <li class="flex justify-between items-center bg-[#020b18]/60 border border-white/5 px-3.5 py-2 rounded-xl text-xs">
-                <div class="flex items-center gap-2.5">
-                  <button data-id="${key}" data-status="${pagado}" class="btn-toggle-pago p-1 rounded-lg ${pagado ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-500 bg-slate-800'}">
-                    <i data-lucide="${pagado ? 'check-circle' : 'circle'}" class="w-4 h-4"></i>
-                  </button>
-                  <span class="font-medium ${pagado ? 'line-through text-slate-500' : 'text-slate-200'}">${item.nombre}</span>
-                </div>
-                
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center gap-2 font-mono text-[11px]">
-                    ${usd > 0 ? `<span class="${pagado ? 'text-slate-500' : 'text-emerald-400 font-semibold'}">$${usd} USD</span>` : ''}
-                    ${ars > 0 ? `<span class="${pagado ? 'text-slate-500' : 'text-cyan-400 font-semibold'}">$${ars.toLocaleString()} ARS</span>` : ''}
-                  </div>
-                  <button data-id="${key}" class="btn-del-pago text-slate-500 hover:text-rose-400 p-0.5 transition">
-                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </li>
-            `;
-          });
-        } else {
-          lista.innerHTML = '<p class="text-xs text-slate-500 text-center py-2">No hay personas registradas</p>';
-        }
-
-        totalUsdEl.innerText = `$${faltanteUsd} USD`;
-        totalArsEl.innerText = `$${faltanteArs.toLocaleString()} ARS`;
-
-        lucide.createIcons();
-        bindDelete('btn-del-pago', 'pagos_mdq');
-
-        document.querySelectorAll('.btn-toggle-pago').forEach(btn => {
-          btn.onclick = () => {
-            const id = btn.getAttribute('data-id');
-            const currentStatus = btn.getAttribute('data-status') === 'true';
-            update(ref(db, `pagos_mdq/${id}`), { pagado: !currentStatus });
-          };
-        });
-      });
-
-      document.getElementById('form-mdq-pago').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const nombre = document.getElementById('mdq-nombre').value;
-        const usd = parseFloat(document.getElementById('mdq-usd').value || 0);
-        const ars = parseFloat(document.getElementById('mdq-ars').value || 0);
-
-        push(pagosMdqRef, { nombre, usd, ars, pagado: false });
-        e.target.reset();
-      });
-
-      // --- NOTAS MDQ ---
-      const notasMdq = document.getElementById('notas-mdq');
-      const estadoMdq = document.getElementById('estado-mdq');
-      let timerMdq = null;
-
-      onValue(notasMdqRef, (snapshot) => {
-        const val = snapshot.val();
-        if (val !== null && document.activeElement !== notasMdq) {
-          notasMdq.value = val;
-        }
-      });
-
-      notasMdq.addEventListener('input', () => {
-        estadoMdq.innerText = 'Guardando...';
-        clearTimeout(timerMdq);
-        timerMdq = setTimeout(() => {
-          set(notasMdqRef, notasMdq.value);
-          estadoMdq.innerText = 'Guardado';
-        }, 500);
       });
     }
 
