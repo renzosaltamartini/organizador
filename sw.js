@@ -10,7 +10,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('push', function(event) {
   const data = event.data ? event.data.json() : {};
   
-  const title = data.title || 'Organizador Personal 🔔';
+  const title = data.title || 'Peristente';
   
   const options = {
     body: data.body || 'Tienes una nueva alerta en tu panel.',
