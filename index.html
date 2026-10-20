@@ -408,7 +408,7 @@
         alert('¡Notificaciones permitidas con éxito en tu iPhone!');
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.ready.then(reg => {
-            reg.showNotification('Organizador Personal 🔔', {
+            reg.showNotification('Peristente', {
               body: '¡El sistema de alertas independientes ya está activo!',
               icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
             });
