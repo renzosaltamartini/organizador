@@ -42,7 +42,6 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* Estética Cyber Dark Glass con Acentos de Color */
     .glass-card {
       background: rgba(13, 17, 28, 0.82);
       backdrop-filter: blur(20px);
@@ -164,7 +163,7 @@
           </div>
         </div>
 
-        <!-- Card Métricas Ajustadas Responsive -->
+        <!-- Card Métricas -->
         <div class="md:col-span-7 glass-card glass-card-glow rounded-[32px] p-6 grid grid-cols-2 gap-4">
           <div class="bg-appInput border border-white/10 rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/30 transition-all group min-w-0">
             <div class="flex items-center gap-2.5 text-emerald-400">
@@ -350,7 +349,7 @@
         </div>
 
         <div id="cal-grid" class="grid grid-cols-7 gap-1 sm:gap-2 min-h-[300px]">
-          <!-- Dinámico adaptado para evitar desbordes -->
+          <!-- Dinámico -->
         </div>
       </section>
 
@@ -385,10 +384,10 @@
         </div>
       </section>
 
-      <!-- Recordatorios & Gastos (Alineación y Simetría Restaurada) -->
+      <!-- Recordatorios & Gastos -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Recordatorios con Título + Detalle -->
+        <!-- Recordatorios -->
         <section class="glass-card glass-card-glow rounded-[32px] p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-5">
@@ -400,7 +399,6 @@
               </div>
             </div>
 
-            <!-- Formulario Restaurado con Título y Detalle -->
             <form id="form-recordatorio" class="space-y-2.5 mb-4">
               <input type="text" id="rec-titulo" placeholder="Título (ej. Álgebra) - Opcional" 
                      class="bg-appInput border border-white/10 text-xs rounded-xl px-4 py-2.5 w-full focus:outline-none focus:border-amber-500 text-slate-100 placeholder-slate-500 transition">
@@ -434,7 +432,6 @@
               </div>
             </div>
 
-            <!-- Formulario Simétrico para Gastos -->
             <form id="form-gasto" class="flex gap-2.5 mb-4">
               <input type="text" id="gasto-concepto" placeholder="Concepto" required 
                      class="bg-appInput border border-white/10 text-xs rounded-xl px-4 py-3 w-full focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
@@ -456,7 +453,7 @@
     </main>
   </div>
 
-  <!-- SCRIPT INTEGRADO FIREBASE -->
+  <!-- SCRIPT INTEGRADO CON FECHAS LEGIBLES EN ESPAÑOL -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -487,6 +484,20 @@
     const errorLogin = document.getElementById('error-login');
     const btnLogout = document.getElementById('btn-logout');
     const btnNavbarNotif = document.getElementById('btn-navbar-notif');
+
+    // Función para formatear fechas AAAA-MM-DD a formato "10 de Noviembre"
+    function formatearFechaTexto(fechaIso) {
+      if (!fechaIso) return '';
+      const partes = fechaIso.split('-');
+      if (partes.length !== 3) return fechaIso;
+      
+      const anio = parseInt(partes[0], 10);
+      const mes = parseInt(partes[1], 10) - 1;
+      const dia = parseInt(partes[2], 10);
+      
+      const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+      return `${dia} de ${meses[mes]}`;
+    }
 
     // Service Worker
     if ('serviceWorker' in navigator) {
@@ -768,7 +779,7 @@
             const desactivadaLocal = localStorage.getItem(`notif_off_${key}`) === 'true';
 
             let textoTipo = (alerta.modo === 'fecha')
-              ? `<span class="text-[10px] font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${alerta.fecha}</span>`
+              ? `<span class="text-[10px] font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${formatearFechaTexto(alerta.fecha)}</span>`
               : `<span class="text-[10px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded-md">${nombresModos[alerta.modo] || 'Recurrente'}</span>`;
 
             listaAlertasCustom.innerHTML += `
@@ -892,12 +903,14 @@
             const item = data[key];
             eventosParcialesGlobal.push({ id: key, ...item });
 
+            const fechaTextoLegible = formatearFechaTexto(item.fecha);
+
             grid.innerHTML += `
               <div class="bg-appInput border border-indigo-500/20 hover:border-indigo-500/40 p-4 rounded-2xl flex justify-between items-start transition">
                 <div>
                   <h4 class="font-bold text-sm text-indigo-300">${item.materia}</h4>
-                  <p class="text-xs text-slate-300 font-semibold font-mono mt-1 flex items-center gap-1.5">
-                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400"></i> ${item.fecha}
+                  <p class="text-xs text-slate-200 font-semibold font-mono mt-1 flex items-center gap-1.5">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400"></i> ${fechaTextoLegible}
                   </p>
                   ${item.detalle ? `<p class="text-[11px] text-slate-400 mt-2 leading-relaxed">${item.detalle}</p>` : ''}
                 </div>
@@ -925,7 +938,7 @@
         e.target.reset();
       });
 
-      // --- RECORDATORIOS (RESTAURADO TITULO Y DETALLE) ---
+      // --- RECORDATORIOS ---
       onValue(recordatoriosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-recordatorios');
