@@ -84,6 +84,10 @@
           <span class="font-bold text-white tracking-tight text-sm">Organizador</span>
         </div>
         <div class="flex items-center gap-3">
+          <!-- Botón para activar notificaciones en iPhone -->
+          <button id="btn-notif" title="Activar notificaciones" class="flex items-center gap-1.5 text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1 rounded-full border border-blue-500/20 text-[11px] font-medium transition">
+            <i data-lucide="bell" class="w-3.5 h-3.5"></i> Notificaciones
+          </button>
           <span class="flex items-center gap-1.5 text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 text-[11px] font-medium backdrop-blur-md">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado
           </span>
@@ -338,6 +342,39 @@
     const btnGoogleLogin = document.getElementById('btn-google-login');
     const errorLogin = document.getElementById('error-login');
     const btnLogout = document.getElementById('btn-logout');
+    const btnNotif = document.getElementById('btn-notif');
+
+    // --- REGISTRAR SERVICE WORKER & NOTIFICACIONES EN IOS ---
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registrado con éxito:', reg))
+          .catch(err => console.error('Error al registrar el Service Worker:', err));
+      });
+    }
+
+    btnNotif.addEventListener('click', async () => {
+      if (!('Notification' in window)) {
+        alert('Este navegador no soporta notificaciones.');
+        return;
+      }
+      
+      const permission = await Notification.requestPermission();
+      if (permission === 'granted') {
+        alert('¡Notificaciones activadas con éxito!');
+        // Prueba de notificación local inmediata
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.ready.then(registration => {
+            registration.showNotification('Organizador Personal', {
+              body: '¡Las notificaciones están funcionando perfectamente en tu iPhone!',
+              icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
+            });
+          });
+        }
+      } else {
+        alert('Permiso de notificaciones denegado. Puedes cambiarlo en los ajustes de tu iPhone.');
+      }
+    });
 
     // --- MANEJO DE ESTADO DE AUTENTICACIÓN DE GOOGLE ---
     onAuthStateChanged(auth, (user) => {
