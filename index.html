@@ -263,25 +263,31 @@
             </span>
             <div>
               <h3 class="font-bold text-base text-white tracking-tight">Panel de Alertas Personalizadas ⏰</h3>
-              <p class="text-xs text-blue-300/80">Crea alertas independientes (descripción opcional y repetición configurable)</p>
+              <p class="text-xs text-blue-300/80">Crea alertas eligiendo el día exacto o repetición semanal</p>
             </div>
           </div>
         </div>
 
-        <!-- Formulario Alertas Custom (Descripción Opcional + Selector de Repetición) -->
+        <!-- Formulario Alertas Custom (Título, Desc opcional, Hora, Selector de Día y Repetición) -->
         <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-2 bg-inputBg border border-white/10 p-4 rounded-2xl">
           <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
                  class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
           
           <input type="text" id="alerta-desc" placeholder="Descripción (opcional)"
-                 class="sm:col-span-4 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
+                 class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
           
           <input type="time" id="alerta-hora" required
                  class="sm:col-span-2 bg-[#020b18] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
           
-          <select id="alerta-tipo" class="sm:col-span-2 bg-[#020b18] border border-white/10 text-xs text-slate-200 rounded-xl px-2 py-2 focus:outline-none focus:border-blue-500">
-            <option value="diaria">Diaria</option>
-            <option value="unica">Única</option>
+          <select id="alerta-dia" class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs text-slate-200 rounded-xl px-2 py-2 focus:outline-none focus:border-blue-500">
+            <option value="todos">Todos los días</option>
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miércoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sábado</option>
+            <option value="0">Domingo</option>
           </select>
 
           <button type="submit" class="sm:col-span-1 bg-blue-600 hover:bg-blue-500 text-white p-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1 shadow-lg shadow-blue-600/20 active:scale-95">
@@ -408,7 +414,7 @@
         alert('¡Notificaciones permitidas con éxito en tu iPhone!');
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.ready.then(reg => {
-            reg.showNotification('Peristente', {
+            reg.showNotification('Organizador Personal 🔔', {
               body: '¡El sistema de alertas independientes ya está activo!',
               icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
             });
@@ -441,17 +447,26 @@
         return;
       }
 
+      const nombresDias = {
+        'todos': 'Todos los días',
+        '1': 'Lunes',
+        '2': 'Martes',
+        '3': 'Miércoles',
+        '4': 'Jueves',
+        '5': 'Viernes',
+        '6': 'Sábado',
+        '0': 'Domingo'
+      };
+
       alertas.forEach((alerta, index) => {
-        const badgeTipo = alerta.tipo === 'unica' 
-          ? '<span class="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-md">Única</span>' 
-          : '<span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">Diaria</span>';
+        const textoDia = nombresDias[alerta.dia] || 'Programada';
 
         listaAlertasCustom.innerHTML += `
           <li class="flex justify-between items-center bg-[#020b18]/60 border border-white/5 px-3.5 py-2.5 rounded-xl text-xs">
             <div class="space-y-0.5">
               <div class="flex items-center gap-2">
                 <span class="font-bold text-blue-300">${alerta.titulo}</span>
-                ${badgeTipo}
+                <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${textoDia}</span>
               </div>
               ${alerta.desc ? `<p class="text-[11px] text-slate-300">${alerta.desc}</p>` : ''}
             </div>
@@ -478,29 +493,31 @@
       const titulo = document.getElementById('alerta-titulo').value.trim();
       const desc = document.getElementById('alerta-desc').value.trim();
       const hora = document.getElementById('alerta-hora').value;
-      const tipo = document.getElementById('alerta-tipo').value; // 'diaria' o 'unica'
+      const dia = document.getElementById('alerta-dia').value; // 'todos' o '0' a '6'
 
       let alertas = obtenerAlertas();
-      alertas.push({ titulo, desc, hora, tipo });
+      alertas.push({ titulo, desc, hora, dia });
       guardarAlertas(alertas);
 
       formAlertaCustom.reset();
-      alert(`¡Alerta "${titulo}" guardada con éxito para las ${hora} hs!`);
+      alert(`¡Alerta "${titulo}" guardada con éxito!`);
     });
 
-    // Motor independiente que revisa cada 30 segundos las alertas custom
+    // Motor independiente que revisa cada 30 segundos las alertas custom por día y hora
     setInterval(() => {
       let alertas = obtenerAlertas();
       if (alertas.length === 0 || Notification.permission !== 'granted') return;
 
       const ahora = new Date();
+      const diaActual = ahora.getDay().toString(); // '0' (domingo) al '6' (sábado)
       const horaActual = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
       const fechaHoy = ahora.toISOString().split('T')[0];
 
       let huboCambios = false;
 
       alertas = alertas.filter((alerta) => {
-        if (alerta.hora === horaActual) {
+        // Verifica si la hora coincide y si es para "todos los días" o coincide exactamente con el día actual de la semana
+        if (alerta.hora === horaActual && (alerta.dia === 'todos' || alerta.dia === diaActual)) {
           const claveUnica = `custom_${alerta.titulo}_${alerta.hora}_${fechaHoy}`;
           if (localStorage.getItem(claveUnica) !== 'enviado') {
             localStorage.setItem(claveUnica, 'enviado');
@@ -515,14 +532,14 @@
               });
             }
 
-            // Si es de tipo única, se elimina automáticamente al dispararse
-            if (alerta.tipo === 'unica') {
+            // Si no es "todos los días" (es decir, eligió un día específico de la semana), se borra automáticamente al cumplirse
+            if (alerta.dia !== 'todos') {
               huboCambios = true;
-              return false; // la elimina del array
+              return false; // se elimina
             }
           }
         }
-        return true; // la mantiene
+        return true;
       });
 
       if (huboCambios) {
