@@ -147,6 +147,42 @@
 
       </div>
 
+      <!-- NUEVA SECCIÓN: CALENDARIO MENSUAL INTERACTIVO 📅 -->
+      <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-2.5">
+            <span class="p-2.5 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20">
+              <i data-lucide="calendar-days" class="w-5 h-5"></i>
+            </span>
+            <div>
+              <h3 class="font-bold text-base text-white tracking-tight">Calendario Mensual 📅</h3>
+              <p class="text-xs text-slate-400">Vista de tus eventos y parciales sincronizados</p>
+            </div>
+          </div>
+          
+          <!-- Controles de Mes y Año -->
+          <div class="flex items-center gap-2 bg-inputBg border border-white/10 px-3 py-1.5 rounded-2xl">
+            <button id="cal-prev" class="p-1.5 hover:bg-white/10 rounded-lg text-slate-300 transition">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <span id="cal-mes-anio" class="text-xs font-bold text-white w-32 text-center capitalize"></span>
+            <button id="cal-next" class="p-1.5 hover:bg-white/10 rounded-lg text-slate-300 transition">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Días de la semana -->
+        <div class="grid grid-cols-7 gap-1 text-center font-semibold text-[11px] text-slate-400 py-2 border-b border-white/5">
+          <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+        </div>
+
+        <!-- Cuadrícula del Calendario -->
+        <div id="cal-grid" class="grid grid-cols-7 gap-1.5 min-h-[320px]">
+          <!-- Dinámico -->
+        </div>
+      </section>
+
       <!-- FILA 2: FECHAS DE PARCIALES -->
       <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-4">
         <div class="flex items-center justify-between">
@@ -240,7 +276,7 @@
             <input type="text" id="gasto-concepto" placeholder="Concepto" required 
                    class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
             <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
-                   class="bg-inputBg border border-white/10 text-xs font-mono rounded-xl px-3 py-2.5 w-24 focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
+                   class="bg-inputBg border border-white/10 text-xs font-mono rounded-xl px-3.5 py-2.5 w-24 focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
             <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-emerald-600/20 active:scale-95">
               <i data-lucide="plus" class="w-4 h-4"></i>
             </button>
@@ -268,7 +304,7 @@
           </div>
         </div>
 
-        <!-- Formulario Alertas Custom (Título, Desc opcional, Hora, Selector de Día) -->
+        <!-- Formulario Alertas Custom -->
         <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-2 bg-inputBg border border-white/10 p-4 rounded-2xl">
           <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
                  class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
@@ -448,7 +484,6 @@
       alert(`¡Alerta "${titulo}" guardada con éxito!`);
     });
 
-    // Motor independiente que revisa cada 30 segundos las alertas custom por día y hora
     setInterval(() => {
       let alertas = obtenerAlertas();
       if (alertas.length === 0 || Notification.permission !== 'granted') return;
@@ -538,6 +573,8 @@
     }
 
     // --- INICIALIZAR FIREBASE Y LISTENERS ---
+    let eventosParcialesGlobal = [];
+
     function iniciarFirebase() {
       db = getDatabase(app);
 
@@ -545,15 +582,17 @@
       const recordatoriosRef = ref(db, 'recordatorios');
       const parcialesRef = ref(db, 'parciales');
 
-      // --- PARCIALES (Formato legible DD-MM sin año) ---
+      // --- PARCIALES & CALENDARIO ---
       onValue(parcialesRef, (snapshot) => {
         const data = snapshot.val();
         const grid = document.getElementById('grid-parciales');
         grid.innerHTML = '';
+        eventosParcialesGlobal = [];
 
         if (data) {
           Object.keys(data).forEach((key) => {
             const item = data[key];
+            eventosParcialesGlobal.push({ id: key, ...item });
             
             let fechaLegible = item.fecha;
             if (item.fecha) {
@@ -589,6 +628,7 @@
 
         lucide.createIcons();
         bindDelete('btn-del-parcial', 'parciales');
+        renderizarCalendario();
       });
 
       document.getElementById('form-parcial').addEventListener('submit', (e) => {
@@ -703,6 +743,71 @@
         e.target.reset();
       });
     }
+
+    // --- LÓGICA DEL CALENDARIO INTERACTIVO ---
+    let fechaActualCal = new Date();
+
+    function renderizarCalendario() {
+      const anio = fechaActualCal.getFullYear();
+      const mes = fechaActualCal.getMonth();
+
+      const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+      document.getElementById('cal-mes-anio').innerText = `${nombresMeses[mes]} ${anio}`;
+
+      const grid = document.getElementById('cal-grid');
+      grid.innerHTML = '';
+
+      // Primer día del mes y total de días
+      const primerDiaIndex = (new Date(anio, mes, 1).getDay() + 6) % 7; // Ajustado a lunes como inicio
+      const totalDiasMes = new Date(anio, mes + 1, 0).getDate();
+      const totalDiasMesAnterior = new Date(anio, mes, 0).getDate();
+
+      const hoy = new Date();
+
+      // Días del mes anterior (relleno)
+      for (let i = primerDiaIndex; i > 0; i--) {
+        const diaNum = totalDiasMesAnterior - i + 1;
+        grid.innerHTML += `<div class="bg-inputBg/40 border border-white/5 rounded-xl p-1.5 min-h-[70px] opacity-30 text-slate-500 text-[10px] font-mono">${diaNum}</div>`;
+      }
+
+      // Días del mes actual
+      for (let dia = 1; dia <= totalDiasMes; dia++) {
+        const mesStr = String(mes + 1).padStart(2, '0');
+        const diaStr = String(dia).padStart(2, '0');
+        const fechaIso = `${anio}-${mesStr}-${diaStr}`;
+
+        const esHoy = (dia === hoy.getDate() && mes === hoy.getMonth() && anio === hoy.getFullYear());
+
+        // Buscar parciales en esta fecha
+        const parcialesDelDia = eventosParcialesGlobal.filter(p => p.fecha === fechaIso);
+
+        let eventosHtml = '';
+        parcialesDelDia.forEach(p => {
+          eventosHtml += `<div class="bg-purple-500/20 border border-purple-500/40 text-purple-200 text-[9px] px-1.5 py-0.5 rounded mt-1 truncate font-medium" title="${p.materia}">${p.materia}</div>`;
+        });
+
+        grid.innerHTML += `
+          <div class="bg-inputBg border ${esHoy ? 'border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]' : 'border-white/5'} rounded-xl p-1.5 min-h-[70px] flex flex-col justify-between transition hover:border-white/20">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-mono font-bold ${esHoy ? 'bg-blue-600 text-white px-1.5 rounded-md' : 'text-slate-300'}">${dia}</span>
+            </div>
+            <div class="overflow-y-auto max-h-[50px] space-y-1">
+              ${eventosHtml}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      fechaActualCal.setMonth(fechaActualCal.getMonth() - 1);
+      renderizarCalendario();
+    });
+
+    document.getElementById('cal-next').addEventListener('click', () => {
+      fechaActualCal.setMonth(fechaActualCal.getMonth() + 1);
+      renderizarCalendario();
+    });
 
     function bindDelete(className, node) {
       document.querySelectorAll(`.${className}`).forEach(btn => {
