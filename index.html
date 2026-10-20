@@ -84,8 +84,8 @@
           <span class="font-bold text-white tracking-tight text-sm">Organizador</span>
         </div>
         <div class="flex items-center gap-2">
-          <!-- Botón de Notificaciones en el Navbar -->
-          <button id="btn-navbar-notif" title="Activar notificaciones" class="p-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/20 rounded-xl transition flex items-center justify-center">
+          <!-- Botón de Notificaciones para habilitar permisos en iPhone -->
+          <button id="btn-navbar-notif" title="Permitir notificaciones" class="p-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/20 rounded-xl transition flex items-center justify-center">
             <i data-lucide="bell" class="w-4 h-4"></i>
           </button>
           
@@ -147,33 +147,31 @@
 
       </div>
 
-      <!-- FILA 2: FECHAS DE PARCIALES -->
-      <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl">
-        <div class="flex items-center justify-between mb-5">
+      <!-- FILA 2: FECHAS DE PARCIALES (REDESECIONADO Y ORDENADO) -->
+      <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-4">
+        <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
-            <span class="p-2 bg-purple-500/10 text-purple-400 rounded-xl border border-purple-500/20">
+            <span class="p-2.5 bg-purple-500/10 text-purple-400 rounded-xl border border-purple-500/20">
               <i data-lucide="graduation-cap" class="w-5 h-5"></i>
             </span>
             <div>
-              <h3 class="font-bold text-base text-white tracking-tight">Fechas de Parciales</h3>
-              <p class="text-[11px] text-slate-400">Exámenes y entregas de la universidad</p>
+              <h3 class="font-bold text-base text-white tracking-tight">Fechas de Parciales 📚</h3>
+              <p class="text-xs text-slate-400">Exámenes y entregas de la universidad</p>
             </div>
           </div>
         </div>
 
-        <!-- Formulario Parciales -->
-        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-5">
+        <!-- Formulario Parciales Ordenado -->
+        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 bg-inputBg border border-white/10 p-4 rounded-2xl">
           <input type="text" id="parcial-materia" placeholder="Materia (ej. Álgebra)" required 
-                 class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-purple-500 text-slate-100 placeholder-slate-500 transition">
+                 class="sm:col-span-4 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500">
           <input type="date" id="parcial-fecha" required 
-                 class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-300 focus:outline-none focus:border-purple-500 transition">
-          <div class="flex gap-2">
-            <input type="text" id="parcial-detalle" placeholder="Detalle / Temas (opcional)" 
-                   class="bg-inputBg border border-white/10 text-xs rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-purple-500 text-slate-100 placeholder-slate-500 transition">
-            <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-purple-600/20 active:scale-95">
-              <i data-lucide="plus" class="w-4 h-4"></i>
-            </button>
-          </div>
+                 class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-300 focus:outline-none focus:border-purple-500">
+          <input type="text" id="parcial-detalle" placeholder="Detalle / Temas (opcional)" 
+                 class="sm:col-span-4 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500">
+          <button type="submit" class="sm:col-span-1 bg-purple-600 hover:bg-purple-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shadow-lg shadow-purple-600/20 active:scale-95">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+          </button>
         </form>
 
         <!-- Grid de Parciales -->
@@ -256,7 +254,7 @@
 
       </div>
 
-      <!-- SECCIÓN: ALERTAS Y NOTIFICACIONES DIARIAS -->
+      <!-- PANEL INDEPENDIENTE: ALERTAS DIARIAS PERSONALIZADAS ⏰ -->
       <section class="bg-cardBg border border-blue-500/30 rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
@@ -264,26 +262,32 @@
               <i data-lucide="bell-ring" class="w-5 h-5"></i>
             </span>
             <div>
-              <h3 class="font-bold text-base text-white tracking-tight">Alertas Diarias ⏰</h3>
-              <p class="text-xs text-blue-300/80">Recibe una notificación todos los días a la hora configurada</p>
+              <h3 class="font-bold text-base text-white tracking-tight">Panel de Alertas Personalizadas ⏰</h3>
+              <p class="text-xs text-blue-300/80">Crea tus propias alertas independientes con título, descripción y hora exacta</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-inputBg border border-white/10 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div class="w-full sm:w-auto flex items-center gap-3">
-            <label for="input-hora-alarma" class="text-xs text-slate-300 font-medium whitespace-nowrap">Hora de aviso:</label>
-            <input type="time" id="input-hora-alarma" value="09:00" 
-                   class="bg-[#020b18] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500 transition">
-          </div>
-          
-          <div class="w-full sm:w-auto flex items-center gap-2">
-            <button id="btn-activar-alarma" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 active:scale-95">
-              <i data-lucide="bell" class="w-4 h-4"></i> Activar Alarma Diaria
-            </button>
-          </div>
+        <!-- Formulario para agregar una nueva alerta independiente -->
+        <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-2 bg-inputBg border border-white/10 p-4 rounded-2xl">
+          <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
+                 class="sm:col-span-4 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
+          <input type="text" id="alerta-desc" placeholder="Descripción (ej. Entrenar pierna)" required
+                 class="sm:col-span-5 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
+          <input type="time" id="alerta-hora" required
+                 class="sm:col-span-2 bg-[#020b18] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
+          <button type="submit" class="sm:col-span-1 bg-blue-600 hover:bg-blue-500 text-white p-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1 shadow-lg shadow-blue-600/20 active:scale-95">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <!-- Lista de Alertas Personalizadas Creadas -->
+        <div class="space-y-2 mt-3">
+          <h4 class="text-xs font-semibold text-slate-400">Mis Alertas Programadas:</h4>
+          <ul id="lista-alertas-custom" class="space-y-2 max-h-[200px] overflow-y-auto pr-1">
+            <!-- Dinámico -->
+          </ul>
         </div>
-        <p id="estado-alarma" class="text-[11px] text-slate-400 text-center sm:text-left">Estado: Sin alarma programada</p>
       </section>
 
       <!-- FILA 4: ORGANIZADOR MDQ 2027 -->
@@ -374,8 +378,6 @@
     const errorLogin = document.getElementById('error-login');
     const btnLogout = document.getElementById('btn-logout');
     const btnNavbarNotif = document.getElementById('btn-navbar-notif');
-    const btnActivarAlarma = document.getElementById('btn-activar-alarma');
-    const estadoAlarma = document.getElementById('estado-alarma');
 
     // --- REGISTRAR SERVICE WORKER ---
     if ('serviceWorker' in navigator) {
@@ -386,7 +388,7 @@
       });
     }
 
-    // --- BOTÓN DE NOTIFICACIONES EN EL NAVBAR (Para otorgar permisos rápidamente en iOS) ---
+    // --- PERMISOS DE NOTIFICACIÓN EN EL NAVBAR ---
     btnNavbarNotif.addEventListener('click', async () => {
       if (!('Notification' in window)) {
         alert('Este dispositivo no soporta notificaciones.');
@@ -399,60 +401,108 @@
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.ready.then(reg => {
             reg.showNotification('Organizador Personal 🔔', {
-              body: '¡Las alertas ya están configuradas y funcionando!',
+              body: '¡El sistema de alertas independientes ya está activo!',
               icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
             });
           });
         }
       } else {
-        alert('Permiso de notificaciones denegado. Habilítalas en los Ajustes de tu iPhone.');
+        alert('Permiso denegado. Habilítalas en los Ajustes de tu iPhone.');
       }
     });
 
-    // --- LÓGICA DE ALARMA DIARIA ---
-    btnActivarAlarma.addEventListener('click', async () => {
-      if (!('Notification' in window)) {
-        alert('Este dispositivo no soporta notificaciones.');
+    // --- GESTIÓN DE ALERTAS PERSONALIZADAS INDEPENDIENTES ---
+    const formAlertaCustom = document.getElementById('form-alerta-custom');
+    const listaAlertasCustom = document.getElementById('lista-alertas-custom');
+
+    function obtenerAlertas() {
+      return JSON.parse(localStorage.getItem('misAlertasCustom') || '[]');
+    }
+
+    function guardarAlertas(alertas) {
+      localStorage.setItem('misAlertasCustom', JSON.stringify(alertas));
+      renderizarAlertasCustom();
+    }
+
+    function renderizarAlertasCustom() {
+      const alertas = obtenerAlertas();
+      listaAlertasCustom.innerHTML = '';
+
+      if (alertas.length === 0) {
+        listaAlertasCustom.innerHTML = '<p class="text-xs text-slate-500 text-center py-2">No hay alertas independientes creadas</p>';
         return;
       }
 
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        const horaSeleccionada = document.getElementById('input-hora-alarma').value;
-        localStorage.setItem('alarmaHora', horaSeleccionada);
-        localStorage.setItem('alarmaActiva', 'true');
-        
-        estadoAlarma.innerText = `Estado: Alarma diaria activa a las ${horaSeleccionada} hs 🔔`;
-        alert(`¡Listo! Te llegará una notificación todos los días a las ${horaSeleccionada} hs.`);
-      } else {
-        alert('Debes permitir las notificaciones en los ajustes de tu iPhone.');
-      }
+      alertas.forEach((alerta, index) => {
+        listaAlertasCustom.innerHTML += `
+          <li class="flex justify-between items-center bg-[#020b18]/60 border border-white/5 px-3.5 py-2.5 rounded-xl text-xs">
+            <div>
+              <span class="font-bold text-blue-300">${alerta.titulo}</span>
+              <p class="text-[11px] text-slate-300 mt-0.5">${alerta.desc}</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-cyan-400 font-semibold bg-cyan-500/10 px-2 py-1 rounded-lg border border-cyan-500/20">${alerta.hora} hs</span>
+              <button onclick="window.eliminarAlerta(${index})" class="text-slate-500 hover:text-rose-400 p-1 transition">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </li>
+        `;
+      });
+      lucide.createIcons();
+    }
+
+    window.eliminarAlerta = function(index) {
+      let alertas = obtenerAlertas();
+      alertas.splice(index, 1);
+      guardarAlertas(alertas);
+    }
+
+    formAlertaCustom.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const titulo = document.getElementById('alerta-titulo').value.trim();
+      const desc = document.getElementById('alerta-desc').value.trim();
+      const hora = document.getElementById('alerta-hora').value;
+
+      let alertas = obtenerAlertas();
+      alertas.push({ titulo, desc, hora });
+      guardarAlertas(alertas);
+
+      formAlertaCustom.reset();
+      alert(`¡Alerta "${titulo}" guardada con éxito para las ${hora} hs!`);
     });
 
-    // Verificador de alarma en bucle cada minuto
+    // Motor independiente que revisa cada 30 segundos si coincide la hora exacta de alguna alerta creada
     setInterval(() => {
-      if (localStorage.getItem('alarmaActiva') === 'true') {
-        const horaAlarma = localStorage.getItem('alarmaHora');
-        const ahora = new Date();
-        const horaActual = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
+      const alertas = obtenerAlertas();
+      if (alertas.length === 0 || Notification.permission !== 'granted') return;
 
-        if (horaActual === horaAlarma) {
-          const ultimoDisparo = localStorage.getItem('ultimoDisparo');
-          if (ultimoDisparo !== horaActual) {
-            localStorage.setItem('ultimoDisparo', horaActual);
-            
+      const ahora = new Date();
+      const horaActual = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
+      const fechaHoy = ahora.toISOString().split('T')[0];
+
+      alertas.forEach((alerta) => {
+        if (alerta.hora === horaActual) {
+          const claveUnica = `custom_${alerta.titulo}_${alerta.hora}_${fechaHoy}`;
+          if (localStorage.getItem(claveUnica) !== 'enviado') {
+            localStorage.setItem(claveUnica, 'enviado');
+
             if ('serviceWorker' in navigator) {
               navigator.serviceWorker.ready.then(reg => {
-                reg.showNotification('Organizador Personal ⏰', {
-                  body: '¡Es hora de revisar tus pendientes, gastos y parciales!',
-                  icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
+                reg.showNotification(`🔔 ${alerta.titulo}`, {
+                  body: alerta.desc,
+                  icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no',
+                  vibrate: [300, 100, 300]
                 });
               });
             }
           }
         }
-      }
+      });
     }, 30000);
+
+    renderizarAlertasCustom();
+
 
     // --- MANEJO DE ESTADO DE AUTENTICACIÓN DE GOOGLE ---
     onAuthStateChanged(auth, (user) => {
@@ -491,11 +541,6 @@
       if (!db) {
         iniciarFirebase();
       }
-      if (localStorage.getItem('alarmaActiva') === 'true') {
-        const h = localStorage.getItem('alarmaHora') || '09:00';
-        document.getElementById('input-hora-alarma').value = h;
-        estadoAlarma.innerText = `Estado: Alarma diaria activa a las ${h} hs 🔔`;
-      }
     }
 
     function bloquearApp() {
@@ -513,7 +558,7 @@
       const notasMdqRef = ref(db, 'notas_mdq');
       const pagosMdqRef = ref(db, 'pagos_mdq');
 
-      // --- PARCIALES ---
+      // --- PARCIALES (Formato legible DD-MM sin año) ---
       onValue(parcialesRef, (snapshot) => {
         const data = snapshot.val();
         const grid = document.getElementById('grid-parciales');
@@ -522,11 +567,29 @@
         if (data) {
           Object.keys(data).forEach((key) => {
             const item = data[key];
+            
+            // Transformar la fecha YYYY-MM-DD a formato "DD de mes" (sin año)
+            let fechaLegible = item.fecha;
+            if (item.fecha) {
+              const partes = item.fecha.split('-'); // [YYYY, MM, DD]
+              if (partes.length === 3) {
+                const anio = partes[0];
+                const mesIndex = parseInt(partes[1], 10) - 1;
+                const dia = parseInt(partes[2], 10);
+                const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                if (meses[mesIndex]) {
+                  fechaLegible = `${dia} de ${meses[mesIndex]}`;
+                }
+              }
+            }
+
             grid.innerHTML += `
               <div class="bg-inputBg border border-purple-500/20 hover:border-purple-500/40 p-4 rounded-2xl flex justify-between items-start transition">
                 <div>
                   <h4 class="font-bold text-sm text-purple-300">${item.materia}</h4>
-                  <p class="text-xs text-slate-300 font-semibold font-mono mt-1"><i data-lucide="calendar" class="w-3 h-3 inline mr-1"></i>${item.fecha}</p>
+                  <p class="text-xs text-slate-200 font-semibold font-mono mt-1 flex items-center gap-1">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-purple-400"></i> ${fechaLegible}
+                  </p>
                   ${item.detalle ? `<p class="text-[11px] text-slate-400 mt-2 leading-tight">${item.detalle}</p>` : ''}
                 </div>
                 <button data-id="${key}" class="btn-del-parcial text-slate-500 hover:text-rose-400 p-1 transition">
@@ -553,7 +616,7 @@
         e.target.reset();
       });
 
-      // --- RECORDATORIOS CON EDICIÓN Y MULTILÍNEA ---
+      // --- RECORDATORIOS ---
       const cacheRecordatorios = {};
 
       onValue(recordatoriosRef, (snapshot) => {
@@ -607,54 +670,6 @@
 
         lucide.createIcons();
         bindDelete('btn-del-rec', 'recordatorios');
-        bindEditRec();
-      });
-
-      function bindEditRec() {
-        document.querySelectorAll('.btn-edit-rec').forEach(btn => {
-          btn.onclick = () => {
-            const id = btn.getAttribute('data-id');
-            const item = cacheRecordatorios[id];
-            if (item) {
-              document.getElementById('rec-edit-id').value = id;
-              document.getElementById('rec-titulo').value = item.tituloOpcional || '';
-              document.getElementById('rec-detalle').value = item.detalle || item.titulo || '';
-              
-              document.getElementById('label-edit-rec').classList.remove('hidden');
-              document.getElementById('btn-cancel-edit').classList.remove('hidden');
-              document.getElementById('btn-rec-submit').innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
-              document.getElementById('btn-rec-submit').className = 'bg-amber-600 hover:bg-amber-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-amber-600/20 active:scale-95';
-              lucide.createIcons();
-            }
-          };
-        });
-      }
-
-      function resetRecForm() {
-        document.getElementById('rec-edit-id').value = '';
-        document.getElementById('rec-titulo').value = '';
-        document.getElementById('rec-detalle').value = '';
-        document.getElementById('label-edit-rec').classList.add('hidden');
-        document.getElementById('btn-cancel-edit').classList.add('hidden');
-        document.getElementById('btn-rec-submit').innerHTML = '<i data-lucide="plus" class="w-4 h-4"></i>';
-        document.getElementById('btn-rec-submit').className = 'bg-blue-600 hover:bg-blue-500 text-white p-2.5 rounded-xl text-xs font-medium transition flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20 active:scale-95';
-        lucide.createIcons();
-      }
-
-      document.getElementById('btn-cancel-edit').addEventListener('click', resetRecForm);
-
-      document.getElementById('form-recordatorio').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const editId = document.getElementById('rec-edit-id').value;
-        const tituloOpcional = document.getElementById('rec-titulo').value.trim();
-        const detalle = document.getElementById('rec-detalle').value.trim();
-
-        if (editId) {
-          update(ref(db, `recordatorios/${editId}`), { tituloOpcional, detalle });
-        } else {
-          push(recordatoriosRef, { tituloOpcional, detalle });
-        }
-        resetRecForm();
       });
 
       // --- GASTOS ---
@@ -703,7 +718,7 @@
         e.target.reset();
       });
 
-      // --- PAGOS MDQ (USD / PESOS) ---
+      // --- PAGOS MDQ ---
       onValue(pagosMdqRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-mdq-pagos');
