@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Organizador Personal OS</title>
+  <title>Organizador Personal OS Pro</title>
   
   <!-- Icono Web / PWA -->
   <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
   <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#030712" />
 
   <!-- Fonts: Plus Jakarta Sans & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,10 +29,10 @@
             mono: ['Space Grotesk', 'sans-serif'],
           },
           colors: {
-            monoDark: '#000000',
-            monoCard: 'rgba(18, 18, 18, 0.75)',
-            monoBorder: 'rgba(255, 255, 255, 0.12)',
-            monoInput: 'rgba(10, 10, 10, 0.95)',
+            appBlack: '#030712',
+            appCard: 'rgba(15, 23, 42, 0.75)',
+            appBorder: 'rgba(255, 255, 255, 0.1)',
+            appInput: 'rgba(11, 15, 25, 0.95)',
           }
         }
       }
@@ -42,25 +42,25 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* Estética Minimalista Monocromática Glass */
-    .mono-panel {
-      background: rgba(15, 15, 15, 0.75);
+    /* Estética Cyber Dark Glass con Acentos de Color */
+    .glass-card {
+      background: rgba(13, 17, 28, 0.82);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
     }
     
-    .mono-panel-glow {
+    .glass-card-glow {
       position: relative;
     }
-    .mono-panel-glow::before {
+    .glass-card-glow::before {
       content: '';
       position: absolute;
       inset: -1px;
       border-radius: 28px;
       padding: 1px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(56, 189, 248, 0.2), rgba(239, 68, 68, 0.1), rgba(255, 255, 255, 0.02));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -68,23 +68,23 @@
     }
 
     ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.8); }
+    ::-webkit-scrollbar-track { background: rgba(3, 7, 18, 0.8); }
     ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.5); }
 
     .schedule-hour-row {
       transition: all 0.2s ease;
     }
   </style>
 </head>
-<body class="bg-[#000000] text-slate-100 min-h-screen font-sans antialiased pb-24 selection:bg-white selection:text-black relative overflow-x-hidden">
+<body class="bg-[#030712] text-slate-100 min-h-screen font-sans antialiased pb-24 selection:bg-cyan-500/30 selection:text-cyan-200 relative overflow-x-hidden">
 
   <!-- PANTALLA DE BLOQUEO / LOGIN CON GOOGLE -->
-  <div id="login-modal" class="fixed inset-0 z-[100] bg-black/98 backdrop-blur-2xl flex items-center justify-center p-4">
-    <div class="mono-panel mono-panel-glow rounded-[32px] p-8 max-w-sm w-full text-center space-y-6">
+  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#030712]/98 backdrop-blur-2xl flex items-center justify-center p-4">
+    <div class="glass-card glass-card-glow rounded-[32px] p-8 max-w-sm w-full text-center space-y-6">
       <div class="relative w-24 h-24 mx-auto">
-        <div class="absolute -inset-1 rounded-full bg-white/20 blur opacity-50 animate-pulse"></div>
-        <div class="relative w-full h-full rounded-full bg-black border-2 border-white/40 p-1 flex items-center justify-center overflow-hidden">
+        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-500 via-amber-500 to-rose-500 blur opacity-60 animate-pulse"></div>
+        <div class="relative w-full h-full rounded-full bg-slate-950 border-2 border-white/30 p-1 flex items-center justify-center overflow-hidden">
           <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
                alt="Perfil" class="w-full h-full object-cover rounded-full">
         </div>
@@ -95,7 +95,7 @@
       </div>
 
       <div class="space-y-3">
-        <button id="btn-google-login" class="w-full bg-white hover:bg-slate-200 text-black py-3.5 px-4 rounded-2xl text-xs font-bold transition shadow-lg flex items-center justify-center gap-2.5 active:scale-95">
+        <button id="btn-google-login" class="w-full bg-white hover:bg-slate-200 text-slate-950 py-3.5 px-4 rounded-2xl text-xs font-bold transition shadow-lg flex items-center justify-center gap-2.5 active:scale-95">
           <svg class="w-4 h-4" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
             <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/>
@@ -112,21 +112,25 @@
   <!-- CONTENIDO PRINCIPAL -->
   <div id="app-content" class="hidden">
 
-    <!-- Header Topbar (Sin Logo ni Nombre AURA) -->
-    <header class="w-full bg-black/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
+    <!-- Fondos de ambiente suaves -->
+    <div class="fixed top-0 left-1/4 -z-10 w-[500px] h-[400px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none"></div>
+    <div class="fixed bottom-0 right-1/4 -z-10 w-[500px] h-[400px] bg-emerald-600/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <!-- Header Topbar -->
+    <header class="w-full bg-[#030712]/90 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center text-xs font-normal text-slate-300">
         <div class="flex items-center gap-3">
-          <span class="font-bold text-white tracking-tight text-base font-mono">Organizador <span class="text-black bg-white text-xs px-2.5 py-0.5 rounded-full font-bold">OS</span></span>
+          <span class="font-bold text-white tracking-tight text-base font-mono">Organizador <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs px-2.5 py-0.5 rounded-full font-bold">OS</span></span>
         </div>
         <div class="flex items-center gap-2.5">
-          <button id="btn-navbar-notif" title="Permitir notificaciones" class="p-2.5 bg-neutral-900 hover:bg-neutral-800 text-slate-200 border border-white/15 rounded-2xl transition active:scale-95 flex items-center justify-center">
+          <button id="btn-navbar-notif" title="Permitir notificaciones" class="p-2.5 bg-slate-900/80 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-2xl transition active:scale-95 flex items-center justify-center">
             <i data-lucide="bell" class="w-4 h-4"></i>
           </button>
           
-          <span class="hidden sm:flex items-center gap-2 text-white bg-white/10 px-3.5 py-1.5 rounded-2xl border border-white/20 text-[11px] font-mono">
+          <span class="hidden sm:flex items-center gap-2 text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-2xl border border-emerald-500/20 text-[11px] font-mono">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Firebase Sync
           </span>
-          <button id="btn-logout" title="Cerrar sesión" class="p-2.5 bg-neutral-900 hover:bg-rose-500/20 hover:text-rose-400 border border-white/15 rounded-2xl transition text-slate-400 active:scale-95">
+          <button id="btn-logout" title="Cerrar sesión" class="p-2.5 bg-slate-900/80 hover:bg-rose-500/20 hover:text-rose-400 border border-white/10 rounded-2xl transition text-slate-400 active:scale-95">
             <i data-lucide="log-out" class="w-4 h-4"></i>
           </button>
         </div>
@@ -140,62 +144,65 @@
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
         
         <!-- Card Perfil -->
-        <div class="md:col-span-5 mono-panel mono-panel-glow rounded-[32px] p-6 flex flex-col justify-between relative overflow-hidden">
+        <div class="md:col-span-5 glass-card glass-card-glow rounded-[32px] p-6 flex flex-col justify-between relative overflow-hidden">
           <div class="flex items-center gap-4">
             <div class="relative">
-              <div class="w-16 h-16 rounded-full bg-black border-2 border-white/30 p-1 shadow-lg flex items-center justify-center overflow-hidden">
+              <div class="w-16 h-16 rounded-full bg-slate-950 border-2 border-cyan-500/40 p-1 shadow-lg flex items-center justify-center overflow-hidden">
                 <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
                      alt="Perfil" class="w-full h-full object-cover rounded-full">
               </div>
-              <span class="absolute bottom-0 right-0 w-4 h-4 bg-emerald-400 border-2 border-black rounded-full"></span>
+              <span class="absolute bottom-0 right-0 w-4 h-4 bg-emerald-400 border-2 border-[#030712] rounded-full"></span>
             </div>
             <div>
               <h2 class="text-2xl font-bold text-white tracking-tight">Renzo</h2>
-              <p class="text-xs text-slate-400 font-mono font-medium mt-0.5">Control & Sincronización Global</p>
+              <p class="text-xs text-cyan-400 font-mono font-medium mt-0.5">Control & Sincronización Global</p>
             </div>
           </div>
           <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs text-slate-400 font-mono">
             <span>Estado del Sistema</span>
-            <span class="text-black bg-white font-bold px-3 py-1 rounded-xl">En Línea</span>
+            <span class="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 font-bold px-3 py-1 rounded-xl">En Línea</span>
           </div>
         </div>
 
-        <!-- Card Métricas -->
-        <div class="md:col-span-7 mono-panel mono-panel-glow rounded-[32px] p-6 grid grid-cols-2 gap-4">
-          <div class="bg-monoInput border border-white/10 rounded-2xl p-4 flex flex-col justify-between hover:border-white/30 transition-all group">
-            <div class="flex items-center gap-2.5 text-slate-200">
-              <span class="p-2.5 bg-white/10 rounded-xl border border-white/10 group-hover:scale-110 transition"><i data-lucide="wallet" class="w-4 h-4"></i></span>
-              <span class="text-xs font-semibold text-slate-300">Gastos Totales</span>
+        <!-- Card Métricas Ajustadas Responsive -->
+        <div class="md:col-span-7 glass-card glass-card-glow rounded-[32px] p-6 grid grid-cols-2 gap-4">
+          <div class="bg-appInput border border-white/10 rounded-2xl p-4 flex flex-col justify-between hover:border-emerald-500/30 transition-all group min-w-0">
+            <div class="flex items-center gap-2.5 text-emerald-400">
+              <span class="p-2.5 bg-emerald-500/10 rounded-xl border border-emerald-500/20 group-hover:scale-110 transition"><i data-lucide="wallet" class="w-4 h-4"></i></span>
+              <span class="text-xs font-semibold text-slate-300 truncate">Gastos Totales</span>
             </div>
-            <span id="widget-total-gastos" class="text-3xl font-bold font-mono text-white tracking-tight mt-3">$0</span>
+            <span id="widget-total-gastos" class="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-emerald-400 tracking-tight mt-3 truncate block">
+              $0
+            </span>
           </div>
 
-          <div class="bg-monoInput border border-white/10 rounded-2xl p-4 flex flex-col justify-between hover:border-white/30 transition-all group">
-            <div class="flex items-center gap-2.5 text-slate-200">
-              <span class="p-2.5 bg-white/10 rounded-xl border border-white/10 group-hover:scale-110 transition"><i data-lucide="check-square" class="w-4 h-4"></i></span>
-              <span class="text-xs font-semibold text-slate-300">Pendientes</span>
+          <div class="bg-appInput border border-white/10 rounded-2xl p-4 flex flex-col justify-between hover:border-amber-500/30 transition-all group min-w-0">
+            <div class="flex items-center gap-2.5 text-amber-400">
+              <span class="p-2.5 bg-amber-500/10 rounded-xl border border-amber-500/20 group-hover:scale-110 transition"><i data-lucide="check-square" class="w-4 h-4"></i></span>
+              <span class="text-xs font-semibold text-slate-300 truncate">Pendientes</span>
             </div>
-            <span id="widget-pendientes" class="text-3xl font-bold font-mono text-white tracking-tight mt-3">0</span>
+            <span id="widget-pendientes" class="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-amber-400 tracking-tight mt-3 truncate block">
+              0
+            </span>
           </div>
         </div>
 
       </div>
 
       <!-- PANEL: TU DÍA CON MINUTOS EXACTOS EN "HOY/AHORA" ⏱️ -->
-      <section class="mono-panel mono-panel-glow rounded-[32px] p-6 space-y-6">
+      <section class="glass-card glass-card-glow rounded-[32px] p-6 space-y-6">
         
         <!-- Banner con Reloj Digital -->
-        <div class="bg-neutral-900/80 border border-white/15 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
+        <div class="bg-slate-900/80 border border-blue-500/20 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
           <div class="flex items-center gap-4">
-            <div class="p-3.5 bg-white/10 border border-white/20 rounded-2xl text-white shrink-0">
+            <div class="p-3.5 bg-blue-500/10 border border-blue-500/30 rounded-2xl text-blue-400 shrink-0">
               <i data-lucide="clock" class="w-7 h-7"></i>
             </div>
             <div>
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">Tiempo Real en Vivo</span>
+                <span class="text-[10px] font-mono uppercase tracking-widest text-blue-400 font-bold">Tiempo Real en Vivo</span>
               </div>
-              <!-- Horas : Minutos : Segundos -->
               <div id="live-clock" class="text-3xl sm:text-4xl font-black font-mono text-white tracking-tight mt-0.5">00:00:00</div>
               <p id="live-date" class="text-xs text-slate-400 mt-0.5 capitalize font-medium"></p>
             </div>
@@ -203,11 +210,11 @@
 
           <!-- Zoom del Cronograma -->
           <div class="flex items-center gap-2 self-end sm:self-center">
-            <div class="flex items-center bg-black border border-white/15 p-1 rounded-2xl">
+            <div class="flex items-center bg-[#030712] border border-white/15 p-1 rounded-2xl">
               <button id="schedule-zoom-out" title="Reducir zoom" class="p-2 hover:bg-white/10 rounded-xl text-slate-300 transition active:scale-95">
                 <i data-lucide="zoom-out" class="w-4 h-4"></i>
               </button>
-              <span id="schedule-zoom-label" class="text-xs font-mono text-white px-2.5 font-bold">100%</span>
+              <span id="schedule-zoom-label" class="text-xs font-mono text-blue-400 px-2.5 font-bold">100%</span>
               <button id="schedule-zoom-in" title="Aumentar zoom" class="p-2 hover:bg-white/10 rounded-xl text-slate-300 transition active:scale-95">
                 <i data-lucide="zoom-in" class="w-4 h-4"></i>
               </button>
@@ -218,42 +225,42 @@
           </div>
         </div>
 
-        <!-- Selector de Días -->
+        <!-- Selector de Días de la Semana -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="schedule-day-tabs">
           <!-- Dinámico -->
         </div>
 
         <!-- Formulario Actividad -->
-        <form id="form-schedule-item" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-monoInput border border-white/15 p-4 rounded-2xl">
+        <form id="form-schedule-item" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-appInput border border-white/10 p-4 rounded-2xl">
           <input type="text" id="sch-titulo" placeholder="Actividad / Título (ej. Algoritmos)" required 
-                 class="sm:col-span-4 bg-black border border-white/15 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-white placeholder-slate-500">
+                 class="sm:col-span-4 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
           
           <div class="sm:col-span-3 flex items-center gap-1.5">
             <input type="time" id="sch-hora-inicio" required 
-                   class="bg-black border border-white/15 text-xs font-mono text-slate-200 rounded-xl px-2.5 py-2.5 w-full focus:outline-none focus:border-white">
+                   class="bg-[#030712] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-2.5 py-2.5 w-full focus:outline-none focus:border-cyan-500">
             <span class="text-slate-500 text-xs">a</span>
             <input type="time" id="sch-hora-fin" required 
-                   class="bg-black border border-white/15 text-xs font-mono text-slate-200 rounded-xl px-2.5 py-2.5 w-full focus:outline-none focus:border-white">
+                   class="bg-[#030712] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-2.5 py-2.5 w-full focus:outline-none focus:border-cyan-500">
           </div>
 
-          <select id="sch-categoria" class="sm:col-span-2 bg-black border border-white/15 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-white">
-            <option value="cyan">Estudio / Universidad</option>
-            <option value="violet">Trabajo / Proyectos</option>
-            <option value="emerald">Deporte / Salud</option>
-            <option value="amber">Ocio / Personal</option>
-            <option value="rose">Importante</option>
+          <select id="sch-categoria" class="sm:col-span-2 bg-[#030712] border border-white/10 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-cyan-500">
+            <option value="cyan">Estudio / Universidad (Azul)</option>
+            <option value="violet">Trabajo / Proyectos (Morado)</option>
+            <option value="emerald">Deporte / Salud (Verde)</option>
+            <option value="amber">Ocio / Personal (Amarillo)</option>
+            <option value="rose">Importante (Rojo)</option>
           </select>
 
           <input type="text" id="sch-notas" placeholder="Notas (opcional)" 
-                 class="sm:col-span-2 bg-black border border-white/15 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-white placeholder-slate-500">
+                 class="sm:col-span-2 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-cyan-500 placeholder-slate-500">
 
-          <button type="submit" class="sm:col-span-1 bg-white hover:bg-slate-200 text-black p-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 active:scale-95 shadow-md">
+          <button type="submit" class="sm:col-span-1 bg-cyan-600 hover:bg-cyan-500 text-white p-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 active:scale-95 shadow-md">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
 
         <!-- Cronograma de Tu Día -->
-        <div class="bg-black/90 border border-white/15 rounded-2xl p-4 overflow-x-auto">
+        <div class="bg-[#030712]/90 border border-white/10 rounded-2xl p-4 overflow-x-auto">
           <div id="schedule-timeline-container" class="min-w-[600px] relative space-y-1">
             <!-- Bloques dinámicos por hora -->
           </div>
@@ -261,10 +268,10 @@
       </section>
 
       <!-- PANEL ALERTAS PERSONALIZADAS SINCRONIZADAS EN FIREBASE ⏰ -->
-      <section class="mono-panel mono-panel-glow rounded-[32px] p-6 space-y-5">
+      <section class="glass-card glass-card-glow rounded-[32px] p-6 space-y-5">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <span class="p-3 bg-white/10 text-white rounded-2xl border border-white/20">
+            <span class="p-3 bg-blue-500/10 text-blue-400 rounded-2xl border border-blue-500/20">
               <i data-lucide="bell-ring" class="w-5 h-5"></i>
             </span>
             <div>
@@ -275,17 +282,17 @@
         </div>
 
         <!-- Formulario Alertas Custom -->
-        <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-monoInput border border-white/15 p-4 rounded-2xl">
+        <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-appInput border border-white/10 p-4 rounded-2xl">
           <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
-                 class="sm:col-span-3 bg-black border border-white/15 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-white placeholder-slate-500">
+                 class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
           
           <input type="text" id="alerta-desc" placeholder="Descripción (opcional)"
-                 class="sm:col-span-3 bg-black border border-white/15 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-white placeholder-slate-500">
+                 class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
           
           <input type="time" id="alerta-hora" required
-                 class="sm:col-span-2 bg-black border border-white/15 text-xs font-mono text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-white">
+                 class="sm:col-span-2 bg-[#030712] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
           
-          <select id="alerta-modo" class="sm:col-span-3 bg-black border border-white/15 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-white">
+          <select id="alerta-modo" class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
             <option value="fecha">Fecha exacta</option>
             <option value="todos">Todos los días (Lun - Dom)</option>
             <option value="1">Todos los Lunes</option>
@@ -298,9 +305,9 @@
           </select>
 
           <input type="date" id="alerta-fecha-exacta" 
-                 class="sm:col-span-11 bg-black border border-white/15 text-xs text-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-white">
+                 class="sm:col-span-11 bg-[#030712] border border-white/10 text-xs text-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-500">
 
-          <button type="submit" class="sm:col-span-1 bg-white hover:bg-slate-200 text-black p-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 active:scale-95 shadow-md">
+          <button type="submit" class="sm:col-span-1 bg-blue-600 hover:bg-blue-500 text-white p-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 active:scale-95 shadow-md">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
@@ -314,11 +321,11 @@
         </div>
       </section>
 
-      <!-- CALENDARIO MENSUAL 📅 (REDISEÑADO Y RESPONSIVE PARA MÓVILES) -->
-      <section class="mono-panel mono-panel-glow rounded-[32px] p-6 space-y-4">
+      <!-- CALENDARIO MENSUAL 📅 -->
+      <section class="glass-card glass-card-glow rounded-[32px] p-6 space-y-4">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div class="flex items-center gap-3">
-            <span class="p-3 bg-white/10 text-white rounded-2xl border border-white/20">
+            <span class="p-3 bg-cyan-500/10 text-cyan-400 rounded-2xl border border-cyan-500/20">
               <i data-lucide="calendar-days" class="w-5 h-5"></i>
             </span>
             <div>
@@ -327,7 +334,7 @@
             </div>
           </div>
           
-          <div class="flex items-center gap-2 bg-monoInput border border-white/15 px-3.5 py-2 rounded-2xl">
+          <div class="flex items-center gap-2 bg-appInput border border-white/10 px-3.5 py-2 rounded-2xl">
             <button id="cal-prev" class="p-1.5 hover:bg-white/10 rounded-xl text-slate-300 transition active:scale-90">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
@@ -348,10 +355,10 @@
       </section>
 
       <!-- FECHAS DE PARCIALES -->
-      <section class="mono-panel mono-panel-glow rounded-[32px] p-6 space-y-5">
+      <section class="glass-card glass-card-glow rounded-[32px] p-6 space-y-5">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <span class="p-3 bg-white/10 text-white rounded-2xl border border-white/20">
+            <span class="p-3 bg-indigo-500/10 text-indigo-400 rounded-2xl border border-indigo-500/20">
               <i data-lucide="graduation-cap" class="w-5 h-5"></i>
             </span>
             <div>
@@ -361,14 +368,14 @@
           </div>
         </div>
 
-        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-monoInput border border-white/15 p-4 rounded-2xl">
+        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-appInput border border-white/10 p-4 rounded-2xl">
           <input type="text" id="parcial-materia" placeholder="Materia (ej. Álgebra)" required 
-                 class="sm:col-span-4 bg-black border border-white/15 text-xs rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-white transition">
+                 class="sm:col-span-4 bg-[#030712] border border-white/10 text-xs rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
           <input type="date" id="parcial-fecha" required 
-                 class="sm:col-span-3 bg-black border border-white/15 text-xs font-mono text-slate-300 px-4 py-3 rounded-xl focus:outline-none focus:border-white transition">
+                 class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs font-mono text-slate-300 px-4 py-3 rounded-xl focus:outline-none focus:border-indigo-500 transition">
           <input type="text" id="parcial-detalle" placeholder="Detalle / Temas (opcional)" 
-                 class="sm:col-span-4 bg-black border border-white/15 text-xs rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-white transition">
-          <button type="submit" class="sm:col-span-1 bg-white hover:bg-slate-200 text-black p-3 rounded-xl text-xs font-bold transition flex items-center justify-center active:scale-95 shadow-md">
+                 class="sm:col-span-4 bg-[#030712] border border-white/10 text-xs rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
+          <button type="submit" class="sm:col-span-1 bg-indigo-600 hover:bg-indigo-500 text-white p-3 rounded-xl text-xs font-bold transition flex items-center justify-center active:scale-95 shadow-md">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
@@ -378,47 +385,51 @@
         </div>
       </section>
 
-      <!-- Recordatorios & Gastos (Alineación Simétrica) -->
+      <!-- Recordatorios & Gastos (Alineación y Simetría Restaurada) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Recordatorios -->
-        <section class="mono-panel mono-panel-glow rounded-[32px] p-6 flex flex-col justify-between">
+        <!-- Recordatorios con Título + Detalle -->
+        <section class="glass-card glass-card-glow rounded-[32px] p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-5">
               <div class="flex items-center gap-3">
-                <span class="p-2.5 bg-white/10 text-white rounded-2xl border border-white/20">
+                <span class="p-2.5 bg-amber-500/10 text-amber-400 rounded-2xl border border-amber-500/20">
                   <i data-lucide="check-square" class="w-5 h-5"></i>
                 </span>
                 <h3 class="font-bold text-lg text-white tracking-tight">Recordatorios</h3>
               </div>
             </div>
 
-            <!-- Formulario Simétrico para Recordatorios -->
-            <form id="form-recordatorio" class="flex gap-2.5 mb-4">
-              <input type="text" id="rec-detalle" placeholder="Añadir recordatorio..." required 
-                     class="bg-monoInput border border-white/15 text-xs rounded-xl px-4 py-3 w-full focus:outline-none focus:border-white text-slate-100 placeholder-slate-500 transition">
-              <button type="submit" class="bg-white hover:bg-slate-200 text-black px-4 py-3 rounded-xl text-xs font-bold transition flex items-center justify-center shrink-0 active:scale-95 shadow-md">
-                <i data-lucide="plus" class="w-4 h-4"></i>
-              </button>
+            <!-- Formulario Restaurado con Título y Detalle -->
+            <form id="form-recordatorio" class="space-y-2.5 mb-4">
+              <input type="text" id="rec-titulo" placeholder="Título (ej. Álgebra) - Opcional" 
+                     class="bg-appInput border border-white/10 text-xs rounded-xl px-4 py-2.5 w-full focus:outline-none focus:border-amber-500 text-slate-100 placeholder-slate-500 transition">
+              <div class="flex gap-2.5 items-start">
+                <textarea id="rec-detalle" placeholder="Recordatorio / Detalle..." required rows="2"
+                          class="bg-appInput border border-white/10 text-xs rounded-xl px-4 py-2.5 w-full focus:outline-none focus:border-amber-500 text-slate-100 placeholder-slate-500 transition resize-none leading-relaxed"></textarea>
+                <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-3 rounded-xl text-xs font-bold transition flex items-center justify-center shrink-0 active:scale-95 shadow-md h-full">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
+              </div>
             </form>
 
-            <ul id="lista-recordatorios" class="space-y-2 max-h-[260px] overflow-y-auto pr-1">
+            <ul id="lista-recordatorios" class="space-y-2.5 max-h-[260px] overflow-y-auto pr-1">
               <!-- Dinámico -->
             </ul>
           </div>
         </section>
 
         <!-- Control de Gastos -->
-        <section class="mono-panel mono-panel-glow rounded-[32px] p-6 flex flex-col justify-between">
+        <section class="glass-card glass-card-glow rounded-[32px] p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-5">
               <div class="flex items-center gap-3">
-                <span class="p-2.5 bg-white/10 text-white rounded-2xl border border-white/20">
+                <span class="p-2.5 bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/20">
                   <i data-lucide="credit-card" class="w-5 h-5"></i>
                 </span>
                 <h3 class="font-bold text-lg text-white tracking-tight">Control de Gastos</h3>
               </div>
-              <div class="bg-white/10 border border-white/20 px-3 py-1 rounded-xl text-xs font-semibold font-mono text-white">
+              <div class="bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-xl text-xs font-semibold font-mono text-emerald-400">
                 Total: <span id="section-total-gastos">$0</span>
               </div>
             </div>
@@ -426,10 +437,10 @@
             <!-- Formulario Simétrico para Gastos -->
             <form id="form-gasto" class="flex gap-2.5 mb-4">
               <input type="text" id="gasto-concepto" placeholder="Concepto" required 
-                     class="bg-monoInput border border-white/15 text-xs rounded-xl px-4 py-3 w-full focus:outline-none focus:border-white text-slate-100 placeholder-slate-500 transition">
+                     class="bg-appInput border border-white/10 text-xs rounded-xl px-4 py-3 w-full focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
               <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
-                     class="bg-monoInput border border-white/15 text-xs font-mono rounded-xl px-3.5 py-3 w-28 focus:outline-none focus:border-white text-slate-100 placeholder-slate-500 transition">
-              <button type="submit" class="bg-white hover:bg-slate-200 text-black px-4 py-3 rounded-xl text-xs font-bold transition flex items-center justify-center shrink-0 active:scale-95 shadow-md">
+                     class="bg-appInput border border-white/10 text-xs font-mono rounded-xl px-3.5 py-3 w-28 focus:outline-none focus:border-emerald-500 text-slate-100 placeholder-slate-500 transition">
+              <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-3 rounded-xl text-xs font-bold transition flex items-center justify-center shrink-0 active:scale-95 shadow-md">
                 <i data-lucide="plus" class="w-4 h-4"></i>
               </button>
             </form>
@@ -445,7 +456,7 @@
     </main>
   </div>
 
-  <!-- SCRIPT CON LOGICA FIREBASE Y HORAS CON MINUTOS DINÁMICOS -->
+  <!-- SCRIPT INTEGRADO FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -548,14 +559,14 @@
         const esSeleccionado = (d.id === diaSeleccionadoTuDia);
 
         let activeClasses = esSeleccionado 
-          ? 'bg-white text-black font-bold border-white' 
-          : 'bg-monoInput text-slate-400 border-white/10 hover:text-white';
+          ? 'bg-blue-600 text-white font-bold border-blue-400 shadow-lg shadow-blue-500/20' 
+          : 'bg-appInput text-slate-400 border-white/10 hover:text-white';
 
         scheduleDayTabs.innerHTML += `
           <button type="button" onclick="window.cambiarDiaTuDia('${d.id}')" 
                   class="px-4 py-2.5 rounded-xl border text-xs font-mono transition flex items-center gap-2 shrink-0 ${activeClasses}">
             <span>${d.nombre}</span>
-            ${esHoy ? `<span class="w-2 h-2 rounded-full ${esSeleccionado ? 'bg-black' : 'bg-emerald-400'}"></span>` : ''}
+            ${esHoy ? `<span class="w-2 h-2 rounded-full ${esSeleccionado ? 'bg-emerald-300' : 'bg-emerald-400'}"></span>` : ''}
           </button>
         `;
       });
@@ -596,6 +607,14 @@
       const minutosActualNum = String(ahora.getMinutes()).padStart(2, '0');
       const esHoySeleccionado = (String(ahora.getDay()) === diaSeleccionadoTuDia);
 
+      const coloresCategoria = {
+        cyan: { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-300', badge: 'bg-blue-500/20 text-blue-300' },
+        violet: { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-300', badge: 'bg-purple-500/20 text-purple-300' },
+        emerald: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', text: 'text-emerald-300', badge: 'bg-emerald-500/20 text-emerald-300' },
+        amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-300', badge: 'bg-amber-500/20 text-amber-300' },
+        rose: { bg: 'bg-rose-500/10', border: 'border-rose-500/30', text: 'text-rose-300', badge: 'bg-rose-500/20 text-rose-300' }
+      };
+
       for (let hora = 7; hora <= 23; hora++) {
         const horaFormatted = String(hora).padStart(2, '0') + ':00';
         const esHoraActual = (esHoySeleccionado && hora === horaActualNum);
@@ -604,14 +623,15 @@
 
         let itemsHtml = '';
         actividadesEnHora.forEach((item) => {
+          const styleCol = coloresCategoria[item.categoria] || coloresCategoria.cyan;
           const globalIdx = diaItems.indexOf(item);
 
           itemsHtml += `
-            <div class="bg-neutral-900 border border-white/20 rounded-xl p-2.5 my-1 flex justify-between items-center transition hover:scale-[1.01]">
+            <div class="${styleCol.bg} ${styleCol.border} border rounded-xl p-2.5 my-1 flex justify-between items-center transition hover:scale-[1.01]">
               <div class="space-y-0.5">
                 <div class="flex items-center gap-2">
-                  <span class="font-bold text-white text-xs">${item.titulo}</span>
-                  <span class="text-[10px] font-mono bg-white/10 text-slate-300 px-2 py-0.5 rounded-md font-semibold">${item.horaInicio} - ${item.horaFin} hs</span>
+                  <span class="font-bold ${styleCol.text} text-xs">${item.titulo}</span>
+                  <span class="text-[10px] font-mono ${styleCol.badge} px-2 py-0.5 rounded-md font-semibold">${item.horaInicio} - ${item.horaFin} hs</span>
                 </div>
                 ${item.notas ? `<p class="text-[11px] text-slate-400">${item.notas}</p>` : ''}
               </div>
@@ -622,12 +642,11 @@
           `;
         });
 
-        // Etiqueta exacta con hora + minutos exactos
         scheduleTimelineContainer.innerHTML += `
-          <div class="schedule-hour-row flex items-start gap-4 border-b border-white/10 py-1 ${esHoraActual ? 'bg-white/10 rounded-2xl border-2 border-white p-2' : ''}" style="min-height: ${baseRowHeight}px;">
+          <div class="schedule-hour-row flex items-start gap-4 border-b border-white/10 py-1 ${esHoraActual ? 'bg-emerald-500/10 rounded-2xl border-2 border-emerald-400 p-2' : ''}" style="min-height: ${baseRowHeight}px;">
             <div class="w-28 shrink-0 flex flex-col pt-1">
-              <span class="text-[11px] font-mono ${esHoraActual ? 'text-white font-black' : 'text-slate-500'} font-semibold">${horaFormatted}</span>
-              ${esHoraActual ? `<span class="text-[9px] font-bold text-black bg-white px-1.5 py-0.5 rounded mt-0.5 uppercase tracking-tight font-mono">AHORA (${horaActualNum}:${minutosActualNum} hs)</span>` : ''}
+              <span class="text-[11px] font-mono ${esHoraActual ? 'text-emerald-400 font-black' : 'text-slate-500'} font-semibold">${horaFormatted}</span>
+              ${esHoraActual ? `<span class="text-[9px] font-bold text-slate-950 bg-emerald-400 px-1.5 py-0.5 rounded mt-0.5 uppercase tracking-tight font-mono">AHORA (${horaActualNum}:${minutosActualNum} hs)</span>` : ''}
             </div>
             <div class="w-full flex-1 min-h-[30px]">${itemsHtml}</div>
           </div>
@@ -660,7 +679,7 @@
     });
 
     renderizarScheduleTuDia();
-    setInterval(renderizarScheduleTuDia, 30000); // Se actualiza cada 30 segundos para ajustar el tiempo con precisión
+    setInterval(renderizarScheduleTuDia, 30000);
 
     // --- AUTENTICACIÓN GOOGLE ---
     onAuthStateChanged(auth, (user) => {
@@ -749,11 +768,11 @@
             const desactivadaLocal = localStorage.getItem(`notif_off_${key}`) === 'true';
 
             let textoTipo = (alerta.modo === 'fecha')
-              ? `<span class="text-[10px] font-mono bg-white/10 text-slate-300 border border-white/20 px-2 py-0.5 rounded-md">${alerta.fecha}</span>`
-              : `<span class="text-[10px] font-mono bg-white/10 text-slate-300 border border-white/20 px-2 py-0.5 rounded-md">${nombresModos[alerta.modo] || 'Recurrente'}</span>`;
+              ? `<span class="text-[10px] font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${alerta.fecha}</span>`
+              : `<span class="text-[10px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded-md">${nombresModos[alerta.modo] || 'Recurrente'}</span>`;
 
             listaAlertasCustom.innerHTML += `
-              <li class="flex justify-between items-center bg-monoInput border border-white/10 px-4 py-3 rounded-2xl text-xs hover:border-white/30 transition">
+              <li class="flex justify-between items-center bg-appInput border border-white/10 px-4 py-3 rounded-2xl text-xs hover:border-white/30 transition">
                 <div class="space-y-0.5 pr-2">
                   <div class="flex items-center gap-2">
                     <span class="font-bold text-white">${alerta.titulo}</span>
@@ -762,10 +781,10 @@
                   ${alerta.desc ? `<p class="text-[11px] text-slate-300">${alerta.desc}</p>` : ''}
                 </div>
                 <div class="flex items-center gap-3 shrink-0">
-                  <span class="font-mono text-white font-semibold bg-white/10 px-2.5 py-1 rounded-xl border border-white/20">${alerta.hora} hs</span>
+                  <span class="font-mono text-cyan-400 font-semibold bg-cyan-500/10 px-2.5 py-1 rounded-xl border border-cyan-500/20">${alerta.hora} hs</span>
                   
                   <button onclick="window.toggleNotifLocal('${key}')" title="${desactivadaLocal ? 'Aviso desactivado en este equipo' : 'Aviso activo en este equipo'}" 
-                          class="p-2 rounded-xl border transition ${desactivadaLocal ? 'bg-neutral-800 border-white/10 text-slate-500' : 'bg-white text-black border-white'}">
+                          class="p-2 rounded-xl border transition ${desactivadaLocal ? 'bg-neutral-800 border-white/10 text-slate-500' : 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'}">
                     <i data-lucide="${desactivadaLocal ? 'bell-off' : 'bell'}" class="w-3.5 h-3.5"></i>
                   </button>
 
@@ -874,11 +893,11 @@
             eventosParcialesGlobal.push({ id: key, ...item });
 
             grid.innerHTML += `
-              <div class="bg-monoInput border border-white/15 hover:border-white/40 p-4 rounded-2xl flex justify-between items-start transition">
+              <div class="bg-appInput border border-indigo-500/20 hover:border-indigo-500/40 p-4 rounded-2xl flex justify-between items-start transition">
                 <div>
-                  <h4 class="font-bold text-sm text-white">${item.materia}</h4>
+                  <h4 class="font-bold text-sm text-indigo-300">${item.materia}</h4>
                   <p class="text-xs text-slate-300 font-semibold font-mono mt-1 flex items-center gap-1.5">
-                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i> ${item.fecha}
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400"></i> ${item.fecha}
                   </p>
                   ${item.detalle ? `<p class="text-[11px] text-slate-400 mt-2 leading-relaxed">${item.detalle}</p>` : ''}
                 </div>
@@ -906,7 +925,7 @@
         e.target.reset();
       });
 
-      // --- RECORDATORIOS ---
+      // --- RECORDATORIOS (RESTAURADO TITULO Y DETALLE) ---
       onValue(recordatoriosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-recordatorios');
@@ -918,11 +937,15 @@
           widgetPendientes.innerText = arr.length;
 
           arr.forEach((item) => {
+            const tituloText = item.tituloOpcional || '';
             const detalleText = item.detalle || item.titulo || '';
 
             lista.innerHTML += `
-              <li class="flex justify-between items-center bg-monoInput border border-white/10 px-4 py-3 rounded-2xl text-xs text-slate-200 transition">
-                <span class="font-medium text-slate-100">${detalleText}</span>
+              <li class="flex justify-between items-start bg-appInput border border-white/10 px-4 py-3 rounded-2xl text-xs text-slate-200 transition">
+                <div class="space-y-1 w-full pr-2">
+                  ${tituloText ? `<h5 class="font-bold text-amber-400 text-xs flex items-center gap-1.5"><i data-lucide="bookmark" class="w-3 h-3 text-amber-400 shrink-0"></i>${tituloText}</h5>` : ''}
+                  <p class="font-medium text-slate-200 leading-snug">${detalleText}</p>
+                </div>
                 <button data-id="${item.key}" class="btn-del-rec text-slate-500 hover:text-rose-400 p-1 transition">
                   <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                 </button>
@@ -940,8 +963,9 @@
 
       document.getElementById('form-recordatorio').addEventListener('submit', (e) => {
         e.preventDefault();
-        const detalle = document.getElementById('rec-detalle').value;
-        push(recordatoriosRef, { detalle });
+        const tituloOpcional = document.getElementById('rec-titulo').value.trim();
+        const detalle = document.getElementById('rec-detalle').value.trim();
+        push(recordatoriosRef, { tituloOpcional, detalle });
         e.target.reset();
       });
 
@@ -959,10 +983,10 @@
             const item = data[key];
             total += parseFloat(item.monto || 0);
             lista.innerHTML += `
-              <li class="flex justify-between items-center bg-monoInput border border-white/10 px-4 py-3 rounded-2xl text-xs text-slate-200 transition">
+              <li class="flex justify-between items-center bg-appInput border border-white/10 px-4 py-3 rounded-2xl text-xs text-slate-200 transition">
                 <span class="font-medium">${item.concepto}</span>
                 <div class="flex items-center gap-3">
-                  <span class="font-bold font-mono text-white">$${Number(item.monto).toLocaleString()}</span>
+                  <span class="font-bold font-mono text-emerald-400">$${Number(item.monto).toLocaleString()}</span>
                   <button data-id="${key}" class="btn-del-gasto text-slate-500 hover:text-rose-400 p-1 transition">
                     <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                   </button>
@@ -990,7 +1014,7 @@
       });
     }
 
-    // --- CALENDARIO MENSUAL REDISEÑADO PARA MÓVILES ---
+    // --- CALENDARIO MENSUAL ---
     let fechaActualCal = new Date();
 
     function renderizarCalendario() {
@@ -1009,7 +1033,7 @@
 
       for (let i = primerDiaIndex; i > 0; i--) {
         const diaNum = totalDiasMesAnterior - i + 1;
-        grid.innerHTML += `<div class="bg-monoInput/30 border border-white/5 rounded-xl p-1.5 sm:p-2 min-h-[60px] sm:min-h-[75px] opacity-20 text-slate-500 text-[10px] font-mono">${diaNum}</div>`;
+        grid.innerHTML += `<div class="bg-appInput/30 border border-white/5 rounded-xl p-1.5 sm:p-2 min-h-[60px] sm:min-h-[75px] opacity-20 text-slate-500 text-[10px] font-mono">${diaNum}</div>`;
       }
 
       for (let dia = 1; dia <= totalDiasMes; dia++) {
@@ -1022,17 +1046,17 @@
         let eventosHtml = '';
         parcialesDelDia.forEach(p => {
           eventosHtml += `
-            <div class="bg-white/10 border border-white/20 text-slate-200 text-[9px] px-1.5 py-0.5 rounded mt-1 truncate font-medium" title="${p.materia}">
+            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-200 text-[9px] px-1.5 py-0.5 rounded mt-1 truncate font-medium" title="${p.materia}">
               <span class="hidden sm:inline">${p.materia}</span>
-              <span class="sm:hidden font-bold">●</span>
+              <span class="sm:hidden font-bold text-indigo-400">●</span>
             </div>
           `;
         });
 
         grid.innerHTML += `
-          <div class="bg-monoInput border ${esHoy ? 'border-white bg-white/10' : 'border-white/10'} rounded-xl p-1.5 sm:p-2 min-h-[60px] sm:min-h-[75px] flex flex-col justify-between transition hover:border-white/30">
+          <div class="bg-appInput border ${esHoy ? 'border-cyan-400 bg-cyan-500/10' : 'border-white/10'} rounded-xl p-1.5 sm:p-2 min-h-[60px] sm:min-h-[75px] flex flex-col justify-between transition hover:border-white/30">
             <div class="flex justify-between items-center">
-              <span class="text-[11px] sm:text-xs font-mono font-bold ${esHoy ? 'bg-white text-black px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded-md' : 'text-slate-300'}">${dia}</span>
+              <span class="text-[11px] sm:text-xs font-mono font-bold ${esHoy ? 'bg-cyan-400 text-slate-950 px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded-md' : 'text-slate-300'}">${dia}</span>
             </div>
             <div class="overflow-y-auto max-h-[45px] space-y-0.5">${eventosHtml}</div>
           </div>
