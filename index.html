@@ -147,7 +147,7 @@
 
       </div>
 
-      <!-- FILA 2: FECHAS DE PARCIALES (REDESECIONADO Y ORDENADO) -->
+      <!-- FILA 2: FECHAS DE PARCIALES -->
       <section class="bg-cardBg border border-cardBorder rounded-[28px] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-2xl space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
@@ -263,19 +263,27 @@
             </span>
             <div>
               <h3 class="font-bold text-base text-white tracking-tight">Panel de Alertas Personalizadas ⏰</h3>
-              <p class="text-xs text-blue-300/80">Crea tus propias alertas independientes con título, descripción y hora exacta</p>
+              <p class="text-xs text-blue-300/80">Crea alertas independientes (descripción opcional y repetición configurable)</p>
             </div>
           </div>
         </div>
 
-        <!-- Formulario para agregar una nueva alerta independiente -->
+        <!-- Formulario Alertas Custom (Descripción Opcional + Selector de Repetición) -->
         <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-2 bg-inputBg border border-white/10 p-4 rounded-2xl">
           <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
+                 class="sm:col-span-3 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
+          
+          <input type="text" id="alerta-desc" placeholder="Descripción (opcional)"
                  class="sm:col-span-4 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
-          <input type="text" id="alerta-desc" placeholder="Descripción (ej. Entrenar pierna)" required
-                 class="sm:col-span-5 bg-[#020b18] border border-white/10 text-xs rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
+          
           <input type="time" id="alerta-hora" required
                  class="sm:col-span-2 bg-[#020b18] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-500">
+          
+          <select id="alerta-tipo" class="sm:col-span-2 bg-[#020b18] border border-white/10 text-xs text-slate-200 rounded-xl px-2 py-2 focus:outline-none focus:border-blue-500">
+            <option value="diaria">Diaria</option>
+            <option value="unica">Única</option>
+          </select>
+
           <button type="submit" class="sm:col-span-1 bg-blue-600 hover:bg-blue-500 text-white p-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1 shadow-lg shadow-blue-600/20 active:scale-95">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
@@ -434,11 +442,18 @@
       }
 
       alertas.forEach((alerta, index) => {
+        const badgeTipo = alerta.tipo === 'unica' 
+          ? '<span class="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-md">Única</span>' 
+          : '<span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">Diaria</span>';
+
         listaAlertasCustom.innerHTML += `
           <li class="flex justify-between items-center bg-[#020b18]/60 border border-white/5 px-3.5 py-2.5 rounded-xl text-xs">
-            <div>
-              <span class="font-bold text-blue-300">${alerta.titulo}</span>
-              <p class="text-[11px] text-slate-300 mt-0.5">${alerta.desc}</p>
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-blue-300">${alerta.titulo}</span>
+                ${badgeTipo}
+              </div>
+              ${alerta.desc ? `<p class="text-[11px] text-slate-300">${alerta.desc}</p>` : ''}
             </div>
             <div class="flex items-center gap-3">
               <span class="font-mono text-cyan-400 font-semibold bg-cyan-500/10 px-2 py-1 rounded-lg border border-cyan-500/20">${alerta.hora} hs</span>
@@ -463,25 +478,28 @@
       const titulo = document.getElementById('alerta-titulo').value.trim();
       const desc = document.getElementById('alerta-desc').value.trim();
       const hora = document.getElementById('alerta-hora').value;
+      const tipo = document.getElementById('alerta-tipo').value; // 'diaria' o 'unica'
 
       let alertas = obtenerAlertas();
-      alertas.push({ titulo, desc, hora });
+      alertas.push({ titulo, desc, hora, tipo });
       guardarAlertas(alertas);
 
       formAlertaCustom.reset();
       alert(`¡Alerta "${titulo}" guardada con éxito para las ${hora} hs!`);
     });
 
-    // Motor independiente que revisa cada 30 segundos si coincide la hora exacta de alguna alerta creada
+    // Motor independiente que revisa cada 30 segundos las alertas custom
     setInterval(() => {
-      const alertas = obtenerAlertas();
+      let alertas = obtenerAlertas();
       if (alertas.length === 0 || Notification.permission !== 'granted') return;
 
       const ahora = new Date();
       const horaActual = String(ahora.getHours()).padStart(2, '0') + ':' + String(ahora.getMinutes()).padStart(2, '0');
       const fechaHoy = ahora.toISOString().split('T')[0];
 
-      alertas.forEach((alerta) => {
+      let huboCambios = false;
+
+      alertas = alertas.filter((alerta) => {
         if (alerta.hora === horaActual) {
           const claveUnica = `custom_${alerta.titulo}_${alerta.hora}_${fechaHoy}`;
           if (localStorage.getItem(claveUnica) !== 'enviado') {
@@ -490,15 +508,26 @@
             if ('serviceWorker' in navigator) {
               navigator.serviceWorker.ready.then(reg => {
                 reg.showNotification(`🔔 ${alerta.titulo}`, {
-                  body: alerta.desc,
+                  body: alerta.desc ? alerta.desc : '¡Es la hora programada!',
                   icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no',
                   vibrate: [300, 100, 300]
                 });
               });
             }
+
+            // Si es de tipo única, se elimina automáticamente al dispararse
+            if (alerta.tipo === 'unica') {
+              huboCambios = true;
+              return false; // la elimina del array
+            }
           }
         }
+        return true; // la mantiene
       });
+
+      if (huboCambios) {
+        guardarAlertas(alertas);
+      }
     }, 30000);
 
     renderizarAlertasCustom();
@@ -568,12 +597,10 @@
           Object.keys(data).forEach((key) => {
             const item = data[key];
             
-            // Transformar la fecha YYYY-MM-DD a formato "DD de mes" (sin año)
             let fechaLegible = item.fecha;
             if (item.fecha) {
-              const partes = item.fecha.split('-'); // [YYYY, MM, DD]
+              const partes = item.fecha.split('-');
               if (partes.length === 3) {
-                const anio = partes[0];
                 const mesIndex = parseInt(partes[1], 10) - 1;
                 const dia = parseInt(partes[2], 10);
                 const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
