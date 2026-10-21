@@ -78,6 +78,7 @@
     .animate-fade-in {
       animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+    /* Scrollbar minimalista y limpio */
     ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: #070708; }
     ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
@@ -201,13 +202,15 @@
           <p id="live-date" class="text-xs text-zinc-400 capitalize font-light"></p>
         </div>
 
-        <!-- Selector de Días Rápido o Fecha Específica Flexible (Futuro / Pasado) -->
+        <!-- Selector de Días Rápido o Fecha Específica Flexible (Futuro / Pasado) con overflow responsivo controlado -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#070708]/40 p-3 rounded-xl border border-borderSubtle">
-          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none" id="schedule-day-tabs">
-            <!-- Dinámico por pestañas de semana -->
+          <div class="w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+            <div class="flex items-center gap-1.5 min-w-max" id="schedule-day-tabs">
+              <!-- Dinámico por pestañas de semana -->
+            </div>
           </div>
           
-          <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+          <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-between sm:justify-start">
             <span class="text-[10px] font-mono text-zinc-500">Fecha específica:</span>
             <input type="date" id="sch-selector-fecha" class="minimal-input text-xs font-mono px-3 py-1 text-slate-200">
           </div>
@@ -242,7 +245,7 @@
           </button>
         </form>
 
-        <!-- Cronograma Vertical de Minutos Exactos -->
+        <!-- Cronograma Vertical de Minutos Exactos con Soporte Columna Lado a Lado -->
         <div class="bg-[#070708] border border-borderSubtle rounded-xl relative overflow-hidden">
           <div class="px-4 py-2.5 bg-[#0f0f12]/50 border-b border-borderSubtle flex justify-between items-center text-xs font-mono text-zinc-400">
             <span id="label-agenda-activa" class="font-normal text-slate-200">Agenda seleccionada</span>
@@ -571,11 +574,11 @@
       calendarGridTimeline.innerHTML = '';
 
       const coloresCategoria = {
-        zinc: { bg: 'bg-[#16161a]', border: 'border-zinc-700/60', text: 'text-zinc-200' },
-        blue: { bg: 'bg-sky-950/40', border: 'border-sky-800/55', text: 'text-sky-200' },
-        emerald: { bg: 'bg-emerald-950/40', border: 'border-emerald-800/55', text: 'text-emerald-200' },
-        amber: { bg: 'bg-amber-950/40', border: 'border-amber-800/55', text: 'text-amber-200' },
-        rose: { bg: 'bg-rose-950/40', border: 'border-rose-800/55', text: 'text-rose-200' }
+        zinc: { bg: 'bg-[#16161a]/90', border: 'border-zinc-700/60', text: 'text-zinc-200' },
+        blue: { bg: 'bg-sky-950/80', border: 'border-sky-800/55', text: 'text-sky-200' },
+        emerald: { bg: 'bg-emerald-950/80', border: 'border-emerald-800/55', text: 'text-emerald-200' },
+        amber: { bg: 'bg-amber-950/80', border: 'border-amber-800/55', text: 'text-amber-200' },
+        rose: { bg: 'bg-rose-950/80', border: 'border-rose-800/55', text: 'text-rose-200' }
       };
 
       const hourHeight = 60;
@@ -613,6 +616,7 @@
         return { ...item, originalIndex: idx, inicioMins, finMins };
       });
 
+      // Algoritmo de columnas separadas lado a lado para solapamientos exactos
       parsedItems.forEach((item, i) => {
         item.colIndex = 0;
         item.totalCols = 1;
@@ -621,8 +625,8 @@
         });
 
         if (overlapping.length > 0) {
-          item.totalCols = overlapping.length + 1;
           const sameGroup = [item, ...overlapping].sort((a, b) => a.originalIndex - b.originalIndex);
+          item.totalCols = sameGroup.length;
           item.colIndex = sameGroup.findIndex(x => x.originalIndex === item.originalIndex);
         }
       });
@@ -631,24 +635,24 @@
       parsedItems.forEach((item) => {
         const topPx = (item.inicioMins - (startHour * 60)) * (hourHeight / 60);
         const durationMins = item.finMins - item.inicioMins;
-        const heightPx = Math.max(durationMins * (hourHeight / 60), 28);
+        const heightPx = Math.max(durationMins * (hourHeight / 60), 32);
 
         const styleCol = coloresCategoria[item.categoria] || coloresCategoria.zinc;
         const widthPercent = 100 / item.totalCols;
         const leftPercent = item.colIndex * widthPercent;
 
         eventsHtml += `
-          <div class="absolute rounded-lg p-2 border ${styleCol.bg} ${styleCol.border} backdrop-blur-sm overflow-hidden flex flex-col justify-between shadow-sm transition hover:z-30"
-               style="top: ${topPx}px; height: ${heightPx}px; left: calc(3rem + ${leftPercent}%); width: calc(100% - 3rem - ${leftPercent}% - ${item.totalCols > 1 ? '4px' : '0px'});">
-            <div class="flex justify-between items-start">
-              <div class="space-y-0.5 overflow-hidden pr-1">
-                <div class="flex items-center gap-1.5 flex-wrap">
-                  <span class="font-normal ${styleCol.text} text-xs truncate">${item.titulo}</span>
-                  <span class="text-[9px] font-mono text-zinc-400">${item.horaInicio}-${item.horaFin}</span>
+          <div class="absolute rounded-lg p-2 border ${styleCol.bg} ${styleCol.border} backdrop-blur-sm overflow-hidden flex flex-col justify-between shadow-md transition hover:z-30"
+               style="top: ${topPx}px; height: ${heightPx}px; left: calc(3rem + (${leftPercent}%)); width: calc((100% - 3rem) / ${item.totalCols} - 4px);">
+            <div class="flex justify-between items-start gap-1">
+              <div class="space-y-0.5 overflow-hidden">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span class="font-normal ${styleCol.text} text-[11px] truncate leading-tight">${item.titulo}</span>
+                  <span class="text-[9px] font-mono text-zinc-400 shrink-0">${item.horaInicio}-${item.horaFin}</span>
                 </div>
                 ${item.notas && heightPx > 45 ? `<p class="text-[10px] text-zinc-400 truncate font-light">${item.notas}</p>` : ''}
               </div>
-              <button onclick="window.eliminarItemTuDia('${fechaSeleccionadaAgenda}', ${item.originalIndex})" class="text-zinc-500 hover:text-slate-100 p-0.5 transition shrink-0">
+              <button onclick="window.eliminarItemTuDia('${fechaSeleccionadaAgenda}', ${item.originalIndex})" class="text-zinc-400 hover:text-slate-100 p-1 bg-black/40 rounded transition shrink-0">
                 <i data-lucide="x" class="w-3 h-3"></i>
               </button>
             </div>
