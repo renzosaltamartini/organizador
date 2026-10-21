@@ -229,7 +229,7 @@
           </span>
           <div>
             <h3 class="font-bold text-lg text-white tracking-tight">Panel de Alertas Sincronizadas ⏰</h3>
-            <p class="text-xs text-slate-400">Notificaciones en la nube para Celular y PC.</p>
+            <p class="text-xs text-slate-400">Para asegurar que suenen, la app debe estar abierta.</p>
           </div>
         </div>
 
@@ -402,8 +402,10 @@
         alert('Las notificaciones ya están activas en este dispositivo.');
         if (navigator.serviceWorker.controller) {
           navigator.serviceWorker.ready.then(reg => {
-            reg.showNotification('Estado: Activas ✅', { body: 'Todo está configurado correctamente.' });
+            reg.showNotification('Estado: Activas ✅', { body: 'Todo está configurado correctamente.', icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no' });
           });
+        } else {
+            new Notification('Estado: Activas ✅', { body: 'Todo está configurado correctamente.' });
         }
         return;
       }
@@ -635,13 +637,19 @@
         onValue(alertasRef, () => {}, { onlyOnce: true }); // Refresca UI
       };
 
-      // MOTOR DE REVISIÓN CADA 10 SEGUNDOS
+      // MOTOR DE REVISIÓN CORREGIDO (Cada 5 segundos, Zona Horaria Local)
       setInterval(() => {
         if (!cacheAlertasGlobales || Notification.permission !== 'granted') return;
+        
         const now = new Date();
         const hhmm = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
         const diaStr = String(now.getDay());
-        const fechaIso = now.toISOString().split('T')[0];
+        
+        // CORRECCIÓN: Fechas locales en vez de UTC (toISOString trae problemas en Argentina)
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const fechaLocal = `${year}-${month}-${day}`;
 
         Object.keys(cacheAlertasGlobales).forEach(k => {
           const a = cacheAlertasGlobales[k];
@@ -651,24 +659,32 @@
           if (!coincideHora) return;
 
           let coincideMomento = false;
-          if (a.tipo === 'una_vez' && a.fecha === fechaIso) coincideMomento = true;
+          if (a.tipo === 'una_vez' && a.fecha === fechaLocal) coincideMomento = true;
           else if (a.tipo === 'diario') coincideMomento = true;
           else if (a.tipo === 'semanal' && a.dia_semana === diaStr) coincideMomento = true;
 
           if (coincideMomento) {
-            const blockKey = `sent_${k}_${fechaIso}_${hhmm}`;
+            const blockKey = `sent_${k}_${fechaLocal}_${hhmm}`;
             if (!localStorage.getItem(blockKey)) {
               localStorage.setItem(blockKey, 'true');
+              
               if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-                navigator.serviceWorker.ready.then(reg => reg.showNotification(`⏰ ${a.titulo}`, { body: a.desc || 'Es hora', vibrate: [300,100,300] }));
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification(`⏰ ${a.titulo}`, { 
+                        body: a.desc || 'Es hora', 
+                        vibrate: [300,100,300],
+                        icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
+                    });
+                });
               } else {
                 new Notification(`⏰ ${a.titulo}`, { body: a.desc || 'Es hora' });
               }
+              
               if (a.tipo === 'una_vez') remove(ref(db, `alertas_custom/${k}`)); // Auto limpieza
             }
           }
         });
-      }, 10000);
+      }, 5000);
 
       // RESTO DE FIREBASE (Parciales, Gastos, Recordatorios)
       onValue(ref(db, 'parciales'), (s) => {
