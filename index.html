@@ -882,59 +882,6 @@
         alertaFechaInput.classList.remove('hidden');
       });
 
-      // MOTOR DE ALERTAS
-      setInterval(() => {
-        if (!cacheAlertasGlobales || Notification.permission !== 'granted') return;
-
-        const ahora = new Date();
-        const diaActual = ahora.getDay().toString();
-        const hh = String(ahora.getHours()).padStart(2, '0');
-        const mm = String(ahora.getMinutes()).padStart(2, '0');
-        const horaActualStr = `${hh}:${mm}`;
-        const fechaHoyIso = ahora.toISOString().split('T')[0];
-
-        Object.keys(cacheAlertasGlobales).forEach((key) => {
-          const alerta = cacheAlertasGlobales[key];
-          if (localStorage.getItem(`notif_off_${key}`) === 'true') return;
-
-          let [aH, aM] = alerta.hora.split(':');
-          const horaAlertaNorm = `${String(aH).padStart(2, '0')}:${String(aM).padStart(2, '0')}`;
-
-          const coincideHora = (horaAlertaNorm === horaActualStr);
-          let coincideMomento = false;
-
-          if (alerta.modo === 'fecha') coincideMomento = (alerta.fecha === fechaHoyIso);
-          else if (alerta.modo === 'todos') coincideMomento = true;
-          else coincideMomento = (alerta.modo === diaActual);
-
-          if (coincideHora && coincideMomento) {
-            const claveLanzado = `sent_${key}_${fechaHoyIso}_${horaActualStr}`;
-            if (!localStorage.getItem(claveLanzado)) {
-              localStorage.setItem(claveLanzado, 'true');
-
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.ready.then(reg => {
-                  reg.showNotification(`⏰ ${alerta.titulo}`, {
-                    body: alerta.desc || '¡Es la hora programada!',
-                    icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no',
-                    vibrate: [300, 100, 300]
-                  });
-                });
-              } else {
-                new Notification(`⏰ ${alerta.titulo}`, {
-                  body: alerta.desc || '¡Es la hora programada!',
-                  icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
-                });
-              }
-
-              if (alerta.modo === 'fecha') {
-                remove(ref(db, `alertas_custom/${key}`));
-              }
-            }
-          }
-        });
-      }, 10000);
-
       // --- PARCIALES & CALENDARIO ---
       onValue(parcialesRef, (snapshot) => {
         const data = snapshot.val();
