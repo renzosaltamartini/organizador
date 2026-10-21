@@ -552,11 +552,39 @@
       });
     }
 
-    // Permisos Notificaciones
+    // --- PASO 1: GESTIÓN DE PERMISOS DE NOTIFICACIÓN ---
     btnNavbarNotif.addEventListener('click', async () => {
-      if (!('Notification' in window)) return alert('Este dispositivo no soporta notificaciones.');
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') alert('¡Notificaciones activadas!');
+      // 1. Verificamos si el navegador/dispositivo soporta notificaciones
+      if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+        alert('Tu dispositivo actual no soporta notificaciones web.');
+        return;
+      }
+
+      // 2. Verificamos si YA nos diste permiso antes
+      if (Notification.permission === 'granted') {
+        alert('Las notificaciones ya están activas en este dispositivo.');
+        // Opcional: Mandar una notificación de prueba para confirmar
+        navigator.serviceWorker.ready.then(reg => {
+          reg.showNotification('Estado: Activas ✅', {
+            body: 'Todo está configurado correctamente.',
+            icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
+          });
+        });
+        return;
+      }
+
+      // 3. Si no hay permiso, lo solicitamos (iOS mostrará el popup nativo aquí)
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+          alert('¡Notificaciones activadas con éxito!');
+        } else if (permission === 'denied') {
+          alert('Permiso denegado. Debes habilitarlo desde la configuración de tu iPhone (Ajustes > Tu App > Notificaciones).');
+        }
+      } catch (error) {
+        console.error('Error al pedir permisos:', error);
+        alert('Hubo un problema al intentar pedir los permisos.');
+      }
     });
 
     // RELOJ EN VIVO
@@ -1127,4 +1155,3 @@
   </script>
 </body>
 </html>
-
