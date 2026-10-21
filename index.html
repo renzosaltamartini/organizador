@@ -392,7 +392,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -409,8 +409,8 @@
     const ALLOWED_EMAIL = "renzosalta07@gmail.com";
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getDatabase(app, firebaseConfig.databaseURL);
     const provider = new GoogleAuthProvider();
-    let db = null;
 
     lucide.createIcons();
 
@@ -647,7 +647,7 @@
     function desbloquearApp() {
       loginModal.classList.add('hidden');
       appContent.classList.remove('hidden');
-      if (!db) iniciarFirebase();
+      iniciarFirebase();
     }
 
     function bloquearApp() {
@@ -657,12 +657,12 @@
 
     // --- SINCRONIZACIÓN FIREBASE REALTIME ---
     let eventosParcialesGlobal = [];
+    let firebaseSuscrita = false;
 
     function iniciarFirebase() {
-      db = getDatabase(app);
-      
-      // Renderizar el calendario de inmediato para evitar bloqueos
       renderizarCalendario();
+      if (firebaseSuscrita) return;
+      firebaseSuscrita = true;
 
       const gastosRef = ref(db, 'gastos');
       const recordatoriosRef = ref(db, 'recordatorios');
