@@ -1,3 +1,6 @@
+¡Tienes toda la razón, disculpa el descuido! Al no interpretar los saltos de línea (los "enter"), el texto se ponía todo en la misma línea.
+He solucionado esto agregando la propiedad whitespace-pre-wrap al texto de los recordatorios y alineando los botones hacia arriba para que, cuando escribas varias líneas (por ejemplo, con guiones o números), se respete exactamente el formato de lista hacia abajo.
+Aquí tienes el index.html completo y corregido para que lo copies y pegues directamente:
 <!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
@@ -1014,10 +1017,11 @@
             `;
 
             grupos[titulo].forEach(item => {
+              // Aplicamos whitespace-pre-wrap y items-start para respetar los enters
               grupoHtml += `
-                <li class="flex justify-between items-center text-xs text-slate-200 hover:bg-white/5 p-1.5 rounded-lg transition">
-                  <span class="font-medium flex-1">${item.detalle}</span>
-                  <div class="flex items-center gap-1 shrink-0 ml-2">
+                <li class="flex justify-between items-start text-xs text-slate-200 hover:bg-white/5 p-2 rounded-lg transition">
+                  <div class="font-medium flex-1 whitespace-pre-wrap leading-relaxed">${item.detalle}</div>
+                  <div class="flex items-center gap-1 shrink-0 ml-2 mt-0.5">
                     <button data-id="${item.key}" data-detalle="${item.detalle}" class="btn-edit-rec text-slate-500 hover:text-blue-400 p-1 transition" title="Editar">
                       <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
                     </button>
