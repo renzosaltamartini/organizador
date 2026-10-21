@@ -395,16 +395,28 @@
     import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAz1S8GIgCSBBVeWkCsPGaj9Hf1nSjDW3Q",
-      authDomain: "uadeweek.firebaseapp.com",
-      databaseURL: "https://uadeweek-default-rtdb.firebaseio.com",
-      projectId: "uadeweek",
-      storageBucket: "uadeweek.firebasestorage.app",
-      messagingSenderId: "609296121090",
-      appId: "1:609296121090:web:85d5693013964b99a2561b",
-      measurementId: "G-3ZN359T40E"
-    };
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAXGKWZA8kWaN2NWCK2A9jTlGSq-B2bqWA",
+  authDomain: "laranchada-6abd3.firebaseapp.com",
+  databaseURL: "https://laranchada-6abd3-default-rtdb.firebaseio.com",
+  projectId: "laranchada-6abd3",
+  storageBucket: "laranchada-6abd3.firebasestorage.app",
+  messagingSenderId: "326750839699",
+  appId: "1:326750839699:web:3b122315eb61296d99fe66",
+  measurementId: "G-XL398QW21P"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
     const ALLOWED_EMAIL = "renzosalta07@gmail.com";
     const app = initializeApp(firebaseConfig);
