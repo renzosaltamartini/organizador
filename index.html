@@ -9,11 +9,11 @@
   <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#09090b" />
+  <meta name="theme-color" content="#070708" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -22,13 +22,13 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Geist', 'sans-serif'],
-            mono: ['Geist Mono', 'monospace'],
+            sans: ['Poppins', 'sans-serif'],
+            mono: ['Space Grotesk', 'monospace'],
           },
           colors: {
-            bgBase: '#09090b',
-            bgCard: '#121216',
-            bgHover: '#18181b',
+            bgBase: '#070708',
+            bgCard: '#0f0f12',
+            bgHover: '#16161a',
             borderSubtle: '#27272a',
             borderMuted: '#3f3f46',
             accent: '#fafafa',
@@ -41,11 +41,11 @@
 
   <style>
     body {
-      background-color: #09090b;
-      color: #a1a1aa;
+      background-color: #070708;
+      color: #94a3b8;
     }
     .panel-card {
-      background-color: #121216;
+      background-color: #0f0f12;
       border: 1px solid #27272a;
       border-radius: 16px;
       transition: border-color 0.2s ease, transform 0.3s ease, opacity 0.3s ease;
@@ -54,9 +54,9 @@
       border-color: #3f3f46;
     }
     .minimal-input {
-      background-color: #09090b;
+      background-color: #070708;
       border: 1px solid #27272a;
-      color: #f4f4f5;
+      color: #f1f5f9;
       border-radius: 10px;
       transition: all 0.2s ease;
     }
@@ -65,11 +65,10 @@
       border-color: #71717a;
       box-shadow: 0 0 0 1px #71717a;
     }
-    /* Animación de entrada suave */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(10px);
       }
       to {
         opacity: 1;
@@ -77,36 +76,36 @@
       }
     }
     .animate-fade-in {
-      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     ::-webkit-scrollbar { width: 4px; height: 4px; }
-    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-track { background: #070708; }
     ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
   </style>
 </head>
-<body class="min-h-screen antialiased pb-20 selection:bg-white selection:text-black">
+<body class="min-h-screen antialiased pb-20 selection:bg-slate-200 selection:text-slate-900 font-sans">
 
   <!-- SPINNER / PANTALLA DE CARGA INICIAL -->
-  <div id="initial-loader" class="fixed inset-0 z-[110] bg-[#09090b] flex flex-col items-center justify-center space-y-4 transition-opacity duration-500">
-    <div class="w-8 h-8 rounded-full border-2 border-zinc-700 border-t-white animate-spin"></div>
-    <p class="text-xs font-mono text-zinc-500 tracking-widest uppercase">Cargando Organizador OS...</p>
+  <div id="initial-loader" class="fixed inset-0 z-[110] bg-[#070708] flex flex-col items-center justify-center space-y-4 transition-opacity duration-500">
+    <div class="w-7 h-7 rounded-full border-2 border-zinc-700 border-t-slate-200 animate-spin"></div>
+    <p class="text-[11px] font-mono text-zinc-500 tracking-widest uppercase">Cargando Organizador OS...</p>
   </div>
 
   <!-- LOGIN MODAL -->
-  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#09090b] flex items-center justify-center p-4 hidden">
+  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#070708] flex items-center justify-center p-4 hidden">
     <div class="panel-card p-8 max-w-sm w-full text-center space-y-6 shadow-2xl animate-fade-in">
-      <div class="w-16 h-16 mx-auto rounded-full bg-[#18181b] border border-borderSubtle p-1 flex items-center justify-center overflow-hidden">
+      <div class="w-16 h-16 mx-auto rounded-full bg-[#16161a] border border-borderSubtle p-1 flex items-center justify-center overflow-hidden">
         <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
              alt="Perfil" class="w-full h-full object-cover rounded-full">
       </div>
       <div class="space-y-1">
-        <h1 class="text-lg font-semibold text-white tracking-tight">Organizador</h1>
+        <h1 class="text-base font-medium text-slate-100 tracking-tight">Organizador</h1>
         <p class="text-xs text-zinc-500">Inicia sesión con tu cuenta autorizada</p>
       </div>
 
       <div class="space-y-3">
-        <button id="btn-google-login" class="w-full bg-white hover:bg-zinc-200 text-zinc-950 py-2.5 px-4 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-2">
+        <button id="btn-google-login" class="w-full bg-slate-100 hover:bg-white text-slate-950 py-2.5 px-4 rounded-xl text-xs font-medium transition flex items-center justify-center gap-2">
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
             <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/>
@@ -124,10 +123,10 @@
   <div id="app-content" class="hidden animate-fade-in">
 
     <!-- Navbar Minimal -->
-    <header class="w-full bg-[#09090b]/80 backdrop-blur-md border-b border-borderSubtle sticky top-0 z-50">
+    <header class="w-full bg-[#070708]/80 backdrop-blur-md border-b border-borderSubtle sticky top-0 z-50">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex justify-between items-center">
-        <span class="font-semibold text-white text-sm tracking-tight font-sans">Organizador</span>
-        <button id="btn-logout" title="Cerrar sesión" class="p-2 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded-lg transition">
+        <span class="font-medium text-slate-100 text-xs tracking-wide font-mono uppercase">Organizador</span>
+        <button id="btn-logout" title="Cerrar sesión" class="p-2 hover:bg-[#16161a] text-zinc-400 hover:text-slate-100 rounded-lg transition">
           <i data-lucide="log-out" class="w-4 h-4"></i>
         </button>
       </div>
@@ -136,45 +135,45 @@
     <!-- Dashboard Container -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-6 space-y-6">
 
-      <!-- TOP ROW: Perfil & Métricas con Animación Count-Up -->
+      <!-- TOP ROW: Perfil & Métricas -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
         
         <!-- Perfil limpio -->
         <div class="md:col-span-5 panel-card p-5 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full bg-zinc-900 border border-borderSubtle p-0.5 overflow-hidden">
+            <div class="w-11 h-11 rounded-full bg-[#16161a] border border-borderSubtle p-0.5 overflow-hidden">
               <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
                    alt="Perfil" class="w-full h-full object-cover rounded-full">
             </div>
             <div>
-              <h2 class="text-sm font-semibold text-white">Renzo</h2>
+              <h2 class="text-xs font-medium text-slate-100">Renzo</h2>
               <div class="flex items-center gap-1.5 mt-0.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <span class="text-[11px] text-zinc-400 font-mono">Activo</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400/80"></span>
+                <span class="text-[10px] text-zinc-500 font-mono">En línea</span>
               </div>
             </div>
           </div>
-          <span class="text-[11px] font-mono text-zinc-500 bg-zinc-900 px-2.5 py-1 rounded-md border border-borderSubtle">v2.1</span>
+          <span class="text-[10px] font-mono text-zinc-500 bg-[#070708] px-2.5 py-1 rounded-md border border-borderSubtle">v2.1</span>
         </div>
 
-        <!-- Métricas -->
+        <!-- Métricas (con Count-Up) -->
         <div class="md:col-span-7 grid grid-cols-2 gap-4">
           <div class="panel-card p-4 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-zinc-400 text-xs">
-              <span>Gastos Totales</span>
-              <i data-lucide="wallet" class="w-3.5 h-3.5 text-zinc-500"></i>
+            <div class="flex items-center justify-between text-zinc-500 text-xs">
+              <span class="font-light">Gastos Totales</span>
+              <i data-lucide="wallet" class="w-3.5 h-3.5 text-zinc-600"></i>
             </div>
-            <span id="widget-total-gastos" class="text-lg font-semibold font-mono text-white tracking-tight mt-2 block">
+            <span id="widget-total-gastos" class="text-base font-normal font-mono text-slate-100 tracking-tight mt-2 block">
               $0
             </span>
           </div>
 
           <div class="panel-card p-4 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-zinc-400 text-xs">
-              <span>Pendientes</span>
-              <i data-lucide="check-square" class="w-3.5 h-3.5 text-zinc-500"></i>
+            <div class="flex items-center justify-between text-zinc-500 text-xs">
+              <span class="font-light">Pendientes</span>
+              <i data-lucide="check-square" class="w-3.5 h-3.5 text-zinc-600"></i>
             </div>
-            <span id="widget-pendientes" class="text-lg font-semibold font-mono text-white tracking-tight mt-2 block">
+            <span id="widget-pendientes" class="text-base font-normal font-mono text-slate-100 tracking-tight mt-2 block">
               0
             </span>
           </div>
@@ -182,42 +181,42 @@
 
       </div>
 
-      <!-- CRONOGRAMA EN VIVO & AGENDA FUTURA (SELECTOR DE FECHA EXACTA) -->
+      <!-- CRONOGRAMA EN VIVO & AGENDA FUTURA/PASADA (FLEXIBLE) -->
       <section class="panel-card p-5 space-y-4">
         
         <!-- Live Clock Banner -->
-        <div class="bg-zinc-900/60 border border-borderSubtle rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="bg-[#070708]/60 border border-borderSubtle rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-zinc-800 rounded-lg text-zinc-300">
-              <i data-lucide="clock" class="w-5 h-5"></i>
+            <div class="p-2.5 bg-[#16161a] rounded-lg text-zinc-400 border border-borderSubtle">
+              <i data-lucide="clock" class="w-4 h-4"></i>
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Tiempo Real</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-[9px] font-mono uppercase tracking-widest text-zinc-500">Tiempo Real</span>
               </div>
-              <div id="live-clock" class="text-2xl font-semibold font-mono text-white tracking-tight">00:00:00</div>
+              <div id="live-clock" class="text-xl font-normal font-mono text-slate-100 tracking-tight">00:00:00</div>
             </div>
           </div>
-          <p id="live-date" class="text-xs text-zinc-400 capitalize font-medium"></p>
+          <p id="live-date" class="text-xs text-zinc-400 capitalize font-light"></p>
         </div>
 
-        <!-- Selector de Días Rápido o Fecha Específica Futura -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-zinc-900/40 p-3 rounded-xl border border-borderSubtle">
+        <!-- Selector de Días Rápido o Fecha Específica Flexible (Futuro / Pasado) -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#070708]/40 p-3 rounded-xl border border-borderSubtle">
           <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none" id="schedule-day-tabs">
             <!-- Dinámico por pestañas de semana -->
           </div>
           
           <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto">
-            <span class="text-[11px] font-mono text-zinc-400">Fecha Específica:</span>
-            <input type="date" id="sch-selector-fecha" class="minimal-input text-xs font-mono px-3 py-1.5 text-zinc-200">
+            <span class="text-[10px] font-mono text-zinc-500">Fecha específica:</span>
+            <input type="date" id="sch-selector-fecha" class="minimal-input text-xs font-mono px-3 py-1 text-slate-200">
           </div>
         </div>
 
         <!-- Formulario Actividad -->
         <form id="form-schedule-item" class="grid grid-cols-1 sm:grid-cols-12 gap-2">
           <input type="text" id="sch-titulo" placeholder="Actividad / Título" required 
-                 class="sm:col-span-4 minimal-input text-xs px-3.5 py-2.5 placeholder-zinc-600">
+                 class="sm:col-span-4 minimal-input text-xs px-3.5 py-2.5 placeholder-zinc-600 font-light">
           
           <div class="sm:col-span-3 flex items-center gap-1">
             <input type="time" id="sch-hora-inicio" required 
@@ -227,7 +226,7 @@
                    class="minimal-input text-xs font-mono px-2 py-2.5 w-full text-center">
           </div>
 
-          <select id="sch-categoria" class="sm:col-span-2 minimal-input text-xs px-3 py-2.5">
+          <select id="sch-categoria" class="sm:col-span-2 minimal-input text-xs px-3 py-2.5 font-light">
             <option value="zinc">Estudio / General</option>
             <option value="blue">Trabajo / Proyectos</option>
             <option value="emerald">Deporte / Salud</option>
@@ -236,20 +235,20 @@
           </select>
 
           <input type="text" id="sch-notas" placeholder="Notas (opcional)" 
-                 class="sm:col-span-2 minimal-input text-xs px-3.5 py-2.5 placeholder-zinc-600">
+                 class="sm:col-span-2 minimal-input text-xs px-3.5 py-2.5 placeholder-zinc-600 font-light">
 
-          <button type="submit" class="sm:col-span-1 bg-white hover:bg-zinc-200 text-zinc-950 rounded-xl text-xs font-semibold transition flex items-center justify-center py-2.5">
+          <button type="submit" class="sm:col-span-1 bg-slate-100 hover:bg-white text-slate-950 rounded-xl text-xs font-medium transition flex items-center justify-center py-2.5">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
 
         <!-- Cronograma Vertical de Minutos Exactos -->
-        <div class="bg-[#09090b] border border-borderSubtle rounded-xl relative overflow-hidden">
-          <div class="px-4 py-2 bg-zinc-900/50 border-b border-borderSubtle flex justify-between items-center text-xs font-mono text-zinc-400">
-            <span id="label-agenda-activa" class="font-semibold text-white">Mostrando agenda del día</span>
+        <div class="bg-[#070708] border border-borderSubtle rounded-xl relative overflow-hidden">
+          <div class="px-4 py-2.5 bg-[#0f0f12]/50 border-b border-borderSubtle flex justify-between items-center text-xs font-mono text-zinc-400">
+            <span id="label-agenda-activa" class="font-normal text-slate-200">Agenda seleccionada</span>
             <span id="badge-fecha-activa" class="text-[11px] text-zinc-500"></span>
           </div>
-          <div id="calendar-grid-timeline" class="relative w-full h-[650px] overflow-y-auto pr-2">
+          <div id="calendar-grid-timeline" class="relative w-full h-[620px] overflow-y-auto pr-2">
             <!-- Dinámico -->
           </div>
         </div>
@@ -262,25 +261,25 @@
         <section class="panel-card p-5 space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <i data-lucide="calendar" class="w-4 h-4 text-zinc-400"></i>
-              <h3 class="font-semibold text-sm text-white">Calendario Mensual</h3>
+              <i data-lucide="calendar" class="w-4 h-4 text-zinc-500"></i>
+              <h3 class="font-normal text-xs text-slate-200 tracking-wide">Calendario Mensual</h3>
             </div>
-            <div class="flex items-center gap-1 bg-[#09090b] border border-borderSubtle px-2 py-1 rounded-lg">
-              <button id="cal-prev" class="p-1 hover:bg-zinc-800 rounded text-zinc-400 transition">
+            <div class="flex items-center gap-1 bg-[#070708] border border-borderSubtle px-2 py-1 rounded-lg">
+              <button id="cal-prev" class="p-1 hover:bg-[#16161a] rounded text-zinc-400 transition">
                 <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
               </button>
-              <span id="cal-mes-anio" class="text-xs font-semibold text-white w-28 text-center font-mono capitalize"></span>
-              <button id="cal-next" class="p-1 hover:bg-zinc-800 rounded text-zinc-400 transition">
+              <span id="cal-mes-anio" class="text-xs font-normal text-slate-200 w-28 text-center font-mono capitalize"></span>
+              <button id="cal-next" class="p-1 hover:bg-[#16161a] rounded text-zinc-400 transition">
                 <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
           </div>
 
-          <div class="grid grid-cols-7 gap-1 text-center font-mono text-[10px] text-zinc-500 py-1">
+          <div class="grid grid-cols-7 gap-1 text-center font-mono text-[10px] text-zinc-600 py-1">
             <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
           </div>
 
-          <div id="cal-grid" class="grid grid-cols-7 gap-1 min-h-[260px]">
+          <div id="cal-grid" class="grid grid-cols-7 gap-1 min-h-[250px]">
             <!-- Dinámico -->
           </div>
         </section>
@@ -288,21 +287,21 @@
         <!-- FECHAS DE PARCIALES -->
         <section class="panel-card p-5 space-y-4">
           <div class="flex items-center gap-2">
-            <i data-lucide="graduation-cap" class="w-4 h-4 text-zinc-400"></i>
-            <h3 class="font-semibold text-sm text-white">Exámenes y Parciales</h3>
+            <i data-lucide="graduation-cap" class="w-4 h-4 text-zinc-500"></i>
+            <h3 class="font-normal text-xs text-slate-200 tracking-wide">Exámenes y Parciales</h3>
           </div>
 
           <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-2">
             <input type="text" id="parcial-materia" placeholder="Materia" required 
-                   class="sm:col-span-5 minimal-input text-xs px-3 py-2.5 placeholder-zinc-600">
+                   class="sm:col-span-5 minimal-input text-xs px-3 py-2.5 placeholder-zinc-600 font-light">
             <input type="date" id="parcial-fecha" required 
                    class="sm:col-span-4 minimal-input text-xs font-mono px-3 py-2.5 text-zinc-300">
-            <button type="submit" class="sm:col-span-3 bg-white hover:bg-zinc-200 text-zinc-950 rounded-xl text-xs font-semibold transition flex items-center justify-center py-2.5">
+            <button type="submit" class="sm:col-span-3 bg-slate-100 hover:bg-white text-slate-950 rounded-xl text-xs font-medium transition flex items-center justify-center py-2.5">
               Agregar
             </button>
           </form>
 
-          <div id="grid-parciales" class="space-y-2 max-h-[240px] overflow-y-auto pr-1">
+          <div id="grid-parciales" class="space-y-2 max-h-[230px] overflow-y-auto pr-1">
             <!-- Dinámico -->
           </div>
         </section>
@@ -314,23 +313,23 @@
         <!-- Recordatorios -->
         <section class="panel-card p-5 space-y-4">
           <div class="flex items-center gap-2">
-            <i data-lucide="check-square" class="w-4 h-4 text-zinc-400"></i>
-            <h3 class="font-semibold text-sm text-white">Recordatorios</h3>
+            <i data-lucide="check-square" class="w-4 h-4 text-zinc-500"></i>
+            <h3 class="font-normal text-xs text-slate-200 tracking-wide">Recordatorios</h3>
           </div>
 
           <form id="form-recordatorio" class="space-y-2">
             <input type="text" id="rec-titulo" placeholder="Título (opcional)" 
-                   class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600">
+                   class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600 font-light">
             <div class="flex gap-2">
               <textarea id="rec-detalle" placeholder="Escribe un recordatorio..." required rows="1"
-                        class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600 resize-none"></textarea>
-              <button type="submit" class="bg-white hover:bg-zinc-200 text-zinc-950 px-4 rounded-xl text-xs font-semibold transition shrink-0">
+                        class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600 resize-none font-light"></textarea>
+              <button type="submit" class="bg-slate-100 hover:bg-white text-slate-950 px-4 rounded-xl text-xs font-medium transition shrink-0">
                 +
               </button>
             </div>
           </form>
 
-          <ul id="lista-recordatorios" class="space-y-2 max-h-[200px] overflow-y-auto pr-1">
+          <ul id="lista-recordatorios" class="space-y-2 max-h-[190px] overflow-y-auto pr-1">
             <!-- Dinámico -->
           </ul>
         </section>
@@ -339,23 +338,23 @@
         <section class="panel-card p-5 space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <i data-lucide="credit-card" class="w-4 h-4 text-zinc-400"></i>
-              <h3 class="font-semibold text-sm text-white">Gastos</h3>
+              <i data-lucide="credit-card" class="w-4 h-4 text-zinc-500"></i>
+              <h3 class="font-normal text-xs text-slate-200 tracking-wide">Gastos</h3>
             </div>
             <span class="text-xs font-mono text-zinc-400" id="section-total-gastos">$0</span>
           </div>
 
           <form id="form-gasto" class="flex gap-2">
             <input type="text" id="gasto-concepto" placeholder="Concepto" required 
-                   class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600">
+                   class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600 font-light">
             <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
                    class="minimal-input text-xs font-mono px-3 py-2.5 w-24 placeholder-zinc-600">
-            <button type="submit" class="bg-white hover:bg-zinc-200 text-zinc-950 px-4 rounded-xl text-xs font-semibold transition shrink-0">
+            <button type="submit" class="bg-slate-100 hover:bg-white text-slate-950 px-4 rounded-xl text-xs font-medium transition shrink-0">
               +
             </button>
           </form>
 
-          <ul id="lista-gastos" class="space-y-2 max-h-[200px] overflow-y-auto pr-1">
+          <ul id="lista-gastos" class="space-y-2 max-h-[190px] overflow-y-auto pr-1">
             <!-- Dinámico -->
           </ul>
         </section>
@@ -438,7 +437,7 @@
       function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easeProgress = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
         const currentVal = Math.floor(startVal + (targetValue - startVal) * easeProgress);
 
         if (isCurrency) {
@@ -460,8 +459,7 @@
       requestAnimationFrame(update);
     }
 
-    // --- MANEJO DE FECHA / AGENDA FUTURA (SEMANAS Y DÍAS ESPECÍFICOS) ---
-    // Obtenemos fecha actual en formato ISO (YYYY-MM-DD)
+    // --- MANEJO DE FECHA / AGENDA FLEXIBLE (FUTURO Y PASADO) ---
     function obtenerFechaIsoHoy() {
       const d = new Date();
       const year = d.getFullYear();
@@ -516,14 +514,14 @@
         const esHoy = (i === 0);
 
         let activeClasses = esSeleccionado 
-          ? 'bg-white text-zinc-950 font-semibold border-white' 
-          : 'bg-[#09090b] text-zinc-400 hover:text-white border border-borderSubtle';
+          ? 'bg-slate-100 text-slate-950 font-medium border-slate-100' 
+          : 'bg-[#070708] text-zinc-400 hover:text-slate-100 border border-borderSubtle';
 
         scheduleDayTabs.innerHTML += `
           <button type="button" onclick="window.cambiarFechaAgenda('${fechaIso}')" 
                   class="px-3 py-1.5 rounded-lg text-xs font-mono transition flex items-center gap-1.5 shrink-0 ${activeClasses}">
             <span class="capitalize">${nombreDia} ${numeroDia}</span>
-            ${esHoy && !esSeleccionado ? `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>` : ''}
+            ${esHoy && !esSeleccionado ? `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>` : ''}
           </button>
         `;
       }
@@ -559,12 +557,11 @@
         localStorage.setItem('tuDiaScheduleItems', JSON.stringify(allItems));
       }
 
-      // Actualizar textos de cabecera de agenda
       if (labelAgendaActiva) {
         if (esHoySeleccionado) {
-          labelAgendaActiva.innerText = "Agenda de Hoy (En Vivo)";
+          labelAgendaActiva.innerText = "Agenda de Hoy";
         } else {
-          labelAgendaActiva.innerText = `Agenda Programada`;
+          labelAgendaActiva.innerText = "Agenda Programada";
         }
       }
       if (badgeFechaActiva) {
@@ -574,11 +571,11 @@
       calendarGridTimeline.innerHTML = '';
 
       const coloresCategoria = {
-        zinc: { bg: 'bg-zinc-800/80', border: 'border-zinc-700', text: 'text-zinc-100' },
-        blue: { bg: 'bg-blue-950/60', border: 'border-blue-800/60', text: 'text-blue-200' },
-        emerald: { bg: 'bg-emerald-950/60', border: 'border-emerald-800/60', text: 'text-emerald-200' },
-        amber: { bg: 'bg-amber-950/60', border: 'border-amber-800/60', text: 'text-amber-200' },
-        rose: { bg: 'bg-rose-950/60', border: 'border-rose-800/60', text: 'text-rose-200' }
+        zinc: { bg: 'bg-[#16161a]', border: 'border-zinc-700/60', text: 'text-zinc-200' },
+        blue: { bg: 'bg-sky-950/40', border: 'border-sky-800/55', text: 'text-sky-200' },
+        emerald: { bg: 'bg-emerald-950/40', border: 'border-emerald-800/55', text: 'text-emerald-200' },
+        amber: { bg: 'bg-amber-950/40', border: 'border-amber-800/55', text: 'text-amber-200' },
+        rose: { bg: 'bg-rose-950/40', border: 'border-rose-800/55', text: 'text-rose-200' }
       };
 
       const hourHeight = 60;
@@ -591,7 +588,7 @@
         const topPos = (h - startHour) * hourHeight;
         const horaLabel = String(h).padStart(2, '0') + ':00';
         backgroundLinesHtml += `
-          <div class="absolute w-full flex items-start border-t border-zinc-800/60" style="top: ${topPos}px; height: ${hourHeight}px;">
+          <div class="absolute w-full flex items-start border-t border-zinc-800/40" style="top: ${topPos}px; height: ${hourHeight}px;">
             <span class="text-[10px] font-mono text-zinc-600 w-12 pt-1 select-none text-right pr-3">${horaLabel}</span>
           </div>
         `;
@@ -603,8 +600,8 @@
         if (liveTop >= 0 && liveTop <= totalHours * hourHeight) {
           liveLineHtml = `
             <div class="absolute left-12 right-0 z-20 flex items-center pointer-events-none" style="top: ${liveTop}px;">
-              <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
-              <div class="flex-1 h-[1px] bg-white/60"></div>
+              <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+              <div class="flex-1 h-[1px] bg-slate-200/50"></div>
             </div>
           `;
         }
@@ -645,13 +642,13 @@
                style="top: ${topPx}px; height: ${heightPx}px; left: calc(3rem + ${leftPercent}%); width: calc(100% - 3rem - ${leftPercent}% - ${item.totalCols > 1 ? '4px' : '0px'});">
             <div class="flex justify-between items-start">
               <div class="space-y-0.5 overflow-hidden pr-1">
-                <div class="flex items-center gap-1 flex-wrap">
-                  <span class="font-semibold ${styleCol.text} text-xs truncate">${item.titulo}</span>
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <span class="font-normal ${styleCol.text} text-xs truncate">${item.titulo}</span>
                   <span class="text-[9px] font-mono text-zinc-400">${item.horaInicio}-${item.horaFin}</span>
                 </div>
-                ${item.notas && heightPx > 45 ? `<p class="text-[10px] text-zinc-400 truncate">${item.notas}</p>` : ''}
+                ${item.notas && heightPx > 45 ? `<p class="text-[10px] text-zinc-400 truncate font-light">${item.notas}</p>` : ''}
               </div>
-              <button onclick="window.eliminarItemTuDia('${fechaSeleccionadaAgenda}', ${item.originalIndex})" class="text-zinc-500 hover:text-white p-0.5 transition shrink-0">
+              <button onclick="window.eliminarItemTuDia('${fechaSeleccionadaAgenda}', ${item.originalIndex})" class="text-zinc-500 hover:text-slate-100 p-0.5 transition shrink-0">
                 <i data-lucide="x" class="w-3 h-3"></i>
               </button>
             </div>
@@ -691,7 +688,6 @@
 
     // --- AUTH GOOGLE ---
     onAuthStateChanged(auth, (user) => {
-      // Ocultar loader inicial con fundido
       if (initialLoader) {
         initialLoader.style.opacity = '0';
         setTimeout(() => initialLoader.remove(), 400);
@@ -758,19 +754,19 @@
             const fechaTextoLegible = formatearFechaTexto(item.fecha);
 
             grid.innerHTML += `
-              <div class="bg-[#09090b] border border-borderSubtle p-3 rounded-xl flex justify-between items-center text-xs">
+              <div class="bg-[#070708] border border-borderSubtle p-3 rounded-xl flex justify-between items-center text-xs">
                 <div>
-                  <span class="font-semibold text-white">${item.materia}</span>
-                  <span class="text-zinc-400 font-mono ml-2">(${fechaTextoLegible})</span>
+                  <span class="font-normal text-slate-200">${item.materia}</span>
+                  <span class="text-zinc-500 font-mono ml-2">(${fechaTextoLegible})</span>
                 </div>
-                <button data-id="${key}" class="btn-del-parcial text-zinc-500 hover:text-white p-1 transition">
+                <button data-id="${key}" class="btn-del-parcial text-zinc-500 hover:text-slate-100 p-1 transition">
                   <i data-lucide="x" class="w-3.5 h-3.5"></i>
                 </button>
               </div>
             `;
           });
         } else {
-          grid.innerHTML = '<p class="text-xs text-zinc-500 text-center py-3">Sin exámenes agendados</p>';
+          grid.innerHTML = '<p class="text-xs text-zinc-600 text-center py-3 font-light">Sin exámenes agendados</p>';
         }
         lucide.createIcons();
         bindDelete('btn-del-parcial', 'parciales');
@@ -793,14 +789,13 @@
 
         if (data) {
           const arr = Object.keys(data).map(key => ({ key, ...data[key] }));
-          // Animación count-up pendientes
           animarContador('widget-pendientes', arr.length, false);
 
           arr.forEach((item) => {
             lista.innerHTML += `
-              <li class="flex justify-between items-center bg-[#09090b] border border-borderSubtle px-3 py-2.5 rounded-xl text-xs">
-                <span class="text-zinc-200">${item.detalle || item.titulo}</span>
-                <button data-id="${item.key}" class="btn-del-rec text-zinc-500 hover:text-white p-1 transition">
+              <li class="flex justify-between items-center bg-[#070708] border border-borderSubtle px-3 py-2.5 rounded-xl text-xs">
+                <span class="text-zinc-300 font-light">${item.detalle || item.titulo}</span>
+                <button data-id="${item.key}" class="btn-del-rec text-zinc-500 hover:text-slate-100 p-1 transition">
                   <i data-lucide="x" class="w-3.5 h-3.5"></i>
                 </button>
               </li>
@@ -808,7 +803,7 @@
           });
         } else {
           animarContador('widget-pendientes', 0, false);
-          lista.innerHTML = '<p class="text-center py-4 text-xs text-zinc-500">Sin recordatorios</p>';
+          lista.innerHTML = '<p class="text-center py-4 text-xs text-zinc-600 font-light">Sin recordatorios</p>';
         }
         lucide.createIcons();
         bindDelete('btn-del-rec', 'recordatorios');
@@ -834,11 +829,11 @@
             const item = data[key];
             total += parseFloat(item.monto || 0);
             lista.innerHTML += `
-              <li class="flex justify-between items-center bg-[#09090b] border border-borderSubtle px-3 py-2.5 rounded-xl text-xs">
-                <span class="text-zinc-200">${item.concepto}</span>
+              <li class="flex justify-between items-center bg-[#070708] border border-borderSubtle px-3 py-2.5 rounded-xl text-xs">
+                <span class="text-zinc-300 font-light">${item.concepto}</span>
                 <div class="flex items-center gap-2">
-                  <span class="font-mono text-white">$${Number(item.monto).toLocaleString()}</span>
-                  <button data-id="${key}" class="btn-del-gasto text-zinc-500 hover:text-white p-1 transition">
+                  <span class="font-mono text-slate-100">$${Number(item.monto).toLocaleString()}</span>
+                  <button data-id="${key}" class="btn-del-gasto text-zinc-500 hover:text-slate-100 p-1 transition">
                     <i data-lucide="x" class="w-3.5 h-3.5"></i>
                   </button>
                 </div>
@@ -846,10 +841,9 @@
             `;
           });
         } else {
-          lista.innerHTML = '<p class="text-center py-4 text-xs text-zinc-500">Sin gastos</p>';
+          lista.innerHTML = '<p class="text-center py-4 text-xs text-zinc-600 font-light">Sin gastos</p>';
         }
 
-        // Animación count-up gastos totales
         animarContador('widget-total-gastos', total, true);
         sectionTotal.innerText = `$${total.toLocaleString()}`;
 
@@ -885,7 +879,7 @@
 
       for (let i = primerDiaIndex; i > 0; i--) {
         const diaNum = totalDiasMesAnterior - i + 1;
-        grid.innerHTML += `<div class="bg-[#09090b]/40 border border-borderSubtle/30 rounded-lg p-1 min-h-[50px] opacity-20 text-zinc-600 text-[10px] font-mono">${diaNum}</div>`;
+        grid.innerHTML += `<div class="bg-[#070708]/30 border border-borderSubtle/20 rounded-lg p-1 min-h-[48px] opacity-20 text-zinc-600 text-[10px] font-mono">${diaNum}</div>`;
       }
 
       for (let dia = 1; dia <= totalDiasMes; dia++) {
@@ -898,15 +892,15 @@
         let eventosHtml = '';
         parcialesDelDia.forEach(p => {
           eventosHtml += `
-            <div class="bg-zinc-800 text-zinc-200 text-[9px] px-1 py-0.5 rounded truncate font-mono mt-0.5" title="${p.materia}">
+            <div class="bg-[#16161a] text-zinc-300 text-[9px] px-1 py-0.5 rounded truncate font-mono mt-0.5 border border-zinc-700/50" title="${p.materia}">
               ${p.materia}
             </div>
           `;
         });
 
         grid.innerHTML += `
-          <div class="bg-[#09090b] border ${esHoy ? 'border-white' : 'border-borderSubtle'} rounded-lg p-1 min-h-[50px] flex flex-col justify-between">
-            <span class="text-[10px] font-mono ${esHoy ? 'text-white font-bold' : 'text-zinc-400'}">${dia}</span>
+          <div class="bg-[#070708] border ${esHoy ? 'border-slate-200' : 'border-borderSubtle'} rounded-lg p-1 min-h-[48px] flex flex-col justify-between">
+            <span class="text-[10px] font-mono ${esHoy ? 'text-slate-100 font-medium' : 'text-zinc-500'}">${dia}</span>
             <div class="overflow-y-auto max-h-[30px]">${eventosHtml}</div>
           </div>
         `;
