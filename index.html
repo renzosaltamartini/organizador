@@ -5,19 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Organizador Personal OS Pro</title>
   
-  <!-- Icono Web / PWA -->
   <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
   <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#030712" />
 
-  <!-- Fonts: Plus Jakarta Sans & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -38,7 +35,6 @@
       }
     }
   </script>
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
@@ -111,7 +107,6 @@
   <!-- CONTENIDO PRINCIPAL -->
   <div id="app-content" class="hidden">
 
-    <!-- Fondos de ambiente suaves -->
     <div class="fixed top-0 left-1/4 -z-10 w-[500px] h-[400px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none"></div>
     <div class="fixed bottom-0 right-1/4 -z-10 w-[500px] h-[400px] bg-emerald-600/10 rounded-full blur-[150px] pointer-events-none"></div>
 
@@ -122,10 +117,6 @@
           <span class="font-bold text-white tracking-tight text-base font-mono">Organizador <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs px-2.5 py-0.5 rounded-full font-bold">OS</span></span>
         </div>
         <div class="flex items-center gap-2.5">
-          <button id="btn-navbar-notif" title="Permitir notificaciones" class="p-2.5 bg-slate-900/80 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-2xl transition active:scale-95 flex items-center justify-center">
-            <i data-lucide="bell" class="w-4 h-4"></i>
-          </button>
-          
           <span class="hidden sm:flex items-center gap-2 text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-2xl border border-emerald-500/20 text-[11px] font-mono">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Firebase Sync
           </span>
@@ -266,60 +257,6 @@
         </div>
       </section>
 
-      <!-- PANEL ALERTAS PERSONALIZADAS SINCRONIZADAS EN FIREBASE ⏰ -->
-      <section class="glass-card glass-card-glow rounded-[32px] p-6 space-y-5">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <span class="p-3 bg-blue-500/10 text-blue-400 rounded-2xl border border-blue-500/20">
-              <i data-lucide="bell-ring" class="w-5 h-5"></i>
-            </span>
-            <div>
-              <h3 class="font-bold text-lg text-white tracking-tight">Panel de Alertas Sincronizadas ⏰</h3>
-              <p class="text-xs text-slate-400">Configuración compartida entre Celular, PC y Tablet.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Formulario Alertas Custom -->
-        <form id="form-alerta-custom" class="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-appInput border border-white/10 p-4 rounded-2xl">
-          <input type="text" id="alerta-titulo" placeholder="Título (ej. Gym)" required
-                 class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
-          
-          <input type="text" id="alerta-desc" placeholder="Descripción (opcional)"
-                 class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs rounded-xl px-3.5 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 placeholder-slate-500">
-          
-          <input type="time" id="alerta-hora" required
-                 class="sm:col-span-2 bg-[#030712] border border-white/10 text-xs font-mono text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
-          
-          <select id="alerta-modo" class="sm:col-span-3 bg-[#030712] border border-white/10 text-xs text-slate-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
-            <option value="fecha">Fecha exacta</option>
-            <option value="todos">Todos los días (Lun - Dom)</option>
-            <option value="1">Todos los Lunes</option>
-            <option value="2">Todos los Martes</option>
-            <option value="3">Todos los Miércoles</option>
-            <option value="4">Todos los Jueves</option>
-            <option value="5">Todos los Viernes</option>
-            <option value="6">Todos los Sábados</option>
-            <option value="0">Todos los Domingos</option>
-          </select>
-
-          <input type="date" id="alerta-fecha-exacta" 
-                 class="sm:col-span-11 bg-[#030712] border border-white/10 text-xs text-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-500">
-
-          <button type="submit" class="sm:col-span-1 bg-blue-600 hover:bg-blue-500 text-white p-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 active:scale-95 shadow-md">
-            <i data-lucide="plus" class="w-4 h-4"></i>
-          </button>
-        </form>
-
-        <!-- Lista de Alertas -->
-        <div class="space-y-3.5">
-          <h4 class="text-xs font-semibold font-mono text-slate-400">Mis Alertas Guardadas (Nube Firebase):</h4>
-          <ul id="lista-alertas-custom" class="space-y-2.5 max-h-[260px] overflow-y-auto pr-1">
-            <!-- Dinámico desde Firebase -->
-          </ul>
-        </div>
-      </section>
-
       <!-- CALENDARIO MENSUAL 📅 -->
       <section class="glass-card glass-card-glow rounded-[32px] p-6 space-y-4">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -453,7 +390,6 @@
     </main>
   </div>
 
-  <!-- SCRIPT INTEGRADO CON FECHAS LEGIBLES EN ESPAÑOL -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -483,9 +419,7 @@
     const btnGoogleLogin = document.getElementById('btn-google-login');
     const errorLogin = document.getElementById('error-login');
     const btnLogout = document.getElementById('btn-logout');
-    const btnNavbarNotif = document.getElementById('btn-navbar-notif');
 
-    // Función para formatear fechas AAAA-MM-DD a formato "10 de Noviembre"
     function formatearFechaTexto(fechaIso) {
       if (!fechaIso) return '';
       const partes = fechaIso.split('-');
@@ -499,7 +433,6 @@
       return `${dia} de ${meses[mes]}`;
     }
 
-    // Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
@@ -507,13 +440,6 @@
           .catch(err => console.error('SW Error:', err));
       });
     }
-
-    // Permisos Notificaciones
-    btnNavbarNotif.addEventListener('click', async () => {
-      if (!('Notification' in window)) return alert('Este dispositivo no soporta notificaciones.');
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') alert('¡Notificaciones activadas!');
-    });
 
     // RELOJ EN VIVO
     function actualizarReloj() {
@@ -731,165 +657,16 @@
 
     // --- SINCRONIZACIÓN FIREBASE REALTIME ---
     let eventosParcialesGlobal = [];
-    let cacheAlertasGlobales = {};
 
     function iniciarFirebase() {
       db = getDatabase(app);
+      
+      // Renderizar el calendario de inmediato para evitar bloqueos
+      renderizarCalendario();
 
       const gastosRef = ref(db, 'gastos');
       const recordatoriosRef = ref(db, 'recordatorios');
       const parcialesRef = ref(db, 'parciales');
-      const alertasCustomRef = ref(db, 'alertas_custom');
-
-      // 1. ALERTAS PERSONALIZADAS
-      const formAlertaCustom = document.getElementById('form-alerta-custom');
-      const listaAlertasCustom = document.getElementById('lista-alertas-custom');
-      const alertaModoSelect = document.getElementById('alerta-modo');
-      const alertaFechaInput = document.getElementById('alerta-fecha-exacta');
-
-      alertaFechaInput.value = new Date().toISOString().split('T')[0];
-
-      alertaModoSelect.addEventListener('change', () => {
-        if (alertaModoSelect.value === 'fecha') {
-          alertaFechaInput.classList.remove('hidden');
-        } else {
-          alertaFechaInput.classList.add('hidden');
-        }
-      });
-
-      onValue(alertasCustomRef, (snapshot) => {
-        const data = snapshot.val();
-        cacheAlertasGlobales = data || {};
-        listaAlertasCustom.innerHTML = '';
-
-        if (data) {
-          const nombresModos = {
-            'todos': 'Todos los días',
-            '1': 'Todos los Lunes',
-            '2': 'Todos los Martes',
-            '3': 'Todos los Miércoles',
-            '4': 'Todos los Jueves',
-            '5': 'Todos los Viernes',
-            '6': 'Todos los Sábados',
-            '0': 'Todos los Domingos'
-          };
-
-          Object.keys(data).forEach((key) => {
-            const alerta = data[key];
-            const desactivadaLocal = localStorage.getItem(`notif_off_${key}`) === 'true';
-
-            let textoTipo = (alerta.modo === 'fecha')
-              ? `<span class="text-[10px] font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${formatearFechaTexto(alerta.fecha)}</span>`
-              : `<span class="text-[10px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded-md">${nombresModos[alerta.modo] || 'Recurrente'}</span>`;
-
-            listaAlertasCustom.innerHTML += `
-              <li class="flex justify-between items-center bg-appInput border border-white/10 px-4 py-3 rounded-2xl text-xs hover:border-white/30 transition">
-                <div class="space-y-0.5 pr-2">
-                  <div class="flex items-center gap-2">
-                    <span class="font-bold text-white">${alerta.titulo}</span>
-                    ${textoTipo}
-                  </div>
-                  ${alerta.desc ? `<p class="text-[11px] text-slate-300">${alerta.desc}</p>` : ''}
-                </div>
-                <div class="flex items-center gap-3 shrink-0">
-                  <span class="font-mono text-cyan-400 font-semibold bg-cyan-500/10 px-2.5 py-1 rounded-xl border border-cyan-500/20">${alerta.hora} hs</span>
-                  
-                  <button onclick="window.toggleNotifLocal('${key}')" title="${desactivadaLocal ? 'Aviso desactivado en este equipo' : 'Aviso activo en este equipo'}" 
-                          class="p-2 rounded-xl border transition ${desactivadaLocal ? 'bg-neutral-800 border-white/10 text-slate-500' : 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'}">
-                    <i data-lucide="${desactivadaLocal ? 'bell-off' : 'bell'}" class="w-3.5 h-3.5"></i>
-                  </button>
-
-                  <button data-id="${key}" class="btn-del-alerta text-slate-500 hover:text-rose-400 p-1 transition">
-                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </li>
-            `;
-          });
-        } else {
-          listaAlertasCustom.innerHTML = '<p class="text-xs text-slate-500 text-center py-3">Sin alertas creadas en la nube</p>';
-        }
-
-        lucide.createIcons();
-        bindDelete('btn-del-alerta', 'alertas_custom');
-      });
-
-      window.toggleNotifLocal = function(key) {
-        const desactivada = localStorage.getItem(`notif_off_${key}`) === 'true';
-        if (desactivada) {
-          localStorage.removeItem(`notif_off_${key}`);
-        } else {
-          localStorage.setItem(`notif_off_${key}`, 'true');
-        }
-        onValue(alertasCustomRef, () => {}, { onlyOnce: true });
-      };
-
-      formAlertaCustom.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const titulo = document.getElementById('alerta-titulo').value.trim();
-        const desc = document.getElementById('alerta-desc').value.trim();
-        const hora = document.getElementById('alerta-hora').value;
-        const modo = alertaModoSelect.value;
-        const fecha = alertaFechaInput.value;
-
-        push(alertasCustomRef, { titulo, desc, hora, modo, fecha });
-        formAlertaCustom.reset();
-        alertaFechaInput.value = new Date().toISOString().split('T')[0];
-        alertaFechaInput.classList.remove('hidden');
-      });
-
-      // MOTOR DE ALERTAS
-      setInterval(() => {
-        if (!cacheAlertasGlobales || Notification.permission !== 'granted') return;
-
-        const ahora = new Date();
-        const diaActual = ahora.getDay().toString();
-        const hh = String(ahora.getHours()).padStart(2, '0');
-        const mm = String(ahora.getMinutes()).padStart(2, '0');
-        const horaActualStr = `${hh}:${mm}`;
-        const fechaHoyIso = ahora.toISOString().split('T')[0];
-
-        Object.keys(cacheAlertasGlobales).forEach((key) => {
-          const alerta = cacheAlertasGlobales[key];
-          if (localStorage.getItem(`notif_off_${key}`) === 'true') return;
-
-          let [aH, aM] = alerta.hora.split(':');
-          const horaAlertaNorm = `${String(aH).padStart(2, '0')}:${String(aM).padStart(2, '0')}`;
-
-          const coincideHora = (horaAlertaNorm === horaActualStr);
-          let coincideMomento = false;
-
-          if (alerta.modo === 'fecha') coincideMomento = (alerta.fecha === fechaHoyIso);
-          else if (alerta.modo === 'todos') coincideMomento = true;
-          else coincideMomento = (alerta.modo === diaActual);
-
-          if (coincideHora && coincideMomento) {
-            const claveLanzado = `sent_${key}_${fechaHoyIso}_${horaActualStr}`;
-            if (!localStorage.getItem(claveLanzado)) {
-              localStorage.setItem(claveLanzado, 'true');
-
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.ready.then(reg => {
-                  reg.showNotification(`⏰ ${alerta.titulo}`, {
-                    body: alerta.desc || '¡Es la hora programada!',
-                    icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no',
-                    vibrate: [300, 100, 300]
-                  });
-                });
-              } else {
-                new Notification(`⏰ ${alerta.titulo}`, {
-                  body: alerta.desc || '¡Es la hora programada!',
-                  icon: 'https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no'
-                });
-              }
-
-              if (alerta.modo === 'fecha') {
-                remove(ref(db, `alertas_custom/${key}`));
-              }
-            }
-          }
-        });
-      }, 10000);
 
       // --- PARCIALES & CALENDARIO ---
       onValue(parcialesRef, (snapshot) => {
