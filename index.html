@@ -48,7 +48,7 @@
       background-color: #121216;
       border: 1px solid #27272a;
       border-radius: 16px;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.3s ease, opacity 0.3s ease;
     }
     .panel-card:hover {
       border-color: #3f3f46;
@@ -65,6 +65,20 @@
       border-color: #71717a;
       box-shadow: 0 0 0 1px #71717a;
     }
+    /* Animación de entrada suave */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in {
+      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
     ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: #09090b; }
     ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
@@ -73,9 +87,15 @@
 </head>
 <body class="min-h-screen antialiased pb-20 selection:bg-white selection:text-black">
 
+  <!-- SPINNER / PANTALLA DE CARGA INICIAL -->
+  <div id="initial-loader" class="fixed inset-0 z-[110] bg-[#09090b] flex flex-col items-center justify-center space-y-4 transition-opacity duration-500">
+    <div class="w-8 h-8 rounded-full border-2 border-zinc-700 border-t-white animate-spin"></div>
+    <p class="text-xs font-mono text-zinc-500 tracking-widest uppercase">Cargando Organizador OS...</p>
+  </div>
+
   <!-- LOGIN MODAL -->
-  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#09090b] flex items-center justify-center p-4">
-    <div class="panel-card p-8 max-w-sm w-full text-center space-y-6 shadow-2xl">
+  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#09090b] flex items-center justify-center p-4 hidden">
+    <div class="panel-card p-8 max-w-sm w-full text-center space-y-6 shadow-2xl animate-fade-in">
       <div class="w-16 h-16 mx-auto rounded-full bg-[#18181b] border border-borderSubtle p-1 flex items-center justify-center overflow-hidden">
         <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
              alt="Perfil" class="w-full h-full object-cover rounded-full">
@@ -101,7 +121,7 @@
   </div>
 
   <!-- MAIN APP -->
-  <div id="app-content" class="hidden">
+  <div id="app-content" class="hidden animate-fade-in">
 
     <!-- Navbar Minimal -->
     <header class="w-full bg-[#09090b]/80 backdrop-blur-md border-b border-borderSubtle sticky top-0 z-50">
@@ -116,7 +136,7 @@
     <!-- Dashboard Container -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-6 space-y-6">
 
-      <!-- TOP ROW: Perfil & Métricas -->
+      <!-- TOP ROW: Perfil & Métricas con Animación Count-Up -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
         
         <!-- Perfil limpio -->
@@ -134,7 +154,7 @@
               </div>
             </div>
           </div>
-          <span class="text-[11px] font-mono text-zinc-500 bg-zinc-900 px-2.5 py-1 rounded-md border border-borderSubtle">v2.0</span>
+          <span class="text-[11px] font-mono text-zinc-500 bg-zinc-900 px-2.5 py-1 rounded-md border border-borderSubtle">v2.1</span>
         </div>
 
         <!-- Métricas -->
@@ -162,7 +182,7 @@
 
       </div>
 
-      <!-- CRONOGRAMA EN VIVO (ESTILO GOOGLE CALENDAR / LINEAR) -->
+      <!-- CRONOGRAMA EN VIVO & AGENDA FUTURA (SELECTOR DE FECHA EXACTA) -->
       <section class="panel-card p-5 space-y-4">
         
         <!-- Live Clock Banner -->
@@ -182,9 +202,16 @@
           <p id="live-date" class="text-xs text-zinc-400 capitalize font-medium"></p>
         </div>
 
-        <!-- Tabs de Días -->
-        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none" id="schedule-day-tabs">
-          <!-- Dinámico -->
+        <!-- Selector de Días Rápido o Fecha Específica Futura -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-zinc-900/40 p-3 rounded-xl border border-borderSubtle">
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none" id="schedule-day-tabs">
+            <!-- Dinámico por pestañas de semana -->
+          </div>
+          
+          <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+            <span class="text-[11px] font-mono text-zinc-400">Fecha Específica:</span>
+            <input type="date" id="sch-selector-fecha" class="minimal-input text-xs font-mono px-3 py-1.5 text-zinc-200">
+          </div>
         </div>
 
         <!-- Formulario Actividad -->
@@ -218,7 +245,11 @@
 
         <!-- Cronograma Vertical de Minutos Exactos -->
         <div class="bg-[#09090b] border border-borderSubtle rounded-xl relative overflow-hidden">
-          <div id="calendar-grid-timeline" class="relative w-full h-[700px] overflow-y-auto pr-2">
+          <div class="px-4 py-2 bg-zinc-900/50 border-b border-borderSubtle flex justify-between items-center text-xs font-mono text-zinc-400">
+            <span id="label-agenda-activa" class="font-semibold text-white">Mostrando agenda del día</span>
+            <span id="badge-fecha-activa" class="text-[11px] text-zinc-500"></span>
+          </div>
+          <div id="calendar-grid-timeline" class="relative w-full h-[650px] overflow-y-auto pr-2">
             <!-- Dinámico -->
           </div>
         </div>
@@ -359,6 +390,7 @@
 
     lucide.createIcons();
 
+    const initialLoader = document.getElementById('initial-loader');
     const loginModal = document.getElementById('login-modal');
     const appContent = document.getElementById('app-content');
     const btnGoogleLogin = document.getElementById('btn-google-login');
@@ -395,18 +427,50 @@
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // --- CRONOGRAMA MINUTOS EXACTOS ---
-    const diasSemanaNombres = [
-      { id: '1', nombre: 'Lunes' },
-      { id: '2', nombre: 'Martes' },
-      { id: '3', nombre: 'Miércoles' },
-      { id: '4', nombre: 'Jueves' },
-      { id: '5', nombre: 'Viernes' },
-      { id: '6', nombre: 'Sábado' },
-      { id: '0', nombre: 'Domingo' }
-    ];
+    // --- ANIMACIÓN COUNT-UP PARA NÚMEROS Y GASTOS ---
+    function animarContador(elementId, targetValue, isCurrency = false) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const duration = 800; // ms
+      const startTime = performance.now();
+      const startVal = 0;
 
-    let diaSeleccionadoTuDia = String(new Date().getDay());
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        const currentVal = Math.floor(startVal + (targetValue - startVal) * easeProgress);
+
+        if (isCurrency) {
+          el.innerText = `$${currentVal.toLocaleString()}`;
+        } else {
+          el.innerText = currentVal.toLocaleString();
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          if (isCurrency) {
+            el.innerText = `$${targetValue.toLocaleString()}`;
+          } else {
+            el.innerText = targetValue.toLocaleString();
+          }
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    // --- MANEJO DE FECHA / AGENDA FUTURA (SEMANAS Y DÍAS ESPECÍFICOS) ---
+    // Obtenemos fecha actual en formato ISO (YYYY-MM-DD)
+    function obtenerFechaIsoHoy() {
+      const d = new Date();
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    let fechaSeleccionadaAgenda = obtenerFechaIsoHoy();
 
     function obtenerTuDiaItems() {
       return JSON.parse(localStorage.getItem('tuDiaScheduleItems') || '{}');
@@ -418,32 +482,56 @@
     }
 
     const scheduleDayTabs = document.getElementById('schedule-day-tabs');
+    const schSelectorFecha = document.getElementById('sch-selector-fecha');
     const calendarGridTimeline = document.getElementById('calendar-grid-timeline');
+    const labelAgendaActiva = document.getElementById('label-agenda-activa');
+    const badgeFechaActiva = document.getElementById('badge-fecha-activa');
 
-    function renderizarTabsDia() {
-      const hoyNum = String(new Date().getDay());
-      scheduleDayTabs.innerHTML = '';
-
-      diasSemanaNombres.forEach(d => {
-        const esHoy = (d.id === hoyNum);
-        const esSeleccionado = (d.id === diaSeleccionadoTuDia);
-
-        let activeClasses = esSeleccionado 
-          ? 'bg-white text-zinc-950 font-semibold' 
-          : 'bg-[#09090b] text-zinc-400 hover:text-white border border-borderSubtle';
-
-        scheduleDayTabs.innerHTML += `
-          <button type="button" onclick="window.cambiarDiaTuDia('${d.id}')" 
-                  class="px-3.5 py-1.5 rounded-lg text-xs font-mono transition flex items-center gap-1.5 shrink-0 ${activeClasses}">
-            <span>${d.nombre}</span>
-            ${esHoy ? `<span class="w-1.5 h-1.5 rounded-full ${esSeleccionado ? 'bg-zinc-950' : 'bg-emerald-500'}"></span>` : ''}
-          </button>
-        `;
+    if (schSelectorFecha) {
+      schSelectorFecha.value = fechaSeleccionadaAgenda;
+      schSelectorFecha.addEventListener('change', (e) => {
+        if (e.target.value) {
+          fechaSeleccionadaAgenda = e.target.value;
+          renderizarScheduleTuDia();
+        }
       });
     }
 
-    window.cambiarDiaTuDia = function(diaId) {
-      diaSeleccionadoTuDia = diaId;
+    // Generar solapas rápidas para los próximos 7 días a partir de hoy
+    function renderizarTabsDia() {
+      scheduleDayTabs.innerHTML = '';
+      const hoy = new Date();
+
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(hoy);
+        d.setDate(hoy.getDate() + i);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const fechaIso = `${year}-${month}-${day}`;
+
+        const nombreDia = d.toLocaleDateString('es-ES', { weekday: 'short' });
+        const numeroDia = d.getDate();
+        const esSeleccionado = (fechaIso === fechaSeleccionadaAgenda);
+        const esHoy = (i === 0);
+
+        let activeClasses = esSeleccionado 
+          ? 'bg-white text-zinc-950 font-semibold border-white' 
+          : 'bg-[#09090b] text-zinc-400 hover:text-white border border-borderSubtle';
+
+        scheduleDayTabs.innerHTML += `
+          <button type="button" onclick="window.cambiarFechaAgenda('${fechaIso}')" 
+                  class="px-3 py-1.5 rounded-lg text-xs font-mono transition flex items-center gap-1.5 shrink-0 ${activeClasses}">
+            <span class="capitalize">${nombreDia} ${numeroDia}</span>
+            ${esHoy && !esSeleccionado ? `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>` : ''}
+          </button>
+        `;
+      }
+    }
+
+    window.cambiarFechaAgenda = function(fechaIso) {
+      fechaSeleccionadaAgenda = fechaIso;
+      if (schSelectorFecha) schSelectorFecha.value = fechaIso;
       renderizarTabsDia();
       renderizarScheduleTuDia();
     };
@@ -457,17 +545,30 @@
     function renderizarScheduleTuDia() {
       renderizarTabsDia();
       const allItems = obtenerTuDiaItems();
-      let diaItems = allItems[diaSeleccionadoTuDia] || [];
+      let diaItems = allItems[fechaSeleccionadaAgenda] || [];
 
-      // Borrado automático al terminar si es el día actual
+      // Borrado automático de actividades expiradas SOLAMENTE si es el día de hoy exacto
+      const hoyIso = obtenerFechaIsoHoy();
+      const esHoySeleccionado = (fechaSeleccionadaAgenda === hoyIso);
       const ahora = new Date();
-      const esHoySeleccionado = (String(ahora.getDay()) === diaSeleccionadoTuDia);
       const minutosActuales = ahora.getHours() * 60 + ahora.getMinutes();
 
       if (esHoySeleccionado) {
         diaItems = diaItems.filter(item => convertirHoraAMinutos(item.horaFin) > minutosActuales);
-        allItems[diaSeleccionadoTuDia] = diaItems;
+        allItems[fechaSeleccionadaAgenda] = diaItems;
         localStorage.setItem('tuDiaScheduleItems', JSON.stringify(allItems));
+      }
+
+      // Actualizar textos de cabecera de agenda
+      if (labelAgendaActiva) {
+        if (esHoySeleccionado) {
+          labelAgendaActiva.innerText = "Agenda de Hoy (En Vivo)";
+        } else {
+          labelAgendaActiva.innerText = `Agenda Programada`;
+        }
+      }
+      if (badgeFechaActiva) {
+        badgeFechaActiva.innerText = formatearFechaTexto(fechaSeleccionadaAgenda) || fechaSeleccionadaAgenda;
       }
 
       calendarGridTimeline.innerHTML = '';
@@ -550,7 +651,7 @@
                 </div>
                 ${item.notas && heightPx > 45 ? `<p class="text-[10px] text-zinc-400 truncate">${item.notas}</p>` : ''}
               </div>
-              <button onclick="window.eliminarItemTuDia('${diaSeleccionadoTuDia}', ${item.originalIndex})" class="text-zinc-500 hover:text-white p-0.5 transition shrink-0">
+              <button onclick="window.eliminarItemTuDia('${fechaSeleccionadaAgenda}', ${item.originalIndex})" class="text-zinc-500 hover:text-white p-0.5 transition shrink-0">
                 <i data-lucide="x" class="w-3 h-3"></i>
               </button>
             </div>
@@ -562,10 +663,10 @@
       lucide.createIcons();
     }
 
-    window.eliminarItemTuDia = function(diaId, index) {
+    window.eliminarItemTuDia = function(fechaKey, index) {
       let allItems = obtenerTuDiaItems();
-      if (allItems[diaId]) {
-        allItems[diaId].splice(index, 1);
+      if (allItems[fechaKey]) {
+        allItems[fechaKey].splice(index, 1);
         guardarTuDiaItems(allItems);
       }
     };
@@ -579,8 +680,8 @@
       const notas = document.getElementById('sch-notas').value.trim();
 
       let allItems = obtenerTuDiaItems();
-      if (!allItems[diaSeleccionadoTuDia]) allItems[diaSeleccionadoTuDia] = [];
-      allItems[diaSeleccionadoTuDia].push({ titulo, horaInicio, horaFin, categoria, notas });
+      if (!allItems[fechaSeleccionadaAgenda]) allItems[fechaSeleccionadaAgenda] = [];
+      allItems[fechaSeleccionadaAgenda].push({ titulo, horaInicio, horaFin, categoria, notas });
       guardarTuDiaItems(allItems);
       document.getElementById('form-schedule-item').reset();
     });
@@ -590,6 +691,12 @@
 
     // --- AUTH GOOGLE ---
     onAuthStateChanged(auth, (user) => {
+      // Ocultar loader inicial con fundido
+      if (initialLoader) {
+        initialLoader.style.opacity = '0';
+        setTimeout(() => initialLoader.remove(), 400);
+      }
+
       if (user) {
         if (user.email === ALLOWED_EMAIL) {
           desbloquearApp();
@@ -682,12 +789,12 @@
       onValue(recordatoriosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-recordatorios');
-        const widgetPendientes = document.getElementById('widget-pendientes');
         lista.innerHTML = '';
 
         if (data) {
           const arr = Object.keys(data).map(key => ({ key, ...data[key] }));
-          widgetPendientes.innerText = arr.length;
+          // Animación count-up pendientes
+          animarContador('widget-pendientes', arr.length, false);
 
           arr.forEach((item) => {
             lista.innerHTML += `
@@ -700,7 +807,7 @@
             `;
           });
         } else {
-          widgetPendientes.innerText = '0';
+          animarContador('widget-pendientes', 0, false);
           lista.innerHTML = '<p class="text-center py-4 text-xs text-zinc-500">Sin recordatorios</p>';
         }
         lucide.createIcons();
@@ -718,7 +825,6 @@
       onValue(gastosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-gastos');
-        const widgetTotal = document.getElementById('widget-total-gastos');
         const sectionTotal = document.getElementById('section-total-gastos');
         lista.innerHTML = '';
         let total = 0;
@@ -743,9 +849,10 @@
           lista.innerHTML = '<p class="text-center py-4 text-xs text-zinc-500">Sin gastos</p>';
         }
 
-        const formattedTotal = `$${total.toLocaleString()}`;
-        widgetTotal.innerText = formattedTotal;
-        sectionTotal.innerText = formattedTotal;
+        // Animación count-up gastos totales
+        animarContador('widget-total-gastos', total, true);
+        sectionTotal.innerText = `$${total.toLocaleString()}`;
+
         lucide.createIcons();
         bindDelete('btn-del-gasto', 'gastos');
       });
