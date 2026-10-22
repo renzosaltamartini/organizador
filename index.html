@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<selection-tag><!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- jsPDF para exportar/compartir a PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{--bg:#0a0c10;--card:#12151b;--soft:#1a1e26;--line:#252b36;--tx:#f3f5f8;--mut:#8f98a8;--ac:#0ea5e9;--ok:#10b981;--warn:#f59e0b;--bad:#f43f5e;--r:18px;color-scheme:dark}
 @media(prefers-color-scheme:light){:root{--bg:#f2f4f7;--card:#fff;--soft:#f0f2f6;--line:#e0e4ea;--tx:#161a20;--mut:#667085;color-scheme:light}}
@@ -215,6 +217,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0112 0v5l2 2H4zM10 21h4"/></symbol>
  <symbol id="i-note" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 13h8M8 17h6"/></symbol>
  <symbol id="i-wal" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/></symbol>
+ <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></symbol>
 </svg>
 
 <div id="initial-loader" class="full"><div class="spin"></div>Cargando tus datos…</div>
@@ -224,7 +227,6 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <h1 class="lt">Organizador Personal</h1>
   <p class="land-sub">Simplificamos tu rutina en simples pasos.</p>
   
-  <!-- Mini versión preview front-end -->
   <div class="mini-preview" aria-hidden="true">
    <div class="mini-header">
     <div class="mini-dots"><span></span><span></span><span></span></div>
@@ -259,7 +261,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  </div>
 </div>
 
-<!-- Modal de Registro / Onboarding obligatorios para nuevos usuarios -->
+<!-- Modal de Registro / Onboarding -->
 <div id="onboarding-modal" class="modal-overlay" hidden>
  <div class="modal-card">
   <h2>Completa tu perfil</h2>
@@ -281,7 +283,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  </div>
 </div>
 
-<!-- Modal para cambiar foto en cualquier momento -->
+<!-- Modal para cambiar foto -->
 <div id="profile-modal" class="modal-overlay" hidden>
  <div class="modal-card">
   <div class="vh"><h2>Editar foto de perfil</h2><button class="x" id="prof-close" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>
@@ -293,6 +295,14 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
    </label>
   </div>
   <button class="btn" id="prof-save">Guardar cambios</button>
+ </div>
+</div>
+
+<!-- Modal interactivo para fechas del calendario -->
+<div id="cal-day-modal" class="modal-overlay" hidden>
+ <div class="modal-card" style="max-width:480px">
+  <div class="vh"><h2 id="cal-modal-title">Detalle del día</h2><button class="x" id="cal-modal-close" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div id="cal-modal-content" style="display:flex;flex-direction:column;gap:10px;max-height:60vh;overflow-y:auto"></div>
  </div>
 </div>
 
@@ -319,6 +329,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <section id="v-home" style="display:flex;flex-direction:column;gap:16px">
    <div class="card hero">
     <div><p class="sub" id="greet">Hola</p><b id="live-clock">00:00:00</b><p class="sub" id="live-date"></p></div>
+    <button class="btn ghost" id="btn-pdf-home"><svg class="ic"><use href="#i-share"/></svg> Compartir Resumen</button>
    </div>
    <div class="tiles">
     <button class="card tile" data-go="dia" style="--c:#0ea5e9"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
@@ -331,12 +342,17 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 
   <!-- TU DÍA -->
   <section id="v-dia" class="card" hidden>
-   <div class="vh"><div><h1>Tu día</h1><p class="sub">Agenda en tiempo real</p></div>
-    <button class="btn" id="btn-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva actividad</button></div>
+   <div class="vh">
+    <div><h1>Tu día</h1><p class="sub">Agenda en tiempo real</p></div>
+    <div style="display:flex;gap:8px">
+     <button class="btn ghost" id="btn-pdf-dia"><svg class="ic"><use href="#i-share"/></svg> Compartir PDF</button>
+     <button class="btn" id="btn-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva actividad</button>
+    </div>
+   </div>
 
    <form id="form-schedule-item" class="fgrid" hidden>
     <p class="sub" id="form-day"></p>
-    <label class="f t"><span>Actividad</span><input class="in" id="sch-titulo" placeholder="Ej. Algoritmos" required></label>
+    <label class="f t"><span>Actividad</span><input class="in" id="sch-titulo" placeholder="Ej. Reunión importante" required></label>
     <label class="f h"><span>Inicio</span><input class="in" type="time" id="sch-hora-inicio" required></label>
     <label class="f h"><span>Fin</span><input class="in" type="time" id="sch-hora-fin" required></label>
     <label class="f n"><span>Notas</span><input class="in" id="sch-notas" placeholder="Opcional"></label>
@@ -366,16 +382,21 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <section id="v-cal" hidden>
    <div class="split">
     <div class="card">
-     <div class="vh"><div><h1>Calendario</h1><p class="sub">Toca un día para ver su agenda</p></div>
-      <div class="mnav"><button id="cal-prev" class="ib" aria-label="Mes anterior"><svg class="ic"><use href="#i-l"/></svg></button><b id="cal-mes-anio"></b><button id="cal-next" class="ib" aria-label="Mes siguiente"><svg class="ic"><use href="#i-r"/></svg></button></div></div>
+     <div class="vh">
+      <div><h1>Calendario</h1><p class="sub">Toca un día para ver su agenda o agregar eventos</p></div>
+      <div style="display:flex;gap:6px;align-items:center">
+       <button class="btn ghost" id="btn-pdf-cal" style="min-height:42px;padding:0 12px"><svg class="ic"><use href="#i-share"/></svg> PDF</button>
+       <div class="mnav"><button id="cal-prev" class="ib" aria-label="Mes anterior"><svg class="ic"><use href="#i-l"/></svg></button><b id="cal-mes-anio"></b><button id="cal-next" class="ib" aria-label="Mes siguiente"><svg class="ic"><use href="#i-r"/></svg></button></div>
+      </div>
+     </div>
      <div class="wd"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
      <div id="cal-grid" class="cal"></div>
-     <div class="legend"><span><i style="background:var(--warn)"></i>Parcial</span><span><i style="background:var(--ok)"></i>Con agenda</span></div>
+     <div class="legend"><span><i style="background:var(--warn)"></i>Fecha Importante</span><span><i style="background:var(--ok)"></i>Con agenda</span></div>
     </div>
     <div class="card">
-     <h2>Fechas de parciales</h2>
+     <h2>Fechas importantes</h2>
      <form id="form-parcial" class="fgrid" style="grid-template-columns:1fr">
-      <label class="f"><span>Materia</span><input class="in" id="parcial-materia" placeholder="Ej. Álgebra" required></label>
+      <label class="f"><span>Título / Evento</span><input class="in" id="parcial-materia" placeholder="Ej. Presentación de proyecto" required></label>
       <label class="f"><span>Fecha</span><input class="in" type="date" id="parcial-fecha" required></label>
       <button class="btn" type="submit"><svg class="ic"><use href="#i-plus"/></svg> Agregar</button>
      </form>
@@ -387,7 +408,10 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <!-- RECORDATORIOS -->
   <section id="v-rec" hidden><div class="narrow">
    <div class="card">
-    <h1>Recordatorios</h1>
+    <div class="vh">
+     <h1>Recordatorios</h1>
+     <button class="btn ghost" id="btn-pdf-rec"><svg class="ic"><use href="#i-share"/></svg> Compartir PDF</button>
+    </div>
     <form id="form-recordatorio" class="fgrid" style="grid-template-columns:1fr">
      <input class="in" id="rec-titulo" placeholder="Título (opcional)">
      <textarea class="in" id="rec-detalle" rows="2" placeholder="Detalle…" required></textarea>
@@ -400,7 +424,10 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <!-- GASTOS -->
   <section id="v-gas" hidden><div class="narrow">
    <div class="card">
-    <h1>Gastos</h1>
+    <div class="vh">
+     <h1>Gastos</h1>
+     <button class="btn ghost" id="btn-pdf-gas"><svg class="ic"><use href="#i-share"/></svg> Compartir PDF</button>
+    </div>
     <p class="big" id="section-total-gastos">$0</p><p class="sub">Total acumulado</p>
     <form id="form-gasto" class="fgrid" style="grid-template-columns:1fr">
      <div class="row2">
@@ -412,11 +439,18 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
     <ul id="lista-gastos" class="list"></ul>
    </div>
   </div></section>
-   <!-- NOTAS -->
+
+  <!-- NOTAS -->
   <section id="v-not" hidden>
    <div class="card nbox" id="nbox">
     <aside class="nside">
-     <div class="nhead"><h1>Notas</h1><button class="btn" id="n-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva</button></div>
+     <div class="nhead">
+      <h1>Notas</h1>
+      <div style="display:flex;gap:4px">
+       <button class="btn ghost" id="btn-pdf-not" style="min-height:40px;padding:0 10px"><svg class="ic"><use href="#i-share"/></svg></button>
+       <button class="btn" id="n-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva</button>
+      </div>
+     </div>
      <input class="in" id="n-search" type="search" placeholder="Buscar">
      <div id="n-list" class="nlist"></div>
     </aside>
@@ -480,6 +514,85 @@ const delBtn = path => `<button class="x" data-del="${esc(path)}" aria-label="El
 
 let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, notas = [], curId = null, dirty = false, tmr = null, rng = null, needScroll = true, lastRender = 0, calDate = new Date();
 
+/* ---------- Generador de PDF ---------- */
+async function generarPDF(tituloSeccion, contenidoTexto, nombreArchivo) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(20);
+  doc.text("Organizador Personal", 15, 20);
+  
+  doc.setFontSize(14);
+  doc.setTextColor(80, 80, 80);
+  doc.text(`Sección: ${tituloSeccion}`, 15, 28);
+  doc.text(`Usuario: ${userPerfil ? userPerfil.nombre + ' ' + userPerfil.apellido : 'Usuario'}`, 15, 35);
+  doc.text(`Fecha de exportación: ${new Date().toLocaleDateString('es-ES')}`, 15, 42);
+  
+  doc.setLineWidth(0.5);
+  doc.setLineColor(200, 200, 200);
+  doc.line(15, 48, 195, 48);
+
+  doc.setFont("Helvetica", "normal");
+  doc.setFontSize(11);
+  doc.setTextColor(20, 20, 20);
+
+  const splitText = doc.splitTextToSize(contenidoTexto, 180);
+  doc.text(splitText, 15, 56);
+
+  // Intentar compartir mediante Web Share API si está disponible en móviles
+  const pdfBlob = doc.output('blob');
+  const file = new File([pdfBlob], `${nombreArchivo}.pdf`, { type: 'application/pdf' });
+  
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({
+        title: `Organizador - ${tituloSeccion}`,
+        text: `Aquí tienes el resumen de ${tituloSeccion}`,
+        files: [file]
+      });
+      return;
+    } catch (e) {
+      if (e.name !== 'AbortError') console.warn(e);
+    }
+  }
+  
+  // Descargar localmente si no se compartió
+  doc.save(`${nombreArchivo}.pdf`);
+}
+
+$('btn-pdf-home').onclick = () => {
+  const txt = `Resumen General\nHora actual: ${new Date().toLocaleTimeString()}\nAgenda de hoy: ${$('t-dia').textContent}\nPróxima fecha: ${$('t-cal').textContent}\nRecordatorios: ${recN}\nGastos acumulados: ${money(gasT)}`;
+  generarPDF('Inicio y Estado General', txt, 'resumen-organizador');
+};
+
+$('btn-pdf-dia').onclick = () => {
+  const its = (agenda[sel] || []).map(i => `- [${i.horaInicio} a ${i.horaFin}] ${i.titulo} (${i.notas || 'Sin notas'})`).join('\n');
+  generarPDF(`Agenda del día (${sel})`, its || 'No hay actividades para este día.', `agenda-${sel}`);
+};
+
+$('btn-pdf-cal').onclick = () => {
+  const ps = parciales.map(p => `- ${p.materia} (${p.fecha}) · ${cuando(p.fecha)}`).join('\n');
+  generarPDF('Fechas Importantes', ps || 'No hay fechas importantes registradas.', 'fechas-importantes');
+};
+
+$('btn-pdf-rec').onclick = () => {
+  const rs = [...document.querySelectorAll('#lista-recordatorios li')].map(li => `- ${li.textContent.trim()}`).join('\n');
+  generarPDF('Recordatorios', rs || 'No hay recordatorios.', 'recordatorios');
+};
+
+$('btn-pdf-gas').onclick = () => {
+  const gs = [...document.querySelectorAll('#lista-gastos li')].map(li => `- ${li.textContent.trim()}`).join('\n');
+  generarPDF(`Gastos (Total: ${money(gasT)})`, gs || 'No hay gastos registrados.', 'gastos');
+};
+
+$('btn-pdf-not').onclick = () => {
+  const n = notas.find(x => x.id === curId) || notas[0];
+  if (!n) { alert('No hay notas para exportar.'); return; }
+  const cleanTxt = document.createElement('div'); cleanTxt.innerHTML = noteHtml(n);
+  generarPDF('Nota Seleccionada', cleanTxt.textContent || 'Nota vacía', 'nota-personal');
+};
+
 /* ---------- Manejo de Rutas y 404 ---------- */
 const VIEWS = ['home', 'dia', 'cal', 'rec', 'gas', 'not'];
 const PATHS = { home: '/panel', dia: '/panel/agenda', cal: '/panel/calendario', rec: '/panel/recordatorios', gas: '/panel/gastos', not: '/panel/notas' };
@@ -505,11 +618,8 @@ function onRoute() {
     return;
   }
   if (!v) {
-    if (p !== '/' && p !== '/panel') {
-      go('home', true);
-      return;
-    }
-    const w = wanted || 'home'; wanted = null; go(w, true);
+    // Redirección automática al inicio si es 404 o ruta desconocida
+    go('home', true);
     return;
   }
   showView(v);
@@ -548,7 +658,7 @@ function renderHome() {
   const live = its.find(i => i.s <= nm && i.e > nm), next = its.find(i => i.s > nm);
   $('t-dia').textContent = live ? `En curso: ${live.titulo}` : next ? `Próxima: ${next.titulo} · ${next.horaInicio}` : its.length ? 'Ya terminaste por hoy' : 'Sin actividades hoy';
   const p = parciales.find(x => x.fecha >= t);
-  $('t-cal').textContent = p ? `${p.materia} · ${cuando(p.fecha).toLowerCase()}` : 'Sin parciales próximos';
+  $('t-cal').textContent = p ? `${p.materia} · ${cuando(p.fecha).toLowerCase()}` : 'Sin fechas próximas';
   $('t-rec').textContent = `${recN} ${recN === 1 ? 'pendiente' : 'pendientes'}`;
   $('t-gas').textContent = money(gasT);
   $('t-not').textContent = notas.length ? `${notas.length} ${notas.length === 1 ? 'nota' : 'notas'}` : 'Sin notas todavía';
@@ -636,7 +746,7 @@ function render() {
   if (it) det.innerHTML = `<div class="det" style="--c:${COL[it.categoria] || COL.indigo}"><div><b>${esc(it.titulo)}</b><span class="sub">${it.horaInicio} – ${it.horaFin}${it.notas ? ' · ' + esc(it.notas) : ''}</span></div>${delBtn(`agenda/${sel}/${it.id}`)}<button class="x" data-close aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>`;
 }
 
-/* ---------- Calendario ---------- */
+/* ---------- Calendario con Modales Interactivos ---------- */
 function renderCal() {
   const y = calDate.getFullYear(), m = calDate.getMonth();
   $('cal-mes-anio').textContent = `${MESES[m]} ${y}`;
@@ -651,10 +761,70 @@ function renderCal() {
   }
   $('cal-grid').innerHTML = h;
 }
+
 $('cal-grid').addEventListener('click', e => {
   const b = e.target.closest('[data-d]');
-  if (b) { setDate(b.dataset.d); go('dia'); }
+  if (!b) return;
+  const k = b.dataset.d;
+  openCalDayModal(k);
 });
+
+function openCalDayModal(k) {
+  const items = agenda[k] || [];
+  const importantDates = parciales.filter(p => p.fecha === k);
+  const titleEl = $('cal-modal-title');
+  const contentEl = $('cal-modal-content');
+  const dl = new Date(k + 'T00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  
+  titleEl.textContent = dl;
+
+  if (items.length === 0 && importantDates.length === 0) {
+    contentEl.innerHTML = `
+      <div style="text-align:center;padding:20px;display:flex;flex-direction:column;gap:12px;align-items:center">
+        <p class="sub" style="font-size:14px">No tienes nada agendado, deseas agregar algo?</p>
+        <button class="btn" id="modal-add-btn">Agregar actividad para este día</button>
+      </div>
+    `;
+    $('modal-add-btn').onclick = () => {
+      $('cal-day-modal').hidden = true;
+      setDate(k);
+      go('dia');
+      $('form-schedule-item').hidden = false;
+      $('sch-titulo').focus();
+    };
+  } else {
+    let html = '';
+    if (importantDates.length > 0) {
+      html += `<b style="font-size:13px;color:var(--warn)">Fechas importantes:</b>`;
+      importantDates.forEach(p => {
+        html += `<div class="card" style="padding:10px;margin-bottom:6px"><b>${esc(p.materia)}</b></div>`;
+      });
+    }
+    if (items.length > 0) {
+      html += `<b style="font-size:13px;color:var(--ac);margin-top:6px">Agenda del día:</b>`;
+      items.forEach(i => {
+        html += `<div class="card" style="padding:10px;margin-bottom:6px;border-left:4px solid ${COL[i.categoria] || COL.indigo}"><b>${esc(i.titulo)}</b><div class="sub">${i.horaInicio} – ${i.horaFin}${i.notas ? ' · ' + esc(i.notas) : ''}</div></div>`;
+      });
+    }
+    html += `<button class="btn ghost" id="modal-go-agenda" style="margin-top:10px">Ver en Tu Día</button>`;
+    contentEl.innerHTML = html;
+    
+    const goAgendaBtn = $('modal-go-agenda');
+    if (goAgendaBtn) {
+      goAgendaBtn.onclick = () => {
+        $('cal-day-modal').hidden = true;
+        setDate(k);
+        go('dia');
+      };
+    }
+  }
+
+  $('cal-day-modal').hidden = false;
+}
+
+$('cal-modal-close').onclick = () => { $('cal-day-modal').hidden = true; };
+$('cal-day-modal').onclick = e => { if (e.target === $('cal-day-modal')) $('cal-day-modal').hidden = true; };
+
 $('cal-prev').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() - 1); renderCal(); };
 $('cal-next').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() + 1); renderCal(); };
 
@@ -858,10 +1028,8 @@ onAuthStateChanged(auth, async user => {
     curUser = user;
     base = `users/${user.uid}/`;
     
-    // Verificar si existe perfil registrado en Firebase
     const snap = await get(R('perfil'));
     if (!snap.exists()) {
-      // Primera vez: mostrar modal de registro obligatorio
       $('initial-loader').style.display = 'none';
       $('login-modal').hidden = true;
       $('onb-nombre').value = (user.displayName || '').split(' ')[0] || '';
@@ -954,7 +1122,7 @@ function iniciar() {
     parciales = Object.keys(data).map(id => ({ id, ...data[id] })).sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''));
     $('grid-parciales').innerHTML = parciales.length ? parciales.map(p =>
       `<li class="${dias(p.fecha) < 0 ? 'past' : ''}"><div><b>${esc(p.materia)}</b><br><span class="sub">${fechaTexto(p.fecha)}</span><br><span class="tag">${cuando(p.fecha)}</span></div>${delBtn('parciales/' + p.id)}</li>`
-    ).join('') : '<p class="empty">No hay parciales agendados</p>';
+    ).join('') : '<p class="empty">No hay fechas importantes agendadas</p>';
     renderCal(); renderHome(); cargado('parciales');
   });
   $('form-parcial').addEventListener('submit', e => {
@@ -1002,4 +1170,4 @@ function iniciar() {
 }
 </script>
 </body>
-</html>
+</html></selection-tag>
