@@ -57,8 +57,19 @@ textarea.in{resize:none}
 #initial-loader{z-index:110;transition:opacity .4s;color:var(--mut);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 .spin{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--ac);animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-.login{max-width:360px;width:100%;text-align:center;display:flex;flex-direction:column;gap:18px;padding:28px}
-.avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto}
+.land-wrap{justify-content:flex-start;overflow-y:auto;background:radial-gradient(900px 380px at 50% -8%,color-mix(in srgb,var(--ac) 20%,transparent),transparent),var(--bg)}
+.land{margin:auto;width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:28px;padding:24px 0;text-align:center}
+.lt{font-size:clamp(30px,7vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.lgrid{display:grid;grid-template-columns:1fr;gap:14px;width:100%;text-align:left}
+.lc{display:flex;flex-direction:column;gap:10px}
+.lc h2{font-size:17px}
+.lc .ty{color:var(--mut);font-size:14px;line-height:1.6}
+.ty{position:relative;display:block;white-space:pre-line}
+.ty .ghost{visibility:hidden}
+.ty .live{position:absolute;left:0;top:0;right:0}
+.ty.typing .live::after{content:"";display:inline-block;width:2px;height:1em;margin-left:2px;vertical-align:-.12em;background:var(--ac);animation:bl .9s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.lbtn{display:inline-flex;padding:0 28px;min-height:54px;font-size:16px;box-shadow:0 10px 30px -10px color-mix(in srgb,var(--ac) 60%,transparent)}
 .gbtn{background:#fff;color:#18181b;border:0;border-radius:12px;min-height:48px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px}
 /* layout */
 header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
@@ -156,6 +167,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 .big{font-size:32px;font-weight:800;letter-spacing:-.02em;color:var(--ok)}
 .row2{display:grid;grid-template-columns:1fr 120px;gap:10px}
 @media(min-width:720px){
+ .lgrid{grid-template-columns:repeat(3,1fr)}
  .hin,main{padding-left:24px;padding-right:24px}
  body{padding-bottom:24px}
  #nav{position:static;max-width:1100px;margin:16px auto 0;padding:0 24px;background:none;border:0;backdrop-filter:none;display:flex;gap:8px}
@@ -182,6 +194,9 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+ <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5z"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></symbol>
  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
@@ -198,15 +213,18 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 
 <div id="initial-loader" class="full"><div class="spin"></div>Cargando tus datos…</div>
 
-<div id="login-modal" class="full" hidden>
- <div class="card login">
-  <span class="ti" style="--c:#0ea5e9;width:64px;height:64px;margin:0 auto;border-radius:20px"><svg class="ic" style="width:30px;height:30px"><use href="#i-cal"/></svg></span>
-  <div><h2 style="font-size:20px">Organizador Personal</h2><p class="sub" style="margin-top:4px">Agenda, calendario, recordatorios, gastos y notas en un solo lugar.</p></div>
-  <button id="btn-google-login" class="gbtn">
-   <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
-   Continuar con Google
+<div id="login-modal" class="full land-wrap" hidden>
+ <div class="land">
+  <h1 class="ty lt" data-text="Organizador Personal"></h1>
+  <div class="lgrid">
+   <article class="card lc" style="--c:#0ea5e9"><span class="ti"><svg class="ic"><use href="#i-user"/></svg></span><h2>Quién la creó</h2><p class="ty" data-text="Hecha por Renzo."></p></article>
+   <article class="card lc" style="--c:#14b8a6"><span class="ti"><svg class="ic"><use href="#i-spark"/></svg></span><h2>Para qué sirve</h2><p class="ty" data-text="Para organizar tu día, tus fechas importantes y tus gastos, desde el celular o la computadora."></p></article>
+   <article class="card lc" style="--c:#f59e0b"><span class="ti"><svg class="ic"><use href="#i-check"/></svg></span><h2>Qué podés hacer</h2><p class="ty" data-text="• Planear tu día hora por hora&#10;• Marcar parciales en el calendario&#10;• Guardar recordatorios&#10;• Controlar tus gastos&#10;• Escribir notas con formato"></p></article>
+  </div>
+  <button id="btn-google-login" class="gbtn lbtn">
+   <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
+   Comenzar recorrido
   </button>
-  <p class="sub">Tus datos son privados: solo tú puedes verlos.</p>
   <p id="error-login" class="sub" style="color:var(--bad)" hidden></p>
  </div>
 </div>
@@ -393,21 +411,43 @@ const delBtn = path => `<button class="x" data-del="${esc(path)}" aria-label="El
 
 let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, notas = [], curId = null, dirty = false, tmr = null, rng = null, needScroll = true, lastRender = 0, calDate = new Date();
 
-/* ---------- Navegación entre secciones ---------- */
+/* ---------- Rutas: /  ·  /panel  ·  /panel/agenda  ·  /panel/calendario … ---------- */
 const VIEWS = ['home', 'dia', 'cal', 'rec', 'gas', 'not'];
+const PATHS = { home: '/panel', dia: '/panel/agenda', cal: '/panel/calendario', rec: '/panel/recordatorios', gas: '/panel/gastos', not: '/panel/notas' };
+const NOMBRES = { dia: 'Tu día', cal: 'Calendario', rec: 'Recordatorios', gas: 'Gastos', not: 'Notas' };
+let curUser = null, wanted = null, hashMode = location.protocol === 'file:'; // en file:// usa #/panel/…
+const getPath = () => hashMode ? (location.hash.slice(1) || '/') : location.pathname;
+const viewFromPath = p => VIEWS.find(k => PATHS[k] === p.replace(/\/+$/, '')) || null;
+
+function go(view, replace) {
+  const path = view ? PATHS[view] : '/';
+  if (getPath() === path) { onRoute(); return; }
+  if (hashMode) { replace ? location.replace('#' + path) : (location.hash = path); return; }
+  try { history[replace ? 'replaceState' : 'pushState'](null, '', path); }
+  catch (e) { hashMode = true; return go(view, replace); }
+  onRoute();
+}
+function onRoute() {
+  const p = getPath(), v = viewFromPath(p);
+  if (!curUser) { if (p !== '/') { wanted = v; go(null, true); } return; }  // sin sesión: siempre "/"
+  if (!v) { const w = wanted || 'home'; wanted = null; go(w, true); return; } // "/" o ruta inexistente → /panel
+  showView(v);
+}
 function showView(v) {
   if (!VIEWS.includes(v)) v = 'home';
   if (v !== 'not') flush();
   VIEWS.forEach(x => { $('v-' + x).hidden = x !== v; });
   document.querySelectorAll('.nv').forEach(b => b.classList.toggle('on', b.dataset.go === v));
+  document.title = (NOMBRES[v] ? NOMBRES[v] + ' · ' : '') + 'Organizador Personal';
   if (v === 'dia') { needScroll = true; render(); }
   scrollTo(0, 0);
 }
 document.addEventListener('click', e => {
   const g = e.target.closest('[data-go]');
-  if (g) location.hash = g.dataset.go === 'home' ? '' : g.dataset.go;
+  if (g) go(g.dataset.go);
 });
-addEventListener('hashchange', () => showView(location.hash.slice(1)));
+addEventListener('popstate', onRoute);
+addEventListener('hashchange', onRoute);
 
 /* ---------- Reloj ---------- */
 function tick() {
@@ -531,7 +571,7 @@ function renderCal() {
 }
 $('cal-grid').addEventListener('click', e => {
   const b = e.target.closest('[data-d]');
-  if (b) { setDate(b.dataset.d); location.hash = 'dia'; }
+  if (b) { setDate(b.dataset.d); go('dia'); }
 });
 $('cal-prev').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() - 1); renderCal(); };
 $('cal-next').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() + 1); renderCal(); };
@@ -656,9 +696,12 @@ const errorLogin = $('error-login');
 onAuthStateChanged(auth, user => {
   if (user) desbloquear(user);
   else {
+    curUser = null;
     $('initial-loader').style.display = 'none';
-    $('login-modal').hidden = false;
     $('app-content').hidden = true;
+    $('login-modal').hidden = false;
+    onRoute();
+    iniciarLanding();
   }
 });
 $('btn-google-login').onclick = () => {
@@ -673,7 +716,32 @@ $('btn-google-login').onclick = () => {
     errorLogin.hidden = false;
   });
 };
-$('btn-logout').onclick = () => signOut(auth).then(() => location.reload());
+$('btn-logout').onclick = () => signOut(auth).then(() => {
+  try { hashMode ? (location.hash = '') : history.replaceState(null, '', '/'); } catch (e) {}
+  location.reload();
+});
+
+/* ---------- Landing con animación de escritura ---------- */
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+let landOn = false, stopTyping = false;
+async function typeEl(el, speed) {
+  const t = el.dataset.text, live = el.querySelector('.live');
+  el.classList.add('typing');
+  for (let i = 1; i <= t.length && !stopTyping; i++) { live.textContent = t.slice(0, i); await sleep(speed); }
+  live.textContent = t; el.classList.remove('typing');
+}
+async function iniciarLanding() {
+  if (landOn) return; landOn = true;
+  const els = [...document.querySelectorAll('.ty')];
+  els.forEach(el => {
+    el.setAttribute('aria-label', el.dataset.text);
+    el.innerHTML = '<span class="ghost" aria-hidden="true"></span><span class="live" aria-hidden="true"></span>';
+    el.firstChild.textContent = el.dataset.text;
+  });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { els.forEach(el => { el.querySelector('.live').textContent = el.dataset.text; }); return; }
+  await typeEl(els[0], 45);
+  await Promise.all(els.slice(1).map(async (el, i) => { await sleep(i * 250); await typeEl(el, 18); }));
+}
 
 /* Migración única de tus datos antiguos (solo para esta cuenta). Puedes borrar este bloque cuando ya la hayas hecho. */
 const CUENTA_ANTIGUA = 'renzosalta07@gmail.com';
@@ -704,6 +772,7 @@ function cargado(nombre) {
 }
 
 async function desbloquear(user) {
+  curUser = user; stopTyping = true;
   base = `users/${user.uid}/`;
   uName = (user.displayName || user.email || '').split(' ')[0];
   $('u-name').textContent = user.displayName || user.email || 'Mi organizador';
@@ -712,7 +781,7 @@ async function desbloquear(user) {
   const l = $('initial-loader'); if (l) { l.style.display = 'flex'; l.style.opacity = '1'; }
   $('login-modal').hidden = true;
   $('app-content').hidden = false;
-  showView(location.hash.slice(1));
+  onRoute();
   await migrarDatosAntiguos(user);
   iniciar();
   setTimeout(hideLoader, 10000); // por si la conexión es muy lenta
