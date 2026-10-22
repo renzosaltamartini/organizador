@@ -6,14 +6,11 @@
   <title>Organizador Personal OS</title>
   
   <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
-  <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#070708" />
+  <meta name="theme-color" content="#09090b" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -23,15 +20,13 @@
         extend: {
           fontFamily: {
             sans: ['Poppins', 'sans-serif'],
-            mono: ['Space Grotesk', 'monospace'],
+            mono: ['Space Grotesk', 'sans-serif'],
           },
           colors: {
-            bgBase: '#070708',
-            bgCard: '#0f0f12',
-            bgHover: '#16161a',
+            bgDark: '#09090b',
+            cardDark: '#121217',
             borderSubtle: '#27272a',
-            borderMuted: '#3f3f46',
-            accent: '#fafafa',
+            inputDark: '#18181b',
           }
         }
       }
@@ -41,140 +36,144 @@
 
   <style>
     body {
-      background-color: #070708;
-      color: #94a3b8;
+      font-family: 'Poppins', sans-serif;
+      background-color: #09090b;
+      color: #f4f4f5;
     }
-    .panel-card {
-      background-color: #0f0f12;
+    
+    .font-mono {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .minimal-card {
+      background: #121217;
       border: 1px solid #27272a;
-      border-radius: 16px;
-      transition: border-color 0.2s ease, transform 0.3s ease, opacity 0.3s ease;
+      transition: border-color 0.2s ease;
     }
-    .panel-card:hover {
+    .minimal-card:hover {
       border-color: #3f3f46;
     }
-    .minimal-input {
-      background-color: #070708;
-      border: 1px solid #27272a;
-      color: #f1f5f9;
-      border-radius: 10px;
-      transition: all 0.2s ease;
-    }
-    .minimal-input:focus {
-      outline: none;
-      border-color: #71717a;
-      box-shadow: 0 0 0 1px #71717a;
-    }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+
+    /* Animaciones de contador y fade */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in {
-      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    /* Scrollbar minimalista y limpio */
+
     ::-webkit-scrollbar { width: 4px; height: 4px; }
-    ::-webkit-scrollbar-track { background: #070708; }
+    ::-webkit-scrollbar-track { background: #09090b; }
     ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
   </style>
 </head>
-<body class="min-h-screen antialiased pb-20 selection:bg-slate-200 selection:text-slate-900 font-sans">
+<body class="min-h-screen pb-24 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-hidden">
 
-  <!-- SPINNER / PANTALLA DE CARGA INICIAL -->
-  <div id="initial-loader" class="fixed inset-0 z-[110] bg-[#070708] flex flex-col items-center justify-center space-y-4 transition-opacity duration-500">
-    <div class="w-7 h-7 rounded-full border-2 border-zinc-700 border-t-slate-200 animate-spin"></div>
-    <p class="text-[11px] font-mono text-zinc-500 tracking-widest uppercase">Cargando Organizador OS...</p>
+  <!-- PANTALLA DE CARGA INICIAL -->
+  <div id="initial-loader" class="fixed inset-0 z-[110] bg-[#09090b] flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="space-y-4 text-center">
+      <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center mx-auto animate-pulse">
+        <i data-lucide="command" class="w-6 h-6 text-indigo-400"></i>
+      </div>
+      <p class="text-xs font-mono tracking-widest uppercase text-zinc-400">Sincronizando Sistema...</p>
+    </div>
   </div>
 
-  <!-- LOGIN MODAL -->
-  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#070708] flex items-center justify-center p-4 hidden">
-    <div class="panel-card p-8 max-w-sm w-full text-center space-y-6 shadow-2xl animate-fade-in">
-      <div class="w-16 h-16 mx-auto rounded-full bg-[#16161a] border border-borderSubtle p-1 flex items-center justify-center overflow-hidden">
-        <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
-             alt="Perfil" class="w-full h-full object-cover rounded-full">
+  <!-- PANTALLA DE BLOQUEO / LOGIN CON GOOGLE -->
+  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#09090b] flex items-center justify-center p-4 hidden">
+    <div class="minimal-card rounded-3xl p-8 max-w-sm w-full text-center space-y-6">
+      <div class="relative w-20 h-20 mx-auto">
+        <div class="relative w-full h-full rounded-full bg-zinc-900 border border-zinc-700 p-1 flex items-center justify-center overflow-hidden">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
+               alt="Perfil" class="w-full h-full object-cover rounded-full">
+        </div>
       </div>
-      <div class="space-y-1">
-        <h1 class="text-base font-medium text-slate-100 tracking-tight">Organizador</h1>
-        <p class="text-xs text-zinc-500">Inicia sesión con tu cuenta autorizada</p>
+      <div>
+        <h2 class="text-xl font-bold font-mono tracking-tight text-white">Organizador</h2>
+        <p class="text-xs text-zinc-400 mt-1">Inicia sesión con tu cuenta autorizada</p>
       </div>
 
       <div class="space-y-3">
-        <button id="btn-google-login" class="w-full bg-slate-100 hover:bg-white text-slate-950 py-2.5 px-4 rounded-xl text-xs font-medium transition flex items-center justify-center gap-2">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24">
+        <button id="btn-google-login" class="w-full bg-white hover:bg-zinc-200 text-zinc-950 py-3 px-4 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-2.5 active:scale-95">
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
             <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/>
             <path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/>
             <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/>
           </svg>
-          Continuar con Google
+          Ingresar con Google
         </button>
-        <p id="error-login" class="text-[11px] text-rose-400 hidden font-mono">Acceso denegado: correo no autorizado.</p>
+        <p id="error-login" class="text-[11px] text-rose-400 hidden font-medium">Acceso denegado: tu correo no está autorizado.</p>
       </div>
     </div>
   </div>
 
-  <!-- MAIN APP -->
+  <!-- CONTENIDO PRINCIPAL -->
   <div id="app-content" class="hidden animate-fade-in">
 
-    <!-- Navbar Minimal -->
-    <header class="w-full bg-[#070708]/80 backdrop-blur-md border-b border-borderSubtle sticky top-0 z-50">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex justify-between items-center">
-        <span class="font-medium text-slate-100 text-xs tracking-wide font-mono uppercase">Organizador</span>
-        <button id="btn-logout" title="Cerrar sesión" class="p-2 hover:bg-[#16161a] text-zinc-400 hover:text-slate-100 rounded-lg transition">
-          <i data-lucide="log-out" class="w-4 h-4"></i>
-        </button>
+    <!-- Header Topbar -->
+    <header class="w-full bg-[#09090b]/90 backdrop-blur-md border-b border-[#27272a] sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center text-xs">
+        <div class="flex items-center gap-3">
+          <span class="font-bold text-white tracking-tight text-sm font-mono flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span> Organizador
+          </span>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <button id="btn-logout" title="Cerrar sesión" class="p-2 bg-[#121217] hover:bg-rose-500/10 hover:text-rose-400 border border-[#27272a] rounded-xl transition text-zinc-400 active:scale-95">
+            <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
       </div>
     </header>
 
-    <!-- Dashboard Container -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-6 space-y-6">
+    <!-- Dashboard Principal -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-8 space-y-6">
 
-      <!-- TOP ROW: Perfil & Métricas -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+      <!-- FILA 1: Header Perfil & Métricas -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
         
-        <!-- Perfil limpio -->
-        <div class="md:col-span-5 panel-card p-5 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full bg-[#16161a] border border-borderSubtle p-0.5 overflow-hidden">
-              <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
-                   alt="Perfil" class="w-full h-full object-cover rounded-full">
+        <!-- Card Perfil -->
+        <div class="md:col-span-5 minimal-card rounded-2xl p-5 flex flex-col justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="relative">
+              <div class="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-700 p-0.5 flex items-center justify-center overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
+                     alt="Perfil" class="w-full h-full object-cover rounded-full">
+              </div>
+              <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-[#09090b] rounded-full"></span>
             </div>
             <div>
-              <h2 class="text-xs font-medium text-slate-100">Renzo</h2>
-              <div class="flex items-center gap-1.5 mt-0.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400/80"></span>
-                <span class="text-[10px] text-zinc-500 font-mono">En línea</span>
-              </div>
+              <h2 class="text-base font-bold text-white tracking-tight">Renzo</h2>
+              <p class="text-[11px] text-zinc-400 font-mono">Conectado</p>
             </div>
           </div>
-          <span class="text-[10px] font-mono text-zinc-500 bg-[#070708] px-2.5 py-1 rounded-md border border-borderSubtle">v2.1</span>
+          <div class="mt-5 pt-3 border-t border-[#27272a] flex justify-between items-center text-[11px] text-zinc-400 font-mono">
+            <span>Estado</span>
+            <span class="text-emerald-400 font-semibold flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado</span>
+          </div>
         </div>
 
-        <!-- Métricas (con Count-Up) -->
-        <div class="md:col-span-7 grid grid-cols-2 gap-4">
-          <div class="panel-card p-4 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-zinc-500 text-xs">
-              <span class="font-light">Gastos Totales</span>
-              <i data-lucide="wallet" class="w-3.5 h-3.5 text-zinc-600"></i>
+        <!-- Card Métricas -->
+        <div class="md:col-span-7 minimal-card rounded-2xl p-5 grid grid-cols-2 gap-4">
+          <div class="bg-[#18181b] border border-[#27272a] rounded-xl p-4 flex flex-col justify-between">
+            <div class="flex items-center gap-2 text-emerald-400">
+              <span class="p-2 bg-emerald-500/10 rounded-lg"><i data-lucide="wallet" class="w-3.5 h-3.5"></i></span>
+              <span class="text-[11px] font-medium text-zinc-400 truncate">Gastos Totales</span>
             </div>
-            <span id="widget-total-gastos" class="text-base font-normal font-mono text-slate-100 tracking-tight mt-2 block">
+            <span id="widget-total-gastos" class="text-2xl font-bold font-mono text-emerald-400 tracking-tight mt-2 block">
               $0
             </span>
           </div>
 
-          <div class="panel-card p-4 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-zinc-500 text-xs">
-              <span class="font-light">Pendientes</span>
-              <i data-lucide="check-square" class="w-3.5 h-3.5 text-zinc-600"></i>
+          <div class="bg-[#18181b] border border-[#27272a] rounded-xl p-4 flex flex-col justify-between">
+            <div class="flex items-center gap-2 text-amber-400">
+              <span class="p-2 bg-amber-500/10 rounded-lg"><i data-lucide="check-square" class="w-3.5 h-3.5"></i></span>
+              <span class="text-[11px] font-medium text-zinc-400 truncate">Pendientes</span>
             </div>
-            <span id="widget-pendientes" class="text-base font-normal font-mono text-slate-100 tracking-tight mt-2 block">
+            <span id="widget-pendientes" class="text-2xl font-bold font-mono text-amber-400 tracking-tight mt-2 block">
               0
             </span>
           </div>
@@ -182,184 +181,195 @@
 
       </div>
 
-      <!-- CRONOGRAMA EN VIVO & AGENDA FUTURA/PASADA (FLEXIBLE) -->
-      <section class="panel-card p-5 space-y-4">
+      <!-- PANEL: TIEMPO REAL & AGENDA FLEXIBLE (SEMANAL/FUTURA) ⏱️ -->
+      <section class="minimal-card rounded-2xl p-5 sm:p-6 space-y-5">
         
-        <!-- Live Clock Banner -->
-        <div class="bg-[#070708]/60 border border-borderSubtle rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <!-- Reloj & Selector de Fecha de Agenda -->
+        <div class="bg-[#18181b] border border-[#27272a] rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-[#16161a] rounded-lg text-zinc-400 border border-borderSubtle">
-              <i data-lucide="clock" class="w-4 h-4"></i>
+            <div class="p-2.5 bg-indigo-500/10 border border-indigo-500/20 rounded-xl text-indigo-400 shrink-0">
+              <i data-lucide="clock" class="w-5 h-5"></i>
             </div>
             <div>
-              <div class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-[9px] font-mono uppercase tracking-widest text-zinc-500">Tiempo Real</span>
-              </div>
-              <div id="live-clock" class="text-xl font-normal font-mono text-slate-100 tracking-tight">00:00:00</div>
+              <div id="live-clock" class="text-2xl font-black font-mono text-white tracking-tight">00:00:00</div>
+              <p id="live-date" class="text-[11px] text-zinc-400 capitalize"></p>
             </div>
           </div>
-          <p id="live-date" class="text-xs text-zinc-400 capitalize font-light"></p>
+
+          <!-- Selector de Fecha de Actividad -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 w-full md:w-auto">
+            <div class="flex items-center gap-2 bg-[#121217] border border-[#27272a] px-3 py-2 rounded-xl w-full sm:w-auto">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400 shrink-0"></i>
+              <span class="text-[11px] text-zinc-400 font-mono">Fecha Agenda:</span>
+              <input type="date" id="schedule-date-picker" class="bg-transparent text-xs font-mono text-white focus:outline-none cursor-pointer">
+            </div>
+          </div>
         </div>
 
-        <!-- Selector de Días Rápido o Fecha Específica Flexible (Futuro / Pasado) con overflow responsivo controlado -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#070708]/40 p-3 rounded-xl border border-borderSubtle">
-          <div class="w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-            <div class="flex items-center gap-1.5 min-w-max" id="schedule-day-tabs">
-              <!-- Dinámico por pestañas de semana -->
-            </div>
-          </div>
-          
-          <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-between sm:justify-start">
-            <span class="text-[10px] font-mono text-zinc-500">Fecha específica:</span>
-            <input type="date" id="sch-selector-fecha" class="minimal-input text-xs font-mono px-3 py-1 text-slate-200">
-          </div>
+        <!-- Selector de Días Rápidos -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none" id="schedule-day-tabs">
+          <!-- Dinámico -->
         </div>
 
         <!-- Formulario Actividad -->
-        <form id="form-schedule-item" class="grid grid-cols-1 sm:grid-cols-12 gap-2">
-          <input type="text" id="sch-titulo" placeholder="Actividad / Título" required 
-                 class="sm:col-span-4 minimal-input text-xs px-3.5 py-2.5 placeholder-zinc-600 font-light">
+        <form id="form-schedule-item" class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 bg-[#18181b] border border-[#27272a] p-3.5 rounded-xl">
+          <input type="text" id="sch-titulo" placeholder="Actividad (ej. Algoritmos)" required 
+                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-indigo-500 placeholder-zinc-500">
           
-          <div class="sm:col-span-3 flex items-center gap-1">
+          <div class="sm:col-span-3 flex items-center gap-1.5">
             <input type="time" id="sch-hora-inicio" required 
-                   class="minimal-input text-xs font-mono px-2 py-2.5 w-full text-center">
-            <span class="text-zinc-600 text-xs">-</span>
+                   class="bg-[#121217] border border-[#27272a] text-xs font-mono text-white rounded-lg px-2 py-2.5 w-full focus:outline-none focus:border-indigo-500">
+            <span class="text-zinc-500 text-xs">a</span>
             <input type="time" id="sch-hora-fin" required 
-                   class="minimal-input text-xs font-mono px-2 py-2.5 w-full text-center">
+                   class="bg-[#121217] border border-[#27272a] text-xs font-mono text-white rounded-lg px-2 py-2.5 w-full focus:outline-none focus:border-indigo-500">
           </div>
 
-          <select id="sch-categoria" class="sm:col-span-2 minimal-input text-xs px-3 py-2.5 font-light">
-            <option value="zinc">Estudio / General</option>
-            <option value="blue">Trabajo / Proyectos</option>
-            <option value="emerald">Deporte / Salud</option>
-            <option value="amber">Ocio / Personal</option>
-            <option value="rose">Urgente</option>
+          <select id="sch-categoria" class="sm:col-span-2 bg-[#121217] border border-[#27272a] text-xs text-zinc-300 rounded-lg px-3 py-2.5 focus:outline-none focus:border-indigo-500">
+            <option value="indigo">Estudio (Índigo)</option>
+            <option value="violet">Trabajo (Violeta)</option>
+            <option value="emerald">Deporte (Esmeralda)</option>
+            <option value="amber">Personal (Ámbar)</option>
+            <option value="rose">Urgente (Rosa)</option>
           </select>
 
           <input type="text" id="sch-notas" placeholder="Notas (opcional)" 
-                 class="sm:col-span-2 minimal-input text-xs px-3.5 py-2.5 placeholder-zinc-600 font-light">
+                 class="sm:col-span-2 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-indigo-500 placeholder-zinc-500">
 
-          <button type="submit" class="sm:col-span-1 bg-slate-100 hover:bg-white text-slate-950 rounded-xl text-xs font-medium transition flex items-center justify-center py-2.5">
+          <button type="submit" class="sm:col-span-1 bg-indigo-600 hover:bg-indigo-500 text-white p-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center active:scale-95">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
 
-        <!-- Cronograma Vertical de Minutos Exactos con Soporte Columna Lado a Lado -->
-        <div class="bg-[#070708] border border-borderSubtle rounded-xl relative overflow-hidden">
-          <div class="px-4 py-2.5 bg-[#0f0f12]/50 border-b border-borderSubtle flex justify-between items-center text-xs font-mono text-zinc-400">
-            <span id="label-agenda-activa" class="font-normal text-slate-200">Agenda seleccionada</span>
-            <span id="badge-fecha-activa" class="text-[11px] text-zinc-500"></span>
-          </div>
-          <div id="calendar-grid-timeline" class="relative w-full h-[620px] overflow-y-auto pr-2">
+        <!-- Cronograma Estilo Google Calendar con Columnas para Solapamientos -->
+        <div class="bg-[#121217] border border-[#27272a] rounded-xl p-3.5 relative overflow-hidden">
+          <div id="calendar-grid-timeline" class="relative w-full h-[680px] overflow-y-auto pr-2">
             <!-- Dinámico -->
           </div>
         </div>
       </section>
 
-      <!-- GRID INFERIOR: Calendario, Parciales, Recordatorios, Gastos -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        
-        <!-- CALENDARIO MENSUAL -->
-        <section class="panel-card p-5 space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <i data-lucide="calendar" class="w-4 h-4 text-zinc-500"></i>
-              <h3 class="font-normal text-xs text-slate-200 tracking-wide">Calendario Mensual</h3>
-            </div>
-            <div class="flex items-center gap-1 bg-[#070708] border border-borderSubtle px-2 py-1 rounded-lg">
-              <button id="cal-prev" class="p-1 hover:bg-[#16161a] rounded text-zinc-400 transition">
-                <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
-              </button>
-              <span id="cal-mes-anio" class="text-xs font-normal text-slate-200 w-28 text-center font-mono capitalize"></span>
-              <button id="cal-next" class="p-1 hover:bg-[#16161a] rounded text-zinc-400 transition">
-                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-              </button>
+      <!-- CALENDARIO MENSUAL 📅 -->
+      <section class="minimal-card rounded-2xl p-5 sm:p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="p-2.5 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
+              <i data-lucide="calendar-days" class="w-4 h-4"></i>
+            </span>
+            <div>
+              <h3 class="font-bold text-sm text-white tracking-tight">Calendario Mensual</h3>
+              <p class="text-[11px] text-zinc-400">Vista general de parciales y eventos</p>
             </div>
           </div>
-
-          <div class="grid grid-cols-7 gap-1 text-center font-mono text-[10px] text-zinc-600 py-1">
-            <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
-          </div>
-
-          <div id="cal-grid" class="grid grid-cols-7 gap-1 min-h-[250px]">
-            <!-- Dinámico -->
-          </div>
-        </section>
-
-        <!-- FECHAS DE PARCIALES -->
-        <section class="panel-card p-5 space-y-4">
-          <div class="flex items-center gap-2">
-            <i data-lucide="graduation-cap" class="w-4 h-4 text-zinc-500"></i>
-            <h3 class="font-normal text-xs text-slate-200 tracking-wide">Exámenes y Parciales</h3>
-          </div>
-
-          <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-2">
-            <input type="text" id="parcial-materia" placeholder="Materia" required 
-                   class="sm:col-span-5 minimal-input text-xs px-3 py-2.5 placeholder-zinc-600 font-light">
-            <input type="date" id="parcial-fecha" required 
-                   class="sm:col-span-4 minimal-input text-xs font-mono px-3 py-2.5 text-zinc-300">
-            <button type="submit" class="sm:col-span-3 bg-slate-100 hover:bg-white text-slate-950 rounded-xl text-xs font-medium transition flex items-center justify-center py-2.5">
-              Agregar
+          
+          <div class="flex items-center gap-2 bg-[#18181b] border border-[#27272a] px-3 py-1.5 rounded-xl">
+            <button id="cal-prev" class="p-1 hover:bg-white/10 rounded-lg text-zinc-300 transition active:scale-90">
+              <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
             </button>
-          </form>
-
-          <div id="grid-parciales" class="space-y-2 max-h-[230px] overflow-y-auto pr-1">
-            <!-- Dinámico -->
+            <span id="cal-mes-anio" class="text-xs font-bold text-white w-32 text-center font-mono capitalize"></span>
+            <button id="cal-next" class="p-1 hover:bg-white/10 rounded-lg text-zinc-300 transition active:scale-90">
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </button>
           </div>
-        </section>
+        </div>
 
-      </div>
+        <div class="grid grid-cols-7 gap-1 text-center font-semibold font-mono text-[11px] text-zinc-400 py-2 border-b border-[#27272a]">
+          <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+        </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div id="cal-grid" class="grid grid-cols-7 gap-1.5 min-h-[280px]">
+          <!-- Dinámico -->
+        </div>
+      </section>
+
+      <!-- FECHAS DE PARCIALES -->
+      <section class="minimal-card rounded-2xl p-5 sm:p-6 space-y-4">
+        <div class="flex items-center gap-2.5">
+          <span class="p-2.5 bg-violet-500/10 text-violet-400 rounded-xl border border-violet-500/20">
+            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+          </span>
+          <div>
+            <h3 class="font-bold text-sm text-white tracking-tight">Fechas de Parciales</h3>
+            <p class="text-[11px] text-zinc-400">Exámenes y entregas universitarias</p>
+          </div>
+        </div>
+
+        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 bg-[#18181b] border border-[#27272a] p-3.5 rounded-xl">
+          <input type="text" id="parcial-materia" placeholder="Materia (ej. Álgebra)" required 
+                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500">
+          <input type="date" id="parcial-fecha" required 
+                 class="sm:col-span-3 bg-[#121217] border border-[#27272a] text-xs font-mono text-zinc-300 px-3 py-2.5 rounded-lg focus:outline-none focus:border-violet-500">
+          <input type="text" id="parcial-detalle" placeholder="Detalle / Temas (opcional)" 
+                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500">
+          <button type="submit" class="sm:col-span-1 bg-violet-600 hover:bg-violet-500 text-white p-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center active:scale-95">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <div id="grid-parciales" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <!-- Dinámico -->
+        </div>
+      </section>
+
+      <!-- Recordatorios & Gastos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         
         <!-- Recordatorios -->
-        <section class="panel-card p-5 space-y-4">
-          <div class="flex items-center gap-2">
-            <i data-lucide="check-square" class="w-4 h-4 text-zinc-500"></i>
-            <h3 class="font-normal text-xs text-slate-200 tracking-wide">Recordatorios</h3>
-          </div>
-
-          <form id="form-recordatorio" class="space-y-2">
-            <input type="text" id="rec-titulo" placeholder="Título (opcional)" 
-                   class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600 font-light">
-            <div class="flex gap-2">
-              <textarea id="rec-detalle" placeholder="Escribe un recordatorio..." required rows="1"
-                        class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600 resize-none font-light"></textarea>
-              <button type="submit" class="bg-slate-100 hover:bg-white text-slate-950 px-4 rounded-xl text-xs font-medium transition shrink-0">
-                +
-              </button>
+        <section class="minimal-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2.5 mb-4">
+              <span class="p-2 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
+                <i data-lucide="check-square" class="w-4 h-4"></i>
+              </span>
+              <h3 class="font-bold text-sm text-white tracking-tight">Recordatorios</h3>
             </div>
-          </form>
 
-          <ul id="lista-recordatorios" class="space-y-2 max-h-[190px] overflow-y-auto pr-1">
-            <!-- Dinámico -->
-          </ul>
+            <form id="form-recordatorio" class="space-y-2 mb-4">
+              <input type="text" id="rec-titulo" placeholder="Título (ej. Álgebra) - Opcional" 
+                     class="bg-[#18181b] border border-[#27272a] text-xs rounded-lg px-3.5 py-2.5 w-full focus:outline-none focus:border-amber-500 text-white placeholder-zinc-500">
+              <div class="flex gap-2 items-start">
+                <textarea id="rec-detalle" placeholder="Recordatorio / Detalle..." required rows="2"
+                          class="bg-[#18181b] border border-[#27272a] text-xs rounded-lg px-3.5 py-2.5 w-full focus:outline-none focus:border-amber-500 text-white placeholder-zinc-500 resize-none leading-relaxed"></textarea>
+                <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-zinc-950 px-3.5 py-3 rounded-lg text-xs font-bold transition flex items-center justify-center shrink-0 active:scale-95 h-full">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </form>
+
+            <ul id="lista-recordatorios" class="space-y-2 max-h-[240px] overflow-y-auto pr-1">
+              <!-- Dinámico -->
+            </ul>
+          </div>
         </section>
 
         <!-- Control de Gastos -->
-        <section class="panel-card p-5 space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <i data-lucide="credit-card" class="w-4 h-4 text-zinc-500"></i>
-              <h3 class="font-normal text-xs text-slate-200 tracking-wide">Gastos</h3>
+        <section class="minimal-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2.5">
+                <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
+                  <i data-lucide="credit-card" class="w-4 h-4"></i>
+                </span>
+                <h3 class="font-bold text-sm text-white tracking-tight">Control de Gastos</h3>
+              </div>
+              <div class="bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-lg text-[11px] font-semibold font-mono text-emerald-400">
+                Total: <span id="section-total-gastos">$0</span>
+              </div>
             </div>
-            <span class="text-xs font-mono text-zinc-400" id="section-total-gastos">$0</span>
+
+            <form id="form-gasto" class="flex gap-2 mb-4">
+              <input type="text" id="gasto-concepto" placeholder="Concepto" required 
+                     class="bg-[#18181b] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 w-full focus:outline-none focus:border-emerald-500 text-white placeholder-zinc-500">
+              <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
+                     class="bg-[#18181b] border border-[#27272a] text-xs font-mono rounded-lg px-3 py-2.5 w-24 focus:outline-none focus:border-emerald-500 text-white placeholder-zinc-500">
+              <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-3.5 py-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center shrink-0 active:scale-95">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </button>
+            </form>
+
+            <ul id="lista-gastos" class="space-y-2 max-h-[240px] overflow-y-auto pr-1">
+              <!-- Dinámico -->
+            </ul>
           </div>
-
-          <form id="form-gasto" class="flex gap-2">
-            <input type="text" id="gasto-concepto" placeholder="Concepto" required 
-                   class="minimal-input text-xs px-3 py-2.5 w-full placeholder-zinc-600 font-light">
-            <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
-                   class="minimal-input text-xs font-mono px-3 py-2.5 w-24 placeholder-zinc-600">
-            <button type="submit" class="bg-slate-100 hover:bg-white text-slate-950 px-4 rounded-xl text-xs font-medium transition shrink-0">
-              +
-            </button>
-          </form>
-
-          <ul id="lista-gastos" class="space-y-2 max-h-[190px] overflow-y-auto pr-1">
-            <!-- Dinámico -->
-          </ul>
         </section>
 
       </div>
@@ -367,7 +377,6 @@
     </main>
   </div>
 
-  <!-- SCRIPT DE LA APLICACIÓN -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -403,11 +412,49 @@
       if (!fechaIso) return '';
       const partes = fechaIso.split('-');
       if (partes.length !== 3) return fechaIso;
+      
       const anio = parseInt(partes[0], 10);
       const mes = parseInt(partes[1], 10) - 1;
       const dia = parseInt(partes[2], 10);
-      const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-      return `${dia} ${meses[mes]}`;
+      
+      const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+      return `${dia} de ${meses[mes]}`;
+    }
+
+    function obtenerFechaIsoLocal(d = new Date()) {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    let fechaSeleccionadaTuDia = obtenerFechaIsoLocal();
+    const scheduleDatePicker = document.getElementById('schedule-date-picker');
+    if (scheduleDatePicker) scheduleDatePicker.value = fechaSeleccionadaTuDia;
+
+    // ANIMACIÓN DE CONTEO PROGRESIVO (COUNT-UP)
+    function animarConteo(elementoId, valorFinal, esMoneda = false) {
+      const el = document.getElementById(elementoId);
+      if (!el) return;
+      let duracion = 600;
+      let pasos = 20;
+      let incremento = valorFinal / pasos;
+      let actual = 0;
+      let pasoActual = 0;
+
+      let timer = setInterval(() => {
+        pasoActual++;
+        actual += incremento;
+        if (pasoActual >= pasos) {
+          actual = valorFinal;
+          clearInterval(timer);
+        }
+        if (esMoneda) {
+          el.innerText = `$${Math.round(actual).toLocaleString()}`;
+        } else {
+          el.innerText = Math.round(actual);
+        }
+      }, duracion / pasos);
     }
 
     // RELOJ EN VIVO
@@ -422,120 +469,61 @@
       
       if (liveClock) liveClock.innerText = `${h}:${m}:${s}`;
       if (liveDate) {
-        const opciones = { weekday: 'short', day: 'numeric', month: 'short' };
+        const opciones = { weekday: 'long', day: 'numeric', month: 'long' };
         liveDate.innerText = ahora.toLocaleDateString('es-ES', opciones);
       }
     }
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // --- ANIMACIÓN COUNT-UP PARA NÚMEROS Y GASTOS ---
-    function animarContador(elementId, targetValue, isCurrency = false) {
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      const duration = 800; // ms
-      const startTime = performance.now();
-      const startVal = 0;
-
-      function update(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const easeProgress = 1 - Math.pow(1 - progress, 3);
-        const currentVal = Math.floor(startVal + (targetValue - startVal) * easeProgress);
-
-        if (isCurrency) {
-          el.innerText = `$${currentVal.toLocaleString()}`;
-        } else {
-          el.innerText = currentVal.toLocaleString();
-        }
-
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        } else {
-          if (isCurrency) {
-            el.innerText = `$${targetValue.toLocaleString()}`;
-          } else {
-            el.innerText = targetValue.toLocaleString();
-          }
-        }
-      }
-      requestAnimationFrame(update);
-    }
-
-    // --- MANEJO DE FECHA / AGENDA FLEXIBLE (FUTURO Y PASADO) ---
-    function obtenerFechaIsoHoy() {
-      const d = new Date();
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    }
-
-    let fechaSeleccionadaAgenda = obtenerFechaIsoHoy();
-
-    function obtenerTuDiaItems() {
-      return JSON.parse(localStorage.getItem('tuDiaScheduleItems') || '{}');
-    }
-
-    function guardarTuDiaItems(data) {
-      localStorage.setItem('tuDiaScheduleItems', JSON.stringify(data));
-      renderizarScheduleTuDia();
-    }
+    // --- MANEJO DE AGENDA SINCRONIZADA CON FIREBASE ---
+    let eventosAgendaGlobal = {};
 
     const scheduleDayTabs = document.getElementById('schedule-day-tabs');
-    const schSelectorFecha = document.getElementById('sch-selector-fecha');
     const calendarGridTimeline = document.getElementById('calendar-grid-timeline');
-    const labelAgendaActiva = document.getElementById('label-agenda-activa');
-    const badgeFechaActiva = document.getElementById('badge-fecha-activa');
 
-    if (schSelectorFecha) {
-      schSelectorFecha.value = fechaSeleccionadaAgenda;
-      schSelectorFecha.addEventListener('change', (e) => {
-        if (e.target.value) {
-          fechaSeleccionadaAgenda = e.target.value;
-          renderizarScheduleTuDia();
-        }
-      });
-    }
-
-    // Generar solapas rápidas para los próximos 7 días a partir de hoy
     function renderizarTabsDia() {
       scheduleDayTabs.innerHTML = '';
-      const hoy = new Date();
+      const hoyIso = obtenerFechaIsoLocal();
 
       for (let i = 0; i < 7; i++) {
-        const d = new Date(hoy);
-        d.setDate(hoy.getDate() + i);
-        const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, '0');
-        const day = String(d.getDate()).padStart(2, '0');
-        const fechaIso = `${year}-${month}-${day}`;
-
-        const nombreDia = d.toLocaleDateString('es-ES', { weekday: 'short' });
-        const numeroDia = d.getDate();
-        const esSeleccionado = (fechaIso === fechaSeleccionadaAgenda);
-        const esHoy = (i === 0);
+        const d = new Date();
+        d.setDate(d.getDate() + i);
+        const iso = obtenerFechaIsoLocal(d);
+        const nombreDia = d.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'numeric' });
+        const esHoy = (iso === hoyIso);
+        const esSeleccionado = (iso === fechaSeleccionadaTuDia);
 
         let activeClasses = esSeleccionado 
-          ? 'bg-slate-100 text-slate-950 font-medium border-slate-100' 
-          : 'bg-[#070708] text-zinc-400 hover:text-slate-100 border border-borderSubtle';
+          ? 'bg-indigo-600 text-white font-semibold border-indigo-500 shadow-lg shadow-indigo-500/20' 
+          : 'bg-[#18181b] text-zinc-400 border-[#27272a] hover:text-white';
 
         scheduleDayTabs.innerHTML += `
-          <button type="button" onclick="window.cambiarFechaAgenda('${fechaIso}')" 
-                  class="px-3 py-1.5 rounded-lg text-xs font-mono transition flex items-center gap-1.5 shrink-0 ${activeClasses}">
-            <span class="capitalize">${nombreDia} ${numeroDia}</span>
-            ${esHoy && !esSeleccionado ? `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>` : ''}
+          <button type="button" onclick="window.cambiarFechaTuDia('${iso}')" 
+                  class="px-3.5 py-2 rounded-xl border text-xs font-mono transition flex items-center gap-2 shrink-0 ${activeClasses}">
+            <span>${nombreDia}</span>
+            ${esHoy ? `<span class="w-1.5 h-1.5 rounded-full ${esSeleccionado ? 'bg-emerald-300' : 'bg-emerald-400'}"></span>` : ''}
           </button>
         `;
       }
     }
 
-    window.cambiarFechaAgenda = function(fechaIso) {
-      fechaSeleccionadaAgenda = fechaIso;
-      if (schSelectorFecha) schSelectorFecha.value = fechaIso;
+    window.cambiarFechaTuDia = function(iso) {
+      fechaSeleccionadaTuDia = iso;
+      if (scheduleDatePicker) scheduleDatePicker.value = iso;
       renderizarTabsDia();
       renderizarScheduleTuDia();
     };
+
+    if (scheduleDatePicker) {
+      scheduleDatePicker.addEventListener('change', (e) => {
+        if (e.target.value) {
+          fechaSeleccionadaTuDia = e.target.value;
+          renderizarTabsDia();
+          renderizarScheduleTuDia();
+        }
+      });
+    }
 
     function convertirHoraAMinutos(horaStr) {
       if (!horaStr) return 0;
@@ -545,45 +533,36 @@
 
     function renderizarScheduleTuDia() {
       renderizarTabsDia();
-      const allItems = obtenerTuDiaItems();
-      let diaItems = allItems[fechaSeleccionadaAgenda] || [];
+      const diaItems = eventosAgendaGlobal[fechaSeleccionadaTuDia] || [];
 
-      // Borrado automático de actividades expiradas SOLAMENTE si es el día de hoy exacto
-      const hoyIso = obtenerFechaIsoHoy();
-      const esHoySeleccionado = (fechaSeleccionadaAgenda === hoyIso);
+      // FILTRAR AUTOMÁTICAMENTE EVENTOS EXPIRADOS SI ES HOY
       const ahora = new Date();
+      const hoyIso = obtenerFechaIsoLocal(ahora);
+      const esHoySeleccionado = (fechaSeleccionadaTuDia === hoyIso);
       const minutosActuales = ahora.getHours() * 60 + ahora.getMinutes();
 
+      let itemsParaMostrar = [...diaItems];
       if (esHoySeleccionado) {
-        diaItems = diaItems.filter(item => convertirHoraAMinutos(item.horaFin) > minutosActuales);
-        allItems[fechaSeleccionadaAgenda] = diaItems;
-        localStorage.setItem('tuDiaScheduleItems', JSON.stringify(allItems));
-      }
-
-      if (labelAgendaActiva) {
-        if (esHoySeleccionado) {
-          labelAgendaActiva.innerText = "Agenda de Hoy";
-        } else {
-          labelAgendaActiva.innerText = "Agenda Programada";
-        }
-      }
-      if (badgeFechaActiva) {
-        badgeFechaActiva.innerText = formatearFechaTexto(fechaSeleccionadaAgenda) || fechaSeleccionadaAgenda;
+        itemsParaMostrar = itemsParaMostrar.filter(item => {
+          const finMin = convertirHoraAMinutos(item.horaFin);
+          return finMin > minutosActuales;
+        });
       }
 
       calendarGridTimeline.innerHTML = '';
 
       const coloresCategoria = {
-        zinc: { bg: 'bg-[#16161a]/90', border: 'border-zinc-700/60', text: 'text-zinc-200' },
-        blue: { bg: 'bg-sky-950/80', border: 'border-sky-800/55', text: 'text-sky-200' },
-        emerald: { bg: 'bg-emerald-950/80', border: 'border-emerald-800/55', text: 'text-emerald-200' },
-        amber: { bg: 'bg-amber-950/80', border: 'border-amber-800/55', text: 'text-amber-200' },
-        rose: { bg: 'bg-rose-950/80', border: 'border-rose-800/55', text: 'text-rose-200' }
+        indigo: { bg: 'bg-indigo-500/15', border: 'border-indigo-500/40', text: 'text-indigo-200', badge: 'bg-indigo-500/25 text-indigo-200' },
+        violet: { bg: 'bg-violet-500/15', border: 'border-violet-500/40', text: 'text-violet-200', badge: 'bg-violet-500/25 text-violet-200' },
+        emerald: { bg: 'bg-emerald-500/15', border: 'border-emerald-500/40', text: 'text-emerald-200', badge: 'bg-emerald-500/25 text-emerald-200' },
+        amber: { bg: 'bg-amber-500/15', border: 'border-amber-500/40', text: 'text-amber-200', badge: 'bg-amber-500/25 text-amber-200' },
+        rose: { bg: 'bg-rose-500/15', border: 'border-rose-500/40', text: 'text-rose-200', badge: 'bg-rose-500/25 text-rose-200' }
       };
 
       const hourHeight = 60;
       const startHour = 7;
       const totalHours = 17;
+
       calendarGridTimeline.style.height = `${totalHours * hourHeight}px`;
 
       let backgroundLinesHtml = '';
@@ -591,8 +570,8 @@
         const topPos = (h - startHour) * hourHeight;
         const horaLabel = String(h).padStart(2, '0') + ':00';
         backgroundLinesHtml += `
-          <div class="absolute w-full flex items-start border-t border-zinc-800/40" style="top: ${topPos}px; height: ${hourHeight}px;">
-            <span class="text-[10px] font-mono text-zinc-600 w-12 pt-1 select-none text-right pr-3">${horaLabel}</span>
+          <div class="absolute w-full flex items-start border-t border-[#27272a]" style="top: ${topPos}px; height: ${hourHeight}px;">
+            <span class="text-[10px] font-mono text-zinc-500 w-14 pt-1 select-none">${horaLabel}</span>
           </div>
         `;
       }
@@ -602,21 +581,20 @@
         const liveTop = (minutosActuales - (startHour * 60)) * (hourHeight / 60);
         if (liveTop >= 0 && liveTop <= totalHours * hourHeight) {
           liveLineHtml = `
-            <div class="absolute left-12 right-0 z-20 flex items-center pointer-events-none" style="top: ${liveTop}px;">
-              <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
-              <div class="flex-1 h-[1px] bg-slate-200/50"></div>
+            <div class="absolute left-14 right-0 z-20 flex items-center pointer-events-none" style="top: ${liveTop}px;">
+              <div class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
+              <div class="flex-1 h-[2px] bg-emerald-400 shadow-[0_0_8px_#34d399]"></div>
             </div>
           `;
         }
       }
 
-      const parsedItems = diaItems.map((item, idx) => {
+      const parsedItems = itemsParaMostrar.map((item) => {
         const inicioMins = convertirHoraAMinutos(item.horaInicio);
         const finMins = Math.max(convertirHoraAMinutos(item.horaFin), inicioMins + 15);
-        return { ...item, originalIndex: idx, inicioMins, finMins };
+        return { ...item, inicioMins, finMins };
       });
 
-      // Algoritmo de columnas separadas lado a lado para solapamientos exactos
       parsedItems.forEach((item, i) => {
         item.colIndex = 0;
         item.totalCols = 1;
@@ -625,9 +603,9 @@
         });
 
         if (overlapping.length > 0) {
-          const sameGroup = [item, ...overlapping].sort((a, b) => a.originalIndex - b.originalIndex);
-          item.totalCols = sameGroup.length;
-          item.colIndex = sameGroup.findIndex(x => x.originalIndex === item.originalIndex);
+          item.totalCols = overlapping.length + 1;
+          const sameGroup = [item, ...overlapping].sort((a, b) => a.id.localeCompare(b.id));
+          item.colIndex = sameGroup.findIndex(x => x.id === item.id);
         }
       });
 
@@ -635,25 +613,25 @@
       parsedItems.forEach((item) => {
         const topPx = (item.inicioMins - (startHour * 60)) * (hourHeight / 60);
         const durationMins = item.finMins - item.inicioMins;
-        const heightPx = Math.max(durationMins * (hourHeight / 60), 32);
+        const heightPx = Math.max(durationMins * (hourHeight / 60), 30);
 
-        const styleCol = coloresCategoria[item.categoria] || coloresCategoria.zinc;
+        const styleCol = coloresCategoria[item.categoria] || coloresCategoria.indigo;
         const widthPercent = 100 / item.totalCols;
         const leftPercent = item.colIndex * widthPercent;
 
         eventsHtml += `
-          <div class="absolute rounded-lg p-2 border ${styleCol.bg} ${styleCol.border} backdrop-blur-sm overflow-hidden flex flex-col justify-between shadow-md transition hover:z-30"
-               style="top: ${topPx}px; height: ${heightPx}px; left: calc(3rem + (${leftPercent}%)); width: calc((100% - 3rem) / ${item.totalCols} - 4px);">
-            <div class="flex justify-between items-start gap-1">
-              <div class="space-y-0.5 overflow-hidden">
-                <div class="flex items-center gap-1 flex-wrap">
-                  <span class="font-normal ${styleCol.text} text-[11px] truncate leading-tight">${item.titulo}</span>
-                  <span class="text-[9px] font-mono text-zinc-400 shrink-0">${item.horaInicio}-${item.horaFin}</span>
+          <div class="absolute rounded-xl p-2.5 border ${styleCol.bg} ${styleCol.border} backdrop-blur-md overflow-hidden flex flex-col justify-between shadow-md transition hover:z-30"
+               style="top: ${topPx}px; height: ${heightPx}px; left: calc(3.5rem + ${leftPercent}%); width: calc(100% - 3.5rem - ${leftPercent}% - ${item.totalCols > 1 ? '4px' : '0px'});">
+            <div class="flex justify-between items-start">
+              <div class="space-y-0.5 overflow-hidden pr-2">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <span class="font-bold ${styleCol.text} text-xs truncate">${item.titulo}</span>
+                  <span class="text-[9px] font-mono ${styleCol.badge} px-1.5 py-0.2 rounded font-semibold">${item.horaInicio} - ${item.horaFin}</span>
                 </div>
-                ${item.notas && heightPx > 45 ? `<p class="text-[10px] text-zinc-400 truncate font-light">${item.notas}</p>` : ''}
+                ${item.notas && heightPx > 45 ? `<p class="text-[10px] text-zinc-300 truncate">${item.notas}</p>` : ''}
               </div>
-              <button onclick="window.eliminarItemTuDia('${fechaSeleccionadaAgenda}', ${item.originalIndex})" class="text-zinc-400 hover:text-slate-100 p-1 bg-black/40 rounded transition shrink-0">
-                <i data-lucide="x" class="w-3 h-3"></i>
+              <button onclick="window.eliminarItemAgenda('${item.id}')" class="text-zinc-400 hover:text-rose-400 p-0.5 transition shrink-0">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
               </button>
             </div>
           </div>
@@ -664,43 +642,13 @@
       lucide.createIcons();
     }
 
-    window.eliminarItemTuDia = function(fechaKey, index) {
-      let allItems = obtenerTuDiaItems();
-      if (allItems[fechaKey]) {
-        allItems[fechaKey].splice(index, 1);
-        guardarTuDiaItems(allItems);
-      }
-    };
-
-    document.getElementById('form-schedule-item').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const titulo = document.getElementById('sch-titulo').value.trim();
-      const horaInicio = document.getElementById('sch-hora-inicio').value;
-      const horaFin = document.getElementById('sch-hora-fin').value;
-      const categoria = document.getElementById('sch-categoria').value;
-      const notas = document.getElementById('sch-notas').value.trim();
-
-      let allItems = obtenerTuDiaItems();
-      if (!allItems[fechaSeleccionadaAgenda]) allItems[fechaSeleccionadaAgenda] = [];
-      allItems[fechaSeleccionadaAgenda].push({ titulo, horaInicio, horaFin, categoria, notas });
-      guardarTuDiaItems(allItems);
-      document.getElementById('form-schedule-item').reset();
-    });
-
-    renderizarScheduleTuDia();
-    setInterval(renderizarScheduleTuDia, 15000);
-
-    // --- AUTH GOOGLE ---
+    // --- AUTENTICACIÓN GOOGLE & FIREBASE ---
     onAuthStateChanged(auth, (user) => {
-      if (initialLoader) {
-        initialLoader.style.opacity = '0';
-        setTimeout(() => initialLoader.remove(), 400);
-      }
-
       if (user) {
         if (user.email === ALLOWED_EMAIL) {
           desbloquearApp();
         } else {
+          errorLogin.innerText = "Acceso denegado: Tu correo (" + user.email + ") no está autorizado.";
           errorLogin.classList.remove('hidden');
           signOut(auth);
         }
@@ -723,15 +671,17 @@
     function desbloquearApp() {
       loginModal.classList.add('hidden');
       appContent.classList.remove('hidden');
+      initialLoader.style.opacity = '0';
+      setTimeout(() => initialLoader.remove(), 500);
       iniciarFirebase();
     }
 
     function bloquearApp() {
+      initialLoader.style.display = 'none';
       loginModal.classList.remove('hidden');
       appContent.classList.add('hidden');
     }
 
-    // --- FIREBASE REALTIME ---
     let eventosParcialesGlobal = [];
     let firebaseSuscrita = false;
 
@@ -743,8 +693,44 @@
       const gastosRef = ref(db, 'gastos');
       const recordatoriosRef = ref(db, 'recordatorios');
       const parcialesRef = ref(db, 'parciales');
+      const agendaRef = ref(db, 'agenda');
 
-      // PARCIALES
+      // --- AGENDA / TIEMPO REAL (SYNC ENTRE PC Y CELULAR) ---
+      onValue(agendaRef, (snapshot) => {
+        const data = snapshot.val();
+        eventosAgendaGlobal = {};
+        if (data) {
+          Object.keys(data).forEach(fechaKey => {
+            const itemsFecha = data[fechaKey];
+            eventosAgendaGlobal[fechaKey] = Object.keys(itemsFecha).map(itemId => ({
+              id: itemId,
+              ...itemsFecha[itemId]
+            }));
+          });
+        }
+        renderizarScheduleTuDia();
+      });
+
+      document.getElementById('form-schedule-item').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const titulo = document.getElementById('sch-titulo').value.trim();
+        const horaInicio = document.getElementById('sch-hora-inicio').value;
+        const horaFin = document.getElementById('sch-hora-fin').value;
+        const categoria = document.getElementById('sch-categoria').value;
+        const notas = document.getElementById('sch-notas').value.trim();
+
+        const fechaTarget = fechaSeleccionadaTuDia || obtenerFechaIsoLocal();
+        const itemRef = ref(db, `agenda/${fechaTarget}`);
+        push(itemRef, { titulo, horaInicio, horaFin, categoria, notas });
+        e.target.reset();
+      });
+
+      window.eliminarItemAgenda = function(idItem) {
+        const fechaTarget = fechaSeleccionadaTuDia;
+        if (db) remove(ref(db, `agenda/${fechaTarget}/${idItem}`));
+      };
+
+      // --- PARCIALES & CALENDARIO ---
       onValue(parcialesRef, (snapshot) => {
         const data = snapshot.val();
         const grid = document.getElementById('grid-parciales');
@@ -755,23 +741,28 @@
           Object.keys(data).forEach((key) => {
             const item = data[key];
             eventosParcialesGlobal.push({ id: key, ...item });
+
             const fechaTextoLegible = formatearFechaTexto(item.fecha);
 
             grid.innerHTML += `
-              <div class="bg-[#070708] border border-borderSubtle p-3 rounded-xl flex justify-between items-center text-xs">
+              <div class="bg-[#18181b] border border-[#27272a] hover:border-violet-500/40 p-3.5 rounded-xl flex justify-between items-start transition">
                 <div>
-                  <span class="font-normal text-slate-200">${item.materia}</span>
-                  <span class="text-zinc-500 font-mono ml-2">(${fechaTextoLegible})</span>
+                  <h4 class="font-bold text-xs text-violet-300">${item.materia}</h4>
+                  <p class="text-[11px] text-zinc-300 font-semibold font-mono mt-1 flex items-center gap-1.5">
+                    <i data-lucide="calendar" class="w-3 h-3 text-violet-400"></i> ${fechaTextoLegible}
+                  </p>
+                  ${item.detalle ? `<p class="text-[10px] text-zinc-400 mt-1.5 leading-relaxed">${item.detalle}</p>` : ''}
                 </div>
-                <button data-id="${key}" class="btn-del-parcial text-zinc-500 hover:text-slate-100 p-1 transition">
-                  <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                <button data-id="${key}" class="btn-del-parcial text-zinc-500 hover:text-rose-400 p-1 transition">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                 </button>
               </div>
             `;
           });
         } else {
-          grid.innerHTML = '<p class="text-xs text-zinc-600 text-center py-3 font-light">Sin exámenes agendados</p>';
+          grid.innerHTML = '<p class="text-xs text-zinc-500 col-span-3 text-center py-4">No hay parciales agendados</p>';
         }
+
         lucide.createIcons();
         bindDelete('btn-del-parcial', 'parciales');
         renderizarCalendario();
@@ -781,11 +772,12 @@
         e.preventDefault();
         const materia = document.getElementById('parcial-materia').value;
         const fecha = document.getElementById('parcial-fecha').value;
-        push(parcialesRef, { materia, fecha, detalle: '' });
+        const detalle = document.getElementById('parcial-detalle').value;
+        push(parcialesRef, { materia, fecha, detalle });
         e.target.reset();
       });
 
-      // RECORDATORIOS
+      // --- RECORDATORIOS ---
       onValue(recordatoriosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-recordatorios');
@@ -793,38 +785,45 @@
 
         if (data) {
           const arr = Object.keys(data).map(key => ({ key, ...data[key] }));
-          animarContador('widget-pendientes', arr.length, false);
+          animarConteo('widget-pendientes', arr.length, false);
 
           arr.forEach((item) => {
+            const tituloText = item.tituloOpcional || '';
+            const detalleText = item.detalle || item.titulo || '';
+
             lista.innerHTML += `
-              <li class="flex justify-between items-center bg-[#070708] border border-borderSubtle px-3 py-2.5 rounded-xl text-xs">
-                <span class="text-zinc-300 font-light">${item.detalle || item.titulo}</span>
-                <button data-id="${item.key}" class="btn-del-rec text-zinc-500 hover:text-slate-100 p-1 transition">
-                  <i data-lucide="x" class="w-3.5 h-3.5"></i>
+              <li class="flex justify-between items-start bg-[#18181b] border border-[#27272a] px-3.5 py-2.5 rounded-xl text-xs text-zinc-200 transition">
+                <div class="space-y-0.5 w-full pr-2">
+                  ${tituloText ? `<h5 class="font-bold text-amber-400 text-xs flex items-center gap-1.5"><i data-lucide="bookmark" class="w-3 h-3 text-amber-400 shrink-0"></i>${tituloText}</h5>` : ''}
+                  <p class="font-medium text-zinc-200 leading-snug">${detalleText}</p>
+                </div>
+                <button data-id="${item.key}" class="btn-del-rec text-zinc-500 hover:text-rose-400 p-1 transition">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                 </button>
               </li>
             `;
           });
         } else {
-          animarContador('widget-pendientes', 0, false);
-          lista.innerHTML = '<p class="text-center py-4 text-xs text-zinc-600 font-light">Sin recordatorios</p>';
+          animarConteo('widget-pendientes', 0, false);
+          lista.innerHTML = '<p class="text-center py-5 text-xs text-zinc-500">Sin recordatorios</p>';
         }
+
         lucide.createIcons();
         bindDelete('btn-del-rec', 'recordatorios');
       });
 
       document.getElementById('form-recordatorio').addEventListener('submit', (e) => {
         e.preventDefault();
+        const tituloOpcional = document.getElementById('rec-titulo').value.trim();
         const detalle = document.getElementById('rec-detalle').value.trim();
-        push(recordatoriosRef, { tituloOpcional: '', detalle });
+        push(recordatoriosRef, { tituloOpcional, detalle });
         e.target.reset();
       });
 
-      // GASTOS
+      // --- GASTOS ---
       onValue(gastosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-gastos');
-        const sectionTotal = document.getElementById('section-total-gastos');
         lista.innerHTML = '';
         let total = 0;
 
@@ -833,24 +832,23 @@
             const item = data[key];
             total += parseFloat(item.monto || 0);
             lista.innerHTML += `
-              <li class="flex justify-between items-center bg-[#070708] border border-borderSubtle px-3 py-2.5 rounded-xl text-xs">
-                <span class="text-zinc-300 font-light">${item.concepto}</span>
-                <div class="flex items-center gap-2">
-                  <span class="font-mono text-slate-100">$${Number(item.monto).toLocaleString()}</span>
-                  <button data-id="${key}" class="btn-del-gasto text-zinc-500 hover:text-slate-100 p-1 transition">
-                    <i data-lucide="x" class="w-3.5 h-3.5"></i>
+              <li class="flex justify-between items-center bg-[#18181b] border border-[#27272a] px-3.5 py-2.5 rounded-xl text-xs text-zinc-200 transition">
+                <span class="font-medium">${item.concepto}</span>
+                <div class="flex items-center gap-3">
+                  <span class="font-bold font-mono text-emerald-400">$${Number(item.monto).toLocaleString()}</span>
+                  <button data-id="${key}" class="btn-del-gasto text-zinc-500 hover:text-rose-400 p-1 transition">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                   </button>
                 </div>
               </li>
             `;
           });
         } else {
-          lista.innerHTML = '<p class="text-center py-4 text-xs text-zinc-600 font-light">Sin gastos</p>';
+          lista.innerHTML = '<p class="text-center py-5 text-xs text-zinc-500">Sin gastos registrados</p>';
         }
 
-        animarContador('widget-total-gastos', total, true);
-        sectionTotal.innerText = `$${total.toLocaleString()}`;
-
+        animarConteo('widget-total-gastos', total, true);
+        animarConteo('section-total-gastos', total, true);
         lucide.createIcons();
         bindDelete('btn-del-gasto', 'gastos');
       });
@@ -864,7 +862,7 @@
       });
     }
 
-    // CALENDARIO MENSUAL
+    // --- CALENDARIO MENSUAL ---
     let fechaActualCal = new Date();
 
     function renderizarCalendario() {
@@ -883,7 +881,7 @@
 
       for (let i = primerDiaIndex; i > 0; i--) {
         const diaNum = totalDiasMesAnterior - i + 1;
-        grid.innerHTML += `<div class="bg-[#070708]/30 border border-borderSubtle/20 rounded-lg p-1 min-h-[48px] opacity-20 text-zinc-600 text-[10px] font-mono">${diaNum}</div>`;
+        grid.innerHTML += `<div class="bg-[#18181b]/30 border border-[#27272a]/40 rounded-xl p-1.5 min-h-[55px] opacity-25 text-zinc-500 text-[10px] font-mono">${diaNum}</div>`;
       }
 
       for (let dia = 1; dia <= totalDiasMes; dia++) {
@@ -896,16 +894,19 @@
         let eventosHtml = '';
         parcialesDelDia.forEach(p => {
           eventosHtml += `
-            <div class="bg-[#16161a] text-zinc-300 text-[9px] px-1 py-0.5 rounded truncate font-mono mt-0.5 border border-zinc-700/50" title="${p.materia}">
-              ${p.materia}
+            <div class="bg-violet-500/20 border border-violet-500/40 text-violet-200 text-[9px] px-1.5 py-0.5 rounded mt-1 truncate font-medium" title="${p.materia}">
+              <span class="hidden sm:inline">${p.materia}</span>
+              <span class="sm:hidden font-bold text-violet-400">●</span>
             </div>
           `;
         });
 
         grid.innerHTML += `
-          <div class="bg-[#070708] border ${esHoy ? 'border-slate-200' : 'border-borderSubtle'} rounded-lg p-1 min-h-[48px] flex flex-col justify-between">
-            <span class="text-[10px] font-mono ${esHoy ? 'text-slate-100 font-medium' : 'text-zinc-500'}">${dia}</span>
-            <div class="overflow-y-auto max-h-[30px]">${eventosHtml}</div>
+          <div class="bg-[#18181b] border ${esHoy ? 'border-indigo-500 bg-indigo-500/10' : 'border-[#27272a]'} rounded-xl p-1.5 min-h-[60px] flex flex-col justify-between transition hover:border-zinc-600">
+            <div class="flex justify-between items-center">
+              <span class="text-[11px] font-mono font-bold ${esHoy ? 'bg-indigo-500 text-white px-1.5 py-0.2 rounded-md' : 'text-zinc-300'}">${dia}</span>
+            </div>
+            <div class="overflow-y-auto max-h-[40px] space-y-0.5">${eventosHtml}</div>
           </div>
         `;
       }
