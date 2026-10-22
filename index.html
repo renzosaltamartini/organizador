@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Organizador Personal OS</title>
-<meta name="description" content="Organizador personal: agenda, calendario, recordatorios, gastos y notas en un solo lugar." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%97%93%3C/text%3E%3C/svg%3E" />
+<title>Organizador Personal</title>
+<meta name="description" content="Simplificamos tu rutina en simples pasos." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%D3%85%3C/text%3E%3C/svg%3E" />
 <meta name="theme-color" content="#0a0c10" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,7 +61,7 @@ textarea.in{resize:none}
 .land{margin:auto;width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;gap:24px;padding:32px 16px;text-align:center}
 .lt{font-size:clamp(32px,7vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
 .land-sub{color:var(--mut);font-size:15px;max-width:480px}
-/* Mini Preview Front-end (Decorativo / No interactivo o solo visual) */
+/* Mini Preview Front-end */
 .mini-preview{width:100%;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -15px rgba(0,0,0,0.3);text-align:left;pointer-events:none;user-select:none}
 .mini-header{background:var(--soft);padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
 .mini-dots{display:flex;gap:6px}
@@ -73,11 +73,16 @@ textarea.in{resize:none}
 .gbtn-modern{background:#ffffff;color:#1f2937;border:1px solid #e5e7eb;border-radius:14px;min-height:52px;padding:0 24px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 14px rgba(0,0,0,0.08);transition:all .2s ease;cursor:pointer}
 .gbtn-modern:hover{background:#f9fafb;box-shadow:0 6px 20px rgba(0,0,0,0.12);transform:translateY(-1px)}
 .gbtn-modern:active{transform:translateY(0);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+/* Modal de Onboarding / Perfil */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,12,16,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:200}
+.modal-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;width:100%;max-width:440px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 48px rgba(0,0,0,0.4)}
+.avatar-pick{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:6px}
+.avatar-preview{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--ac);background:var(--soft)}
 /* layout */
 header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
 .hin{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700}
-.brand img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.brand img{width:36px;height:36px;border-radius:50%;object-fit:cover;cursor:pointer}
 .brand small{display:block;font-weight:500;color:var(--ok);font-size:11px}
 main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:16px}
 .nv{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:var(--mut);font-size:10.5px;font-weight:600;padding:8px 0}
@@ -216,10 +221,10 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 
 <div id="login-modal" class="full land-wrap" hidden>
  <div class="land">
-  <h1 class="lt">Organizador Personal OS</h1>
-  <p class="land-sub">Tu agenda, calendario, recordatorios, finanzas y notas en un solo espacio inteligente.</p>
+  <h1 class="lt">Organizador Personal</h1>
+  <p class="land-sub">Simplificamos tu rutina en simples pasos.</p>
   
-  <!-- Mini versión preview front-end (no interactiva) -->
+  <!-- Mini versión preview front-end -->
   <div class="mini-preview" aria-hidden="true">
    <div class="mini-header">
     <div class="mini-dots"><span></span><span></span><span></span></div>
@@ -229,14 +234,14 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
     <div class="mini-card">
      <div style="display:flex;align-items:center;gap:10px">
       <span class="ti" style="width:36px;height:36px;border-radius:10px;--c:#0ea5e9"><svg class="ic" style="width:16px;height:16px"><use href="#i-day"/></svg></span>
-      <div><b>Tu día · En curso</b><div class="sub">10:00 – 11:30 · Algoritmos y Estructuras</div></div>
+      <div><b>Tu día · En curso</b><div class="sub">10:00 – 11:30 · Rutina diaria</div></div>
      </div>
      <span class="mini-badge">Activo</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
      <div class="mini-card" style="flex-direction:column;align-items:flex-start;gap:4px">
-      <span class="sub">Parcial Próximo</span>
-      <b>Álgebra II (En 3 días)</b>
+      <span class="sub">Evento Próximo</span>
+      <b>Reunión (En 3 días)</b>
      </div>
      <div class="mini-card" style="flex-direction:column;align-items:flex-start;gap:4px">
       <span class="sub">Control de Gastos</span>
@@ -254,9 +259,49 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  </div>
 </div>
 
+<!-- Modal de Registro / Onboarding obligatorios para nuevos usuarios -->
+<div id="onboarding-modal" class="modal-overlay" hidden>
+ <div class="modal-card">
+  <h2>Completa tu perfil</h2>
+  <p class="sub">Para continuar en el organizador, necesitamos algunos datos básicos (debes ser mayor de 18 años).</p>
+  <form id="form-onboarding" style="display:flex;flex-direction:column;gap:12px">
+   <div class="avatar-pick">
+    <img id="onb-photo-preview" class="avatar-preview" src="" alt="Avatar" onerror="this.src='https://placehold.co/80x80/1a1e26/8f98a8?text=Foto'">
+    <label class="btn ghost" style="font-size:12px;min-height:36px;padding:0 12px;cursor:pointer">
+     Cambiar foto de perfil
+     <input type="file" id="onb-file-input" accept="image/*" hidden>
+    </label>
+   </div>
+   <label class="f"><span>Nombre</span><input class="in" id="onb-nombre" required></label>
+   <label class="f"><span>Apellido</span><input class="in" id="onb-apellido" required></label>
+   <label class="f"><span>Edad</span><input class="in" type="number" id="onb-edad" min="1" max="120" required placeholder="Ej. 24"></label>
+   <p id="onb-error" class="sub" style="color:var(--bad)" hidden></p>
+   <button class="btn" type="submit">Continuar</button>
+  </form>
+ </div>
+</div>
+
+<!-- Modal para cambiar foto en cualquier momento -->
+<div id="profile-modal" class="modal-overlay" hidden>
+ <div class="modal-card">
+  <div class="vh"><h2>Editar foto de perfil</h2><button class="x" id="prof-close" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div class="avatar-pick" style="margin-top:10px">
+   <img id="prof-photo-preview" class="avatar-preview" src="" alt="Avatar">
+   <label class="btn ghost" style="font-size:12px;min-height:36px;padding:0 12px;cursor:pointer">
+    Elegir nueva imagen
+    <input type="file" id="prof-file-input" accept="image/*" hidden>
+   </label>
+  </div>
+  <button class="btn" id="prof-save">Guardar cambios</button>
+ </div>
+</div>
+
 <div id="app-content" hidden>
  <header><div class="hin">
-  <div class="brand"><img id="u-photo" src="" alt="" referrerpolicy="no-referrer" hidden><div><span id="u-name">Mi organizador</span><small>● Sincronizado</small></div></div>
+  <div class="brand">
+   <img id="u-photo" src="" alt="Perfil" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden>
+   <div><span id="u-name">Mi organizador</span><small>● Sincronizado</small></div>
+  </div>
   <button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button>
  </div></header>
 
@@ -418,7 +463,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app), db = getDatabase(app), provider = new GoogleAuthProvider();
-let base = '', uName = '';
+let base = '', uName = '', userPerfil = null;
 const R = p => ref(db, base + p);
 
 const $ = id => document.getElementById(id);
@@ -456,14 +501,10 @@ function go(view, replace) {
 function onRoute() {
   const p = getPath(), v = viewFromPath(p);
   if (!curUser) {
-    if (p !== '/') {
-      // 404 o ruta inválida sin sesión: redirigir limpiamente al inicio
-      go(null, true);
-    }
+    if (p !== '/') go(null, true);
     return;
   }
   if (!v) {
-    // Si está autenticado pero la ruta no existe (404), redirigir al inicio (/panel)
     if (p !== '/' && p !== '/panel') {
       go('home', true);
       return;
@@ -732,18 +773,119 @@ document.addEventListener('click', e => {
   if (b && confirm('¿Eliminar este elemento?')) { selEv = null; remove(R(b.dataset.del)); }
 });
 
+/* ---------- Gestión de perfil y Onboarding ---------- */
+let tempPhotoBase64 = '';
+
+$('onb-file-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    tempPhotoBase64 = ev.target.result;
+    $('onb-photo-preview').src = tempPhotoBase64;
+  };
+  reader.readAsDataURL(file);
+});
+
+$('prof-file-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    tempPhotoBase64 = ev.target.result;
+    $('prof-photo-preview').src = tempPhotoBase64;
+  };
+  reader.readAsDataURL(file);
+});
+
+$('u-photo').onclick = () => {
+  if (!userPerfil) return;
+  tempPhotoBase64 = userPerfil.photo || '';
+  $('prof-photo-preview').src = tempPhotoBase64 || 'https://placehold.co/80x80/1a1e26/8f98a8?text=Foto';
+  $('profile-modal').hidden = false;
+};
+
+$('prof-close').onclick = () => { $('profile-modal').hidden = true; };
+$('prof-save').onclick = async () => {
+  if (!curUser) return;
+  userPerfil.photo = tempPhotoBase64;
+  await set(R('perfil'), userPerfil);
+  actualizarUiPerfil();
+  $('profile-modal').hidden = true;
+};
+
+function actualizarUiPerfil() {
+  if (!userPerfil) return;
+  uName = userPerfil.nombre || 'Mi organizador';
+  $('u-name').textContent = `${userPerfil.nombre || ''} ${userPerfil.apellido || ''}`.trim();
+  const ph = $('u-photo');
+  if (userPerfil.photo) {
+    ph.src = userPerfil.photo;
+    ph.hidden = false;
+  } else {
+    ph.hidden = true;
+  }
+}
+
+$('form-onboarding').addEventListener('submit', async e => {
+  e.preventDefault();
+  const edad = parseInt($('onb-edad').value, 10);
+  const errEl = $('onb-error');
+  if (isNaN(edad) || edad < 18) {
+    errEl.textContent = 'Debes ser mayor de 18 años para registrarte.';
+    errEl.hidden = false;
+    return;
+  }
+  errEl.hidden = true;
+  
+  userPerfil = {
+    nombre: $('onb-nombre').value.trim(),
+    apellido: $('onb-apellido').value.trim(),
+    edad,
+    photo: tempPhotoBase64 || curUser.photoURL || ''
+  };
+
+  await set(R('perfil'), userPerfil);
+  $('onboarding-modal').hidden = true;
+  actualizarUiPerfil();
+  desbloquearAppFinal();
+});
+
 /* ---------- Auth ---------- */
 const errorLogin = $('error-login');
-onAuthStateChanged(auth, user => {
-  if (user) desbloquear(user);
-  else {
+onAuthStateChanged(auth, async user => {
+  if (user) {
+    curUser = user;
+    base = `users/${user.uid}/`;
+    
+    // Verificar si existe perfil registrado en Firebase
+    const snap = await get(R('perfil'));
+    if (!snap.exists()) {
+      // Primera vez: mostrar modal de registro obligatorio
+      $('initial-loader').style.display = 'none';
+      $('login-modal').hidden = true;
+      $('onb-nombre').value = (user.displayName || '').split(' ')[0] || '';
+      $('onb-apellido').value = (user.displayName || '').split(' ').slice(1).join(' ') || '';
+      tempPhotoBase64 = user.photoURL || '';
+      $('onb-photo-preview').src = tempPhotoBase64 || 'https://placehold.co/80x80/1a1e26/8f98a8?text=Foto';
+      $('onb-error').hidden = true;
+      $('onboarding-modal').hidden = false;
+    } else {
+      userPerfil = snap.val();
+      actualizarUiPerfil();
+      desbloquearAppFinal();
+    }
+  } else {
     curUser = null;
+    userPerfil = null;
     $('initial-loader').style.display = 'none';
     $('app-content').hidden = true;
+    $('onboarding-modal').hidden = true;
     $('login-modal').hidden = false;
     onRoute();
   }
 });
+
 $('btn-google-login').onclick = () => {
   errorLogin.hidden = true;
   signInWithPopup(auth, provider).catch(err => {
@@ -756,26 +898,11 @@ $('btn-google-login').onclick = () => {
     errorLogin.hidden = false;
   });
 };
+
 $('btn-logout').onclick = () => signOut(auth).then(() => {
   try { hashMode ? (location.hash = '') : history.replaceState(null, '', '/'); } catch (e) {}
   location.reload();
 });
-
-/* Migración antigua si aplica */
-const CUENTA_ANTIGUA = 'renzosalta07@gmail.com';
-async function migrarDatosAntiguos(user) {
-  if (user.email !== CUENTA_ANTIGUA) return;
-  try {
-    if ((await get(R('meta/migrado'))).exists()) return;
-    const upd = {};
-    for (const n of ['agenda', 'parciales', 'recordatorios', 'gastos', 'notas']) {
-      const sn = await get(ref(db, n));
-      if (sn.exists()) upd[base + n] = sn.val();
-    }
-    if (Object.keys(upd).length) await update(ref(db), upd);
-    await set(R('meta/migrado'), true);
-  } catch (e) { console.warn('Migración omitida:', e); }
-}
 
 const cargados = new Set();
 function hideLoader() {
@@ -788,18 +915,12 @@ function cargado(nombre) {
   if (cargados.size === 5) hideLoader();
 }
 
-async function desbloquear(user) {
-  curUser = user;
-  base = `users/${user.uid}/`;
-  uName = (user.displayName || user.email || '').split(' ')[0];
-  $('u-name').textContent = user.displayName || user.email || 'Mi organizador';
-  const ph = $('u-photo');
-  if (user.photoURL) { ph.src = user.photoURL; ph.hidden = false; ph.onerror = () => { ph.hidden = true; }; }
+function desbloquearAppFinal() {
   const l = $('initial-loader'); if (l) { l.style.display = 'flex'; l.style.opacity = '1'; }
   $('login-modal').hidden = true;
+  $('onboarding-modal').hidden = true;
   $('app-content').hidden = false;
   onRoute();
-  await migrarDatosAntiguos(user);
   iniciar();
   setTimeout(hideLoader, 10000);
 }
