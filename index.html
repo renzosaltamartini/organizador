@@ -64,9 +64,6 @@ textarea.in{resize:none}
 .land-wrap{justify-content:flex-start;overflow-y:auto;background:radial-gradient(900px 380px at 50% -8%,color-mix(in srgb,var(--ac) 20%,transparent),transparent),var(--bg)}
 .land{margin:auto;width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px 0;text-align:center}
 .lt{font-size:clamp(30px,7vw,50px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.lgrid{display:grid;grid-template-columns:1fr;gap:14px;width:100%;text-align:left}
-.lc{display:flex;flex-direction:column;gap:10px}
-.lc h2{font-size:17px}
 .gbtn{background:#fff;color:#18181b;border:0;border-radius:12px;min-height:48px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 28px;box-shadow:0 10px 30px -10px color-mix(in srgb,var(--ac) 60%,transparent)}
 /* modal generico para dias del calendario */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:200;display:grid;place-items:center;padding:16px}
@@ -237,7 +234,6 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
    <label class="f"><span>Nombre</span><input class="in" id="ob-nombre" required placeholder="Tu nombre"></label>
    <label class="f"><span>Apellido</span><input class="in" id="ob-apellido" required placeholder="Tu apellido"></label>
    <label class="f"><span>Edad (Debes ser mayor de 18 años)</span><input class="in" type="number" id="ob-edad" required min="1" max="120" placeholder="Ej. 20"></label>
-   <label class="f"><span>Foto de perfil (Opcional)</span><input class="in" type="file" id="ob-foto" accept="image/*"></label>
    <p id="ob-error" class="sub" style="color:var(--bad)" hidden></p>
    <button class="btn" type="submit" style="margin-top:6px">Guardar y comenzar</button>
   </form>
@@ -909,11 +905,8 @@ $('form-onboard').addEventListener('submit', async e => {
     return;
   }
   
-  let fotoUrl = curUser.photoURL || '';
-  const fileInput = $('ob-foto');
-  if (fileInput.files && fileInput.files[0]) {
-    fotoUrl = await fileToBase64(fileInput.files[0]);
-  }
+  // Toma la foto predeterminada de Google
+  const fotoUrl = curUser.photoURL || '';
   
   await set(ref(db, `users/${curUser.uid}/profile`), { nombre, apellido, edad, foto: fotoUrl });
   $('onboard-modal').hidden = true;
@@ -942,7 +935,7 @@ $('btn-google-login').onclick = () => {
 
 $('btn-logout').onclick = () => signOut(auth).then(() => { location.hash = ''; location.reload(); });
 
-/* Modificar foto desde el avatar superior */
+/* Modificar foto desde el avatar superior en cualquier momento */
 const profileModal = $('profile-modal');
 $('u-photo').onclick = () => {
   $('pm-preview').src = $('u-photo').src;
