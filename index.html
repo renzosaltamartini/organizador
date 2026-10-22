@@ -58,19 +58,21 @@ textarea.in{resize:none}
 .spin{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--ac);animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 .land-wrap{justify-content:flex-start;overflow-y:auto;background:radial-gradient(900px 380px at 50% -8%,color-mix(in srgb,var(--ac) 20%,transparent),transparent),var(--bg)}
-.land{margin:auto;width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:28px;padding:24px 0;text-align:center}
-.lt{font-size:clamp(30px,7vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.lgrid{display:grid;grid-template-columns:1fr;gap:14px;width:100%;text-align:left}
-.lc{display:flex;flex-direction:column;gap:10px}
-.lc h2{font-size:17px}
-.lc .ty{color:var(--mut);font-size:14px;line-height:1.6}
-.ty{position:relative;display:block;white-space:pre-line}
-.ty .ghost{visibility:hidden}
-.ty .live{position:absolute;left:0;top:0;right:0}
-.ty.typing .live::after{content:"";display:inline-block;width:2px;height:1em;margin-left:2px;vertical-align:-.12em;background:var(--ac);animation:bl .9s steps(1) infinite}
-@keyframes bl{50%{opacity:0}}
-.lbtn{display:inline-flex;padding:0 28px;min-height:54px;font-size:16px;box-shadow:0 10px 30px -10px color-mix(in srgb,var(--ac) 60%,transparent)}
-.gbtn{background:#fff;color:#18181b;border:0;border-radius:12px;min-height:48px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px}
+.land{margin:auto;width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;gap:24px;padding:32px 16px;text-align:center}
+.lt{font-size:clamp(32px,7vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.land-sub{color:var(--mut);font-size:15px;max-width:480px}
+/* Mini Preview Front-end (Decorativo / No interactivo o solo visual) */
+.mini-preview{width:100%;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -15px rgba(0,0,0,0.3);text-align:left;pointer-events:none;user-select:none}
+.mini-header{background:var(--soft);padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.mini-dots{display:flex;gap:6px}
+.mini-dots span{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.mini-body{padding:16px;display:flex;flex-direction:column;gap:12px}
+.mini-card{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:space-between}
+.mini-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;background:color-mix(in srgb,var(--ac) 20%,transparent);color:var(--ac)}
+/* Botón Google Mejorado */
+.gbtn-modern{background:#ffffff;color:#1f2937;border:1px solid #e5e7eb;border-radius:14px;min-height:52px;padding:0 24px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 14px rgba(0,0,0,0.08);transition:all .2s ease;cursor:pointer}
+.gbtn-modern:hover{background:#f9fafb;box-shadow:0 6px 20px rgba(0,0,0,0.12);transform:translateY(-1px)}
+.gbtn-modern:active{transform:translateY(0);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
 /* layout */
 header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
 .hin{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
@@ -167,7 +169,6 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 .big{font-size:32px;font-weight:800;letter-spacing:-.02em;color:var(--ok)}
 .row2{display:grid;grid-template-columns:1fr 120px;gap:10px}
 @media(min-width:720px){
- .lgrid{grid-template-columns:repeat(3,1fr)}
  .hin,main{padding-left:24px;padding-right:24px}
  body{padding-bottom:24px}
  #nav{position:static;max-width:1100px;margin:16px auto 0;padding:0 24px;background:none;border:0;backdrop-filter:none;display:flex;gap:8px}
@@ -215,15 +216,39 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 
 <div id="login-modal" class="full land-wrap" hidden>
  <div class="land">
-  <h1 class="ty lt" data-text="Organizador Personal"></h1>
-  <div class="lgrid">
-   <article class="card lc" style="--c:#0ea5e9"><span class="ti"><svg class="ic"><use href="#i-user"/></svg></span><h2>Quién la creó</h2><p class="ty" data-text="Hecha por Renzo."></p></article>
-   <article class="card lc" style="--c:#14b8a6"><span class="ti"><svg class="ic"><use href="#i-spark"/></svg></span><h2>Para qué sirve</h2><p class="ty" data-text="Para organizar tu día, tus fechas importantes y tus gastos, desde el celular o la computadora."></p></article>
-   <article class="card lc" style="--c:#f59e0b"><span class="ti"><svg class="ic"><use href="#i-check"/></svg></span><h2>Qué podés hacer</h2><p class="ty" data-text="• Planear tu día hora por hora&#10;• Marcar parciales en el calendario&#10;• Guardar recordatorios&#10;• Controlar tus gastos&#10;• Escribir notas con formato"></p></article>
+  <h1 class="lt">Organizador Personal OS</h1>
+  <p class="land-sub">Tu agenda, calendario, recordatorios, finanzas y notas en un solo espacio inteligente.</p>
+  
+  <!-- Mini versión preview front-end (no interactiva) -->
+  <div class="mini-preview" aria-hidden="true">
+   <div class="mini-header">
+    <div class="mini-dots"><span></span><span></span><span></span></div>
+    <span class="sub" style="font-size:11px">Vista previa interactiva</span>
+   </div>
+   <div class="mini-body">
+    <div class="mini-card">
+     <div style="display:flex;align-items:center;gap:10px">
+      <span class="ti" style="width:36px;height:36px;border-radius:10px;--c:#0ea5e9"><svg class="ic" style="width:16px;height:16px"><use href="#i-day"/></svg></span>
+      <div><b>Tu día · En curso</b><div class="sub">10:00 – 11:30 · Algoritmos y Estructuras</div></div>
+     </div>
+     <span class="mini-badge">Activo</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+     <div class="mini-card" style="flex-direction:column;align-items:flex-start;gap:4px">
+      <span class="sub">Parcial Próximo</span>
+      <b>Álgebra II (En 3 días)</b>
+     </div>
+     <div class="mini-card" style="flex-direction:column;align-items:flex-start;gap:4px">
+      <span class="sub">Control de Gastos</span>
+      <b style="color:var(--ok)">$14,500 acumulados</b>
+     </div>
+    </div>
+   </div>
   </div>
-  <button id="btn-google-login" class="gbtn lbtn">
+
+  <button id="btn-google-login" class="gbtn-modern">
    <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
-   Comenzar recorrido
+   Continuar con Google
   </button>
   <p id="error-login" class="sub" style="color:var(--bad)" hidden></p>
  </div>
@@ -393,7 +418,6 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app), db = getDatabase(app), provider = new GoogleAuthProvider();
-// Cada persona guarda sus datos en users/<su uid>/… (privados por las reglas de Firebase)
 let base = '', uName = '';
 const R = p => ref(db, base + p);
 
@@ -411,11 +435,12 @@ const delBtn = path => `<button class="x" data-del="${esc(path)}" aria-label="El
 
 let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, notas = [], curId = null, dirty = false, tmr = null, rng = null, needScroll = true, lastRender = 0, calDate = new Date();
 
-/* ---------- Rutas: /  ·  /panel  ·  /panel/agenda  ·  /panel/calendario … ---------- */
+/* ---------- Manejo de Rutas y 404 ---------- */
 const VIEWS = ['home', 'dia', 'cal', 'rec', 'gas', 'not'];
 const PATHS = { home: '/panel', dia: '/panel/agenda', cal: '/panel/calendario', rec: '/panel/recordatorios', gas: '/panel/gastos', not: '/panel/notas' };
 const NOMBRES = { dia: 'Tu día', cal: 'Calendario', rec: 'Recordatorios', gas: 'Gastos', not: 'Notas' };
-let curUser = null, wanted = null, hashMode = location.protocol === 'file:'; // en file:// usa #/panel/…
+let curUser = null, wanted = null, hashMode = location.protocol === 'file:';
+
 const getPath = () => hashMode ? (location.hash.slice(1) || '/') : location.pathname;
 const viewFromPath = p => VIEWS.find(k => PATHS[k] === p.replace(/\/+$/, '')) || null;
 
@@ -427,12 +452,28 @@ function go(view, replace) {
   catch (e) { hashMode = true; return go(view, replace); }
   onRoute();
 }
+
 function onRoute() {
   const p = getPath(), v = viewFromPath(p);
-  if (!curUser) { if (p !== '/') { wanted = v; go(null, true); } return; }  // sin sesión: siempre "/"
-  if (!v) { const w = wanted || 'home'; wanted = null; go(w, true); return; } // "/" o ruta inexistente → /panel
+  if (!curUser) {
+    if (p !== '/') {
+      // 404 o ruta inválida sin sesión: redirigir limpiamente al inicio
+      go(null, true);
+    }
+    return;
+  }
+  if (!v) {
+    // Si está autenticado pero la ruta no existe (404), redirigir al inicio (/panel)
+    if (p !== '/' && p !== '/panel') {
+      go('home', true);
+      return;
+    }
+    const w = wanted || 'home'; wanted = null; go(w, true);
+    return;
+  }
   showView(v);
 }
+
 function showView(v) {
   if (!VIEWS.includes(v)) v = 'home';
   if (v !== 'not') flush();
@@ -442,6 +483,7 @@ function showView(v) {
   if (v === 'dia') { needScroll = true; render(); }
   scrollTo(0, 0);
 }
+
 document.addEventListener('click', e => {
   const g = e.target.closest('[data-go]');
   if (g) go(g.dataset.go);
@@ -510,9 +552,8 @@ function render() {
   $('form-day').textContent = 'Para: ' + dl;
   $('day-count').textContent = `${items.length} ${items.length === 1 ? 'actividad' : 'actividades'}`;
 
-  // actividades que se cruzan: columnas lado a lado
   let cluster = [], clusterEnd = 0;
-  const flush = () => {
+  const flushCluster = () => {
     const cols = [];
     cluster.forEach(it => {
       let c = cols.findIndex(end => end <= it.s);
@@ -522,10 +563,10 @@ function render() {
     cluster.forEach(it => it.n = cols.length);
   };
   items.forEach(it => {
-    if (cluster.length && it.s >= clusterEnd) { flush(); cluster = []; clusterEnd = 0; }
+    if (cluster.length && it.s >= clusterEnd) { flushCluster(); cluster = []; clusterEnd = 0; }
     cluster.push(it); clusterEnd = Math.max(clusterEnd, it.e);
   });
-  if (cluster.length) flush();
+  if (cluster.length) flushCluster();
 
   const s0 = 0, e0 = 24;
   const H = 64, px = m => (m - s0 * 60) * H / 60;
@@ -576,7 +617,7 @@ $('cal-grid').addEventListener('click', e => {
 $('cal-prev').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() - 1); renderCal(); };
 $('cal-next').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() + 1); renderCal(); };
 
-/* ---------- Notas (editor tipo iCloud) ---------- */
+/* ---------- Notas ---------- */
 const OK = { DIV:1, P:1, BR:1, B:1, STRONG:1, I:1, EM:1, U:1, H1:1, H2:1, H3:1, UL:1, OL:1, LI:1 };
 function clean(html) {
   const t = document.createElement('template'); t.innerHTML = html || '';
@@ -691,7 +732,7 @@ document.addEventListener('click', e => {
   if (b && confirm('¿Eliminar este elemento?')) { selEv = null; remove(R(b.dataset.del)); }
 });
 
-/* ---------- Auth (abierto a cualquier cuenta de Google) ---------- */
+/* ---------- Auth ---------- */
 const errorLogin = $('error-login');
 onAuthStateChanged(auth, user => {
   if (user) desbloquear(user);
@@ -701,7 +742,6 @@ onAuthStateChanged(auth, user => {
     $('app-content').hidden = true;
     $('login-modal').hidden = false;
     onRoute();
-    iniciarLanding();
   }
 });
 $('btn-google-login').onclick = () => {
@@ -711,7 +751,7 @@ $('btn-google-login').onclick = () => {
     if (c === 'auth/popup-blocked' || c === 'auth/operation-not-supported-in-this-environment') return signInWithRedirect(auth, provider);
     if (c === 'auth/popup-closed-by-user' || c === 'auth/cancelled-popup-request') return;
     errorLogin.textContent = c === 'auth/unauthorized-domain'
-      ? 'Este dominio no está autorizado en Firebase (Authentication → Configuración → Dominios autorizados).'
+      ? 'Este dominio no está autorizado en Firebase.'
       : 'No se pudo iniciar sesión. Inténtalo de nuevo.';
     errorLogin.hidden = false;
   });
@@ -721,29 +761,7 @@ $('btn-logout').onclick = () => signOut(auth).then(() => {
   location.reload();
 });
 
-/* ---------- Landing con animación de escritura ---------- */
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-let landOn = false, stopTyping = false;
-async function typeEl(el, speed) {
-  const t = el.dataset.text, live = el.querySelector('.live');
-  el.classList.add('typing');
-  for (let i = 1; i <= t.length && !stopTyping; i++) { live.textContent = t.slice(0, i); await sleep(speed); }
-  live.textContent = t; el.classList.remove('typing');
-}
-async function iniciarLanding() {
-  if (landOn) return; landOn = true;
-  const els = [...document.querySelectorAll('.ty')];
-  els.forEach(el => {
-    el.setAttribute('aria-label', el.dataset.text);
-    el.innerHTML = '<span class="ghost" aria-hidden="true"></span><span class="live" aria-hidden="true"></span>';
-    el.firstChild.textContent = el.dataset.text;
-  });
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { els.forEach(el => { el.querySelector('.live').textContent = el.dataset.text; }); return; }
-  await typeEl(els[0], 45);
-  await Promise.all(els.slice(1).map(async (el, i) => { await sleep(i * 250); await typeEl(el, 18); }));
-}
-
-/* Migración única de tus datos antiguos (solo para esta cuenta). Puedes borrar este bloque cuando ya la hayas hecho. */
+/* Migración antigua si aplica */
 const CUENTA_ANTIGUA = 'renzosalta07@gmail.com';
 async function migrarDatosAntiguos(user) {
   if (user.email !== CUENTA_ANTIGUA) return;
@@ -759,7 +777,6 @@ async function migrarDatosAntiguos(user) {
   } catch (e) { console.warn('Migración omitida:', e); }
 }
 
-/* La pantalla de carga se mantiene hasta que llegan los 5 bloques de datos */
 const cargados = new Set();
 function hideLoader() {
   const l = $('initial-loader');
@@ -772,7 +789,7 @@ function cargado(nombre) {
 }
 
 async function desbloquear(user) {
-  curUser = user; stopTyping = true;
+  curUser = user;
   base = `users/${user.uid}/`;
   uName = (user.displayName || user.email || '').split(' ')[0];
   $('u-name').textContent = user.displayName || user.email || 'Mi organizador';
@@ -784,7 +801,7 @@ async function desbloquear(user) {
   onRoute();
   await migrarDatosAntiguos(user);
   iniciar();
-  setTimeout(hideLoader, 10000); // por si la conexión es muy lenta
+  setTimeout(hideLoader, 10000);
 }
 
 /* ---------- Datos ---------- */
