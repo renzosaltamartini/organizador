@@ -54,7 +54,6 @@
       border-color: #3f3f46;
     }
 
-    /* Animaciones de contador y fade */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
@@ -226,7 +225,7 @@
 
           <select id="sch-categoria" class="sm:col-span-2 bg-[#121217] border border-[#27272a] text-xs text-zinc-300 rounded-lg px-3 py-2.5 focus:outline-none focus:border-indigo-500">
             <option value="indigo">Estudio (Índigo)</option>
-            <option value="violet">Trabajo (Violeta)</option>
+            <option value="cyan">Trabajo (Celeste)</option>
             <option value="emerald">Deporte (Esmeralda)</option>
             <option value="amber">Personal (Ámbar)</option>
             <option value="rose">Urgente (Rosa)</option>
@@ -240,7 +239,7 @@
           </button>
         </form>
 
-        <!-- Cronograma Estilo Google Calendar con Columnas para Solapamientos -->
+        <!-- Cronograma Estilo Google Calendar con Columnas Lado a Lado (Sin Superposición) -->
         <div class="bg-[#121217] border border-[#27272a] rounded-xl p-3.5 relative overflow-hidden">
           <div id="calendar-grid-timeline" class="relative w-full h-[680px] overflow-y-auto pr-2">
             <!-- Dinámico -->
@@ -284,7 +283,7 @@
       <!-- FECHAS DE PARCIALES -->
       <section class="minimal-card rounded-2xl p-5 sm:p-6 space-y-4">
         <div class="flex items-center gap-2.5">
-          <span class="p-2.5 bg-violet-500/10 text-violet-400 rounded-xl border border-violet-500/20">
+          <span class="p-2.5 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
             <i data-lucide="graduation-cap" class="w-4 h-4"></i>
           </span>
           <div>
@@ -295,12 +294,12 @@
 
         <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 bg-[#18181b] border border-[#27272a] p-3.5 rounded-xl">
           <input type="text" id="parcial-materia" placeholder="Materia (ej. Álgebra)" required 
-                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500">
+                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500">
           <input type="date" id="parcial-fecha" required 
-                 class="sm:col-span-3 bg-[#121217] border border-[#27272a] text-xs font-mono text-zinc-300 px-3 py-2.5 rounded-lg focus:outline-none focus:border-violet-500">
+                 class="sm:col-span-3 bg-[#121217] border border-[#27272a] text-xs font-mono text-zinc-300 px-3 py-2.5 rounded-lg focus:outline-none focus:border-indigo-500">
           <input type="text" id="parcial-detalle" placeholder="Detalle / Temas (opcional)" 
-                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500">
-          <button type="submit" class="sm:col-span-1 bg-violet-600 hover:bg-violet-500 text-white p-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center active:scale-95">
+                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500">
+          <button type="submit" class="sm:col-span-1 bg-indigo-600 hover:bg-indigo-500 text-white p-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center active:scale-95">
             <i data-lucide="plus" class="w-4 h-4"></i>
           </button>
         </form>
@@ -432,7 +431,6 @@
     const scheduleDatePicker = document.getElementById('schedule-date-picker');
     if (scheduleDatePicker) scheduleDatePicker.value = fechaSeleccionadaTuDia;
 
-    // ANIMACIÓN DE CONTEO PROGRESIVO (COUNT-UP)
     function animarConteo(elementoId, valorFinal, esMoneda = false) {
       const el = document.getElementById(elementoId);
       if (!el) return;
@@ -457,7 +455,6 @@
       }, duracion / pasos);
     }
 
-    // RELOJ EN VIVO
     function actualizarReloj() {
       const ahora = new Date();
       const h = String(ahora.getHours()).padStart(2, '0');
@@ -476,7 +473,6 @@
     setInterval(actualizarReloj, 1000);
     actualizarReloj();
 
-    // --- MANEJO DE AGENDA SINCRONIZADA CON FIREBASE ---
     let eventosAgendaGlobal = {};
 
     const scheduleDayTabs = document.getElementById('schedule-day-tabs');
@@ -535,7 +531,6 @@
       renderizarTabsDia();
       const diaItems = eventosAgendaGlobal[fechaSeleccionadaTuDia] || [];
 
-      // FILTRAR AUTOMÁTICAMENTE EVENTOS EXPIRADOS SI ES HOY
       const ahora = new Date();
       const hoyIso = obtenerFechaIsoLocal(ahora);
       const esHoySeleccionado = (fechaSeleccionadaTuDia === hoyIso);
@@ -553,7 +548,7 @@
 
       const coloresCategoria = {
         indigo: { bg: 'bg-indigo-500/15', border: 'border-indigo-500/40', text: 'text-indigo-200', badge: 'bg-indigo-500/25 text-indigo-200' },
-        violet: { bg: 'bg-violet-500/15', border: 'border-violet-500/40', text: 'text-violet-200', badge: 'bg-violet-500/25 text-violet-200' },
+        cyan: { bg: 'bg-cyan-500/15', border: 'border-cyan-500/40', text: 'text-cyan-200', badge: 'bg-cyan-500/25 text-cyan-200' },
         emerald: { bg: 'bg-emerald-500/15', border: 'border-emerald-500/40', text: 'text-emerald-200', badge: 'bg-emerald-500/25 text-emerald-200' },
         amber: { bg: 'bg-amber-500/15', border: 'border-amber-500/40', text: 'text-amber-200', badge: 'bg-amber-500/25 text-amber-200' },
         rose: { bg: 'bg-rose-500/15', border: 'border-rose-500/40', text: 'text-rose-200', badge: 'bg-rose-500/25 text-rose-200' }
@@ -589,39 +584,65 @@
         }
       }
 
+      // ALGORITMO ROBUSTO DE COLUMNAS (SIDE-BY-SIDE PACKING)
       const parsedItems = itemsParaMostrar.map((item) => {
         const inicioMins = convertirHoraAMinutos(item.horaInicio);
         const finMins = Math.max(convertirHoraAMinutos(item.horaFin), inicioMins + 15);
         return { ...item, inicioMins, finMins };
+      }).sort((a, b) => a.inicioMins - b.inicioMins || (b.finMins - b.duration) - (a.finMins - a.duration));
+
+      let columns = [];
+      parsedItems.forEach(item => {
+        let placed = false;
+        for (let col = 0; col < columns.length; col++) {
+          let lastInCol = columns[col][columns[col].length - 1];
+          if (lastInCol.finMins <= item.inicioMins) {
+            columns[col].push(item);
+            item.colIndex = col;
+            placed = true;
+            break;
+          }
+        }
+        if (!placed) {
+          item.colIndex = columns.length;
+          columns.push([item]);
+        }
       });
 
-      parsedItems.forEach((item, i) => {
-        item.colIndex = 0;
-        item.totalCols = 1;
-        let overlapping = parsedItems.filter((other, j) => {
-          return j !== i && !(item.finMins <= other.inicioMins || item.inicioMins >= other.finMins);
+      parsedItems.forEach(item => {
+        let overlappingCols = new Set();
+        parsedItems.forEach(other => {
+          if (!(item.finMins <= other.inicioMins || item.inicioMins >= other.finMins)) {
+            overlappingCols.add(other.colIndex);
+          }
         });
+        item.totalCols = Math.max(overlappingCols.size, item.colIndex + 1);
+      });
 
-        if (overlapping.length > 0) {
-          item.totalCols = overlapping.length + 1;
-          const sameGroup = [item, ...overlapping].sort((a, b) => a.id.localeCompare(b.id));
-          item.colIndex = sameGroup.findIndex(x => x.id === item.id);
-        }
+      parsedItems.forEach(item => {
+        let maxC = 1;
+        parsedItems.forEach(other => {
+          if (!(item.finMins <= other.inicioMins || item.inicioMins >= other.finMins)) {
+            maxC = Math.max(maxC, other.colIndex + 1);
+          }
+        });
+        item.totalCols = Math.max(item.totalCols, maxC);
       });
 
       let eventsHtml = '';
       parsedItems.forEach((item) => {
         const topPx = (item.inicioMins - (startHour * 60)) * (hourHeight / 60);
         const durationMins = item.finMins - item.inicioMins;
-        const heightPx = Math.max(durationMins * (hourHeight / 60), 30);
+        const heightPx = Math.max(durationMins * (hourHeight / 60), 32);
 
         const styleCol = coloresCategoria[item.categoria] || coloresCategoria.indigo;
-        const widthPercent = 100 / item.totalCols;
+        const totalC = Math.max(item.totalCols, item.colIndex + 1);
+        const widthPercent = 100 / totalC;
         const leftPercent = item.colIndex * widthPercent;
 
         eventsHtml += `
           <div class="absolute rounded-xl p-2.5 border ${styleCol.bg} ${styleCol.border} backdrop-blur-md overflow-hidden flex flex-col justify-between shadow-md transition hover:z-30"
-               style="top: ${topPx}px; height: ${heightPx}px; left: calc(3.5rem + ${leftPercent}%); width: calc(100% - 3.5rem - ${leftPercent}% - ${item.totalCols > 1 ? '4px' : '0px'});">
+               style="top: ${topPx}px; height: ${heightPx}px; left: calc(3.5rem + ${leftPercent}%); width: calc(100% - 3.5rem - ${leftPercent}% - ${totalC > 1 ? '4px' : '0px'});">
             <div class="flex justify-between items-start">
               <div class="space-y-0.5 overflow-hidden pr-2">
                 <div class="flex items-center gap-1.5 flex-wrap">
@@ -642,7 +663,6 @@
       lucide.createIcons();
     }
 
-    // --- AUTENTICACIÓN GOOGLE & FIREBASE ---
     onAuthStateChanged(auth, (user) => {
       if (user) {
         if (user.email === ALLOWED_EMAIL) {
@@ -695,7 +715,6 @@
       const parcialesRef = ref(db, 'parciales');
       const agendaRef = ref(db, 'agenda');
 
-      // --- AGENDA / TIEMPO REAL (SYNC ENTRE PC Y CELULAR) ---
       onValue(agendaRef, (snapshot) => {
         const data = snapshot.val();
         eventosAgendaGlobal = {};
@@ -730,7 +749,6 @@
         if (db) remove(ref(db, `agenda/${fechaTarget}/${idItem}`));
       };
 
-      // --- PARCIALES & CALENDARIO ---
       onValue(parcialesRef, (snapshot) => {
         const data = snapshot.val();
         const grid = document.getElementById('grid-parciales');
@@ -745,11 +763,11 @@
             const fechaTextoLegible = formatearFechaTexto(item.fecha);
 
             grid.innerHTML += `
-              <div class="bg-[#18181b] border border-[#27272a] hover:border-violet-500/40 p-3.5 rounded-xl flex justify-between items-start transition">
+              <div class="bg-[#18181b] border border-[#27272a] hover:border-indigo-500/40 p-3.5 rounded-xl flex justify-between items-start transition">
                 <div>
-                  <h4 class="font-bold text-xs text-violet-300">${item.materia}</h4>
+                  <h4 class="font-bold text-xs text-indigo-300">${item.materia}</h4>
                   <p class="text-[11px] text-zinc-300 font-semibold font-mono mt-1 flex items-center gap-1.5">
-                    <i data-lucide="calendar" class="w-3 h-3 text-violet-400"></i> ${fechaTextoLegible}
+                    <i data-lucide="calendar" class="w-3 h-3 text-indigo-400"></i> ${fechaTextoLegible}
                   </p>
                   ${item.detalle ? `<p class="text-[10px] text-zinc-400 mt-1.5 leading-relaxed">${item.detalle}</p>` : ''}
                 </div>
@@ -777,7 +795,6 @@
         e.target.reset();
       });
 
-      // --- RECORDATORIOS ---
       onValue(recordatoriosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-recordatorios');
@@ -820,7 +837,6 @@
         e.target.reset();
       });
 
-      // --- GASTOS ---
       onValue(gastosRef, (snapshot) => {
         const data = snapshot.val();
         const lista = document.getElementById('lista-gastos');
@@ -862,7 +878,6 @@
       });
     }
 
-    // --- CALENDARIO MENSUAL ---
     let fechaActualCal = new Date();
 
     function renderizarCalendario() {
@@ -894,9 +909,9 @@
         let eventosHtml = '';
         parcialesDelDia.forEach(p => {
           eventosHtml += `
-            <div class="bg-violet-500/20 border border-violet-500/40 text-violet-200 text-[9px] px-1.5 py-0.5 rounded mt-1 truncate font-medium" title="${p.materia}">
+            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-200 text-[9px] px-1.5 py-0.5 rounded mt-1 truncate font-medium" title="${p.materia}">
               <span class="hidden sm:inline">${p.materia}</span>
-              <span class="sm:hidden font-bold text-violet-400">●</span>
+              <span class="sm:hidden font-bold text-indigo-400">●</span>
             </div>
           `;
         });
