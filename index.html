@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Organizador Personal</title>
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%D3%85%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%9CC%3C/text%3E%3C/svg%3E" />
 <meta name="theme-color" content="#0a0c10" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- jsPDF para exportar/compartir a PDF -->
+<!-- jsPDF y AutoTable para reportes PDF profesionales -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
 :root{--bg:#0a0c10;--card:#12151b;--soft:#1a1e26;--line:#252b36;--tx:#f3f5f8;--mut:#8f98a8;--ac:#0ea5e9;--ok:#10b981;--warn:#f59e0b;--bad:#f43f5e;--r:18px;color-scheme:dark}
 @media(prefers-color-scheme:light){:root{--bg:#f2f4f7;--card:#fff;--soft:#f0f2f6;--line:#e0e4ea;--tx:#161a20;--mut:#667085;color-scheme:light}}
@@ -35,6 +36,7 @@ textarea.in{resize:none}
 .btn.ok{background:var(--ok)}.btn.warn{background:var(--warn);color:#1a1200}
 .btn.ghost{background:var(--soft);color:var(--tx);border:1px solid var(--line)}
 .ib{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--soft);display:inline-grid;place-items:center;color:var(--mut)}
+.ib:hover{border-color:var(--ac);color:var(--ac)}
 .x{width:34px;height:34px;border:0;background:transparent;color:var(--mut);border-radius:10px;display:inline-grid;place-items:center;flex:none}
 .x:hover{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
 .x .ic{width:17px;height:17px}
@@ -54,32 +56,21 @@ textarea.in{resize:none}
 .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;background:color-mix(in srgb,var(--ac) 18%,transparent);color:var(--ac);margin-top:3px}
 .empty{text-align:center;color:var(--mut);padding:24px 8px;font-size:13px}
 .amount{font-weight:700;color:var(--ok);white-space:nowrap}
-/* loader / login */
+/* loader / login / modal */
 .full{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center;padding:20px;z-index:100}
 #initial-loader{z-index:110;transition:opacity .4s;color:var(--mut);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 .spin{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--ac);animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 .land-wrap{justify-content:flex-start;overflow-y:auto;background:radial-gradient(900px 380px at 50% -8%,color-mix(in srgb,var(--ac) 20%,transparent),transparent),var(--bg)}
-.land{margin:auto;width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;gap:24px;padding:32px 16px;text-align:center}
-.lt{font-size:clamp(32px,7vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.land-sub{color:var(--mut);font-size:15px;max-width:480px}
-/* Mini Preview Front-end */
-.mini-preview{width:100%;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -15px rgba(0,0,0,0.3);text-align:left;pointer-events:none;user-select:none}
-.mini-header{background:var(--soft);padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
-.mini-dots{display:flex;gap:6px}
-.mini-dots span{width:10px;height:10px;border-radius:50%;background:var(--line)}
-.mini-body{padding:16px;display:flex;flex-direction:column;gap:12px}
-.mini-card{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:space-between}
-.mini-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;background:color-mix(in srgb,var(--ac) 20%,transparent);color:var(--ac)}
-/* Botón Google Mejorado */
-.gbtn-modern{background:#ffffff;color:#1f2937;border:1px solid #e5e7eb;border-radius:14px;min-height:52px;padding:0 24px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 14px rgba(0,0,0,0.08);transition:all .2s ease;cursor:pointer}
-.gbtn-modern:hover{background:#f9fafb;box-shadow:0 6px 20px rgba(0,0,0,0.12);transform:translateY(-1px)}
-.gbtn-modern:active{transform:translateY(0);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
-/* Modal de Onboarding / Perfil */
-.modal-overlay{position:fixed;inset:0;background:rgba(10,12,16,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:200}
-.modal-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;width:100%;max-width:440px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 48px rgba(0,0,0,0.4)}
-.avatar-pick{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:6px}
-.avatar-preview{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--ac);background:var(--soft)}
+.land{margin:auto;width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px 0;text-align:center}
+.lt{font-size:clamp(30px,7vw,50px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.lgrid{display:grid;grid-template-columns:1fr;gap:14px;width:100%;text-align:left}
+.lc{display:flex;flex-direction:column;gap:10px}
+.lc h2{font-size:17px}
+.gbtn{background:#fff;color:#18181b;border:0;border-radius:12px;min-height:48px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 28px;box-shadow:0 10px 30px -10px color-mix(in srgb,var(--ac) 60%,transparent)}
+/* modal generico para dias del calendario */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:200;display:grid;place-items:center;padding:16px}
+.modal-box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);width:100%;max-width:440px;padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:0 20px 40px rgba(0,0,0,0.4)}
 /* layout */
 header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
 .hin{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
@@ -177,6 +168,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 .big{font-size:32px;font-weight:800;letter-spacing:-.02em;color:var(--ok)}
 .row2{display:grid;grid-template-columns:1fr 120px;gap:10px}
 @media(min-width:720px){
+ .lgrid{grid-template-columns:repeat(3,1fr)}
  .hin,main{padding-left:24px;padding-right:24px}
  body{padding-bottom:24px}
  #nav{position:static;max-width:1100px;margin:16px auto 0;padding:0 24px;background:none;border:0;backdrop-filter:none;display:flex;gap:8px}
@@ -218,43 +210,17 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0112 0v5l2 2H4zM10 21h4"/></symbol>
  <symbol id="i-note" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 13h8M8 17h6"/></symbol>
  <symbol id="i-wal" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/></symbol>
- <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></symbol>
+ <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M10 13H8M16 13h-2M10 17H8M16 17h-2"/></symbol>
 </svg>
 
 <div id="initial-loader" class="full"><div class="spin"></div>Cargando tus datos…</div>
 
+<!-- MODAL DE LOGIN / LANDING -->
 <div id="login-modal" class="full land-wrap" hidden>
  <div class="land">
   <h1 class="lt">Organizador Personal</h1>
-  <p class="land-sub">Simplificamos tu rutina en simples pasos.</p>
-  
-  <div class="mini-preview" aria-hidden="true">
-   <div class="mini-header">
-    <div class="mini-dots"><span></span><span></span><span></span></div>
-    <span class="sub" style="font-size:11px">Vista previa interactiva</span>
-   </div>
-   <div class="mini-body">
-    <div class="mini-card">
-     <div style="display:flex;align-items:center;gap:10px">
-      <span class="ti" style="width:36px;height:36px;border-radius:10px;--c:#0ea5e9"><svg class="ic" style="width:16px;height:16px"><use href="#i-day"/></svg></span>
-      <div><b>Tu día · En curso</b><div class="sub">10:00 – 11:30 · Rutina diaria</div></div>
-     </div>
-     <span class="mini-badge">Activo</span>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-     <div class="mini-card" style="flex-direction:column;align-items:flex-start;gap:4px">
-      <span class="sub">Evento Próximo</span>
-      <b>Reunión (En 3 días)</b>
-     </div>
-     <div class="mini-card" style="flex-direction:column;align-items:flex-start;gap:4px">
-      <span class="sub">Control de Gastos</span>
-      <b style="color:var(--ok)">$14,500 acumulados</b>
-     </div>
-    </div>
-   </div>
-  </div>
-
-  <button id="btn-google-login" class="gbtn-modern">
+  <p class="sub" style="font-size:15px;max-width:500px">Simplificamos tu rutina en simples pasos.</p>
+  <button id="btn-google-login" class="gbtn">
    <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
    Continuar con Google
   </button>
@@ -262,60 +228,49 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  </div>
 </div>
 
-<!-- Modal de Registro / Onboarding -->
-<div id="onboarding-modal" class="modal-overlay" hidden>
- <div class="modal-card">
+<!-- MODAL DE ONBOARDING (PRIMERA VEZ) -->
+<div id="onboard-modal" class="full" hidden style="z-index:150">
+ <div class="card" style="max-width:420px;width:100%;text-align:left">
   <h2>Completa tu perfil</h2>
-  <p class="sub">Para continuar en el organizador, necesitamos algunos datos básicos (debes ser mayor de 18 años).</p>
-  <form id="form-onboarding" style="display:flex;flex-direction:column;gap:12px">
-   <div class="avatar-pick">
-    <img id="onb-photo-preview" class="avatar-preview" src="" alt="Avatar" onerror="this.src='https://placehold.co/80x80/1a1e26/8f98a8?text=Foto'">
-    <label class="btn ghost" style="font-size:12px;min-height:36px;padding:0 12px;cursor:pointer">
-     Cambiar foto de perfil
-     <input type="file" id="onb-file-input" accept="image/*" hidden>
-    </label>
-   </div>
-   <label class="f"><span>Nombre</span><input class="in" id="onb-nombre" required></label>
-   <label class="f"><span>Apellido</span><input class="in" id="onb-apellido" required></label>
-   <label class="f"><span>Edad</span><input class="in" type="number" id="onb-edad" min="1" max="120" required placeholder="Ej. 24"></label>
-   <p id="onb-error" class="sub" style="color:var(--bad)" hidden></p>
-   <button class="btn" type="submit">Continuar</button>
+  <p class="sub" style="margin-bottom:14px">Necesitamos algunos datos para darte la bienvenida.</p>
+  <form id="form-onboard" style="display:flex;flex-direction:column;gap:12px">
+   <label class="f"><span>Nombre</span><input class="in" id="ob-nombre" required placeholder="Tu nombre"></label>
+   <label class="f"><span>Apellido</span><input class="in" id="ob-apellido" required placeholder="Tu apellido"></label>
+   <label class="f"><span>Edad (Debes ser mayor de 18 años)</span><input class="in" type="number" id="ob-edad" required min="1" max="120" placeholder="Ej. 20"></label>
+   <label class="f"><span>Foto de perfil (Opcional)</span><input class="in" type="file" id="ob-foto" accept="image/*"></label>
+   <p id="ob-error" class="sub" style="color:var(--bad)" hidden></p>
+   <button class="btn" type="submit" style="margin-top:6px">Guardar y comenzar</button>
   </form>
  </div>
 </div>
 
-<!-- Modal para cambiar foto -->
-<div id="profile-modal" class="modal-overlay" hidden>
- <div class="modal-card">
-  <div class="vh"><h2>Editar foto de perfil</h2><button class="x" id="prof-close" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>
-  <div class="avatar-pick" style="margin-top:10px">
-   <img id="prof-photo-preview" class="avatar-preview" src="" alt="Avatar">
-   <label class="btn ghost" style="font-size:12px;min-height:36px;padding:0 12px;cursor:pointer">
-    Elegir nueva imagen
-    <input type="file" id="prof-file-input" accept="image/*" hidden>
-   </label>
-  </div>
-  <button class="btn" id="prof-save">Guardar cambios</button>
+<!-- MODAL DINÁMICO PARA CALENDARIO -->
+<div id="calendar-modal" class="modal-overlay" hidden>
+ <div class="modal-box">
+  <div class="vh"><h2 id="cm-title">Fecha</h2><button class="x" id="cm-close" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div id="cm-content"></div>
  </div>
 </div>
 
-<!-- Modal interactivo para fechas del calendario -->
-<div id="cal-day-modal" class="modal-overlay" hidden>
- <div class="modal-card" style="max-width:480px">
-  <div class="vh"><h2 id="cal-modal-title">Detalle del día</h2><button class="x" id="cal-modal-close" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>
-  <div id="cal-modal-content" style="display:flex;flex-direction:column;gap:10px;max-height:60vh;overflow-y:auto"></div>
+<!-- MODAL PARA CAMBIAR FOTO EN CUALQUIER MOMENTO -->
+<div id="profile-modal" class="modal-overlay" hidden>
+ <div class="modal-box" style="max-width:360px;text-align:center">
+  <div class="vh" style="width:100%"><h2>Editar perfil</h2><button class="x" id="pm-close" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <img id="pm-preview" src="" alt="Avatar" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto;border:2px solid var(--ac)">
+  <label class="f" style="text-align:left"><span>Cambiar foto (Archivo o URL)</span><input class="in" type="file" id="pm-file" accept="image/*"></label>
+  <button id="pm-save" class="btn" style="width:100%">Actualizar foto</button>
  </div>
 </div>
 
 <div id="app-content" hidden>
  <header><div class="hin">
   <div class="brand">
-   <img id="u-photo" src="" alt="Perfil" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden>
+   <img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden>
    <div><span id="u-name">Mi organizador</span><small>● Sincronizado</small></div>
   </div>
   <div class="header-actions">
-   <button class="btn ghost" id="btn-pdf-home" style="min-height:38px;padding:0 12px;font-size:12px"><svg class="ic" style="width:16px;height:16px"><use href="#i-share"/></svg> Compartir Resumen</button>
-   <button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión" style="width:38px;height:38px"><svg class="ic"><use href="#i-out"/></svg></button>
+   <button id="btn-share-pdf" class="ib" title="Descargar PDF general" aria-label="Descargar PDF general"><svg class="ic"><use href="#i-pdf"/></svg></button>
+   <button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button>
   </div>
  </div></header>
 
@@ -345,17 +300,12 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 
   <!-- TU DÍA -->
   <section id="v-dia" class="card" hidden>
-   <div class="vh">
-    <div><h1>Tu día</h1><p class="sub">Agenda en tiempo real</p></div>
-    <div style="display:flex;gap:8px">
-     <button class="btn ghost" id="btn-pdf-dia"><svg class="ic"><use href="#i-share"/></svg> Compartir PDF</button>
-     <button class="btn" id="btn-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva actividad</button>
-    </div>
-   </div>
+   <div class="vh"><div><h1>Tu día</h1><p class="sub">Agenda en tiempo real</p></div>
+    <button class="btn" id="btn-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva actividad</button></div>
 
    <form id="form-schedule-item" class="fgrid" hidden>
     <p class="sub" id="form-day"></p>
-    <label class="f t"><span>Actividad</span><input class="in" id="sch-titulo" placeholder="Ej. Reunión importante" required></label>
+    <label class="f t"><span>Actividad</span><input class="in" id="sch-titulo" placeholder="Ej. Reunión" required></label>
     <label class="f h"><span>Inicio</span><input class="in" type="time" id="sch-hora-inicio" required></label>
     <label class="f h"><span>Fin</span><input class="in" type="time" id="sch-hora-fin" required></label>
     <label class="f n"><span>Notas</span><input class="in" id="sch-notas" placeholder="Opcional"></label>
@@ -385,21 +335,16 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <section id="v-cal" hidden>
    <div class="split">
     <div class="card">
-     <div class="vh">
-      <div><h1>Calendario</h1><p class="sub">Toca un día para ver su agenda o agregar eventos</p></div>
-      <div style="display:flex;gap:6px;align-items:center">
-       <button class="btn ghost" id="btn-pdf-cal" style="min-height:42px;padding:0 12px"><svg class="ic"><use href="#i-share"/></svg> PDF</button>
-       <div class="mnav"><button id="cal-prev" class="ib" aria-label="Mes anterior"><svg class="ic"><use href="#i-l"/></svg></button><b id="cal-mes-anio"></b><button id="cal-next" class="ib" aria-label="Mes siguiente"><svg class="ic"><use href="#i-r"/></svg></button></div>
-      </div>
-     </div>
+     <div class="vh"><div><h1>Calendario</h1><p class="sub">Toca un día para ver su agenda</p></div>
+      <div class="mnav"><button id="cal-prev" class="ib" aria-label="Mes anterior"><svg class="ic"><use href="#i-l"/></svg></button><b id="cal-mes-anio"></b><button id="cal-next" class="ib" aria-label="Mes siguiente"><svg class="ic"><use href="#i-r"/></svg></button></div></div>
      <div class="wd"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
      <div id="cal-grid" class="cal"></div>
-     <div class="legend"><span><i style="background:var(--warn)"></i>Fecha Importante</span><span><i style="background:var(--ok)"></i>Con agenda</span></div>
+     <div class="legend"><span><i style="background:var(--warn)"></i>Fecha importante</span><span><i style="background:var(--ok)"></i>Con agenda</span></div>
     </div>
     <div class="card">
      <h2>Fechas importantes</h2>
      <form id="form-parcial" class="fgrid" style="grid-template-columns:1fr">
-      <label class="f"><span>Título / Evento</span><input class="in" id="parcial-materia" placeholder="Ej. Presentación de proyecto" required></label>
+      <label class="f"><span>Evento</span><input class="in" id="parcial-materia" placeholder="Ej. Reunión importante" required></label>
       <label class="f"><span>Fecha</span><input class="in" type="date" id="parcial-fecha" required></label>
       <button class="btn" type="submit"><svg class="ic"><use href="#i-plus"/></svg> Agregar</button>
      </form>
@@ -411,10 +356,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <!-- RECORDATORIOS -->
   <section id="v-rec" hidden><div class="narrow">
    <div class="card">
-    <div class="vh">
-     <h1>Recordatorios</h1>
-     <button class="btn ghost" id="btn-pdf-rec"><svg class="ic"><use href="#i-share"/></svg> Compartir PDF</button>
-    </div>
+    <h1>Recordatorios</h1>
     <form id="form-recordatorio" class="fgrid" style="grid-template-columns:1fr">
      <input class="in" id="rec-titulo" placeholder="Título (opcional)">
      <textarea class="in" id="rec-detalle" rows="2" placeholder="Detalle…" required></textarea>
@@ -427,10 +369,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <!-- GASTOS -->
   <section id="v-gas" hidden><div class="narrow">
    <div class="card">
-    <div class="vh">
-     <h1>Gastos</h1>
-     <button class="btn ghost" id="btn-pdf-gas"><svg class="ic"><use href="#i-share"/></svg> Compartir PDF</button>
-    </div>
+    <h1>Gastos</h1>
     <p class="big" id="section-total-gastos">$0</p><p class="sub">Total acumulado</p>
     <form id="form-gasto" class="fgrid" style="grid-template-columns:1fr">
      <div class="row2">
@@ -442,18 +381,11 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
     <ul id="lista-gastos" class="list"></ul>
    </div>
   </div></section>
-
-  <!-- NOTAS -->
+   <!-- NOTAS -->
   <section id="v-not" hidden>
    <div class="card nbox" id="nbox">
     <aside class="nside">
-     <div class="nhead">
-      <h1>Notas</h1>
-      <div style="display:flex;gap:4px">
-       <button class="btn ghost" id="btn-pdf-not" style="min-height:40px;padding:0 10px"><svg class="ic"><use href="#i-share"/></svg></button>
-       <button class="btn" id="n-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva</button>
-      </div>
-     </div>
+     <div class="nhead"><h1>Notas</h1><button class="btn" id="n-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva</button></div>
      <input class="in" id="n-search" type="search" placeholder="Buscar">
      <div id="n-list" class="nlist"></div>
     </aside>
@@ -500,7 +432,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app), db = getDatabase(app), provider = new GoogleAuthProvider();
-let base = '', uName = '', userPerfil = null;
+let base = '', uName = '';
 const R = p => ref(db, base + p);
 
 const $ = id => document.getElementById(id);
@@ -517,112 +449,31 @@ const delBtn = path => `<button class="x" data-del="${esc(path)}" aria-label="El
 
 let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, notas = [], curId = null, dirty = false, tmr = null, rng = null, needScroll = true, lastRender = 0, calDate = new Date();
 
-/* ---------- Generador de PDF ---------- */
-async function generarPDF(tituloSeccion, contenidoTexto, nombreArchivo) {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  
-  doc.setFont("Helvetica", "bold");
-  doc.setFontSize(20);
-  doc.text("Organizador Personal", 15, 20);
-  
-  doc.setFontSize(14);
-  doc.setTextColor(80, 80, 80);
-  doc.text(`Sección: ${tituloSeccion}`, 15, 28);
-  doc.text(`Usuario: ${userPerfil ? userPerfil.nombre + ' ' + userPerfil.apellido : 'Usuario'}`, 15, 35);
-  doc.text(`Fecha de exportación: ${new Date().toLocaleDateString('es-ES')}`, 15, 42);
-  
-  doc.setLineWidth(0.5);
-  doc.setDrawColor(200, 200, 200);
-  doc.line(15, 48, 195, 48);
-
-  doc.setFont("Helvetica", "normal");
-  doc.setFontSize(11);
-  doc.setTextColor(20, 20, 20);
-
-  const splitText = doc.splitTextToSize(contenidoTexto, 180);
-  doc.text(splitText, 15, 56);
-
-  const pdfBlob = doc.output('blob');
-  const file = new File([pdfBlob], `${nombreArchivo}.pdf`, { type: 'application/pdf' });
-  
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try {
-      await navigator.share({
-        title: `Organizador - ${tituloSeccion}`,
-        text: `Aquí tienes el resumen de ${tituloSeccion}`,
-        files: [file]
-      });
-      return;
-    } catch (e) {
-      if (e.name !== 'AbortError') console.warn(e);
-    }
-  }
-  
-  doc.save(`${nombreArchivo}.pdf`);
-}
-
-$('btn-pdf-home').onclick = () => {
-  const txt = `Resumen General\nHora actual: ${new Date().toLocaleTimeString()}\nAgenda de hoy: ${$('t-dia').textContent}\nPróxima fecha: ${$('t-cal').textContent}\nRecordatorios: ${recN}\nGastos acumulados: ${money(gasT)}`;
-  generarPDF('Inicio y Estado General', txt, 'resumen-organizador');
-};
-
-$('btn-pdf-dia').onclick = () => {
-  const its = (agenda[sel] || []).map(i => `- [${i.horaInicio} a ${i.horaFin}] ${i.titulo} (${i.notas || 'Sin notas'})`).join('\n');
-  generarPDF(`Agenda del día (${sel})`, its || 'No hay actividades para este día.', `agenda-${sel}`);
-};
-
-$('btn-pdf-cal').onclick = () => {
-  const ps = parciales.map(p => `- ${p.materia} (${p.fecha}) · ${cuando(p.fecha)}`).join('\n');
-  generarPDF('Fechas Importantes', ps || 'No hay fechas importantes registradas.', 'fechas-importantes');
-};
-
-$('btn-pdf-rec').onclick = () => {
-  const rs = [...document.querySelectorAll('#lista-recordatorios li')].map(li => `- ${li.textContent.trim()}`).join('\n');
-  generarPDF('Recordatorios', rs || 'No hay recordatorios.', 'recordatorios');
-};
-
-$('btn-pdf-gas').onclick = () => {
-  const gs = [...document.querySelectorAll('#lista-gastos li')].map(li => `- ${li.textContent.trim()}`).join('\n');
-  generarPDF(`Gastos (Total: ${money(gasT)})`, gs || 'No hay gastos registrados.', 'gastos');
-};
-
-$('btn-pdf-not').onclick = () => {
-  const n = notas.find(x => x.id === curId) || notas[0];
-  if (!n) { alert('No hay notas para exportar.'); return; }
-  const cleanTxt = document.createElement('div'); cleanTxt.innerHTML = noteHtml(n);
-  generarPDF('Nota Seleccionada', cleanTxt.textContent || 'Nota vacía', 'nota-personal');
-};
-
-/* ---------- Manejo de Rutas Robustas (Soporte Multi-Hosting y Recarga) ---------- */
+/* ---------- Rutas por Hash (evita errores 404 al recargar) ---------- */
 const VIEWS = ['home', 'dia', 'cal', 'rec', 'gas', 'not'];
-const PATHS = { home: '/panel', dia: '/panel/agenda', cal: '/panel/calendario', rec: '/panel/recordatorios', gas: '/panel/gastos', not: '/panel/notas' };
 const NOMBRES = { dia: 'Tu día', cal: 'Calendario', rec: 'Recordatorios', gas: 'Gastos', not: 'Notas' };
 let curUser = null;
 
-const getPath = () => {
-  const p = location.pathname;
-  if (p && p !== '/' && VIEWS.some(k => PATHS[k] === p.replace(/\/+$/, ''))) return p;
-  return '/panel';
-};
+function getHashView() {
+  const h = location.hash.replace('#/', '').replace('#', '');
+  if (!h || h === 'panel') return 'home';
+  if (h === 'panel/agenda') return 'dia';
+  if (h === 'panel/calendario') return 'cal';
+  if (h === 'panel/recordatorios') return 'rec';
+  if (h === 'panel/gastos') return 'gas';
+  if (h === 'panel/notas') return 'not';
+  return VIEWS.includes(h) ? h : 'home';
+}
 
-const viewFromPath = p => VIEWS.find(k => PATHS[k] === p.replace(/\/+$/, '')) || 'home';
-
-function go(view, replace) {
-  const path = view ? PATHS[view] : '/panel';
-  if (location.pathname === path) { onRoute(); return; }
-  try {
-    history[replace ? 'replaceState' : 'pushState'](null, '', path);
-  } catch (e) {
-    location.href = path;
-    return;
-  }
-  onRoute();
+function go(view) {
+  const target = view === 'home' ? '#/panel' : `#/panel/${view === 'dia' ? 'agenda' : view === 'cal' ? 'calendario' : view === 'rec' ? 'recordatorios' : view === 'gas' ? 'gastos' : 'notas'}`;
+  if (location.hash !== target) location.hash = target;
+  else onRoute();
 }
 
 function onRoute() {
-  const p = getPath(), v = viewFromPath(p);
   if (!curUser) return;
+  const v = getHashView();
   showView(v);
 }
 
@@ -638,12 +489,9 @@ function showView(v) {
 
 document.addEventListener('click', e => {
   const g = e.target.closest('[data-go]');
-  if (g) {
-    e.preventDefault();
-    go(g.dataset.go);
-  }
+  if (g) go(g.dataset.go);
 });
-addEventListener('popstate', onRoute);
+window.addEventListener('hashchange', onRoute);
 
 /* ---------- Reloj ---------- */
 function tick() {
@@ -707,7 +555,7 @@ function render() {
   $('day-count').textContent = `${items.length} ${items.length === 1 ? 'actividad' : 'actividades'}`;
 
   let cluster = [], clusterEnd = 0;
-  const flushCluster = () => {
+  const flushCl = () => {
     const cols = [];
     cluster.forEach(it => {
       let c = cols.findIndex(end => end <= it.s);
@@ -717,10 +565,10 @@ function render() {
     cluster.forEach(it => it.n = cols.length);
   };
   items.forEach(it => {
-    if (cluster.length && it.s >= clusterEnd) { flushCluster(); cluster = []; clusterEnd = 0; }
+    if (cluster.length && it.s >= clusterEnd) { flushCl(); cluster = []; clusterEnd = 0; }
     cluster.push(it); clusterEnd = Math.max(clusterEnd, it.e);
   });
-  if (cluster.length) flushCluster();
+  if (cluster.length) flushCl();
 
   const s0 = 0, e0 = 24;
   const H = 64, px = m => (m - s0 * 60) * H / 60;
@@ -749,7 +597,7 @@ function render() {
   if (it) det.innerHTML = `<div class="det" style="--c:${COL[it.categoria] || COL.indigo}"><div><b>${esc(it.titulo)}</b><span class="sub">${it.horaInicio} – ${it.horaFin}${it.notas ? ' · ' + esc(it.notas) : ''}</span></div>${delBtn(`agenda/${sel}/${it.id}`)}<button class="x" data-close aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>`;
 }
 
-/* ---------- Calendario con Modales Interactivos ---------- */
+/* ---------- Calendario & Modales Interactivos ---------- */
 function renderCal() {
   const y = calDate.getFullYear(), m = calDate.getMonth();
   $('cal-mes-anio').textContent = `${MESES[m]} ${y}`;
@@ -760,78 +608,57 @@ function renderCal() {
   for (let d = 1; d <= total; d++) {
     const k = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
     const ps = parciales.filter(p => p.fecha === k).map(p => `<i class="pc" title="${esc(p.materia)}">${esc(p.materia)}</i>`).join('');
-    h += `<button type="button" data-d="${k}" class="day ${k === today ? 'today' : ''} ${k === sel ? 'sel' : ''} ${agenda[k] && agenda[k].length ? 'has' : ''}"><b>${d}</b>${ps}</button>`;
+    h += `<button type="button" data-calday="${k}" class="day ${k === today ? 'today' : ''} ${k === sel ? 'sel' : ''} ${agenda[k] && agenda[k].length ? 'has' : ''}"><b>${d}</b>${ps}</button>`;
   }
   $('cal-grid').innerHTML = h;
 }
 
 $('cal-grid').addEventListener('click', e => {
-  const b = e.target.closest('[data-d]');
+  const b = e.target.closest('[data-calday]');
   if (!b) return;
-  const k = b.dataset.d;
-  openCalDayModal(k);
-});
-
-function openCalDayModal(k) {
-  const items = agenda[k] || [];
-  const importantDates = parciales.filter(p => p.fecha === k);
-  const titleEl = $('cal-modal-title');
-  const contentEl = $('cal-modal-content');
-  const dl = new Date(k + 'T00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const k = b.dataset.calday;
+  const dayAgenda = agenda[k] || [];
+  const dayParciales = parciales.filter(p => p.fecha === k);
   
-  titleEl.textContent = dl;
-
-  if (items.length === 0 && importantDates.length === 0) {
-    contentEl.innerHTML = `
-      <div style="text-align:center;padding:20px;display:flex;flex-direction:column;gap:12px;align-items:center">
-        <p class="sub" style="font-size:14px">No tienes nada agendado, deseas agregar algo?</p>
-        <button class="btn" id="modal-add-btn">Agregar actividad para este día</button>
+  const modal = $('calendar-modal');
+  const title = $('cm-title');
+  const content = $('cm-content');
+  title.textContent = `Fecha: ${fechaTexto(k)}`;
+  
+  if (dayAgenda.length === 0 && dayParciales.length === 0) {
+    content.innerHTML = `
+      <p class="sub" style="font-size:14px;margin-bottom:12px">No tienes nada agendado, deseas agregar algo?</p>
+      <div style="display:flex;gap:10px">
+        <button id="cm-go-agenda" class="btn" style="flex:1">Ir a la agenda</button>
+        <button id="cm-go-close" class="btn ghost">Cerrar</button>
       </div>
     `;
-    $('modal-add-btn').onclick = () => {
-      $('cal-day-modal').hidden = true;
-      setDate(k);
-      go('dia');
-      $('form-schedule-item').hidden = false;
-      $('sch-titulo').focus();
-    };
+    $('cm-go-agenda').onclick = () => { setDate(k); modal.hidden = true; go('dia'); };
+    $('cm-go-close').onclick = () => modal.hidden = true;
   } else {
-    let html = '';
-    if (importantDates.length > 0) {
-      html += `<b style="font-size:13px;color:var(--warn)">Fechas importantes:</b>`;
-      importantDates.forEach(p => {
-        html += `<div class="card" style="padding:10px;margin-bottom:6px"><b>${esc(p.materia)}</b></div>`;
-      });
+    let html = '<div style="display:flex;flex-direction:column;gap:8px;max-height:60vh;overflow-y:auto">';
+    if (dayParciales.length) {
+      html += '<b>Eventos importantes:</b>';
+      dayParciales.forEach(p => { html += `<div style="background:var(--soft);padding:8px 10px;border-radius:10px;font-size:13px">• ${esc(p.materia)}</div>`; });
     }
-    if (items.length > 0) {
-      html += `<b style="font-size:13px;color:var(--ac);margin-top:6px">Agenda del día:</b>`;
-      items.forEach(i => {
-        html += `<div class="card" style="padding:10px;margin-bottom:6px;border-left:4px solid ${COL[i.categoria] || COL.indigo}"><b>${esc(i.titulo)}</b><div class="sub">${i.horaInicio} – ${i.horaFin}${i.notas ? ' · ' + esc(i.notas) : ''}</div></div>`;
-      });
+    if (dayAgenda.length) {
+      html += '<b style="margin-top:6px">Actividades del día:</b>';
+      dayAgenda.forEach(a => { html += `<div style="background:var(--soft);padding:8px 10px;border-radius:10px;font-size:13px"><b>${esc(a.titulo)}</b> (${a.horaInicio} - ${a.horaFin})</div>`; });
     }
-    html += `<button class="btn ghost" id="modal-go-agenda" style="margin-top:10px">Ver en Tu Día</button>`;
-    contentEl.innerHTML = html;
-    
-    const goAgendaBtn = $('modal-go-agenda');
-    if (goAgendaBtn) {
-      goAgendaBtn.onclick = () => {
-        $('cal-day-modal').hidden = true;
-        setDate(k);
-        go('dia');
-      };
-    }
+    html += '</div><button id="cm-go-day" class="btn" style="width:100%;margin-top:10px">Ver día completo</button>';
+    content.innerHTML = html;
+    $('cm-go-day').onclick = () => { setDate(k); modal.hidden = true; go('dia'); };
   }
+  modal.hidden = false;
+});
 
-  $('cal-day-modal').hidden = false;
-}
-
-$('cal-modal-close').onclick = () => { $('cal-day-modal').hidden = true; };
-$('cal-day-modal').onclick = e => { if (e.target === $('cal-day-modal')) $('cal-day-modal').hidden = true; };
+$('cm-close').onclick = () => { $('calendar-modal').hidden = true; };
+$('calendar-modal').onclick = e => { if (e.target === $('calendar-modal')) $('calendar-modal').hidden = true; };
 
 $('cal-prev').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() - 1); renderCal(); };
 $('cal-next').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() + 1); renderCal(); };
 
-/* ---------- Notas ---------- */
+/* ---------- Notas (editor tipo iCloud) ---------- */
 const OK = { DIV:1, P:1, BR:1, B:1, STRONG:1, I:1, EM:1, U:1, H1:1, H2:1, H3:1, UL:1, OL:1, LI:1 };
 function clean(html) {
   const t = document.createElement('template'); t.innerHTML = html || '';
@@ -916,7 +743,7 @@ ed.addEventListener('click', e => {
   const li = e.target;
   if (li.tagName === 'LI' && li.parentElement.classList.contains('ck') && e.offsetX < 32) { li.classList.toggle('done'); markDirty(); }
 });
-addEventListener('pagehide', flush);
+window.addEventListener('pagehide', flush);
 document.addEventListener('visibilitychange', () => { if (document.hidden) flush(); });
 
 $('n-tool').addEventListener('mousedown', e => { if (e.target.closest('.tb')) e.preventDefault(); });
@@ -946,115 +773,161 @@ document.addEventListener('click', e => {
   if (b && confirm('¿Eliminar este elemento?')) { selEv = null; remove(R(b.dataset.del)); }
 });
 
-/* ---------- Gestión de perfil y Onboarding ---------- */
-let tempPhotoBase64 = '';
+/* ---------- Generación de PDF Profesional (jsPDF + autoTable) ---------- */
+function generarPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  
+  // Encabezado corporativo
+  doc.setFillColor(15, 23, 42); // Azul oscuro
+  doc.rect(0, 0, pageWidth, 26, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(16);
+  doc.setFont('inter', 'bold');
+  doc.text('ORGANIZADOR PERSONAL - REPORTE GENERAL', 14, 17);
+  
+  doc.setFontSize(10);
+  doc.setTextColor(143, 152, 168);
+  doc.text(`Fecha de emisión: ${new Date().toLocaleDateString('es-ES')}`, pageWidth - 14, 17, { align: 'right' });
+  
+  let currentY = 36;
+  
+  // 1. Resumen de Gastos
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(13);
+  doc.setFont('inter', 'bold');
+  doc.text('1. Resumen Financiero y Gastos', 14, currentY);
+  currentY += 6;
+  
+  const totalGastosNum = Object.values(window._gastosData || {}).reduce((s, g) => s + parseFloat(g.monto || 0), 0);
+  const gastosRows = Object.values(window._gastosData || {}).map(g => [g.concepto || '', money(g.monto)]);
+  
+  doc.autoTable({
+    startY: currentY,
+    head: [['Concepto de Gasto', 'Monto']],
+    body: gastosRows.length ? gastosRows : [['Sin gastos registrados', '$0']],
+    theme: 'striped',
+    headStyles: { fillColor: [14, 165, 233] },
+    foot: [['Total Acumulado', money(totalGastosNum)]],
+    footStyles: { fillColor: [15, 23, 42], textColor: [255, 255, 255], fontStyle: 'bold' }
+  });
+  
+  currentY = doc.lastAutoTable.finalY + 12;
+  
+  // 2. Fechas Importantes
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(13);
+  doc.setFont('inter', 'bold');
+  doc.text('2. Fechas Importantes', 14, currentY);
+  currentY += 6;
+  
+  const parcialesRows = (window._parcialesData || []).map(p => [p.materia || '', fechaTexto(p.fecha), cuando(p.fecha)]);
+  doc.autoTable({
+    startY: currentY,
+    head: [['Evento / Materia', 'Fecha', 'Estado']],
+    body: parcialesRows.length ? parcialesRows : [['Sin fechas importantes registradas', '-', '-']],
+    theme: 'striped',
+    headStyles: { fillColor: [20, 184, 166] }
+  });
+  
+  currentY = doc.lastAutoTable.finalY + 12;
+  
+  // 3. Recordatorios
+  if (currentY > 240) { doc.addPage(); currentY = 20; }
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(13);
+  doc.setFont('inter', 'bold');
+  doc.text('3. Recordatorios Pendientes', 14, currentY);
+  currentY += 6;
+  
+  const recRows = Object.values(window._recData || {}).map(r => [r.tituloOpcional || 'General', r.detalle || r.titulo || '']);
+  doc.autoTable({
+    startY: currentY,
+    head: [['Título', 'Detalle']],
+    body: recRows.length ? recRows : [['Sin recordatorios', '-']],
+    theme: 'striped',
+    headStyles: { fillColor: [245, 158, 11] }
+  });
+  
+  // Pie de página en todas las páginas
+  const pageCount = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(9);
+    doc.setTextColor(143, 152, 168);
+    doc.text(`Página ${i} de ${pageCount} — Organizador Personal`, pageWidth / 2, doc.internal.pageSize.getHeight() - 10, { align: 'center' });
+  }
+  
+  doc.save('organizador-personal-reporte.pdf');
+}
 
-$('onb-file-input').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    tempPhotoBase64 = ev.target.result;
-    $('onb-photo-preview').src = tempPhotoBase64;
-  };
-  reader.readAsDataURL(file);
-});
+$('btn-share-pdf').onclick = generarPDF;
 
-$('prof-file-input').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    tempPhotoBase64 = ev.target.result;
-    $('prof-photo-preview').src = tempPhotoBase64;
-  };
-  reader.readAsDataURL(file);
-});
-
-$('u-photo').onclick = () => {
-  if (!userPerfil) return;
-  tempPhotoBase64 = userPerfil.photo || '';
-  $('prof-photo-preview').src = tempPhotoBase64 || 'https://placehold.co/80x80/1a1e26/8f98a8?text=Foto';
-  $('profile-modal').hidden = false;
-};
-
-$('prof-close').onclick = () => { $('profile-modal').hidden = true; };
-$('prof-save').onclick = async () => {
-  if (!curUser) return;
-  userPerfil.photo = tempPhotoBase64;
-  await set(R('perfil'), userPerfil);
-  actualizarUiPerfil();
-  $('profile-modal').hidden = true;
-};
-
-function actualizarUiPerfil() {
-  if (!userPerfil) return;
-  uName = userPerfil.nombre || 'Mi organizador';
-  $('u-name').textContent = `${userPerfil.nombre || ''} ${userPerfil.apellido || ''}`.trim();
-  const ph = $('u-photo');
-  if (userPerfil.photo) {
-    ph.src = userPerfil.photo;
-    ph.hidden = false;
+/* ---------- Auth & Perfil Onboarding ---------- */
+const errorLogin = $('error-login');
+onAuthStateChanged(auth, user => {
+  if (user) {
+    checkUserOnboarding(user);
   } else {
-    ph.hidden = true;
+    curUser = null;
+    $('initial-loader').style.display = 'none';
+    $('app-content').hidden = true;
+    $('login-modal').hidden = false;
+    $('onboard-modal').hidden = true;
+  }
+});
+
+async function checkUserOnboarding(user) {
+  curUser = user;
+  const userRef = ref(db, `users/${user.uid}/profile`);
+  const snap = await get(userRef);
+  
+  if (!snap.exists()) {
+    $('initial-loader').style.display = 'none';
+    $('login-modal').hidden = true;
+    $('ob-nombre').value = user.displayName ? user.displayName.split(' ')[0] : '';
+    $('ob-apellido').value = user.displayName ? user.displayName.split(' ').slice(1).join(' ') : '';
+    $('onboard-modal').hidden = false;
+  } else {
+    const data = snap.val();
+    uName = data.nombre;
+    const photo = data.foto || user.photoURL || '';
+    desbloquear(user, uName, photo);
   }
 }
 
-$('form-onboarding').addEventListener('submit', async e => {
+$('form-onboard').addEventListener('submit', async e => {
   e.preventDefault();
-  const edad = parseInt($('onb-edad').value, 10);
-  const errEl = $('onb-error');
-  if (isNaN(edad) || edad < 18) {
-    errEl.textContent = 'Debes ser mayor de 18 años para registrarte.';
-    errEl.hidden = false;
+  const nombre = $('ob-nombre').value.trim();
+  const apellido = $('ob-apellido').value.trim();
+  const edad = parseInt($('ob-edad').value, 10);
+  
+  if (edad < 18) {
+    $('ob-error').textContent = 'Debes ser mayor de 18 años para registrarte.';
+    $('ob-error').hidden = false;
     return;
   }
-  errEl.hidden = true;
   
-  userPerfil = {
-    nombre: $('onb-nombre').value.trim(),
-    apellido: $('onb-apellido').value.trim(),
-    edad,
-    photo: tempPhotoBase64 || curUser.photoURL || ''
-  };
-
-  await set(R('perfil'), userPerfil);
-  $('onboarding-modal').hidden = true;
-  actualizarUiPerfil();
-  desbloquearAppFinal();
-});
-
-/* ---------- Auth ---------- */
-const errorLogin = $('error-login');
-onAuthStateChanged(auth, async user => {
-  if (user) {
-    curUser = user;
-    base = `users/${user.uid}/`;
-    
-    const snap = await get(R('perfil'));
-    if (!snap.exists()) {
-      $('initial-loader').style.display = 'none';
-      $('login-modal').hidden = true;
-      $('onb-nombre').value = (user.displayName || '').split(' ')[0] || '';
-      $('onb-apellido').value = (user.displayName || '').split(' ').slice(1).join(' ') || '';
-      tempPhotoBase64 = user.photoURL || '';
-      $('onb-photo-preview').src = tempPhotoBase64 || 'https://placehold.co/80x80/1a1e26/8f98a8?text=Foto';
-      $('onb-error').hidden = true;
-      $('onboarding-modal').hidden = false;
-    } else {
-      userPerfil = snap.val();
-      actualizarUiPerfil();
-      desbloquearAppFinal();
-    }
-  } else {
-    curUser = null;
-    userPerfil = null;
-    $('initial-loader').style.display = 'none';
-    $('app-content').hidden = true;
-    $('onboarding-modal').hidden = true;
-    $('login-modal').hidden = false;
+  let fotoUrl = curUser.photoURL || '';
+  const fileInput = $('ob-foto');
+  if (fileInput.files && fileInput.files[0]) {
+    fotoUrl = await fileToBase64(fileInput.files[0]);
   }
+  
+  await set(ref(db, `users/${curUser.uid}/profile`), { nombre, apellido, edad, foto: fotoUrl });
+  $('onboard-modal').hidden = true;
+  desbloquear(curUser, nombre, fotoUrl);
 });
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
 
 $('btn-google-login').onclick = () => {
   errorLogin.hidden = true;
@@ -1062,16 +935,34 @@ $('btn-google-login').onclick = () => {
     const c = err.code;
     if (c === 'auth/popup-blocked' || c === 'auth/operation-not-supported-in-this-environment') return signInWithRedirect(auth, provider);
     if (c === 'auth/popup-closed-by-user' || c === 'auth/cancelled-popup-request') return;
-    errorLogin.textContent = c === 'auth/unauthorized-domain'
-      ? 'Este dominio no está autorizado en Firebase.'
-      : 'No se pudo iniciar sesión. Inténtalo de nuevo.';
+    errorLogin.textContent = 'No se pudo iniciar sesión. Inténtalo de nuevo.';
     errorLogin.hidden = false;
   });
 };
 
-$('btn-logout').onclick = () => signOut(auth).then(() => {
-  location.href = '/';
-});
+$('btn-logout').onclick = () => signOut(auth).then(() => { location.hash = ''; location.reload(); });
+
+/* Modificar foto desde el avatar superior */
+const profileModal = $('profile-modal');
+$('u-photo').onclick = () => {
+  $('pm-preview').src = $('u-photo').src;
+  profileModal.hidden = false;
+};
+$('pm-close').onclick = () => { profileModal.hidden = true; };
+profileModal.onclick = e => { if (e.target === profileModal) profileModal.hidden = true; };
+
+$('pm-file').onchange = async e => {
+  if (e.target.files && e.target.files[0]) {
+    const b64 = await fileToBase64(e.target.files[0]);
+    $('pm-preview').src = b64;
+  }
+};
+$('pm-save').onclick = async () => {
+  const newPhoto = $('pm-preview').src;
+  await update(ref(db, `users/${curUser.uid}/profile`), { foto: newPhoto });
+  $('u-photo').src = newPhoto;
+  profileModal.hidden = true;
+};
 
 const cargados = new Set();
 function hideLoader() {
@@ -1084,17 +975,24 @@ function cargado(nombre) {
   if (cargados.size === 5) hideLoader();
 }
 
-function desbloquearAppFinal() {
+function desbloquear(user, name, photoUrl) {
+  curUser = user;
+  base = `users/${user.uid}/`;
+  uName = name;
+  $('u-name').textContent = name;
+  const ph = $('u-photo');
+  if (photoUrl) { ph.src = photoUrl; ph.hidden = false; }
   const l = $('initial-loader'); if (l) { l.style.display = 'flex'; l.style.opacity = '1'; }
   $('login-modal').hidden = true;
-  $('onboarding-modal').hidden = true;
   $('app-content').hidden = false;
+  
+  if (!location.hash) location.hash = '#/panel';
   onRoute();
   iniciar();
   setTimeout(hideLoader, 10000);
 }
 
-/* ---------- Datos ---------- */
+/* ---------- Sincronización de Datos ---------- */
 let suscrita = false;
 function iniciar() {
   render(); renderCal(); renderHome();
@@ -1121,9 +1019,10 @@ function iniciar() {
   onValue(R('parciales'), snap => {
     const data = snap.val() || {};
     parciales = Object.keys(data).map(id => ({ id, ...data[id] })).sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''));
+    window._parcialesData = parciales;
     $('grid-parciales').innerHTML = parciales.length ? parciales.map(p =>
       `<li class="${dias(p.fecha) < 0 ? 'past' : ''}"><div><b>${esc(p.materia)}</b><br><span class="sub">${fechaTexto(p.fecha)}</span><br><span class="tag">${cuando(p.fecha)}</span></div>${delBtn('parciales/' + p.id)}</li>`
-    ).join('') : '<p class="empty">No hay fechas importantes agendadas</p>';
+    ).join('') : '<p class="empty">No hay fechas importantes</p>';
     renderCal(); renderHome(); cargado('parciales');
   });
   $('form-parcial').addEventListener('submit', e => {
@@ -1135,6 +1034,7 @@ function iniciar() {
   onValue(R('recordatorios'), snap => {
     const data = snap.val() || {}, keys = Object.keys(data);
     recN = keys.length;
+    window._recData = data;
     $('lista-recordatorios').innerHTML = keys.length ? keys.map(k => {
       const it = data[k], t = it.tituloOpcional || '', d = it.detalle || it.titulo || '';
       return `<li><div>${t ? `<b style="color:var(--warn)">${esc(t)}</b><br>` : ''}${esc(d)}</div>${delBtn('recordatorios/' + k)}</li>`;
@@ -1150,11 +1050,17 @@ function iniciar() {
   onValue(R('gastos'), snap => {
     const data = snap.val() || {}, keys = Object.keys(data).reverse();
     gasT = keys.reduce((s, k) => s + parseFloat(data[k].monto || 0), 0);
+    window._gastosData = data;
     $('lista-gastos').innerHTML = keys.length ? keys.map(k =>
       `<li><div>${esc(data[k].concepto)}</div><div style="display:flex;align-items:center;gap:6px"><span class="amount">${money(data[k].monto)}</span>${delBtn('gastos/' + k)}</div></li>`
     ).join('') : '<p class="empty">Sin gastos registrados</p>';
     $('section-total-gastos').textContent = money(gasT);
     renderHome(); cargado('gastos');
+  });
+  $('form-gasto').addEventListener('submit', e => {
+    e.preventDefault();
+    push(R('gastos'), { concepto: $('gasto-concepto').value.trim(), monto: parseFloat($('gasto-monto').value) });
+    e.target.reset();
   });
 
   onValue(R('notas'), snap => {
@@ -1162,11 +1068,6 @@ function iniciar() {
     notas = Object.keys(data).map(id => ({ id, ...data[id] })).sort((a, b) => (b.ts || 0) - (a.ts || 0));
     if (curId && !notas.some(n => n.id === curId)) { curId = null; showPane(false); $('nbox').classList.remove('open'); }
     renderNotas(); renderHome(); cargado('notas');
-  });
-  $('form-gasto').addEventListener('submit', e => {
-    e.preventDefault();
-    push(R('gastos'), { concepto: $('gasto-concepto').value.trim(), monto: parseFloat($('gasto-monto').value) });
-    e.target.reset();
   });
 }
 </script>
