@@ -1,950 +1,528 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Organizador Personal OS</title>
-  
-  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
-  <meta name="theme-color" content="#09090b" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Poppins', 'sans-serif'],
-            mono: ['Space Grotesk', 'sans-serif'],
-          },
-          colors: {
-            bgDark: '#09090b',
-            cardDark: '#121217',
-            borderSubtle: '#27272a',
-            inputDark: '#18181b',
-          }
-        }
-      }
-    }
-  </script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #09090b;
-      color: #f4f4f5;
-    }
-    
-    .font-mono {
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .minimal-card {
-      background: #121217;
-      border: 1px solid #27272a;
-      transition: border-color 0.2s ease;
-    }
-    .minimal-card:hover {
-      border-color: #3f3f46;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in {
-      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    ::-webkit-scrollbar { width: 4px; height: 4px; }
-    ::-webkit-scrollbar-track { background: #09090b; }
-    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Organizador Personal OS</title>
+<link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" />
+<meta name="theme-color" content="#0b0b0f" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0f;--card:#14141a;--soft:#1b1b23;--line:#272731;--tx:#f4f4f5;--mut:#9a9aa8;--ac:#6366f1;--ok:#10b981;--warn:#f59e0b;--bad:#f43f5e;--r:16px;color-scheme:dark}
+@media(prefers-color-scheme:light){:root{--bg:#f4f4f7;--card:#fff;--soft:#f1f1f5;--line:#e2e2e9;--tx:#18181b;--mut:#6b6b78;color-scheme:light}}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.45;padding-bottom:env(safe-area-inset-bottom)}
+button{font:inherit;color:inherit;cursor:pointer}
+.ic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.sec-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+h2{font-size:16px;font-weight:700}
+.sub{color:var(--mut);font-size:12px}
+.in{width:100%;min-height:44px;padding:10px 12px;background:var(--soft);border:1px solid var(--line);color:var(--tx);border-radius:10px;font:inherit;font-size:16px}
+.in:focus{outline:2px solid color-mix(in srgb,var(--ac) 50%,transparent);border-color:var(--ac)}
+textarea.in{resize:none}
+.f{display:flex;flex-direction:column;gap:3px;min-width:0}
+.f>span{font-size:11px;color:var(--mut);padding-left:2px}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;min-height:44px;padding:0 16px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn:active{transform:scale(.97)}
+.btn.ok{background:var(--ok)}.btn.warn{background:var(--warn);color:#1a1200}
+.ib{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--soft);display:inline-flex;align-items:center;justify-content:center;color:var(--mut)}
+.ib:hover{color:var(--tx)}
+.x{width:32px;height:32px;border:0;background:transparent;color:var(--mut);border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.x:hover{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.x .ic{width:16px;height:16px}
+.fgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;background:var(--soft);padding:12px;border-radius:12px;margin-bottom:14px;border:1px solid var(--line)}
+.fgrid>*{grid-column:span 6}
+.fgrid .h3{grid-column:span 3}
+.fgrid .in{background:var(--card)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:12px;color:var(--mut);min-height:36px}
+.chips span::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+.chips input:checked+span{border-color:var(--c);color:var(--tx);background:color-mix(in srgb,var(--c) 15%,var(--card))}
+.chips input:focus-visible+span{outline:2px solid var(--ac)}
+.list{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto}
+.list li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:var(--soft);border:1px solid var(--line);border-radius:12px}
+.list li>div{min-width:0;overflow-wrap:anywhere}
+.empty{text-align:center;color:var(--mut);padding:22px 8px;font-size:13px}
+/* login / loader */
+.full{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100}
+#initial-loader{z-index:110;transition:opacity .4s;color:var(--mut);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.login{max-width:360px;width:100%;text-align:center;display:flex;flex-direction:column;gap:18px;padding:28px}
+.avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto;border:1px solid var(--line)}
+.gbtn{background:#fff;color:#18181b;border:0;border-radius:12px;min-height:46px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px}
+/* header */
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.hin{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.brand img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.brand small{display:block;font-weight:500;color:var(--ok);font-size:11px}
+main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:16px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{display:flex;flex-direction:column;gap:4px}
+.stat b{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.stat.clock{grid-column:span 2}
+.stat.clock b{font-size:34px;font-variant-numeric:tabular-nums}
+.stat.clock .sub{text-transform:capitalize}
+/* agenda */
+.nav{display:flex;gap:8px;align-items:center}
+.nav .in{width:auto;min-width:0;flex:1}
+.nav .btn{min-height:40px;padding:0 12px;background:var(--soft);color:var(--tx);border:1px solid var(--line)}
+.tabs{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:14px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 0;border-radius:12px;border:1px solid var(--line);background:var(--soft);color:var(--mut);font-size:11px;text-transform:capitalize;position:relative}
+.tab b{font-size:16px;color:var(--tx)}
+.tab.on{background:var(--ac);border-color:var(--ac);color:#fff}.tab.on b{color:#fff}
+.tab.today::after{content:"";position:absolute;top:5px;right:6px;width:5px;height:5px;border-radius:50%;background:var(--ok)}
+.daybar{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:8px}
+.daybar b{text-transform:capitalize;font-size:14px}
+#tl{position:relative;max-height:560px;overflow-y:auto;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.tlin{position:relative}
+.hr{position:absolute;left:0;right:0;border-top:1px solid var(--line)}
+.hr span{position:absolute;left:10px;top:3px;font-size:11px;color:var(--mut);font-variant-numeric:tabular-nums}
+.evs{position:absolute;left:62px;right:8px;top:0;bottom:0}
+.ev{position:absolute;padding:4px 8px;border-radius:8px;border-left:3px solid var(--c);background:color-mix(in srgb,var(--c) 20%,var(--card));overflow:hidden;font-size:12px;line-height:1.25}
+.ev b,.ev small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev b{padding-right:22px}
+.ev small{color:var(--mut)}
+.ev .x{position:absolute;top:0;right:0;width:26px;height:26px}
+.ev.done,.li.done{opacity:.5}
+.ev.live,.li.live{box-shadow:0 0 0 1.5px var(--c)}
+.nowline{position:absolute;left:54px;right:0;height:2px;background:var(--bad);z-index:3;pointer-events:none}
+.nowline::before{content:"";position:absolute;left:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--bad)}
+#list{display:none;flex-direction:column;gap:8px}
+.li{display:flex;gap:12px;padding:12px;background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px}
+.lt{display:flex;flex-direction:column;font-size:12px;color:var(--mut);min-width:42px;font-variant-numeric:tabular-nums}
+.lt b{color:var(--tx);font-size:14px}
+.lb{flex:1;min-width:0}
+.lh{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.lh b{overflow-wrap:anywhere}
+.lb p{color:var(--mut);font-size:12px;margin-top:2px;overflow-wrap:anywhere}
+.pill{display:inline-block;font-style:normal;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;margin:6px 6px 0 0;background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
+.pill.warn{background:color-mix(in srgb,var(--warn) 20%,transparent);color:var(--warn)}
+/* calendar */
+.mnav{display:flex;align-items:center;gap:6px}
+.mnav b{min-width:130px;text-align:center;text-transform:capitalize}
+.wd,.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.wd{text-align:center;color:var(--mut);font-size:11px;font-weight:600;margin-bottom:6px}
+.day{position:relative;min-height:52px;padding:5px;border-radius:10px;border:1px solid var(--line);background:var(--soft);text-align:left;display:flex;flex-direction:column;gap:3px;overflow:hidden}
+.day>b{font-size:12px}
+.day.out{opacity:.35}
+.day.today{border-color:var(--ac)}.day.today>b{color:var(--ac)}
+.day.sel{background:color-mix(in srgb,var(--ac) 22%,var(--card));border-color:var(--ac)}
+.day.has::after{content:"";position:absolute;top:7px;right:7px;width:5px;height:5px;border-radius:50%;background:var(--ok)}
+.pc{font-style:normal;font-size:10px;padding:1px 5px;border-radius:5px;background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.legend{display:flex;gap:14px;margin-top:10px;font-size:11px;color:var(--mut)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+/* parciales */
+.pgrid{display:grid;grid-template-columns:1fr;gap:10px}
+.par{padding:12px;background:var(--soft);border:1px solid var(--line);border-radius:12px;display:flex;justify-content:space-between;gap:8px}
+.par.past{opacity:.5}
+.par h4{font-size:14px;color:var(--ac)}
+.par p{font-size:12px;color:var(--mut);overflow-wrap:anywhere}
+.par .d{color:var(--tx);font-weight:600}
+.two{display:grid;grid-template-columns:1fr;gap:16px}
+.row2{display:flex;gap:8px}
+.row2 .in:last-of-type{max-width:110px}
+.amount{font-weight:700;color:var(--ok);white-space:nowrap}
+@media(min-width:720px){
+ .hin,main{padding-left:24px;padding-right:24px}
+ .stats{grid-template-columns:1.4fr 1fr 1fr}
+ .stat.clock{grid-column:auto}
+ .fgrid{grid-template-columns:repeat(12,1fr)}
+ .fgrid .t{grid-column:span 4}.fgrid .h3{grid-column:span 2}.fgrid .n{grid-column:span 4}
+ .fgrid .c{grid-column:span 8}.fgrid .s{grid-column:span 4}
+ .pgrid{grid-template-columns:1fr 1fr}
+ .two{grid-template-columns:1fr 1fr}
+ .day{min-height:78px}
+}
+@media(min-width:1000px){.pgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:719px){
+ #tl{display:none}#list{display:flex}
+ .pc{font-size:0;width:6px;height:6px;padding:0;border-radius:50%;background:var(--ac)}
+ .day{align-items:center;min-height:46px}.day>b{font-size:13px}
+ .day{flex-direction:column}
+}
+@media(max-width:719px){.cal .day{flex-flow:row wrap;justify-content:center;align-content:center;gap:3px}.cal .day>b{width:100%;text-align:center}}
+</style>
 </head>
-<body class="min-h-screen pb-24 selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-hidden">
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-l" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+ <symbol id="i-r" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+ <symbol id="i-out" viewBox="0 0 24 24"><path d="M9 21H5V3h4M16 17l5-5-5-5M21 12H9"/></symbol>
+</svg>
 
-  <!-- PANTALLA DE CARGA INICIAL -->
-  <div id="initial-loader" class="fixed inset-0 z-[110] bg-[#09090b] flex flex-col items-center justify-center transition-opacity duration-500">
-    <div class="space-y-4 text-center">
-      <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center mx-auto animate-pulse">
-        <i data-lucide="command" class="w-6 h-6 text-indigo-400"></i>
-      </div>
-      <p class="text-xs font-mono tracking-widest uppercase text-zinc-400">Sincronizando Sistema...</p>
+<div id="initial-loader" class="full">Sincronizando…</div>
+
+<div id="login-modal" class="full" hidden>
+ <div class="card login">
+  <img class="avatar" src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" alt="Perfil">
+  <div><h2>Organizador</h2><p class="sub">Inicia sesión con tu cuenta autorizada</p></div>
+  <button id="btn-google-login" class="gbtn">
+   <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
+   Ingresar con Google
+  </button>
+  <p id="error-login" class="sub" style="color:var(--bad)" hidden>Acceso denegado: tu correo no está autorizado.</p>
+ </div>
+</div>
+
+<div id="app-content" hidden>
+ <header><div class="hin">
+  <div class="brand">
+   <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" alt="">
+   <div>Renzo<small>● Sincronizado</small></div>
+  </div>
+  <button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button>
+ </div></header>
+
+ <main>
+  <section class="stats">
+   <div class="card stat clock"><span class="sub">Ahora</span><b id="live-clock">00:00:00</b><span id="live-date" class="sub"></span></div>
+   <div class="card stat"><span class="sub">Gastos totales</span><b id="widget-total-gastos" style="color:var(--ok)">$0</b></div>
+   <div class="card stat"><span class="sub">Pendientes</span><b id="widget-pendientes" style="color:var(--warn)">0</b></div>
+  </section>
+
+  <section class="card" id="agenda">
+   <div class="sec-h">
+    <div><h2>Agenda</h2><p class="sub">Tu día en tiempo real</p></div>
+    <div class="nav">
+     <button class="btn" id="d-prev" aria-label="Día anterior"><svg class="ic"><use href="#i-l"/></svg></button>
+     <input type="date" id="schedule-date-picker" class="in" aria-label="Fecha de la agenda">
+     <button class="btn" id="d-next" aria-label="Día siguiente"><svg class="ic"><use href="#i-r"/></svg></button>
+     <button class="btn" id="d-today">Hoy</button>
     </div>
-  </div>
+   </div>
 
-  <!-- PANTALLA DE BLOQUEO / LOGIN CON GOOGLE -->
-  <div id="login-modal" class="fixed inset-0 z-[100] bg-[#09090b] flex items-center justify-center p-4 hidden">
-    <div class="minimal-card rounded-3xl p-8 max-w-sm w-full text-center space-y-6">
-      <div class="relative w-20 h-20 mx-auto">
-        <div class="relative w-full h-full rounded-full bg-zinc-900 border border-zinc-700 p-1 flex items-center justify-center overflow-hidden">
-          <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
-               alt="Perfil" class="w-full h-full object-cover rounded-full">
-        </div>
-      </div>
-      <div>
-        <h2 class="text-xl font-bold font-mono tracking-tight text-white">Organizador</h2>
-        <p class="text-xs text-zinc-400 mt-1">Inicia sesión con tu cuenta autorizada</p>
-      </div>
+   <div class="tabs" id="schedule-day-tabs"></div>
 
-      <div class="space-y-3">
-        <button id="btn-google-login" class="w-full bg-white hover:bg-zinc-200 text-zinc-950 py-3 px-4 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-2.5 active:scale-95">
-          <svg class="w-4 h-4" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
-            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/>
-            <path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/>
-            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/>
-          </svg>
-          Ingresar con Google
-        </button>
-        <p id="error-login" class="text-[11px] text-rose-400 hidden font-medium">Acceso denegado: tu correo no está autorizado.</p>
-      </div>
+   <form id="form-schedule-item" class="fgrid">
+    <label class="f t"><span>Actividad</span><input class="in" id="sch-titulo" placeholder="Ej. Algoritmos" required></label>
+    <label class="f h3"><span>Inicio</span><input class="in" type="time" id="sch-hora-inicio" required></label>
+    <label class="f h3"><span>Fin</span><input class="in" type="time" id="sch-hora-fin" required></label>
+    <label class="f n"><span>Notas</span><input class="in" id="sch-notas" placeholder="Opcional"></label>
+    <div class="chips c" id="sch-cats">
+     <label style="--c:#6366f1"><input type="radio" name="cat" value="indigo" checked><span>Estudio</span></label>
+     <label style="--c:#06b6d4"><input type="radio" name="cat" value="cyan"><span>Trabajo</span></label>
+     <label style="--c:#10b981"><input type="radio" name="cat" value="emerald"><span>Deporte</span></label>
+     <label style="--c:#f59e0b"><input type="radio" name="cat" value="amber"><span>Personal</span></label>
+     <label style="--c:#f43f5e"><input type="radio" name="cat" value="rose"><span>Urgente</span></label>
     </div>
+    <button class="btn s" type="submit"><svg class="ic"><use href="#i-plus"/></svg> Agregar</button>
+   </form>
+
+   <div class="daybar"><b id="day-label"></b><span class="sub" id="day-count"></span></div>
+   <div id="tl"></div>
+   <div id="list"></div>
+  </section>
+
+  <section class="card">
+   <div class="sec-h">
+    <div><h2>Calendario mensual</h2><p class="sub">Toca un día para ver su agenda</p></div>
+    <div class="mnav">
+     <button id="cal-prev" class="ib" aria-label="Mes anterior"><svg class="ic"><use href="#i-l"/></svg></button>
+     <b id="cal-mes-anio"></b>
+     <button id="cal-next" class="ib" aria-label="Mes siguiente"><svg class="ic"><use href="#i-r"/></svg></button>
+    </div>
+   </div>
+   <div class="wd"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+   <div id="cal-grid" class="cal"></div>
+   <div class="legend"><span><i style="background:var(--ac)"></i>Parcial</span><span><i style="background:var(--ok)"></i>Con agenda</span></div>
+  </section>
+
+  <section class="card">
+   <div class="sec-h"><div><h2>Fechas de parciales</h2><p class="sub">Exámenes y entregas</p></div></div>
+   <form id="form-parcial" class="fgrid">
+    <label class="f t"><span>Materia</span><input class="in" id="parcial-materia" placeholder="Ej. Álgebra" required></label>
+    <label class="f h3"><span>Fecha</span><input class="in" type="date" id="parcial-fecha" required></label>
+    <label class="f n" style="grid-column:span 6"><span>Detalle</span><input class="in" id="parcial-detalle" placeholder="Temas (opcional)"></label>
+    <button class="btn s" type="submit"><svg class="ic"><use href="#i-plus"/></svg> Agregar</button>
+   </form>
+   <div id="grid-parciales" class="pgrid"></div>
+  </section>
+
+  <div class="two">
+   <section class="card">
+    <div class="sec-h"><h2>Recordatorios</h2></div>
+    <form id="form-recordatorio" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+     <input class="in" id="rec-titulo" placeholder="Título (opcional)">
+     <textarea class="in" id="rec-detalle" rows="2" placeholder="Detalle…" required></textarea>
+     <button class="btn warn" type="submit"><svg class="ic"><use href="#i-plus"/></svg> Agregar</button>
+    </form>
+    <ul id="lista-recordatorios" class="list"></ul>
+   </section>
+
+   <section class="card">
+    <div class="sec-h"><h2>Control de gastos</h2><span class="amount">Total: <span id="section-total-gastos">$0</span></span></div>
+    <form id="form-gasto" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+     <div class="row2">
+      <input class="in" id="gasto-concepto" placeholder="Concepto" required>
+      <input class="in" type="number" step="0.01" id="gasto-monto" placeholder="$" required inputmode="decimal">
+     </div>
+     <button class="btn ok" type="submit"><svg class="ic"><use href="#i-plus"/></svg> Agregar</button>
+    </form>
+    <ul id="lista-gastos" class="list"></ul>
+   </section>
   </div>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <div id="app-content" class="hidden animate-fade-in">
-
-    <!-- Header Topbar -->
-    <header class="w-full bg-[#09090b]/90 backdrop-blur-md border-b border-[#27272a] sticky top-0 z-50">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center text-xs">
-        <div class="flex items-center gap-3">
-          <span class="font-bold text-white tracking-tight text-sm font-mono flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span> Organizador
-          </span>
-        </div>
-        <div class="flex items-center gap-2.5">
-          <button id="btn-logout" title="Cerrar sesión" class="p-2 bg-[#121217] hover:bg-rose-500/10 hover:text-rose-400 border border-[#27272a] rounded-xl transition text-zinc-400 active:scale-95">
-            <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Dashboard Principal -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-8 space-y-6">
-
-      <!-- FILA 1: Header Perfil & Métricas -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-        
-        <!-- Card Perfil -->
-        <div class="md:col-span-5 minimal-card rounded-2xl p-5 flex flex-col justify-between">
-          <div class="flex items-center gap-3.5">
-            <div class="relative">
-              <div class="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-700 p-0.5 flex items-center justify-center overflow-hidden">
-                <img src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s288-c-no" 
-                     alt="Perfil" class="w-full h-full object-cover rounded-full">
-              </div>
-              <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-[#09090b] rounded-full"></span>
-            </div>
-            <div>
-              <h2 class="text-base font-bold text-white tracking-tight">Renzo</h2>
-              <p class="text-[11px] text-zinc-400 font-mono">Conectado</p>
-            </div>
-          </div>
-          <div class="mt-5 pt-3 border-t border-[#27272a] flex justify-between items-center text-[11px] text-zinc-400 font-mono">
-            <span>Estado</span>
-            <span class="text-emerald-400 font-semibold flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado</span>
-          </div>
-        </div>
-
-        <!-- Card Métricas -->
-        <div class="md:col-span-7 minimal-card rounded-2xl p-5 grid grid-cols-2 gap-4">
-          <div class="bg-[#18181b] border border-[#27272a] rounded-xl p-4 flex flex-col justify-between">
-            <div class="flex items-center gap-2 text-emerald-400">
-              <span class="p-2 bg-emerald-500/10 rounded-lg"><i data-lucide="wallet" class="w-3.5 h-3.5"></i></span>
-              <span class="text-[11px] font-medium text-zinc-400 truncate">Gastos Totales</span>
-            </div>
-            <span id="widget-total-gastos" class="text-2xl font-bold font-mono text-emerald-400 tracking-tight mt-2 block">
-              $0
-            </span>
-          </div>
-
-          <div class="bg-[#18181b] border border-[#27272a] rounded-xl p-4 flex flex-col justify-between">
-            <div class="flex items-center gap-2 text-amber-400">
-              <span class="p-2 bg-amber-500/10 rounded-lg"><i data-lucide="check-square" class="w-3.5 h-3.5"></i></span>
-              <span class="text-[11px] font-medium text-zinc-400 truncate">Pendientes</span>
-            </div>
-            <span id="widget-pendientes" class="text-2xl font-bold font-mono text-amber-400 tracking-tight mt-2 block">
-              0
-            </span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- PANEL: TIEMPO REAL & AGENDA FLEXIBLE (SEMANAL/FUTURA) ⏱️ -->
-      <section class="minimal-card rounded-2xl p-5 sm:p-6 space-y-5">
-        
-        <!-- Reloj & Selector de Fecha de Agenda -->
-        <div class="bg-[#18181b] border border-[#27272a] rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-indigo-500/10 border border-indigo-500/20 rounded-xl text-indigo-400 shrink-0">
-              <i data-lucide="clock" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <div id="live-clock" class="text-2xl font-black font-mono text-white tracking-tight">00:00:00</div>
-              <p id="live-date" class="text-[11px] text-zinc-400 capitalize"></p>
-            </div>
-          </div>
-
-          <!-- Selector de Fecha de Actividad -->
-          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 w-full md:w-auto">
-            <div class="flex items-center gap-2 bg-[#121217] border border-[#27272a] px-3 py-2 rounded-xl w-full sm:w-auto">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400 shrink-0"></i>
-              <span class="text-[11px] text-zinc-400 font-mono">Fecha Agenda:</span>
-              <input type="date" id="schedule-date-picker" class="bg-transparent text-xs font-mono text-white focus:outline-none cursor-pointer">
-            </div>
-          </div>
-        </div>
-
-        <!-- Selector de Días Rápidos -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none" id="schedule-day-tabs">
-          <!-- Dinámico -->
-        </div>
-
-        <!-- Formulario Actividad -->
-        <form id="form-schedule-item" class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 bg-[#18181b] border border-[#27272a] p-3.5 rounded-xl">
-          <input type="text" id="sch-titulo" placeholder="Actividad (ej. Algoritmos)" required 
-                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-indigo-500 placeholder-zinc-500">
-          
-          <div class="sm:col-span-3 flex items-center gap-1.5">
-            <input type="time" id="sch-hora-inicio" required 
-                   class="bg-[#121217] border border-[#27272a] text-xs font-mono text-white rounded-lg px-2 py-2.5 w-full focus:outline-none focus:border-indigo-500">
-            <span class="text-zinc-500 text-xs">a</span>
-            <input type="time" id="sch-hora-fin" required 
-                   class="bg-[#121217] border border-[#27272a] text-xs font-mono text-white rounded-lg px-2 py-2.5 w-full focus:outline-none focus:border-indigo-500">
-          </div>
-
-          <select id="sch-categoria" class="sm:col-span-2 bg-[#121217] border border-[#27272a] text-xs text-zinc-300 rounded-lg px-3 py-2.5 focus:outline-none focus:border-indigo-500">
-            <option value="indigo">Estudio (Índigo)</option>
-            <option value="cyan">Trabajo (Celeste)</option>
-            <option value="emerald">Deporte (Esmeralda)</option>
-            <option value="amber">Personal (Ámbar)</option>
-            <option value="rose">Urgente (Rosa)</option>
-          </select>
-
-          <input type="text" id="sch-notas" placeholder="Notas (opcional)" 
-                 class="sm:col-span-2 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-indigo-500 placeholder-zinc-500">
-
-          <button type="submit" class="sm:col-span-1 bg-indigo-600 hover:bg-indigo-500 text-white p-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center active:scale-95">
-            <i data-lucide="plus" class="w-4 h-4"></i>
-          </button>
-        </form>
-
-        <!-- Cronograma Estilo Google Calendar con Columnas Lado a Lado (Sin Superposición) -->
-        <div class="bg-[#121217] border border-[#27272a] rounded-xl p-3.5 relative overflow-hidden">
-          <div id="calendar-grid-timeline" class="relative w-full h-[680px] overflow-y-auto pr-2">
-            <!-- Dinámico -->
-          </div>
-        </div>
-      </section>
-
-      <!-- CALENDARIO MENSUAL 📅 -->
-      <section class="minimal-card rounded-2xl p-5 sm:p-6 space-y-4">
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div class="flex items-center gap-2.5">
-            <span class="p-2.5 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
-              <i data-lucide="calendar-days" class="w-4 h-4"></i>
-            </span>
-            <div>
-              <h3 class="font-bold text-sm text-white tracking-tight">Calendario Mensual</h3>
-              <p class="text-[11px] text-zinc-400">Vista general de parciales y eventos</p>
-            </div>
-          </div>
-          
-          <div class="flex items-center gap-2 bg-[#18181b] border border-[#27272a] px-3 py-1.5 rounded-xl">
-            <button id="cal-prev" class="p-1 hover:bg-white/10 rounded-lg text-zinc-300 transition active:scale-90">
-              <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
-            </button>
-            <span id="cal-mes-anio" class="text-xs font-bold text-white w-32 text-center font-mono capitalize"></span>
-            <button id="cal-next" class="p-1 hover:bg-white/10 rounded-lg text-zinc-300 transition active:scale-90">
-              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-7 gap-1 text-center font-semibold font-mono text-[11px] text-zinc-400 py-2 border-b border-[#27272a]">
-          <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
-        </div>
-
-        <div id="cal-grid" class="grid grid-cols-7 gap-1.5 min-h-[280px]">
-          <!-- Dinámico -->
-        </div>
-      </section>
-
-      <!-- FECHAS DE PARCIALES -->
-      <section class="minimal-card rounded-2xl p-5 sm:p-6 space-y-4">
-        <div class="flex items-center gap-2.5">
-          <span class="p-2.5 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
-            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
-          </span>
-          <div>
-            <h3 class="font-bold text-sm text-white tracking-tight">Fechas de Parciales</h3>
-            <p class="text-[11px] text-zinc-400">Exámenes y entregas universitarias</p>
-          </div>
-        </div>
-
-        <form id="form-parcial" class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 bg-[#18181b] border border-[#27272a] p-3.5 rounded-xl">
-          <input type="text" id="parcial-materia" placeholder="Materia (ej. Álgebra)" required 
-                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500">
-          <input type="date" id="parcial-fecha" required 
-                 class="sm:col-span-3 bg-[#121217] border border-[#27272a] text-xs font-mono text-zinc-300 px-3 py-2.5 rounded-lg focus:outline-none focus:border-indigo-500">
-          <input type="text" id="parcial-detalle" placeholder="Detalle / Temas (opcional)" 
-                 class="sm:col-span-4 bg-[#121217] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500">
-          <button type="submit" class="sm:col-span-1 bg-indigo-600 hover:bg-indigo-500 text-white p-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center active:scale-95">
-            <i data-lucide="plus" class="w-4 h-4"></i>
-          </button>
-        </form>
-
-        <div id="grid-parciales" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          <!-- Dinámico -->
-        </div>
-      </section>
-
-      <!-- Recordatorios & Gastos -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        
-        <!-- Recordatorios -->
-        <section class="minimal-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2.5 mb-4">
-              <span class="p-2 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
-                <i data-lucide="check-square" class="w-4 h-4"></i>
-              </span>
-              <h3 class="font-bold text-sm text-white tracking-tight">Recordatorios</h3>
-            </div>
-
-            <form id="form-recordatorio" class="space-y-2 mb-4">
-              <input type="text" id="rec-titulo" placeholder="Título (ej. Álgebra) - Opcional" 
-                     class="bg-[#18181b] border border-[#27272a] text-xs rounded-lg px-3.5 py-2.5 w-full focus:outline-none focus:border-amber-500 text-white placeholder-zinc-500">
-              <div class="flex gap-2 items-start">
-                <textarea id="rec-detalle" placeholder="Recordatorio / Detalle..." required rows="2"
-                          class="bg-[#18181b] border border-[#27272a] text-xs rounded-lg px-3.5 py-2.5 w-full focus:outline-none focus:border-amber-500 text-white placeholder-zinc-500 resize-none leading-relaxed"></textarea>
-                <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-zinc-950 px-3.5 py-3 rounded-lg text-xs font-bold transition flex items-center justify-center shrink-0 active:scale-95 h-full">
-                  <i data-lucide="plus" class="w-4 h-4"></i>
-                </button>
-              </div>
-            </form>
-
-            <ul id="lista-recordatorios" class="space-y-2 max-h-[240px] overflow-y-auto pr-1">
-              <!-- Dinámico -->
-            </ul>
-          </div>
-        </section>
-
-        <!-- Control de Gastos -->
-        <section class="minimal-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center gap-2.5">
-                <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
-                  <i data-lucide="credit-card" class="w-4 h-4"></i>
-                </span>
-                <h3 class="font-bold text-sm text-white tracking-tight">Control de Gastos</h3>
-              </div>
-              <div class="bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-lg text-[11px] font-semibold font-mono text-emerald-400">
-                Total: <span id="section-total-gastos">$0</span>
-              </div>
-            </div>
-
-            <form id="form-gasto" class="flex gap-2 mb-4">
-              <input type="text" id="gasto-concepto" placeholder="Concepto" required 
-                     class="bg-[#18181b] border border-[#27272a] text-xs rounded-lg px-3 py-2.5 w-full focus:outline-none focus:border-emerald-500 text-white placeholder-zinc-500">
-              <input type="number" step="0.01" id="gasto-monto" placeholder="$" required 
-                     class="bg-[#18181b] border border-[#27272a] text-xs font-mono rounded-lg px-3 py-2.5 w-24 focus:outline-none focus:border-emerald-500 text-white placeholder-zinc-500">
-              <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-3.5 py-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center shrink-0 active:scale-95">
-                <i data-lucide="plus" class="w-4 h-4"></i>
-              </button>
-            </form>
-
-            <ul id="lista-gastos" class="space-y-2 max-h-[240px] overflow-y-auto pr-1">
-              <!-- Dinámico -->
-            </ul>
-          </div>
-        </section>
-
-      </div>
-
-    </main>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAXGKWZA8kWaN2NWCK2A9jTlGSq-B2bqWA",
-      authDomain: "laranchada-6abd3.firebaseapp.com",
-      databaseURL: "https://laranchada-6abd3-default-rtdb.firebaseio.com",
-      projectId: "laranchada-6abd3",
-      storageBucket: "laranchada-6abd3.firebasestorage.app",
-      messagingSenderId: "326750839699",
-      appId: "1:326750839699:web:3b122315eb61296d99fe66",
-      measurementId: "G-XL398QW21P"
-    };
-
-    const ALLOWED_EMAIL = "renzosalta07@gmail.com";
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getDatabase(app);
-    const provider = new GoogleAuthProvider();
-
-    lucide.createIcons();
-
-    const initialLoader = document.getElementById('initial-loader');
-    const loginModal = document.getElementById('login-modal');
-    const appContent = document.getElementById('app-content');
-    const btnGoogleLogin = document.getElementById('btn-google-login');
-    const errorLogin = document.getElementById('error-login');
-    const btnLogout = document.getElementById('btn-logout');
-
-    function formatearFechaTexto(fechaIso) {
-      if (!fechaIso) return '';
-      const partes = fechaIso.split('-');
-      if (partes.length !== 3) return fechaIso;
-      
-      const anio = parseInt(partes[0], 10);
-      const mes = parseInt(partes[1], 10) - 1;
-      const dia = parseInt(partes[2], 10);
-      
-      const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-      return `${dia} de ${meses[mes]}`;
-    }
-
-    function obtenerFechaIsoLocal(d = new Date()) {
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    }
-
-    let fechaSeleccionadaTuDia = obtenerFechaIsoLocal();
-    const scheduleDatePicker = document.getElementById('schedule-date-picker');
-    if (scheduleDatePicker) scheduleDatePicker.value = fechaSeleccionadaTuDia;
-
-    function animarConteo(elementoId, valorFinal, esMoneda = false) {
-      const el = document.getElementById(elementoId);
-      if (!el) return;
-      let duracion = 600;
-      let pasos = 20;
-      let incremento = valorFinal / pasos;
-      let actual = 0;
-      let pasoActual = 0;
-
-      let timer = setInterval(() => {
-        pasoActual++;
-        actual += incremento;
-        if (pasoActual >= pasos) {
-          actual = valorFinal;
-          clearInterval(timer);
-        }
-        if (esMoneda) {
-          el.innerText = `$${Math.round(actual).toLocaleString()}`;
-        } else {
-          el.innerText = Math.round(actual);
-        }
-      }, duracion / pasos);
-    }
-
-    function actualizarReloj() {
-      const ahora = new Date();
-      const h = String(ahora.getHours()).padStart(2, '0');
-      const m = String(ahora.getMinutes()).padStart(2, '0');
-      const s = String(ahora.getSeconds()).padStart(2, '0');
-      
-      const liveClock = document.getElementById('live-clock');
-      const liveDate = document.getElementById('live-date');
-      
-      if (liveClock) liveClock.innerText = `${h}:${m}:${s}`;
-      if (liveDate) {
-        const opciones = { weekday: 'long', day: 'numeric', month: 'long' };
-        liveDate.innerText = ahora.toLocaleDateString('es-ES', opciones);
-      }
-    }
-    setInterval(actualizarReloj, 1000);
-    actualizarReloj();
-
-    let eventosAgendaGlobal = {};
-
-    const scheduleDayTabs = document.getElementById('schedule-day-tabs');
-    const calendarGridTimeline = document.getElementById('calendar-grid-timeline');
-
-    function renderizarTabsDia() {
-      scheduleDayTabs.innerHTML = '';
-      const hoyIso = obtenerFechaIsoLocal();
-
-      for (let i = 0; i < 7; i++) {
-        const d = new Date();
-        d.setDate(d.getDate() + i);
-        const iso = obtenerFechaIsoLocal(d);
-        const nombreDia = d.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'numeric' });
-        const esHoy = (iso === hoyIso);
-        const esSeleccionado = (iso === fechaSeleccionadaTuDia);
-
-        let activeClasses = esSeleccionado 
-          ? 'bg-indigo-600 text-white font-semibold border-indigo-500 shadow-lg shadow-indigo-500/20' 
-          : 'bg-[#18181b] text-zinc-400 border-[#27272a] hover:text-white';
-
-        scheduleDayTabs.innerHTML += `
-          <button type="button" onclick="window.cambiarFechaTuDia('${iso}')" 
-                  class="px-3.5 py-2 rounded-xl border text-xs font-mono transition flex items-center gap-2 shrink-0 ${activeClasses}">
-            <span>${nombreDia}</span>
-            ${esHoy ? `<span class="w-1.5 h-1.5 rounded-full ${esSeleccionado ? 'bg-emerald-300' : 'bg-emerald-400'}"></span>` : ''}
-          </button>
-        `;
-      }
-    }
-
-    window.cambiarFechaTuDia = function(iso) {
-      fechaSeleccionadaTuDia = iso;
-      if (scheduleDatePicker) scheduleDatePicker.value = iso;
-      renderizarTabsDia();
-      renderizarScheduleTuDia();
-    };
-
-    if (scheduleDatePicker) {
-      scheduleDatePicker.addEventListener('change', (e) => {
-        if (e.target.value) {
-          fechaSeleccionadaTuDia = e.target.value;
-          renderizarTabsDia();
-          renderizarScheduleTuDia();
-        }
-      });
-    }
-
-    function convertirHoraAMinutos(horaStr) {
-      if (!horaStr) return 0;
-      const partes = horaStr.split(':');
-      return parseInt(partes[0], 10) * 60 + parseInt(partes[1], 10);
-    }
-
-    function renderizarScheduleTuDia() {
-      renderizarTabsDia();
-      const diaItems = eventosAgendaGlobal[fechaSeleccionadaTuDia] || [];
-
-      const ahora = new Date();
-      const hoyIso = obtenerFechaIsoLocal(ahora);
-      const esHoySeleccionado = (fechaSeleccionadaTuDia === hoyIso);
-      const minutosActuales = ahora.getHours() * 60 + ahora.getMinutes();
-
-      let itemsParaMostrar = [...diaItems];
-      if (esHoySeleccionado) {
-        itemsParaMostrar = itemsParaMostrar.filter(item => {
-          const finMin = convertirHoraAMinutos(item.horaFin);
-          return finMin > minutosActuales;
-        });
-      }
-
-      calendarGridTimeline.innerHTML = '';
-
-      const coloresCategoria = {
-        indigo: { bg: 'bg-indigo-500/15', border: 'border-indigo-500/40', text: 'text-indigo-200', badge: 'bg-indigo-500/25 text-indigo-200' },
-        cyan: { bg: 'bg-cyan-500/15', border: 'border-cyan-500/40', text: 'text-cyan-200', badge: 'bg-cyan-500/25 text-cyan-200' },
-        emerald: { bg: 'bg-emerald-500/15', border: 'border-emerald-500/40', text: 'text-emerald-200', badge: 'bg-emerald-500/25 text-emerald-200' },
-        amber: { bg: 'bg-amber-500/15', border: 'border-amber-500/40', text: 'text-amber-200', badge: 'bg-amber-500/25 text-amber-200' },
-        rose: { bg: 'bg-rose-500/15', border: 'border-rose-500/40', text: 'text-rose-200', badge: 'bg-rose-500/25 text-rose-200' }
-      };
-
-      const hourHeight = 60;
-      const startHour = 7;
-      const totalHours = 17;
-
-      calendarGridTimeline.style.height = `${totalHours * hourHeight}px`;
-
-      let backgroundLinesHtml = '';
-      for (let h = startHour; h <= 23; h++) {
-        const topPos = (h - startHour) * hourHeight;
-        const horaLabel = String(h).padStart(2, '0') + ':00';
-        backgroundLinesHtml += `
-          <div class="absolute w-full flex items-start border-t border-[#27272a]" style="top: ${topPos}px; height: ${hourHeight}px;">
-            <span class="text-[10px] font-mono text-zinc-500 w-14 pt-1 select-none">${horaLabel}</span>
-          </div>
-        `;
-      }
-
-      let liveLineHtml = '';
-      if (esHoySeleccionado) {
-        const liveTop = (minutosActuales - (startHour * 60)) * (hourHeight / 60);
-        if (liveTop >= 0 && liveTop <= totalHours * hourHeight) {
-          liveLineHtml = `
-            <div class="absolute left-14 right-0 z-20 flex items-center pointer-events-none" style="top: ${liveTop}px;">
-              <div class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
-              <div class="flex-1 h-[2px] bg-emerald-400 shadow-[0_0_8px_#34d399]"></div>
-            </div>
-          `;
-        }
-      }
-
-      // ALGORITMO ROBUSTO DE COLUMNAS (SIDE-BY-SIDE PACKING)
-      const parsedItems = itemsParaMostrar.map((item) => {
-        const inicioMins = convertirHoraAMinutos(item.horaInicio);
-        const finMins = Math.max(convertirHoraAMinutos(item.horaFin), inicioMins + 15);
-        return { ...item, inicioMins, finMins };
-      }).sort((a, b) => a.inicioMins - b.inicioMins || (b.finMins - b.duration) - (a.finMins - a.duration));
-
-      let columns = [];
-      parsedItems.forEach(item => {
-        let placed = false;
-        for (let col = 0; col < columns.length; col++) {
-          let lastInCol = columns[col][columns[col].length - 1];
-          if (lastInCol.finMins <= item.inicioMins) {
-            columns[col].push(item);
-            item.colIndex = col;
-            placed = true;
-            break;
-          }
-        }
-        if (!placed) {
-          item.colIndex = columns.length;
-          columns.push([item]);
-        }
-      });
-
-      parsedItems.forEach(item => {
-        let overlappingCols = new Set();
-        parsedItems.forEach(other => {
-          if (!(item.finMins <= other.inicioMins || item.inicioMins >= other.finMins)) {
-            overlappingCols.add(other.colIndex);
-          }
-        });
-        item.totalCols = Math.max(overlappingCols.size, item.colIndex + 1);
-      });
-
-      parsedItems.forEach(item => {
-        let maxC = 1;
-        parsedItems.forEach(other => {
-          if (!(item.finMins <= other.inicioMins || item.inicioMins >= other.finMins)) {
-            maxC = Math.max(maxC, other.colIndex + 1);
-          }
-        });
-        item.totalCols = Math.max(item.totalCols, maxC);
-      });
-
-      let eventsHtml = '';
-      parsedItems.forEach((item) => {
-        const topPx = (item.inicioMins - (startHour * 60)) * (hourHeight / 60);
-        const durationMins = item.finMins - item.inicioMins;
-        const heightPx = Math.max(durationMins * (hourHeight / 60), 32);
-
-        const styleCol = coloresCategoria[item.categoria] || coloresCategoria.indigo;
-        const totalC = Math.max(item.totalCols, item.colIndex + 1);
-        const widthPercent = 100 / totalC;
-        const leftPercent = item.colIndex * widthPercent;
-
-        eventsHtml += `
-          <div class="absolute rounded-xl p-2.5 border ${styleCol.bg} ${styleCol.border} backdrop-blur-md overflow-hidden flex flex-col justify-between shadow-md transition hover:z-30"
-               style="top: ${topPx}px; height: ${heightPx}px; left: calc(3.5rem + ${leftPercent}%); width: calc(100% - 3.5rem - ${leftPercent}% - ${totalC > 1 ? '4px' : '0px'});">
-            <div class="flex justify-between items-start">
-              <div class="space-y-0.5 overflow-hidden pr-2">
-                <div class="flex items-center gap-1.5 flex-wrap">
-                  <span class="font-bold ${styleCol.text} text-xs truncate">${item.titulo}</span>
-                  <span class="text-[9px] font-mono ${styleCol.badge} px-1.5 py-0.2 rounded font-semibold">${item.horaInicio} - ${item.horaFin}</span>
-                </div>
-                ${item.notas && heightPx > 45 ? `<p class="text-[10px] text-zinc-300 truncate">${item.notas}</p>` : ''}
-              </div>
-              <button onclick="window.eliminarItemAgenda('${item.id}')" class="text-zinc-400 hover:text-rose-400 p-0.5 transition shrink-0">
-                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-              </button>
-            </div>
-          </div>
-        `;
-      });
-
-      calendarGridTimeline.innerHTML = backgroundLinesHtml + liveLineHtml + eventsHtml;
-      lucide.createIcons();
-    }
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (user.email === ALLOWED_EMAIL) {
-          desbloquearApp();
-        } else {
-          errorLogin.innerText = "Acceso denegado: Tu correo (" + user.email + ") no está autorizado.";
-          errorLogin.classList.remove('hidden');
-          signOut(auth);
-        }
-      } else {
-        bloquearApp();
-      }
+ </main>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAXGKWZA8kWaN2NWCK2A9jTlGSq-B2bqWA",
+  authDomain: "laranchada-6abd3.firebaseapp.com",
+  databaseURL: "https://laranchada-6abd3-default-rtdb.firebaseio.com",
+  projectId: "laranchada-6abd3",
+  storageBucket: "laranchada-6abd3.firebasestorage.app",
+  messagingSenderId: "326750839699",
+  appId: "1:326750839699:web:3b122315eb61296d99fe66",
+  measurementId: "G-XL398QW21P"
+};
+const ALLOWED_EMAIL = "renzosalta07@gmail.com";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app), db = getDatabase(app), provider = new GoogleAuthProvider();
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const COL = {indigo:'#6366f1',cyan:'#06b6d4',emerald:'#10b981',amber:'#f59e0b',rose:'#f43f5e'};
+const TRASH = '<svg class="ic"><use href="#i-trash"/></svg>';
+const iso = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const hm = s => { const [h, m] = (s || '0:0').split(':'); return +h * 60 + +m; };
+const money = n => '$' + Number(n || 0).toLocaleString('es-AR');
+const fechaTexto = f => { const p = (f || '').split('-'); return p.length === 3 ? `${+p[2]} de ${MESES[+p[1]-1]}` : f; };
+const delBtn = path => `<button class="x" data-del="${esc(path)}" aria-label="Eliminar">${TRASH}</button>`;
+
+let sel = iso(), agenda = {}, parciales = [], needScroll = true, calDate = new Date();
+
+/* ---------- Reloj ---------- */
+let lastRender = 0;
+function tick() {
+  const n = new Date();
+  $('live-clock').textContent = n.toTimeString().slice(0, 8);
+  $('live-date').textContent = n.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+  if (Date.now() - lastRender > 30000 && !$('app-content').hidden) render();
+}
+setInterval(tick, 1000); tick();
+
+/* ---------- Agenda ---------- */
+function setDate(d) { sel = d; $('schedule-date-picker').value = d; needScroll = true; render(); renderCal(); }
+$('schedule-date-picker').value = sel;
+$('schedule-date-picker').addEventListener('change', e => e.target.value && setDate(e.target.value));
+$('d-today').onclick = () => setDate(iso());
+const shift = n => { const d = new Date(sel + 'T00:00'); d.setDate(d.getDate() + n); setDate(iso(d)); };
+$('d-prev').onclick = () => shift(-1);
+$('d-next').onclick = () => shift(1);
+$('schedule-day-tabs').addEventListener('click', e => { const b = e.target.closest('[data-d]'); if (b) setDate(b.dataset.d); });
+
+function render() {
+  lastRender = Date.now();
+  const today = iso(), isToday = sel === today, n = new Date(), nowM = n.getHours() * 60 + n.getMinutes();
+
+  // tabs: 7 días desde hoy
+  let tabs = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(); d.setDate(d.getDate() + i);
+    const k = iso(d);
+    tabs += `<button type="button" data-d="${k}" class="tab ${k === sel ? 'on' : ''} ${k === today ? 'today' : ''}"><span>${d.toLocaleDateString('es-ES', { weekday: 'short' }).replace('.', '')}</span><b>${d.getDate()}</b></button>`;
+  }
+  $('schedule-day-tabs').innerHTML = tabs;
+
+  const dl = new Date(sel + 'T00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+  const items = (agenda[sel] || []).map(i => {
+    const s = hm(i.horaInicio);
+    return { ...i, s, e: Math.max(hm(i.horaFin), s + 15) };
+  }).sort((a, b) => a.s - b.s || b.e - a.e);
+  $('day-label').textContent = (isToday ? 'Hoy · ' : '') + dl;
+  $('day-count').textContent = `${items.length} ${items.length === 1 ? 'actividad' : 'actividades'}`;
+
+  // columnas sin superposición: agrupar por bloques que se cruzan
+  let cluster = [], clusterEnd = 0;
+  const flush = () => {
+    const cols = [];
+    cluster.forEach(it => {
+      let c = cols.findIndex(end => end <= it.s);
+      if (c < 0) { c = cols.length; cols.push(0); }
+      cols[c] = it.e; it.c = c;
     });
+    cluster.forEach(it => it.n = cols.length);
+  };
+  items.forEach(it => {
+    if (cluster.length && it.s >= clusterEnd) { flush(); cluster = []; clusterEnd = 0; }
+    cluster.push(it); clusterEnd = Math.max(clusterEnd, it.e);
+  });
+  if (cluster.length) flush();
 
-    btnGoogleLogin.addEventListener('click', () => {
-      errorLogin.classList.add('hidden');
-      signInWithPopup(auth, provider).catch(() => {
-        errorLogin.classList.remove('hidden');
-      });
+  // timeline (escritorio)
+  const s0 = items.length ? Math.min(7, Math.floor(items[0].s / 60)) : 7;
+  const e0 = items.length ? Math.min(24, Math.max(22, Math.ceil(Math.max(...items.map(i => i.e)) / 60))) : 22;
+  const H = 56, px = m => (m - s0 * 60) * H / 60;
+  let h = `<div class="tlin" style="height:${(e0 - s0) * H}px">`;
+  for (let x = s0; x < e0; x++) h += `<div class="hr" style="top:${(x - s0) * H}px"><span>${String(x).padStart(2, '0')}:00</span></div>`;
+  h += '<div class="evs">';
+  items.forEach(i => {
+    const st = isToday ? (i.e <= nowM ? 'done' : i.s <= nowM ? 'live' : '') : '';
+    const ht = Math.max(px(i.e) - px(i.s) - 2, 26), w = 100 / i.n;
+    h += `<div class="ev ${st}" style="--c:${COL[i.categoria] || COL.indigo};top:${px(i.s) + 1}px;height:${ht}px;left:calc(${i.c * w}% + 1px);width:calc(${w}% - 3px)" title="${esc(i.titulo)}">
+      <b>${esc(i.titulo)}</b>${ht >= 40 ? `<small>${i.horaInicio} – ${i.horaFin}</small>` : ''}${ht >= 58 && i.notas ? `<small>${esc(i.notas)}</small>` : ''}
+      ${delBtn(`agenda/${sel}/${i.id}`)}</div>`;
+  });
+  h += '</div>';
+  if (isToday && nowM >= s0 * 60 && nowM <= e0 * 60) h += `<div class="nowline" style="top:${px(nowM)}px"></div>`;
+  $('tl').innerHTML = h + '</div>';
+
+  if (needScroll) {
+    needScroll = false;
+    $('tl').scrollTop = Math.max(0, isToday ? px(nowM) - 120 : items.length ? px(items[0].s) - 20 : 0);
+  }
+
+  // lista (móvil)
+  $('list').innerHTML = items.length ? items.map(i => {
+    const st = isToday ? (i.e <= nowM ? 'done' : i.s <= nowM ? 'live' : '') : '';
+    return `<div class="li ${st}" style="--c:${COL[i.categoria] || COL.indigo}">
+      <div class="lt"><b>${i.horaInicio}</b><span>${i.horaFin}</span></div>
+      <div class="lb"><div class="lh"><b>${esc(i.titulo)}</b>${delBtn(`agenda/${sel}/${i.id}`)}</div>
+      ${i.notas ? `<p>${esc(i.notas)}</p>` : ''}
+      ${st === 'live' ? '<em class="pill">En curso</em>' : ''}${i.n > 1 ? '<em class="pill warn">Se cruza con otra</em>' : ''}</div></div>`;
+  }).join('') : '<p class="empty">Sin actividades para este día</p>';
+}
+
+/* ---------- Calendario mensual ---------- */
+function renderCal() {
+  const y = calDate.getFullYear(), m = calDate.getMonth();
+  $('cal-mes-anio').textContent = `${MESES[m]} ${y}`;
+  const first = (new Date(y, m, 1).getDay() + 6) % 7;
+  const total = new Date(y, m + 1, 0).getDate(), prev = new Date(y, m, 0).getDate(), today = iso();
+  let h = '';
+  for (let i = first; i > 0; i--) h += `<div class="day out"><b>${prev - i + 1}</b></div>`;
+  for (let d = 1; d <= total; d++) {
+    const k = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const ps = parciales.filter(p => p.fecha === k).map(p => `<i class="pc" title="${esc(p.materia)}">${esc(p.materia)}</i>`).join('');
+    const has = agenda[k] && agenda[k].length;
+    h += `<button type="button" data-d="${k}" class="day ${k === today ? 'today' : ''} ${k === sel ? 'sel' : ''} ${has ? 'has' : ''}"><b>${d}</b>${ps}</button>`;
+  }
+  $('cal-grid').innerHTML = h;
+}
+$('cal-grid').addEventListener('click', e => {
+  const b = e.target.closest('[data-d]');
+  if (b) { setDate(b.dataset.d); $('agenda').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+});
+$('cal-prev').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() - 1); renderCal(); };
+$('cal-next').onclick = () => { calDate.setDate(1); calDate.setMonth(calDate.getMonth() + 1); renderCal(); };
+
+/* ---------- Eliminar (un solo manejador) ---------- */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-del]');
+  if (b && confirm('¿Eliminar este elemento?')) remove(ref(db, b.dataset.del));
+});
+
+/* ---------- Auth ---------- */
+const errorLogin = $('error-login');
+onAuthStateChanged(auth, user => {
+  if (user) {
+    if (user.email === ALLOWED_EMAIL) desbloquear();
+    else {
+      errorLogin.textContent = `Acceso denegado: tu correo (${user.email}) no está autorizado.`;
+      errorLogin.hidden = false;
+      signOut(auth);
+    }
+  } else {
+    $('initial-loader').style.display = 'none';
+    $('login-modal').hidden = false;
+    $('app-content').hidden = true;
+  }
+});
+$('btn-google-login').onclick = () => { errorLogin.hidden = true; signInWithPopup(auth, provider).catch(() => { errorLogin.hidden = false; }); };
+$('btn-logout').onclick = () => signOut(auth).then(() => location.reload());
+
+function desbloquear() {
+  $('login-modal').hidden = true;
+  $('app-content').hidden = false;
+  const l = $('initial-loader'); l.style.opacity = '0'; setTimeout(() => l.remove(), 400);
+  iniciar();
+}
+
+/* ---------- Datos ---------- */
+let suscrita = false;
+function iniciar() {
+  render(); renderCal();
+  if (suscrita) return; suscrita = true;
+
+  onValue(ref(db, 'agenda'), snap => {
+    const data = snap.val() || {};
+    agenda = {};
+    Object.keys(data).forEach(f => { agenda[f] = Object.keys(data[f]).map(id => ({ id, ...data[f][id] })); });
+    render(); renderCal();
+  });
+
+  $('form-schedule-item').addEventListener('submit', e => {
+    e.preventDefault();
+    const horaInicio = $('sch-hora-inicio').value, horaFin = $('sch-hora-fin').value;
+    if (hm(horaFin) <= hm(horaInicio)) { alert('La hora de fin debe ser posterior a la de inicio.'); return; }
+    push(ref(db, `agenda/${sel}`), {
+      titulo: $('sch-titulo').value.trim(), horaInicio, horaFin,
+      categoria: e.target.elements.cat.value, notas: $('sch-notas').value.trim()
     });
+    e.target.reset();
+  });
 
-    btnLogout.addEventListener('click', () => {
-      signOut(auth).then(() => location.reload());
-    });
+  onValue(ref(db, 'parciales'), snap => {
+    const data = snap.val() || {};
+    parciales = Object.keys(data).map(id => ({ id, ...data[id] })).sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''));
+    const t0 = new Date(iso() + 'T00:00');
+    $('grid-parciales').innerHTML = parciales.length ? parciales.map(p => {
+      const dias = Math.round((new Date(p.fecha + 'T00:00') - t0) / 864e5);
+      const cuando = dias === 0 ? 'Hoy' : dias === 1 ? 'Mañana' : dias > 1 ? `Faltan ${dias} días` : 'Ya pasó';
+      return `<div class="par ${dias < 0 ? 'past' : ''}"><div><h4>${esc(p.materia)}</h4>
+        <p class="d">${fechaTexto(p.fecha)} · ${cuando}</p>${p.detalle ? `<p>${esc(p.detalle)}</p>` : ''}</div>
+        ${delBtn('parciales/' + p.id)}</div>`;
+    }).join('') : '<p class="empty" style="grid-column:1/-1">No hay parciales agendados</p>';
+    renderCal();
+  });
+  $('form-parcial').addEventListener('submit', e => {
+    e.preventDefault();
+    push(ref(db, 'parciales'), { materia: $('parcial-materia').value, fecha: $('parcial-fecha').value, detalle: $('parcial-detalle').value });
+    e.target.reset();
+  });
 
-    function desbloquearApp() {
-      loginModal.classList.add('hidden');
-      appContent.classList.remove('hidden');
-      initialLoader.style.opacity = '0';
-      setTimeout(() => initialLoader.remove(), 500);
-      iniciarFirebase();
-    }
+  onValue(ref(db, 'recordatorios'), snap => {
+    const data = snap.val() || {}, keys = Object.keys(data);
+    $('widget-pendientes').textContent = keys.length;
+    $('lista-recordatorios').innerHTML = keys.length ? keys.map(k => {
+      const it = data[k], t = it.tituloOpcional || '', d = it.detalle || it.titulo || '';
+      return `<li><div>${t ? `<b style="color:var(--warn)">${esc(t)}</b><br>` : ''}${esc(d)}</div>${delBtn('recordatorios/' + k)}</li>`;
+    }).join('') : '<p class="empty">Sin recordatorios</p>';
+  });
+  $('form-recordatorio').addEventListener('submit', e => {
+    e.preventDefault();
+    push(ref(db, 'recordatorios'), { tituloOpcional: $('rec-titulo').value.trim(), detalle: $('rec-detalle').value.trim() });
+    e.target.reset();
+  });
 
-    function bloquearApp() {
-      initialLoader.style.display = 'none';
-      loginModal.classList.remove('hidden');
-      appContent.classList.add('hidden');
-    }
-
-    let eventosParcialesGlobal = [];
-    let firebaseSuscrita = false;
-
-    function iniciarFirebase() {
-      renderizarCalendario();
-      if (firebaseSuscrita) return;
-      firebaseSuscrita = true;
-
-      const gastosRef = ref(db, 'gastos');
-      const recordatoriosRef = ref(db, 'recordatorios');
-      const parcialesRef = ref(db, 'parciales');
-      const agendaRef = ref(db, 'agenda');
-
-      onValue(agendaRef, (snapshot) => {
-        const data = snapshot.val();
-        eventosAgendaGlobal = {};
-        if (data) {
-          Object.keys(data).forEach(fechaKey => {
-            const itemsFecha = data[fechaKey];
-            eventosAgendaGlobal[fechaKey] = Object.keys(itemsFecha).map(itemId => ({
-              id: itemId,
-              ...itemsFecha[itemId]
-            }));
-          });
-        }
-        renderizarScheduleTuDia();
-      });
-
-      document.getElementById('form-schedule-item').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const titulo = document.getElementById('sch-titulo').value.trim();
-        const horaInicio = document.getElementById('sch-hora-inicio').value;
-        const horaFin = document.getElementById('sch-hora-fin').value;
-        const categoria = document.getElementById('sch-categoria').value;
-        const notas = document.getElementById('sch-notas').value.trim();
-
-        const fechaTarget = fechaSeleccionadaTuDia || obtenerFechaIsoLocal();
-        const itemRef = ref(db, `agenda/${fechaTarget}`);
-        push(itemRef, { titulo, horaInicio, horaFin, categoria, notas });
-        e.target.reset();
-      });
-
-      window.eliminarItemAgenda = function(idItem) {
-        const fechaTarget = fechaSeleccionadaTuDia;
-        if (db) remove(ref(db, `agenda/${fechaTarget}/${idItem}`));
-      };
-
-      onValue(parcialesRef, (snapshot) => {
-        const data = snapshot.val();
-        const grid = document.getElementById('grid-parciales');
-        grid.innerHTML = '';
-        eventosParcialesGlobal = [];
-
-        if (data) {
-          Object.keys(data).forEach((key) => {
-            const item = data[key];
-            eventosParcialesGlobal.push({ id: key, ...item });
-
-            const fechaTextoLegible = formatearFechaTexto(item.fecha);
-
-            grid.innerHTML += `
-              <div class="bg-[#18181b] border border-[#27272a] hover:border-indigo-500/40 p-3.5 rounded-xl flex justify-between items-start transition">
-                <div>
-                  <h4 class="font-bold text-xs text-indigo-300">${item.materia}</h4>
-                  <p class="text-[11px] text-zinc-300 font-semibold font-mono mt-1 flex items-center gap-1.5">
-                    <i data-lucide="calendar" class="w-3 h-3 text-indigo-400"></i> ${fechaTextoLegible}
-                  </p>
-                  ${item.detalle ? `<p class="text-[10px] text-zinc-400 mt-1.5 leading-relaxed">${item.detalle}</p>` : ''}
-                </div>
-                <button data-id="${key}" class="btn-del-parcial text-zinc-500 hover:text-rose-400 p-1 transition">
-                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                </button>
-              </div>
-            `;
-          });
-        } else {
-          grid.innerHTML = '<p class="text-xs text-zinc-500 col-span-3 text-center py-4">No hay parciales agendados</p>';
-        }
-
-        lucide.createIcons();
-        bindDelete('btn-del-parcial', 'parciales');
-        renderizarCalendario();
-      });
-
-      document.getElementById('form-parcial').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const materia = document.getElementById('parcial-materia').value;
-        const fecha = document.getElementById('parcial-fecha').value;
-        const detalle = document.getElementById('parcial-detalle').value;
-        push(parcialesRef, { materia, fecha, detalle });
-        e.target.reset();
-      });
-
-      onValue(recordatoriosRef, (snapshot) => {
-        const data = snapshot.val();
-        const lista = document.getElementById('lista-recordatorios');
-        lista.innerHTML = '';
-
-        if (data) {
-          const arr = Object.keys(data).map(key => ({ key, ...data[key] }));
-          animarConteo('widget-pendientes', arr.length, false);
-
-          arr.forEach((item) => {
-            const tituloText = item.tituloOpcional || '';
-            const detalleText = item.detalle || item.titulo || '';
-
-            lista.innerHTML += `
-              <li class="flex justify-between items-start bg-[#18181b] border border-[#27272a] px-3.5 py-2.5 rounded-xl text-xs text-zinc-200 transition">
-                <div class="space-y-0.5 w-full pr-2">
-                  ${tituloText ? `<h5 class="font-bold text-amber-400 text-xs flex items-center gap-1.5"><i data-lucide="bookmark" class="w-3 h-3 text-amber-400 shrink-0"></i>${tituloText}</h5>` : ''}
-                  <p class="font-medium text-zinc-200 leading-snug">${detalleText}</p>
-                </div>
-                <button data-id="${item.key}" class="btn-del-rec text-zinc-500 hover:text-rose-400 p-1 transition">
-                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                </button>
-              </li>
-            `;
-          });
-        } else {
-          animarConteo('widget-pendientes', 0, false);
-          lista.innerHTML = '<p class="text-center py-5 text-xs text-zinc-500">Sin recordatorios</p>';
-        }
-
-        lucide.createIcons();
-        bindDelete('btn-del-rec', 'recordatorios');
-      });
-
-      document.getElementById('form-recordatorio').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const tituloOpcional = document.getElementById('rec-titulo').value.trim();
-        const detalle = document.getElementById('rec-detalle').value.trim();
-        push(recordatoriosRef, { tituloOpcional, detalle });
-        e.target.reset();
-      });
-
-      onValue(gastosRef, (snapshot) => {
-        const data = snapshot.val();
-        const lista = document.getElementById('lista-gastos');
-        lista.innerHTML = '';
-        let total = 0;
-
-        if (data) {
-          Object.keys(data).reverse().forEach((key) => {
-            const item = data[key];
-            total += parseFloat(item.monto || 0);
-            lista.innerHTML += `
-              <li class="flex justify-between items-center bg-[#18181b] border border-[#27272a] px-3.5 py-2.5 rounded-xl text-xs text-zinc-200 transition">
-                <span class="font-medium">${item.concepto}</span>
-                <div class="flex items-center gap-3">
-                  <span class="font-bold font-mono text-emerald-400">$${Number(item.monto).toLocaleString()}</span>
-                  <button data-id="${key}" class="btn-del-gasto text-zinc-500 hover:text-rose-400 p-1 transition">
-                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </li>
-            `;
-          });
-        } else {
-          lista.innerHTML = '<p class="text-center py-5 text-xs text-zinc-500">Sin gastos registrados</p>';
-        }
-
-        animarConteo('widget-total-gastos', total, true);
-        animarConteo('section-total-gastos', total, true);
-        lucide.createIcons();
-        bindDelete('btn-del-gasto', 'gastos');
-      });
-
-      document.getElementById('form-gasto').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const concepto = document.getElementById('gasto-concepto').value;
-        const monto = parseFloat(document.getElementById('gasto-monto').value);
-        push(gastosRef, { concepto, monto });
-        e.target.reset();
-      });
-    }
-
-    let fechaActualCal = new Date();
-
-    function renderizarCalendario() {
-      const anio = fechaActualCal.getFullYear();
-      const mes = fechaActualCal.getMonth();
-      const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-      document.getElementById('cal-mes-anio').innerText = `${nombresMeses[mes]} ${anio}`;
-
-      const grid = document.getElementById('cal-grid');
-      grid.innerHTML = '';
-
-      const primerDiaIndex = (new Date(anio, mes, 1).getDay() + 6) % 7;
-      const totalDiasMes = new Date(anio, mes + 1, 0).getDate();
-      const totalDiasMesAnterior = new Date(anio, mes, 0).getDate();
-      const hoy = new Date();
-
-      for (let i = primerDiaIndex; i > 0; i--) {
-        const diaNum = totalDiasMesAnterior - i + 1;
-        grid.innerHTML += `<div class="bg-[#18181b]/30 border border-[#27272a]/40 rounded-xl p-1.5 min-h-[55px] opacity-25 text-zinc-500 text-[10px] font-mono">${diaNum}</div>`;
-      }
-
-      for (let dia = 1; dia <= totalDiasMes; dia++) {
-        const mesStr = String(mes + 1).padStart(2, '0');
-        const diaStr = String(dia).padStart(2, '0');
-        const fechaIso = `${anio}-${mesStr}-${diaStr}`;
-        const esHoy = (dia === hoy.getDate() && mes === hoy.getMonth() && anio === hoy.getFullYear());
-
-        const parcialesDelDia = eventosParcialesGlobal.filter(p => p.fecha === fechaIso);
-        let eventosHtml = '';
-        parcialesDelDia.forEach(p => {
-          eventosHtml += `
-            <div class="bg-indigo-500/20 border border-indigo-500/40 text-indigo-200 text-[9px] px-1.5 py-0.5 rounded mt-1 truncate font-medium" title="${p.materia}">
-              <span class="hidden sm:inline">${p.materia}</span>
-              <span class="sm:hidden font-bold text-indigo-400">●</span>
-            </div>
-          `;
-        });
-
-        grid.innerHTML += `
-          <div class="bg-[#18181b] border ${esHoy ? 'border-indigo-500 bg-indigo-500/10' : 'border-[#27272a]'} rounded-xl p-1.5 min-h-[60px] flex flex-col justify-between transition hover:border-zinc-600">
-            <div class="flex justify-between items-center">
-              <span class="text-[11px] font-mono font-bold ${esHoy ? 'bg-indigo-500 text-white px-1.5 py-0.2 rounded-md' : 'text-zinc-300'}">${dia}</span>
-            </div>
-            <div class="overflow-y-auto max-h-[40px] space-y-0.5">${eventosHtml}</div>
-          </div>
-        `;
-      }
-    }
-
-    document.getElementById('cal-prev').addEventListener('click', () => {
-      fechaActualCal.setMonth(fechaActualCal.getMonth() - 1);
-      renderizarCalendario();
-    });
-
-    document.getElementById('cal-next').addEventListener('click', () => {
-      fechaActualCal.setMonth(fechaActualCal.getMonth() + 1);
-      renderizarCalendario();
-    });
-
-    function bindDelete(className, node) {
-      document.querySelectorAll(`.${className}`).forEach(btn => {
-        btn.onclick = () => {
-          const id = btn.getAttribute('data-id');
-          if (db) remove(ref(db, `${node}/${id}`));
-        };
-      });
-    }
-  </script>
+  onValue(ref(db, 'gastos'), snap => {
+    const data = snap.val() || {}, keys = Object.keys(data).reverse();
+    const total = keys.reduce((s, k) => s + parseFloat(data[k].monto || 0), 0);
+    $('lista-gastos').innerHTML = keys.length ? keys.map(k =>
+      `<li><div>${esc(data[k].concepto)}</div><div style="display:flex;align-items:center;gap:6px"><span class="amount">${money(data[k].monto)}</span>${delBtn('gastos/' + k)}</div></li>`
+    ).join('') : '<p class="empty">Sin gastos registrados</p>';
+    $('widget-total-gastos').textContent = $('section-total-gastos').textContent = money(total);
+  });
+  $('form-gasto').addEventListener('submit', e => {
+    e.preventDefault();
+    push(ref(db, 'gastos'), { concepto: $('gasto-concepto').value, monto: parseFloat($('gasto-monto').value) });
+    e.target.reset();
+  });
+}
+</script>
 </body>
 </html>
