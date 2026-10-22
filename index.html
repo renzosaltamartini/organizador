@@ -594,34 +594,35 @@ $('btn-pdf-not').onclick = () => {
   generarPDF('Nota Seleccionada', cleanTxt.textContent || 'Nota vacía', 'nota-personal');
 };
 
-/* ---------- Manejo de Rutas y 404 ---------- */
+/* ---------- Manejo de Rutas Robustas (Soporte Multi-Hosting y Recarga) ---------- */
 const VIEWS = ['home', 'dia', 'cal', 'rec', 'gas', 'not'];
 const PATHS = { home: '/panel', dia: '/panel/agenda', cal: '/panel/calendario', rec: '/panel/recordatorios', gas: '/panel/gastos', not: '/panel/notas' };
 const NOMBRES = { dia: 'Tu día', cal: 'Calendario', rec: 'Recordatorios', gas: 'Gastos', not: 'Notas' };
-let curUser = null, wanted = null, hashMode = location.protocol === 'file:';
+let curUser = null;
 
-const getPath = () => hashMode ? (location.hash.slice(1) || '/') : location.pathname;
-const viewFromPath = p => VIEWS.find(k => PATHS[k] === p.replace(/\/+$/, '')) || null;
+const getPath = () => {
+  const p = location.pathname;
+  if (p && p !== '/' && VIEWS.some(k => PATHS[k] === p.replace(/\/+$/, ''))) return p;
+  return '/panel';
+};
+
+const viewFromPath = p => VIEWS.find(k => PATHS[k] === p.replace(/\/+$/, '')) || 'home';
 
 function go(view, replace) {
-  const path = view ? PATHS[view] : '/';
-  if (getPath() === path) { onRoute(); return; }
-  if (hashMode) { replace ? location.replace('#' + path) : (location.hash = path); return; }
-  try { history[replace ? 'replaceState' : 'pushState'](null, '', path); }
-  catch (e) { hashMode = true; return go(view, replace); }
+  const path = view ? PATHS[view] : '/panel';
+  if (location.pathname === path) { onRoute(); return; }
+  try {
+    history[replace ? 'replaceState' : 'pushState'](null, '', path);
+  } catch (e) {
+    location.href = path;
+    return;
+  }
   onRoute();
 }
 
 function onRoute() {
   const p = getPath(), v = viewFromPath(p);
-  if (!curUser) {
-    if (p !== '/') go(null, true);
-    return;
-  }
-  if (!v) {
-    go('home', true);
-    return;
-  }
+  if (!curUser) return;
   showView(v);
 }
 
@@ -637,10 +638,12 @@ function showView(v) {
 
 document.addEventListener('click', e => {
   const g = e.target.closest('[data-go]');
-  if (g) go(g.dataset.go);
+  if (g) {
+    e.preventDefault();
+    go(g.dataset.go);
+  }
 });
 addEventListener('popstate', onRoute);
-addEventListener('hashchange', onRoute);
 
 /* ---------- Reloj ---------- */
 function tick() {
@@ -1050,7 +1053,6 @@ onAuthStateChanged(auth, async user => {
     $('app-content').hidden = true;
     $('onboarding-modal').hidden = true;
     $('login-modal').hidden = false;
-    onRoute();
   }
 });
 
@@ -1068,8 +1070,7 @@ $('btn-google-login').onclick = () => {
 };
 
 $('btn-logout').onclick = () => signOut(auth).then(() => {
-  try { hashMode ? (location.hash = '') : history.replaceState(null, '', '/'); } catch (e) {}
-  location.reload();
+  location.href = '/';
 });
 
 const cargados = new Set();
