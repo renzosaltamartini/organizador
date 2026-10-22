@@ -68,7 +68,15 @@ header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 8
 main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:16px}
 .nv{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:var(--mut);font-size:10.5px;font-weight:600;padding:8px 0}
 .nv.on{color:var(--ac)}
-#nav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:repeat(5,1fr);background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.nv .lg{display:none}
+.tiles .tile.wide{grid-column:1/-1;min-height:0}
+.notes{display:grid;grid-template-columns:1fr;gap:12px;margin-top:4px}
+.note{position:relative;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px 42px 12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0}
+.note:hover,.note.edit{border-color:var(--ac)}
+.note .x{position:absolute;top:6px;right:6px}
+.note p{white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:8;-webkit-box-orient:vertical;overflow:hidden}
+.brow{display:flex;gap:10px}.brow .btn:first-child{flex:1}
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:repeat(6,1fr);background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
 /* home */
 .hero{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 16%,var(--card)),var(--card))}
 .hero b{font-size:40px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;display:block;line-height:1.1}
@@ -132,7 +140,10 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  #nav{position:static;max-width:1100px;margin:16px auto 0;padding:0 24px;background:none;border:0;backdrop-filter:none;display:flex;gap:8px}
  .nv{flex-direction:row;gap:8px;font-size:13px;padding:10px 16px;border-radius:12px;background:var(--card);border:1px solid var(--line)}
  .nv.on{background:color-mix(in srgb,var(--ac) 16%,var(--card));border-color:var(--ac)}
- .tiles{grid-template-columns:repeat(4,1fr)}
+ .tiles{grid-template-columns:repeat(3,1fr)}
+ .tiles .tile.wide{grid-column:auto;min-height:132px}
+ .nv .lg{display:inline}.nv .sh{display:none}
+ .notes{grid-template-columns:1fr 1fr}
  .hero b{font-size:54px}
  .fgrid{grid-template-columns:repeat(12,minmax(0,1fr))}
  .fgrid .t{grid-column:span 5}.fgrid .h{grid-column:span 2}.fgrid .n{grid-column:span 3}
@@ -141,6 +152,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  .day>b{text-align:left}
  .pc{font-size:10px;width:auto;height:auto;padding:1px 6px;border-radius:6px;background:color-mix(in srgb,var(--warn) 28%,transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 }
+@media(min-width:1000px){.tiles{grid-template-columns:repeat(5,1fr)}.notes{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:900px){.split{grid-template-columns:1.7fr 1fr;align-items:start}}
 </style>
 </head>
@@ -156,6 +168,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
  <symbol id="i-day" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0112 0v5l2 2H4zM10 21h4"/></symbol>
+ <symbol id="i-note" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 13h8M8 17h6"/></symbol>
  <symbol id="i-wal" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/></symbol>
 </svg>
 
@@ -183,8 +196,9 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
   <button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg>Inicio</button>
   <button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg>Tu día</button>
   <button class="nv" data-go="cal"><svg class="ic"><use href="#i-cal"/></svg>Calendario</button>
-  <button class="nv" data-go="rec"><svg class="ic"><use href="#i-bell"/></svg>Recordatorios</button>
+  <button class="nv" data-go="rec"><svg class="ic"><use href="#i-bell"/></svg><span class="lg">Recordatorios</span><span class="sh">Recordar</span></button>
   <button class="nv" data-go="gas"><svg class="ic"><use href="#i-wal"/></svg>Gastos</button>
+  <button class="nv" data-go="not"><svg class="ic"><use href="#i-note"/></svg>Notas</button>
  </nav>
 
  <main>
@@ -198,6 +212,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
     <button class="card tile" data-go="cal" style="--c:#14b8a6"><span class="ti"><svg class="ic"><use href="#i-cal"/></svg></span><b>Calendario</b><span class="sub" id="t-cal">…</span></button>
     <button class="card tile" data-go="rec" style="--c:#f59e0b"><span class="ti"><svg class="ic"><use href="#i-bell"/></svg></span><b>Recordatorios</b><span class="sub" id="t-rec">…</span></button>
     <button class="card tile" data-go="gas" style="--c:#84cc16"><span class="ti"><svg class="ic"><use href="#i-wal"/></svg></span><b>Gastos</b><span class="sub" id="t-gas">…</span></button>
+    <button class="card tile wide" data-go="not" style="--c:#fb7185"><span class="ti"><svg class="ic"><use href="#i-note"/></svg></span><b>Notas</b><span class="sub" id="t-not">…</span></button>
    </div>
   </section>
 
@@ -284,12 +299,24 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
     <ul id="lista-gastos" class="list"></ul>
    </div>
   </div></section>
+   <!-- NOTAS -->
+  <section id="v-not" hidden>
+   <div class="card">
+    <h1>Notas</h1><p class="sub">Toca una nota para editarla</p>
+    <form id="form-nota" class="fgrid" style="grid-template-columns:1fr">
+     <input class="in" id="nota-titulo" placeholder="Título (opcional)">
+     <textarea class="in" id="nota-texto" rows="4" placeholder="Escribe tu nota…" required></textarea>
+     <div class="brow"><button class="btn" type="submit"><svg class="ic"><use href="#i-plus"/></svg><span id="nota-btn">Guardar nota</span></button><button class="btn ghost" type="button" id="nota-cancel" hidden>Cancelar</button></div>
+    </form>
+    <div id="lista-notas" class="notes"></div>
+   </div>
+  </section>
  </main>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, push, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -318,10 +345,10 @@ const dias = f => Math.round((new Date(f + 'T00:00') - new Date(iso() + 'T00:00'
 const cuando = f => { const d = dias(f); return d === 0 ? 'Hoy' : d === 1 ? 'Mañana' : d > 1 ? `En ${d} días` : 'Ya pasó'; };
 const delBtn = path => `<button class="x" data-del="${esc(path)}" aria-label="Eliminar"><svg class="ic"><use href="#i-trash"/></svg></button>`;
 
-let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, needScroll = true, lastRender = 0, calDate = new Date();
+let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, notas = [], editId = null, needScroll = true, lastRender = 0, calDate = new Date();
 
 /* ---------- Navegación entre secciones ---------- */
-const VIEWS = ['home', 'dia', 'cal', 'rec', 'gas'];
+const VIEWS = ['home', 'dia', 'cal', 'rec', 'gas', 'not'];
 function showView(v) {
   if (!VIEWS.includes(v)) v = 'home';
   VIEWS.forEach(x => { $('v-' + x).hidden = x !== v; });
@@ -354,6 +381,7 @@ function renderHome() {
   $('t-cal').textContent = p ? `${p.materia} · ${cuando(p.fecha).toLowerCase()}` : 'Sin parciales próximos';
   $('t-rec').textContent = `${recN} ${recN === 1 ? 'pendiente' : 'pendientes'}`;
   $('t-gas').textContent = money(gasT);
+  $('t-not').textContent = notas.length ? `${notas.length} ${notas.length === 1 ? 'nota' : 'notas'}` : 'Sin notas todavía';
 }
 
 /* ---------- Tu día ---------- */
@@ -487,7 +515,7 @@ onAuthStateChanged(auth, user => {
 $('btn-google-login').onclick = () => { errorLogin.hidden = true; signInWithPopup(auth, provider).catch(() => { errorLogin.hidden = false; }); };
 $('btn-logout').onclick = () => signOut(auth).then(() => location.reload());
 
-/* La pantalla de carga se mantiene hasta que llegan los 4 bloques de datos */
+/* La pantalla de carga se mantiene hasta que llegan los 5 bloques de datos */
 const cargados = new Set();
 function hideLoader() {
   const l = $('initial-loader');
@@ -496,7 +524,7 @@ function hideLoader() {
 }
 function cargado(nombre) {
   cargados.add(nombre);
-  if (cargados.size === 4) hideLoader();
+  if (cargados.size === 5) hideLoader();
 }
 
 function desbloquear() {
@@ -568,6 +596,33 @@ function iniciar() {
     ).join('') : '<p class="empty">Sin gastos registrados</p>';
     $('section-total-gastos').textContent = money(gasT);
     renderHome(); cargado('gastos');
+  });
+
+  onValue(ref(db, 'notas'), snap => {
+    const data = snap.val() || {};
+    notas = Object.keys(data).map(id => ({ id, ...data[id] })).sort((a, b) => (b.ts || 0) - (a.ts || 0));
+    $('lista-notas').innerHTML = notas.length ? notas.map(n =>
+      `<article class="note ${n.id === editId ? 'edit' : ''}" data-note="${n.id}">${delBtn('notas/' + n.id)}${n.titulo ? `<b>${esc(n.titulo)}</b>` : ''}<p>${esc(n.texto)}</p>${n.ts ? `<span class="sub">${new Date(n.ts).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</span>` : ''}</article>`
+    ).join('') : '<p class="empty" style="grid-column:1/-1">Todavía no hay notas</p>';
+    renderHome(); cargado('notas');
+  });
+  const finEdicion = () => { editId = null; $('form-nota').reset(); $('nota-btn').textContent = 'Guardar nota'; $('nota-cancel').hidden = true; document.querySelectorAll('.note.edit').forEach(n => n.classList.remove('edit')); };
+  $('nota-cancel').onclick = finEdicion;
+  $('lista-notas').addEventListener('click', e => {
+    if (e.target.closest('[data-del]')) return;
+    const c = e.target.closest('[data-note]'); if (!c) return;
+    const n = notas.find(x => x.id === c.dataset.note); if (!n) return;
+    editId = n.id; $('nota-titulo').value = n.titulo || ''; $('nota-texto').value = n.texto || '';
+    $('nota-btn').textContent = 'Guardar cambios'; $('nota-cancel').hidden = false;
+    document.querySelectorAll('.note').forEach(x => x.classList.toggle('edit', x === c));
+    $('form-nota').scrollIntoView({ behavior: 'smooth', block: 'center' }); $('nota-texto').focus();
+  });
+  $('form-nota').addEventListener('submit', e => {
+    e.preventDefault();
+    const data = { titulo: $('nota-titulo').value.trim(), texto: $('nota-texto').value.trim() };
+    if (editId) { const o = notas.find(x => x.id === editId); set(ref(db, 'notas/' + editId), { ...data, ts: (o && o.ts) || Date.now() }); }
+    else push(ref(db, 'notas'), { ...data, ts: Date.now() });
+    finEdicion();
   });
   $('form-gasto').addEventListener('submit', e => {
     e.preventDefault();
