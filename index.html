@@ -7,6 +7,10 @@
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%9CC%3C/text%3E%3C/svg%3E" />
 <meta name="theme-color" content="#0a0c10" />
+<link rel="manifest" href="/manifest.json" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png" data-appicon="apple-touch-icon" />
 <meta name="apple-mobile-web-app-title" content="Organizador" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,6 +42,7 @@ textarea.in{resize:none}
 .btn.ghost{background:var(--soft);color:var(--tx);border:1px solid var(--line)}
 .ib{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--soft);display:inline-grid;place-items:center;color:var(--mut)}
 .ib:hover{border-color:var(--ac);color:var(--ac)}
+.ib.on{color:var(--ok);border-color:var(--ok)}
 .x{width:34px;height:34px;border:0;background:transparent;color:var(--mut);border-radius:10px;display:inline-grid;place-items:center;flex:none}
 .x:hover{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
 .x .ic{width:17px;height:17px}
@@ -396,6 +401,7 @@ main>section{animation:viewIn .32s cubic-bezier(.2,.7,.2,1)}
    <div><span id="u-name">Mi organizador</span><small>● Sincronizado</small></div>
   </div>
   <div class="header-actions">
+   <button id="btn-notif" class="ib" title="Activar notificaciones" aria-label="Activar notificaciones"><svg class="ic"><use href="#i-bell"/></svg></button>
    <button id="btn-share-pdf" class="ib" title="Descargar PDF general" aria-label="Descargar PDF general"><svg class="ic"><use href="#i-pdf"/></svg></button>
    <button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button>
   </div>
@@ -1290,7 +1296,87 @@ $('btn-google-login').onclick = () => {
   });
 };
 
-$('btn-logout').onclick = () => signOut(auth).then(() => { location.hash = ''; location.reload(); });
+/* ---------- Notificaciones push (Firebase Cloud Messaging) ---------- */
+/* Pegá acá la clave VAPID: Firebase > Configuración del proyecto > Cloud Messaging > Certificados push web > Generar par de claves */
+const VAPID_KEY = 'BLiFktaH58Pp5nV2quu9g1xFYo2_rVXD424ookhN0Hsyln1S53KTH5Ep61V016kJ191WULUsRG5RDoZRBmqeQo0';
+const MSG_URL = 'https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js';
+const msgMod = import(MSG_URL).catch(() => null);   // se precarga; si falla, la app sigue funcionando igual
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isStandalone = () => window.navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
+const noVapid = () => VAPID_KEY.startsWith('PEGA_');
+let pushEnvV = null, pushKey = null, msgInst = null, msgListening = false;
+const tokKey = t => t.replace(/[.$#\[\]\/]/g, '_');
+
+async function pushEnv() {
+  if (isIOS && !isStandalone()) return 'ios-install';
+  if (!('serviceWorker' in navigator) || !('Notification' in window) || !('PushManager' in window)) return 'unsupported';
+  const m = await msgMod; if (!m) return 'unsupported';
+  try { return (await m.isSupported()) ? 'ok' : 'unsupported'; } catch (_) { return 'unsupported'; }
+}
+function updateBell() {
+  const b = $('btn-notif'); if (!b) return;
+  const on = !!pushKey && 'Notification' in window && Notification.permission === 'granted';
+  b.classList.toggle('on', on);
+  b.title = on ? 'Notificaciones activadas (tocá para desactivar)' : 'Activar notificaciones';
+  b.setAttribute('aria-label', b.title);
+}
+pushEnv().then(v => { pushEnvV = v; updateBell(); });
+
+async function setupPush() {
+  const m = await msgMod; if (!m) throw new Error('Firebase Messaging no se pudo cargar');
+  const reg = await navigator.serviceWorker.register('/sw.js');
+  await navigator.serviceWorker.ready;
+  msgInst = msgInst || m.getMessaging(app);
+  const token = await m.getToken(msgInst, { vapidKey: VAPID_KEY, serviceWorkerRegistration: reg });
+  if (!token) throw new Error('No se obtuvo el token del dispositivo');
+  pushKey = tokKey(token);
+  await set(R('pushTokens/' + pushKey), { token, plataforma: isIOS ? 'iOS' : 'otro', standalone: isStandalone(), ua: navigator.userAgent.slice(0, 140), visto: Date.now() });
+  if (!msgListening) {   // app abierta: el push llega acá en vez de al Service Worker
+    msgListening = true;
+    m.onMessage(msgInst, p => {
+      const d = p.data || {};
+      reg.showNotification(d.title || 'Organizador', { body: d.body || '', icon: '/icon-192.png', tag: d.tag || undefined, data: { url: d.url || '/#/panel/agenda' } });
+    });
+  }
+  updateBell();
+  return reg;
+}
+async function enablePush() {
+  /* OJO: requestPermission debe ser lo PRIMERO que se espera dentro del toque (regla de iOS) */
+  const env = pushEnvV || (isIOS && !isStandalone() ? 'ios-install' : ('serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window ? 'ok' : 'unsupported'));
+  if (env === 'ios-install') { alert('Para recibir notificaciones en iPhone:\n\n1) En Safari tocá Compartir > "Agregar a pantalla de inicio".\n2) Abrí la app desde ese ícono (no desde Safari).\n3) Tocá la campana de nuevo.'); return; }
+  if (env === 'unsupported') { alert('Este navegador o dispositivo no soporta notificaciones push.'); return; }
+  if (noVapid()) { alert('Falta configurar la clave VAPID en el código (constante VAPID_KEY).'); return; }
+  if (Notification.permission === 'denied') { alert('Las notificaciones están bloqueadas. Activalas en Ajustes > Notificaciones > (esta app) y volvé a intentar.'); return; }
+  const perm = await Notification.requestPermission();
+  if (perm !== 'granted') { updateBell(); return; }
+  try {
+    const reg = await setupPush();
+    reg.showNotification('Notificaciones activadas ✅', { body: 'Te vamos a avisar aunque el celular esté bloqueado.', icon: '/icon-192.png', tag: 'bienvenida' });
+  } catch (err) {
+    console.error(err);
+    alert('No se pudieron activar las notificaciones.\n' + (err && err.message ? err.message : ''));
+  }
+}
+async function disablePush() {
+  if (!confirm('¿Desactivar las notificaciones en este dispositivo?')) return;
+  try { const m = await msgMod; if (m && msgInst) await m.deleteToken(msgInst); } catch (_) {}
+  try { await remove(R('pushTokens/' + pushKey)); } catch (_) {}
+  pushKey = null; updateBell();
+}
+async function syncPush() {   // al iniciar sesión: si ya diste permiso, renueva/guarda el token de este dispositivo
+  try {
+    pushEnvV = await pushEnv();
+    if (pushEnvV === 'ok' && Notification.permission === 'granted' && !noVapid()) await setupPush();
+  } catch (e) { console.warn('push:', e); }
+  updateBell();
+}
+$('btn-notif').onclick = () => (pushKey ? disablePush() : enablePush());
+
+$('btn-logout').onclick = async () => {
+  if (pushKey) { try { await remove(R('pushTokens/' + pushKey)); } catch (_) {} }   // este celular deja de recibir avisos de esta cuenta
+  signOut(auth).then(() => { location.hash = ''; location.reload(); });
+};
 
 /* Modificar foto desde el avatar superior en cualquier momento */
 const profileModal = $('profile-modal');
@@ -1343,6 +1429,7 @@ function desbloquear(user, name, photoUrl) {
   else if (!location.hash) location.hash = '#/panel';
   onRoute();
   iniciar();
+  syncPush();
   setTimeout(hideLoader, 10000);
 }
 
