@@ -2,7 +2,7 @@
    Protegido con CRON_SECRET para que nadie más pueda dispararlo. */
 const crypto = require('crypto');
 const admin = require('firebase-admin');
-const { correr } = require('../lib/avisos');
+const { correr } = require('../lib/logica');
 
 function iniciar() {
   if (admin.apps.length) return;
