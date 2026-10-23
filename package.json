@@ -1,0 +1,7 @@
+{
+  "name": "organizador-personal",
+  "private": true,
+  "dependencies": {
+    "firebase-admin": "^13.0.0"
+  }
+}
