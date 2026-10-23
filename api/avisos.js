@@ -4,6 +4,10 @@ const crypto = require('crypto');
 const admin = require('firebase-admin');
 const { correr } = require('../lib/logica');
 
+/* OPCIONAL: si no podés crear CRON_SECRET en Vercel, pegá acá una clave NUEVA entre las comillas.
+   Usalo SOLO si tu repositorio es privado. Nunca pongas acá el .json de Firebase. */
+const SECRETO_LOCAL = 'JJDF58501022DDDASOPEN62515FSNIDPASD';
+
 function iniciar() {
   if (admin.apps.length) return;
   admin.initializeApp({
@@ -18,9 +22,10 @@ function igual(a, b) {
 }
 
 module.exports = async (req, res) => {
-  const secreto = process.env.CRON_SECRET;
+  const secreto = process.env.CRON_SECRET || SECRETO_LOCAL;
   const recibido = String(req.headers.authorization || '').replace(/^Bearer\s+/i, '') || (req.query && req.query.key) || '';
-  if (!secreto || !igual(recibido, secreto)) return res.status(401).json({ ok: false });
+  if (!secreto) return res.status(401).json({ ok: false, motivo: 'No hay clave configurada: falta CRON_SECRET en Vercel (o hacer Redeploy), o SECRETO_LOCAL en el código' });
+  if (!igual(recibido, secreto)) return res.status(401).json({ ok: false, motivo: 'La clave enviada no coincide con CRON_SECRET' });
   try {
     iniciar();
     const r = await correr({ admin });
