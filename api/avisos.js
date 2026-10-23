@@ -10,8 +10,12 @@ const SECRETO_LOCAL = 'JJDF58501022DDDASOPEN62515FSNIDPASD';
 
 function iniciar() {
   if (admin.apps.length) return;
+  const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
+  if (!raw) throw new Error('Falta la variable FIREBASE_SERVICE_ACCOUNT en Vercel (crearla con el nombre exacto, marcar Production y hacer Redeploy)');
+  let cuenta;
+  try { cuenta = JSON.parse(raw); } catch (_) { throw new Error('FIREBASE_SERVICE_ACCOUNT no tiene un JSON válido: hay que pegar el contenido COMPLETO del archivo, desde la primera { hasta la última }'); }
   admin.initializeApp({
-    credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
+    credential: admin.credential.cert(cuenta),
     databaseURL: process.env.FIREBASE_DATABASE_URL || 'https://laranchada-6abd3-default-rtdb.firebaseio.com'
   });
 }
