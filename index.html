@@ -53,12 +53,16 @@ textarea.in{resize:none}
 .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;background:var(--soft);padding:14px;border-radius:14px;border:1px solid var(--line);margin:14px 0}
 .fgrid>*{grid-column:1/-1}.fgrid .h{grid-column:auto}
 .fgrid .in{background:var(--card)}
-.sws{display:flex;gap:10px;align-items:center}
+.sws{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .sws label{cursor:pointer;position:relative}
 .sws input{position:absolute;opacity:0}
 .sws span{display:block;width:30px;height:30px;border-radius:50%;background:var(--c);border:3px solid var(--soft);transition:transform .15s}
 .sws input:checked+span{box-shadow:0 0 0 2px var(--c);transform:scale(1.1)}
 .sws input:focus-visible+span{outline:2px solid var(--tx)}
+.sws .cu span{background:var(--c,var(--soft));border:2px dashed var(--line);display:grid;place-items:center}
+.sws .cu span::after{content:"+";font-size:18px;line-height:1;color:var(--mut)}
+.sws .cu.set span{border:3px solid var(--soft)}.sws .cu.set span::after{content:""}
+.sws input[type=color]{inset:0;width:100%;height:100%;cursor:pointer;padding:0;border:0}
 .list{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
 .list li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--soft);border:1px solid var(--line);border-radius:14px}
 .list li>div{min-width:0;overflow-wrap:anywhere}
@@ -80,7 +84,7 @@ textarea.in{resize:none}
 /* ---- pantalla de ingreso ---- */
 .en{justify-content:flex-start;align-items:stretch;gap:0;overflow-y:auto;overscroll-behavior:contain;padding:max(22px,env(safe-area-inset-top)) 22px max(28px,env(safe-area-inset-bottom))}
 .en::before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0,transparent 63px,color-mix(in srgb,var(--line) 42%,transparent) 63px,color-mix(in srgb,var(--line) 42%,transparent) 64px);-webkit-mask-image:linear-gradient(to bottom,#000,transparent 70%);mask-image:linear-gradient(to bottom,#000,transparent 70%)}
-.en-in{position:relative;margin:auto;width:100%;max-width:1040px;display:grid;gap:12px}
+.en-in{position:relative;margin:40px auto 0;width:100%;max-width:1040px;display:grid;gap:12px}
 .en-col{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .en-brand{display:flex;align-items:center;gap:10px;font:600 18px/1 "Source Serif 4",Georgia,serif;letter-spacing:-.01em}
 .en-brand img{width:32px;height:32px;border-radius:9px;display:block}
@@ -118,6 +122,37 @@ textarea.in{resize:none}
 .en-av span{grid-column:2/4;font-size:13px;color:var(--mut)}
 @keyframes avisoIn{from{opacity:0;transform:translateY(-30px) scale(.96)}to{opacity:1;transform:none}}
 @media(min-width:860px){.en-in{grid-template-columns:1.05fr .95fr;gap:72px;align-items:center}.en-wrap{justify-self:end}}
+.en-more{position:relative;width:100%;max-width:1040px;margin:84px auto 0;display:flex;flex-direction:column;gap:80px}
+.en-sec h2{font:600 clamp(26px,6vw,34px)/1.15 "Source Serif 4",Georgia,serif;letter-spacing:-.01em;margin-bottom:8px}
+.en-sec>p{color:var(--mut);max-width:54ch;margin-bottom:22px;font-size:15px;line-height:1.55}
+.en-feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.en-fc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px}
+.en-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+.en-fc h3{font:600 18px "Source Serif 4",Georgia,serif}
+.en-fc p{font-size:14px;color:var(--mut);line-height:1.5}
+.en-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;list-style:none;padding:0;counter-reset:p}
+.en-steps li{counter-increment:p;padding:20px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+.en-steps li::before{content:counter(p);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ac);color:var(--onac);font-weight:700;font-size:13px;margin-bottom:12px}
+.en-steps b{display:block;font-size:15px;margin-bottom:4px}
+.en-steps span{font-size:14px;color:var(--mut);line-height:1.5}
+.en-band{display:grid;gap:22px;padding:28px 22px;border-radius:22px;border:1px solid var(--line);background:color-mix(in srgb,var(--ac) 9%,var(--card))}
+.en-band h2{font:600 clamp(24px,5.5vw,32px)/1.15 "Source Serif 4",Georgia,serif;margin-bottom:6px}
+.en-band p{color:var(--mut);font-size:15px;line-height:1.55;max-width:46ch}
+.en-ck{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px}
+.en-ck li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45}
+.en-ck li::before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;background:var(--ac);color:var(--onac);display:grid;place-items:center;font-size:12px;font-weight:700;margin-top:1px}
+@media(min-width:860px){.en-band{grid-template-columns:1fr 1fr;align-items:center;padding:40px}}
+.en-faq details{border-bottom:1px solid var(--line);padding:16px 0}
+.en-faq summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.en-faq summary::-webkit-details-marker{display:none}
+.en-faq summary::after{content:"+";color:var(--mut);font-size:20px;line-height:1}
+.en-faq details[open] summary::after{content:"–"}
+.en-faq details p{margin-top:10px;color:var(--mut);font-size:14px;line-height:1.55;max-width:60ch}
+.en-end{text-align:center;padding:40px 22px;border:1px solid var(--line);border-radius:22px;background:var(--card);display:flex;flex-direction:column;align-items:center;gap:14px}
+.en-end h2{font:600 clamp(26px,6vw,36px)/1.15 "Source Serif 4",Georgia,serif;max-width:18ch}
+.en-end .btn{min-height:52px;padding:0 28px;font-size:16px}
+.en-foot{font-size:12.5px;color:var(--mut);text-align:center;padding-bottom:6px}
+
 /* ---- alertas ---- */
 .tiles .tile:nth-child(6){animation-delay:.38s}
 .al-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px}
@@ -357,6 +392,26 @@ main>section{animation:viewIn .32s cubic-bezier(.2,.7,.2,1)}
 /* login */
 #onboard-modal .card{animation:pop .4s cubic-bezier(.2,.7,.2,1)}
 /* loader */
+#initial-loader{justify-content:flex-start;align-items:center;gap:0;padding:max(18px,env(safe-area-inset-top)) 18px 18px;overflow:hidden;text-transform:none;letter-spacing:0}
+.sk-wrap{width:100%;max-width:560px;display:flex;flex-direction:column;gap:14px}
+.sk{display:block;border-radius:10px;background:var(--soft);position:relative;overflow:hidden}
+.sk::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--tx) 8%,transparent),transparent);animation:shim 1.4s ease-in-out infinite}
+@keyframes shim{to{transform:translateX(100%)}}
+.sk-head{display:flex;align-items:center;gap:10px;padding:6px 0 8px}
+.sk-av{width:40px;height:40px;border-radius:12px}
+.sk-col{flex:1;display:flex;flex-direction:column;gap:8px}
+.sk-l1{height:12px;width:48%}.sk-l2{height:10px;width:28%}
+.sk-ib{width:42px;height:42px;border-radius:12px}
+.sk-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:10px}
+.sk-hero{min-height:112px;justify-content:center}
+.sk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sk-ic{width:38px;height:38px;border-radius:11px}
+.sk-ln{height:11px;width:80%}.sk-ln.s{width:35%;height:9px}
+.sk-bar{height:3px;border-radius:3px;background:var(--line);overflow:hidden;position:relative;margin-top:4px}
+.sk-bar::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;border-radius:3px;background:var(--ac);animation:barra 1.2s ease-in-out infinite}
+@keyframes barra{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
+.sk-msg{text-align:center;color:var(--mut);font-size:13px}
+@media(prefers-reduced-motion:reduce){.sk::after,.sk-bar::after{animation:none}}
 #initial-loader.out{opacity:0;transform:scale(1.03);transition:opacity .4s,transform .4s}
 @media(min-width:720px){.nv::before{display:none}}
 @media(prefers-reduced-motion:reduce){
@@ -390,7 +445,20 @@ main>section{animation:viewIn .32s cubic-bezier(.2,.7,.2,1)}
  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M10 13H8M16 13h-2M10 17H8M16 17h-2"/></symbol>
 </svg>
 
-<div id="initial-loader" class="full" role="status" aria-label="Cargando"><div class="spin"></div></div>
+<div id="initial-loader" class="full" role="status" aria-label="Cargando">
+ <div class="sk-wrap">
+  <div class="sk-head"><span class="sk sk-av"></span><div class="sk-col"><span class="sk sk-l1"></span><span class="sk sk-l2"></span></div><span class="sk sk-ib"></span><span class="sk sk-ib"></span></div>
+  <div class="sk-card sk-hero"><span class="sk sk-ln" style="width:38%;height:14px"></span><span class="sk sk-ln" style="width:62%"></span><span class="sk sk-ln" style="width:48%"></span></div>
+  <div class="sk-grid">
+   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:60%"></span><span class="sk sk-ln s"></span></div>
+   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:70%"></span><span class="sk sk-ln s"></span></div>
+   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:55%"></span><span class="sk sk-ln s"></span></div>
+   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:65%"></span><span class="sk sk-ln s"></span></div>
+  </div>
+  <div class="sk-bar"></div>
+  <p class="sk-msg">Preparando tu día…</p>
+ </div>
+</div>
 
 <!-- PANTALLA DE INGRESO -->
 <div id="login-modal" class="full en" hidden>
@@ -423,6 +491,61 @@ main>section{animation:viewIn .32s cubic-bezier(.2,.7,.2,1)}
     </ol>
    </div>
   </div>
+ </div>
+
+ <div class="en-more">
+  <section class="en-sec">
+   <h2>Todo lo de tu rutina, en un solo lugar</h2>
+   <p>Seis herramientas pensadas para el día a día, que funcionan juntas y se sienten livianas.</p>
+   <div class="en-feat">
+ <article class="en-fc" style="--c:#2f7d5b"><span class="en-ic"><svg class="ic"><use href="#i-day"/></svg></span><h3>Tu día</h3><p>Tu agenda en tiempo real. Arrastrá una actividad para cambiarle el horario y mirá en qué momento del día estás.</p></article>
+ <article class="en-fc" style="--c:#3f8fa6"><span class="en-ic"><svg class="ic"><use href="#i-cal"/></svg></span><h3>Calendario</h3><p>El mes completo de un vistazo, con tus fechas importantes marcadas.</p></article>
+ <article class="en-fc" style="--c:#e0a43a"><span class="en-ic"><svg class="ic"><use href="#i-bell"/></svg></span><h3>Recordatorios</h3><p>Anotá lo pendiente y tenelo a mano para que no se te escape nada.</p></article>
+ <article class="en-fc" style="--c:#d0626f"><span class="en-ic"><svg class="ic"><use href="#i-alarm"/></svg></span><h3>Alertas</h3><p>Una notificación a la hora exacta, una sola vez o todas las semanas.</p></article>
+ <article class="en-fc" style="--c:#8a9a3f"><span class="en-ic"><svg class="ic"><use href="#i-wal"/></svg></span><h3>Gastos</h3><p>Registrá tus gastos y llevá el control de tu plata sin planillas.</p></article>
+ <article class="en-fc" style="--c:#6b7280"><span class="en-ic"><svg class="ic"><use href="#i-note"/></svg></span><h3>Notas</h3><p>Un editor para ideas, apuntes y listas con tildes.</p></article>
+   </div>
+  </section>
+
+  <section class="en-band">
+   <div>
+    <h2>Avisos que sí llegan</h2>
+    <p>No hace falta tener la app abierta. Recibís la notificación aunque el celular esté bloqueado.</p>
+   </div>
+   <ul class="en-ck">
+    <li>Un aviso 10 minutos antes de cada actividad de tu agenda.</li>
+    <li>Otro cuando la actividad empieza.</li>
+    <li>Alertas a la hora exacta, únicas o semanales.</li>
+    <li>Funciona en Android y en iPhone (en iPhone, agregala a la pantalla de inicio).</li>
+   </ul>
+  </section>
+
+  <section class="en-sec">
+   <h2>Cómo empezar</h2>
+   <p>Tres pasos y ya está funcionando.</p>
+   <ol class="en-steps">
+    <li><b>Ingresá con Google</b><span>Sin contraseñas ni formularios largos.</span></li>
+    <li><b>Cargá tu agenda</b><span>Sumá actividades, alertas y notas en un par de toques.</span></li>
+    <li><b>Activá los avisos</b><span>Tocá la campana y aceptá el permiso para recibir notificaciones.</span></li>
+   </ol>
+  </section>
+
+  <section class="en-sec en-faq">
+   <h2>Preguntas frecuentes</h2>
+   <details><summary>¿Cómo recibo las notificaciones?</summary><p>Entrá a la app, tocá la campana de la parte superior y aceptá el permiso. En iPhone, primero agregá la app a la pantalla de inicio desde el botón Compartir.</p></details>
+   <details><summary>¿Puedo usarla como una app?</summary><p>Sí. Podés agregarla a la pantalla de inicio y se abre a pantalla completa, como cualquier otra app.</p></details>
+   <details><summary>¿Puedo cambiar los colores?</summary><p>Sí. Cada actividad puede tener el color que quieras, ya sea de la paleta o uno personalizado, y podés alternar entre modo claro y oscuro.</p></details>
+   <details><summary>¿Qué pasa con mis datos?</summary><p>Entrás con tu cuenta de Google y tus datos quedan asociados a ella. No usamos contraseñas propias.</p></details>
+   <details><summary>¿Puedo sacar un resumen de todo?</summary><p>Sí. Desde la app podés descargar un PDF con tu agenda, fechas importantes y recordatorios.</p></details>
+  </section>
+
+  <section class="en-end">
+   <h2>Empezá a ordenar tu día</h2>
+   <p class="en-micro">Entrás con tu cuenta de Google en unos segundos.</p>
+   <button type="button" class="btn" onclick="document.getElementById('btn-google-login').click();document.getElementById('login-modal').scrollTo({top:0,behavior:'smooth'})">Continuar con Google</button>
+  </section>
+
+  <p class="en-foot">Organizador Personal · Simplificamos tu rutina en simples pasos.</p>
  </div>
 </div>
 <script>
@@ -539,6 +662,12 @@ main>section{animation:viewIn .32s cubic-bezier(.2,.7,.2,1)}
      <label style="--c:#8a9a3f"><input type="radio" name="cat" value="emerald" aria-label="Oliva"><span></span></label>
      <label style="--c:#e0a43a"><input type="radio" name="cat" value="amber" aria-label="Ámbar"><span></span></label>
      <label style="--c:#d0626f"><input type="radio" name="cat" value="rose" aria-label="Rosa"><span></span></label>
+     <label style="--c:#e07a52"><input type="radio" name="cat" value="#e07a52" aria-label="Naranja"><span></span></label>
+     <label style="--c:#cc4b43"><input type="radio" name="cat" value="#cc4b43" aria-label="Rojo"><span></span></label>
+     <label style="--c:#4f94d4"><input type="radio" name="cat" value="#4f94d4" aria-label="Celeste"><span></span></label>
+     <label style="--c:#6b7a8a"><input type="radio" name="cat" value="#6b7a8a" aria-label="Gris azulado"><span></span></label>
+     <label style="--c:#2b3330"><input type="radio" name="cat" value="#2b3330" aria-label="Carbón"><span></span></label>
+     <label class="cu" title="Elegir otro color"><input type="radio" name="cat" value="#2f7d5b" id="cat-custom" aria-label="Color personalizado"><span></span><input type="color" id="cat-color" value="#2f7d5b" aria-label="Elegir un color personalizado"></label>
     </div></div>
     <button class="btn s" type="submit"><svg class="ic"><use href="#i-check"/></svg> <span id="sch-save">Guardar</span></button>
     <button class="btn ghost" type="button" id="sch-cancel" hidden>Cancelar edición</button>
@@ -725,7 +854,17 @@ const R = p => ref(db, base + p);
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const HEX = /^#[0-9a-f]{6}$/i;
+const colDe = c => COL[c] || (HEX.test(c || '') ? c : COL.indigo);
 const COL = {indigo:'#2f7d5b',cyan:'#3f8fa6',emerald:'#8a9a3f',amber:'#e0a43a',rose:'#d0626f'};
+function setCustom(hex) { const r = $('cat-custom'), cu = r.parentNode; r.value = hex; $('cat-color').value = hex; cu.style.setProperty('--c', hex); cu.classList.add('set'); }
+$('cat-color').addEventListener('input', e => { setCustom(e.target.value); $('cat-custom').checked = true; });
+function setCat(v) {
+  const f = $('form-schedule-item'); v = String(v || 'indigo').toLowerCase();
+  const r = [...f.querySelectorAll('input[name="cat"]')].find(x => x.id !== 'cat-custom' && x.value.toLowerCase() === v);
+  if (r) { r.checked = true; return; }
+  if (HEX.test(v)) { setCustom(v); $('cat-custom').checked = true; } else f.querySelector('input[name="cat"][value="indigo"]').checked = true;
+}
 const iso = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const hm = s => { const [h, m] = (s || '0:0').split(':'); return +h * 60 + +m; };
 const money = n => '$' + Number(n || 0).toLocaleString();
@@ -865,7 +1004,7 @@ function openEdit(it) {
   $('sch-hora-inicio').value = it.horaInicio || '';
   $('sch-hora-fin').value = it.horaFin || '';
   $('sch-notas').value = it.notas || '';
-  const r = f.querySelector(`input[name="cat"][value="${it.categoria || 'indigo'}"]`); if (r) r.checked = true;
+  setCat(it.categoria);
   $('form-day').textContent = 'Editando actividad';
   $('sch-save').textContent = 'Guardar cambios'; $('sch-cancel').hidden = false;
   f.hidden = false;
@@ -1007,7 +1146,7 @@ function render() {
   items.forEach(i => {
     const st = isToday ? (i.e <= nowM ? 'done' : i.s <= nowM ? 'live' : '') : '';
     const ht = Math.max(px(i.e) - px(i.s) - 2, 28), w = 100 / i.n;
-    h += `<div class="ev ${st} ${ht < 46 ? 'sm' : ''} ${selEv === i.id ? 'pick' : ''}" data-ev="${i.id}" style="--c:${COL[i.categoria] || COL.indigo};top:${px(i.s) + 1}px;height:${ht}px;left:calc(${i.c * w}% + 1px);width:calc(${w}% - 3px)">
+    h += `<div class="ev ${st} ${ht < 46 ? 'sm' : ''} ${selEv === i.id ? 'pick' : ''}" data-ev="${i.id}" style="--c:${colDe(i.categoria)};top:${px(i.s) + 1}px;height:${ht}px;left:calc(${i.c * w}% + 1px);width:calc(${w}% - 3px)">
       <b>${esc(i.titulo)}</b>${ht >= 46 ? `<small>${i.horaInicio} – ${i.horaFin}</small>` : ''}</div>`;
   });
   h += '</div>';
@@ -1023,7 +1162,7 @@ function render() {
 
   const it = items.find(i => i.id === selEv), det = $('ev-detail');
   det.hidden = !it;
-  if (it) det.innerHTML = `<div class="det${lastDet !== it.id ? ' enter' : ''}" style="--c:${COL[it.categoria] || COL.indigo}"><div><b>${esc(it.titulo)}</b><span class="sub">${it.horaInicio} – ${it.horaFin}${it.notas ? ' · ' + esc(it.notas) : ''}</span></div><button class="x mv" data-mv="-15" aria-label="Subir 15 minutos"><svg class="ic"><use href="#i-up"/></svg></button><button class="x mv" data-mv="15" aria-label="Bajar 15 minutos"><svg class="ic"><use href="#i-down"/></svg></button>${editBtn(it.id, 'edita')}${delBtn(`agenda/${sel}/${it.id}`)}<button class="x" data-close aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>`;
+  if (it) det.innerHTML = `<div class="det${lastDet !== it.id ? ' enter' : ''}" style="--c:${colDe(it.categoria)}"><div><b>${esc(it.titulo)}</b><span class="sub">${it.horaInicio} – ${it.horaFin}${it.notas ? ' · ' + esc(it.notas) : ''}</span></div><button class="x mv" data-mv="-15" aria-label="Subir 15 minutos"><svg class="ic"><use href="#i-up"/></svg></button><button class="x mv" data-mv="15" aria-label="Bajar 15 minutos"><svg class="ic"><use href="#i-down"/></svg></button>${editBtn(it.id, 'edita')}${delBtn(`agenda/${sel}/${it.id}`)}<button class="x" data-close aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>`;
   lastDet = it ? it.id : null;
 }
 
