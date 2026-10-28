@@ -70,10 +70,11 @@ textarea.in{resize:none}
 .list li.past{opacity:.5}
 .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;background:color-mix(in srgb,var(--ac) 18%,transparent);color:var(--ac);margin-top:3px}
 .empty{text-align:center;color:var(--mut);padding:24px 8px;font-size:13px}
-.amount{font-weight:700;color:var(--ok);overflow-wrap:anywhere;word-break:break-word;text-align:right;min-width:0}
+.amount{font-weight:700;color:var(--ok);white-space:nowrap;overflow-x:auto;overflow-y:hidden;max-width:100%;text-align:right;min-width:0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.amount::-webkit-scrollbar,.stat b::-webkit-scrollbar{display:none}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px}
 .stat{padding:12px;min-width:0;overflow:hidden}
-.stat b{display:block;font-size:18px;line-height:1.25;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.stat b{display:block;font-size:18px;line-height:1.25;white-space:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;font-variant-numeric:tabular-nums}
 /* loader / login / modal */
 .full{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center;padding:20px;z-index:100}
 #initial-loader{z-index:110;transition:opacity .4s;color:var(--mut);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
@@ -234,7 +235,8 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 .tab{display:flex;flex-direction:column;align-items:center;padding:8px 0;border-radius:12px;border:1px solid var(--line);background:var(--soft);color:var(--mut);font-size:11px;text-transform:capitalize;position:relative}
 .tab b{font-size:16px;color:var(--tx)}
 .tab.on{background:var(--ac);border-color:var(--ac);color:var(--onac)}.tab.on b{color:var(--onac)}
-.tab.today::after{content:"";position:absolute;top:5px;right:6px;width:5px;height:5px;border-radius:50%;background:var(--ok)}
+.tab.today::after{content:"";position:absolute;top:5px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--warn)}
+.tab.on.today::after{background:#ffd54a;box-shadow:0 0 0 2px color-mix(in srgb,#000 22%,transparent)}
 .daybar{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px}
 .daybar b{text-transform:capitalize}
 .det{display:flex;align-items:center;gap:6px;padding:12px 12px 12px 14px;margin-bottom:10px;background:color-mix(in srgb,var(--c) 14%,var(--card));border:1px solid var(--c);border-radius:14px}
@@ -879,7 +881,7 @@ function fit(el, max = 18, min = 10) {
   if (!el.offsetParent) return;
   el.style.whiteSpace = 'nowrap'; let sz = max; el.style.fontSize = sz + 'px';
   while (el.scrollWidth > el.clientWidth && sz > min) { sz--; el.style.fontSize = sz + 'px'; }
-  if (el.scrollWidth > el.clientWidth) el.style.whiteSpace = 'normal'; else el.style.whiteSpace = '';
+  el.style.whiteSpace = 'nowrap';   // si aun así no entra, queda en una línea y se desliza
 }
 function setStat(id, txt) {
   const el = $(id);
@@ -1902,6 +1904,7 @@ function iniciar() {
     $('lista-gastos').innerHTML = keys.length ? keys.map(k =>
       `<li><div>${esc(data[k].concepto)}</div><div style="display:flex;align-items:center;gap:6px;flex:none;max-width:60%"><span class="amount">${money(data[k].monto)}</span>${delBtn('gastos/' + k)}</div></li>`
     ).join('') : '<p class="empty">Sin gastos registrados</p>';
+    $('lista-gastos').querySelectorAll('.amount').forEach(el => fit(el, 14, 10));
     renderGas();
     renderHome(); cargado('gastos');
   });
