@@ -1,3 +1,7 @@
+Se actualizó la sección del reloj en la pantalla de inicio reemplazando el texto convencional por una pantalla de información con la estética split-flap tradicional de los aeropuertos antiguos (tableros analógicos/flip-clock).
+Cada dígito y separador se presenta en tarjetas independientes con línea divisoria horizontal central, fondo oscuro, sombra proyectada e iluminación de borde. Además, cada vez que cambia un número se aplica un efecto de volteo mecánico en 3D.
+<view_identifier>index.html</view_identifier>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,7 +20,7 @@
 <meta name="apple-mobile-web-app-title" content="Organizador" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;600;700&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 <!-- jsPDF y AutoTable para reportes PDF profesionales -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -221,6 +225,23 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 .hero{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card)}
 .hero b{font-size:40px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;display:block;line-height:1.1}
 .hero .sub{text-transform:capitalize}
+/* ESTILO RELOJ AEROPUERTO / SPLIT-FLAP (retro/vintage) */
+.split-flap-board{display:flex;align-items:center;gap:3px;margin:10px 0 12px;padding:8px 12px;background:#0d0f0e;border:2px solid #282d2a;border-radius:12px;box-shadow:inset 0 2px 8px rgba(0,0,0,.8),0 4px 12px rgba(0,0,0,.3);width:fit-content}
+.flap-group{display:flex;gap:2px}
+.flap-sep{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;color:#e8f0e8;margin:0 1px;line-height:1;animation:blinkSep 1s infinite;text-shadow:0 0 4px rgba(255,255,255,.2)}
+@keyframes blinkSep{0%,100%{opacity:1}50%{opacity:.2}}
+.flap-card{position:relative;width:28px;height:46px;background:linear-gradient(180deg,#1c211e 0%,#111412 100%);border-radius:5px;border:1px solid #333d36;box-shadow:0 3px 6px rgba(0,0,0,.5);perspective:200px;overflow:hidden}
+.flap-card::before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:#050605;z-index:3;box-shadow:0 1px 0 rgba(255,255,255,.1)}
+.flap-card::after{content:"";position:absolute;inset:0;box-shadow:inset 0 1px 2px rgba(255,255,255,.08),inset 0 -2px 4px rgba(0,0,0,.6);pointer-events:none;z-index:4;border-radius:4px}
+.flap-num{position:absolute;inset:0;display:grid;place-items:center;font-family:'Oswald',sans-serif;font-size:34px;font-weight:700;color:#f0f4f0;line-height:1;letter-spacing:-0.02em;text-shadow:0 -1px 1px rgba(0,0,0,.8)}
+.flap-card.flip .flap-num{animation:flipDown .38s cubic-bezier(.4,0,.2,1)}
+@keyframes flipDown{0%{transform:rotateX(0deg)}50%{transform:rotateX(-90deg);opacity:.6}100%{transform:rotateX(0deg);opacity:1}}
+@media(min-width:480px){
+  .split-flap-board{gap:5px;padding:10px 16px}
+  .flap-card{width:36px;height:58px}
+  .flap-num{font-size:42px}
+  .flap-sep{font-size:40px;margin:0 2px}
+}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .tile{text-align:left;display:flex;flex-direction:column;gap:8px;min-height:132px;transition:border-color .2s,transform .15s}
 .tile:hover{border-color:var(--c)}.tile:active{transform:scale(.98)}
@@ -634,7 +655,27 @@ main>section{animation:viewIn .32s cubic-bezier(.2,.7,.2,1)}
   <!-- INICIO -->
   <section id="v-home" style="display:flex;flex-direction:column;gap:16px">
    <div class="card hero">
-    <div><p class="sub" id="greet">Hola</p><b id="live-clock">00:00:00</b><p class="sub" id="live-date"></p></div>
+    <div>
+     <p class="sub" id="greet">Hola</p>
+     <div class="split-flap-board" id="split-flap-clock" aria-label="Horario actual">
+      <div class="flap-group">
+       <div class="flap-card" id="f-h1"><span class="flap-num">0</span></div>
+       <div class="flap-card" id="f-h2"><span class="flap-num">0</span></div>
+      </div>
+      <span class="flap-sep">:</span>
+      <div class="flap-group">
+       <div class="flap-card" id="f-m1"><span class="flap-num">0</span></div>
+       <div class="flap-card" id="f-m2"><span class="flap-num">0</span></div>
+      </div>
+      <span class="flap-sep">:</span>
+      <div class="flap-group">
+       <div class="flap-card" id="f-s1"><span class="flap-num">0</span></div>
+       <div class="flap-card" id="f-s2"><span class="flap-num">0</span></div>
+      </div>
+     </div>
+     <b id="live-clock" style="display:none">00:00:00</b>
+     <p class="sub" id="live-date"></p>
+    </div>
    </div>
    <div class="tiles">
     <button class="card tile" data-go="dia" style="--c:#2f7d5b"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
@@ -949,10 +990,38 @@ document.addEventListener('click', e => {
 });
 window.addEventListener('hashchange', onRoute);
 
+/* ---------- Reloj Split-Flap Aeropuerto ---------- */
+function updateFlapDigit(cardId, newDigit) {
+  const card = $(cardId);
+  if (!card) return;
+  const numSpan = card.querySelector('.flap-num');
+  if (numSpan && numSpan.textContent !== newDigit) {
+    numSpan.textContent = newDigit;
+    card.classList.remove('flip');
+    void card.offsetWidth; // recalcular reflow para reiniciar animacion 3D
+    card.classList.add('flip');
+  }
+}
+
+function updateSplitFlapClock(timeStr) {
+  // timeStr viene en formato HH:MM:SS (ej: "14:05:09")
+  const parts = timeStr.split(':');
+  if (parts.length !== 3) return;
+  const h = parts[0], m = parts[1], s = parts[2];
+  updateFlapDigit('f-h1', h[0]);
+  updateFlapDigit('f-h2', h[1]);
+  updateFlapDigit('f-m1', m[0]);
+  updateFlapDigit('f-m2', m[1]);
+  updateFlapDigit('f-s1', s[0]);
+  updateFlapDigit('f-s2', s[1]);
+}
+
 /* ---------- Reloj ---------- */
 function tick() {
   const n = new Date(), h = n.getHours();
-  $('live-clock').textContent = n.toTimeString().slice(0, 8);
+  const timeStr = n.toTimeString().slice(0, 8);
+  $('live-clock').textContent = timeStr;
+  updateSplitFlapClock(timeStr);
   $('live-date').textContent = n.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
   $('greet').textContent = `${h < 12 ? 'Buenos días' : h < 20 ? 'Buenas tardes' : 'Buenas noches'}${uName ? ', ' + uName : ''}`;
   if (Date.now() - lastRender > 30000 && !$('app-content').hidden) { render(); renderHome(); if (!$('v-ale').hidden) renderAlertas(); }
@@ -1934,3 +2003,4 @@ function iniciar() {
 </script>
 </body>
 </html>
+
