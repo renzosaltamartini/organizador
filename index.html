@@ -329,6 +329,25 @@ main{max-width:1100px;margin:0 auto;padding:16px;display:flex;flex-direction:col
 @keyframes nowglow{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--bad) 60%,transparent)}50%{box-shadow:0 0 10px 2px color-mix(in srgb,var(--bad) 40%,transparent)}}
 @keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
 
+/* reloj split-flap (tablero de aeropuerto) */
+.flap{display:flex;align-items:center;gap:.07em;font-size:38px;margin:6px 0 4px}
+.fl{position:relative;width:.74em;height:1.12em;perspective:.9em;font-weight:700;font-variant-numeric:tabular-nums;color:#f6efe6}
+.fl>span{position:absolute;left:0;right:0;height:50%;overflow:hidden;background:linear-gradient(#2c251f,#1e1915);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.fl>span i{position:absolute;left:0;right:0;height:200%;display:grid;place-items:center;font-style:normal;line-height:1}
+.fl-t,.fl-ft{top:0;border-radius:.12em .12em 0 0;transform-origin:50% 100%}
+.fl-b,.fl-fb{bottom:0;border-radius:0 0 .12em .12em;transform-origin:50% 0;background:linear-gradient(#211c17,#18140f)!important}
+.fl-t i,.fl-ft i{top:0}.fl-b i,.fl-fb i{bottom:0}
+.fl-fb{transform:rotateX(90deg)}
+.fl::after{content:"";position:absolute;left:0;right:0;top:calc(50% - 1px);height:2px;background:#0b0907;z-index:6}
+.fl::before{content:"";position:absolute;left:-1px;right:-1px;top:0;bottom:0;border-radius:.14em;box-shadow:0 .06em .14em -.04em rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.05);z-index:7;pointer-events:none}
+.fl.go .fl-ft{animation:flTop .17s ease-in forwards}
+.fl.go .fl-fb{animation:flBot .17s ease-out .17s forwards}
+@keyframes flTop{to{transform:rotateX(-90deg)}}
+@keyframes flBot{to{transform:rotateX(0)}}
+.fl-c{display:grid;gap:.16em;width:.26em;justify-items:center}
+.fl-c::before,.fl-c::after{content:"";width:.11em;height:.11em;border-radius:50%;background:var(--ac)}
+.fl-c::after{animation:blink 1s steps(1) infinite}
+@media(min-width:720px){.flap{font-size:52px}}
 /* cambio de vista */
 main>section{animation:none}
 /* Inicio: entrada escalonada (el momento principal al abrir) */
@@ -632,7 +651,7 @@ main>section{animation:none}
   <!-- INICIO -->
   <section id="v-home" style="display:flex;flex-direction:column;gap:16px">
    <div class="card hero">
-    <div><p class="sub" id="greet">Hola</p><b id="live-clock">00:00:00</b><p class="sub" id="live-date"></p></div>
+    <div><p class="sub" id="greet">Hola</p><div id="live-clock" class="flap" role="timer" aria-label="Hora actual"></div><p class="sub" id="live-date"></p></div>
    </div>
    <div class="tiles">
     <button class="card tile" data-go="dia" style="--c:#d9622b"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
@@ -948,9 +967,47 @@ document.addEventListener('click', e => {
 window.addEventListener('hashchange', onRoute);
 
 /* ---------- Reloj ---------- */
+/* ---------- Reloj split-flap ---------- */
+let flapEl = null, flapPrev = '';
+function flapBuild(el) {
+  el.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const c = document.createElement('span');
+    if (i === 2 || i === 5) { c.className = 'fl-c'; c.setAttribute('aria-hidden', 'true'); }
+    else {
+      c.className = 'fl'; c.setAttribute('aria-hidden', 'true');
+      c.innerHTML = '<span class="fl-t"><i>0</i></span><span class="fl-b"><i>0</i></span><span class="fl-ft"><i>0</i></span><span class="fl-fb"><i>0</i></span>';
+    }
+    el.appendChild(c);
+  }
+  flapEl = el; flapPrev = '';
+}
+function flapPaint(c, top, bot, ft, fb) {
+  const q = k => c.querySelector('.' + k + ' i');
+  q('fl-t').textContent = top; q('fl-b').textContent = bot; q('fl-ft').textContent = ft; q('fl-fb').textContent = fb;
+}
+function flapFlip(c, from, to) {
+  flapPaint(c, to, from, from, to);
+  c.classList.remove('go'); void c.offsetWidth; c.classList.add('go');
+  clearTimeout(c._t);
+  c._t = setTimeout(() => { flapPaint(c, to, to, to, to); c.classList.remove('go'); }, 380);
+}
+function flapSet(str) {
+  const el = $('live-clock');
+  if (!flapEl || flapEl !== el) flapBuild(el);
+  const cells = el.children;
+  for (let i = 0; i < 8; i++) {
+    const c = cells[i]; if (!c.classList.contains('fl')) continue;
+    const to = str[i], from = flapPrev ? flapPrev[i] : to;
+    if (to === from) { if (!flapPrev) flapPaint(c, to, to, to, to); continue; }
+    if (document.hidden) flapPaint(c, to, to, to, to); else flapFlip(c, from, to);
+  }
+  flapPrev = str;
+}
+
 function tick() {
   const n = new Date(), h = n.getHours();
-  $('live-clock').textContent = n.toTimeString().slice(0, 8);
+  flapSet(n.toTimeString().slice(0, 8));
   $('live-date').textContent = n.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
   $('greet').textContent = `${h < 12 ? 'Buenos días' : h < 20 ? 'Buenas tardes' : 'Buenas noches'}${uName ? ', ' + uName : ''}`;
   if (Date.now() - lastRender > 30000 && !$('app-content').hidden) { render(); renderHome(); if (!$('v-ale').hidden) renderAlertas(); }
