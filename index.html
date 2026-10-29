@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Organizador Personal</title>
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%9CC%3C/text%3E%3C/svg%3E" />
-<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#15110e" media="(prefers-color-scheme: dark)" />
-<script>try{var t=localStorage.getItem("tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f5f7f4" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#141e19" media="(prefers-color-scheme: dark)" />
+<script>try{var t=localStorage.getItem("tema");document.documentElement.setAttribute("data-theme",t || "light")}catch(e){}</script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -21,10 +21,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
-:root{--bg:#15110e;--card:#1d1814;--soft:#272019;--line:#362d24;--tx:#f3ede4;--mut:#a89a8a;--ac:#e8825a;--onac:#1f0d04;--ok:#6fc596;--warn:#f2c14e;--bad:#ef5350;--r:14px;color-scheme:dark}
-@media(prefers-color-scheme:light){:root{--bg:#faf7f2;--card:#ffffff;--soft:#f3eee6;--line:#e8dfd2;--tx:#2a2119;--mut:#7b6c5d;--ac:#c8582d;--onac:#ffffff;--ok:#3f9a5e;--warn:#b98310;--bad:#d6403a;color-scheme:light}}
-:root[data-theme="light"]{--bg:#faf7f2;--card:#ffffff;--soft:#f3eee6;--line:#e8dfd2;--tx:#2a2119;--mut:#7b6c5d;--ac:#c8582d;--onac:#ffffff;--ok:#3f9a5e;--warn:#b98310;--bad:#d6403a;color-scheme:light}
-:root[data-theme="dark"]{--bg:#15110e;--card:#1d1814;--soft:#272019;--line:#362d24;--tx:#f3ede4;--mut:#a89a8a;--ac:#e8825a;--onac:#1f0d04;--ok:#6fc596;--warn:#f2c14e;--bad:#ef5350;--r:14px;color-scheme:dark}
+:root{--bg:#141e19;--card:#1d1814;--soft:#272019;--line:#362d24;--tx:#f3ede4;--mut:#a89a8a;--ac:#e8825a;--onac:#1f0d04;--ok:#6fc596;--warn:#f2c14e;--bad:#ef5350;--r:14px;color-scheme:dark}
+@media(prefers-color-scheme:light){:root{--bg:#f5f7f4;--card:#ffffff;--soft:#f3eee6;--line:#e8dfd2;--tx:#2a2119;--mut:#7b6c5d;--ac:#c8582d;--onac:#ffffff;--ok:#3f9a5e;--warn:#b98310;--bad:#d6403a;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f5f7f4;--card:#ffffff;--soft:#f3eee6;--line:#e8dfd2;--tx:#2a2119;--mut:#7b6c5d;--ac:#c8582d;--onac:#ffffff;--ok:#3f9a5e;--warn:#b98310;--bad:#d6403a;color-scheme:light}
+:root[data-theme="dark"]{--bg:#141e19;--card:#1d1814;--soft:#272019;--line:#362d24;--tx:#f3ede4;--mut:#a89a8a;--ac:#e8825a;--onac:#1f0d04;--ok:#6fc596;--warn:#f2c14e;--bad:#ef5350;--r:14px;color-scheme:dark}
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
 body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.45;padding-bottom:calc(84px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%}
@@ -437,6 +437,7 @@ main>section{animation:none}
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 </style>
+<link rel="stylesheet" href="/redesign.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -481,11 +482,12 @@ main>section{animation:none}
 
 <!-- PANTALLA DE INGRESO -->
 <div id="login-modal" class="full en" hidden>
+ <div class="en-top"><div class="en-brand"><span class="logo-mark" aria-hidden="true">o.</span>organizador</div><span>Un poco de orden.<br>Un montón de posibilidades.</span></div>
  <div class="en-in">
   <div class="en-col">
    <div class="en-brand"><img src="/icon-192.png" alt="" width="32" height="32">Organizador</div>
-   <h1 class="en-h">Tu día, en orden y a tiempo.</h1>
-   <p class="en-p">Agenda, calendario, recordatorios, alertas, gastos y notas en un solo lugar. Te avisamos antes de cada actividad, incluso con el celular bloqueado.</p>
+   <h1 class="en-h">Tu día.<br>Más simple.<br><em>Más tuyo.</em></h1>
+   <p class="en-p">Un lugar para organizar tus planes, guardar tus ideas y tener tus cuentas claras. Menos cosas en la cabeza. Más espacio para vos.</p>
    <div class="en-cta">
     <button id="btn-google-login" class="en-g">
      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
@@ -514,7 +516,7 @@ main>section{animation:none}
 
  <div class="en-more">
   <section class="en-sec">
-   <h2>Todo lo de tu rutina, en un solo lugar</h2>
+   <h2>Cada cosa en su lugar.</h2>
    <p>Seis herramientas pensadas para el día a día, que funcionan juntas y se sienten livianas.</p>
    <div class="en-feat">
  <article class="en-fc" style="--c:#d9622b"><span class="en-ic"><svg class="ic"><use href="#i-day"/></svg></span><h3>Tu día</h3><p>Tu agenda en tiempo real. Arrastrá una actividad para cambiarle el horario y mirá en qué momento del día estás.</p></article>
@@ -559,12 +561,12 @@ main>section{animation:none}
   </section>
 
   <section class="en-end">
-   <h2>Empezá a ordenar tu día</h2>
+   <h2>Hacé lugar para un día más simple.</h2>
    <p class="en-micro">Entrás con tu cuenta de Google en unos segundos.</p>
    <button type="button" class="btn" onclick="document.getElementById('btn-google-login').click();document.getElementById('login-modal').scrollTo({top:0,behavior:'smooth'})">Continuar con Google</button>
   </section>
 
-  <p class="en-foot">Organizador Personal · Simplificamos tu rutina en simples pasos.</p>
+  <p class="en-foot">organizador · Tus planes. Tu espacio. Tu ritmo.</p>
  </div>
 </div>
 <script>
@@ -637,7 +639,9 @@ main>section{animation:none}
   </div>
  </div></header>
 
- <nav id="nav">
+ <nav id="nav" aria-label="Navegación principal">
+  <div class="sidebar-brand"><span class="logo-mark" aria-hidden="true">o.</span>organizador</div>
+  <p class="nav-caption">TU ESPACIO PERSONAL</p>
   <button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg>Inicio</button>
   <button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg>Tu día</button>
   <button class="nv" data-go="cal"><svg class="ic"><use href="#i-cal"/></svg>Calendario</button>
@@ -645,14 +649,19 @@ main>section{animation:none}
   <button class="nv" data-go="ale"><svg class="ic"><use href="#i-alarm"/></svg>Alertas</button>
   <button class="nv" data-go="gas"><svg class="ic"><use href="#i-wal"/></svg>Gastos</button>
   <button class="nv" data-go="not"><svg class="ic"><use href="#i-note"/></svg>Notas</button>
+  <div class="nav-bottom"><b>Un poco más de calma.</b><span>Un lugar para tus planes,<br>tus ideas y tu día a día.</span></div>
  </nav>
 
  <main>
   <!-- INICIO -->
   <section id="v-home" style="display:flex;flex-direction:column;gap:16px">
+   <div class="page-intro"><div><p class="eyebrow">MENOS RUIDO, MÁS CLARIDAD</p><h1>Tu espacio, en orden.</h1><p>Todo lo que necesitás para darle lugar a lo importante.</p></div><span class="pill">✦ A tu ritmo</span></div>
    <div class="card hero">
-    <div><p class="sub" id="greet">Hola</p><div id="live-clock" class="flap" role="timer" aria-label="Hora actual"></div><p class="sub" id="live-date"></p></div>
+    <div class="hero-copy"><p class="hero-label">HACÉ ESPACIO PARA VOS</p><h2>Un buen día empieza con un poco de orden.</h2><p class="hero-caption">Tus planes tienen su lugar. Vos elegís por dónde empezar.</p><button class="btn" data-go="dia">Ver mi agenda <span aria-hidden="true">↗</span></button></div>
+    <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 300 280" fill="none"><circle cx="167" cy="125" r="103" stroke="#91ad67" stroke-width="1"/><circle cx="167" cy="125" r="80" stroke="#91ad67" stroke-width="1"/><path d="M110 191C86 151 91 101 119 81C146 103 153 151 110 191Z" fill="#89a769"/><path d="M119 194C120 144 145 98 187 97C199 138 166 177 119 194Z" fill="#537b4d"/><path d="M124 202C153 163 199 151 231 173C219 215 167 222 124 202Z" fill="#a4bc77"/><path d="M111 215C121 165 137 138 168 118M112 211L115 111M125 205L207 183" stroke="#31523d" stroke-width="2" stroke-linecap="round"/><path d="M242 60v18m-9-9h18M70 48v12m-6-6h12" stroke="#537b4d" stroke-width="2" stroke-linecap="round"/><circle cx="65" cy="173" r="4" fill="#537b4d"/></svg></div>
+    <div class="hero-clock"><p class="sub" id="greet">Hola</p><div id="live-clock" class="flap" role="timer" aria-label="Hora actual"></div><p class="sub" id="live-date"></p></div>
    </div>
+   <div class="section-label"><h2>Todo a mano</h2><span>Un lugar para cada parte de tu día</span></div>
    <div class="tiles">
     <button class="card tile" data-go="dia" style="--c:#d9622b"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
     <button class="card tile" data-go="cal" style="--c:#3f8fa6"><span class="ti"><svg class="ic"><use href="#i-cal"/></svg></span><b>Calendario</b><span class="sub" id="t-cal">…</span></button>
@@ -661,6 +670,7 @@ main>section{animation:none}
     <button class="card tile" data-go="gas" style="--c:#8a9a3f"><span class="ti"><svg class="ic"><use href="#i-wal"/></svg></span><b>Gastos</b><span class="sub" id="t-gas">…</span></button>
     <button class="card tile" data-go="not" style="--c:#6b7280"><span class="ti"><svg class="ic"><use href="#i-note"/></svg></span><b>Notas</b><span class="sub" id="t-not">…</span></button>
    </div>
+   <div class="home-footer"><span>Un paso a la vez también es avanzar.</span><span>Tu organizador personal</span></div>
   </section>
 
   <!-- TU DÍA -->
@@ -844,7 +854,7 @@ main>section{animation:none}
   b.addEventListener('click',function(){
     var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n);
     try{localStorage.setItem('tema',n);}catch(e){}
-    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.removeAttribute('media');m.content=n==='dark'?'#15110e':'#faf7f2';});
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.removeAttribute('media');m.content=n==='dark'?'#141e19':'#f5f7f4';});
     paint();
   });
   paint();
@@ -1685,7 +1695,7 @@ function squareImg(src, size = 256, type = 'image/jpeg') {
     img.onload = () => {
       try {
         const c = document.createElement('canvas'); c.width = c.height = size;
-        const x = c.getContext('2d'); x.fillStyle = '#15110e'; x.fillRect(0, 0, size, size);
+        const x = c.getContext('2d'); x.fillStyle = '#141e19'; x.fillRect(0, 0, size, size);
         const m = Math.min(img.naturalWidth, img.naturalHeight);
         x.drawImage(img, (img.naturalWidth - m) / 2, (img.naturalHeight - m) / 2, m, m, 0, 0, size, size);
         res(c.toDataURL(type, .9));
