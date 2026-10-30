@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Organizador Personal</title>
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
-<link rel="icon" href="/icon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#f5f7f4" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#141e19" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/icon-192.png" type="image/png">
+<meta name="theme-color" content="#f4f7ff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#101a2c" media="(prefers-color-scheme: dark)" />
 <script>try{var t=localStorage.getItem("tema");document.documentElement.setAttribute("data-theme",t || "light")}catch(e){}</script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -21,10 +21,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
-:root{--bg:#141e19;--card:#1d1814;--soft:#272019;--line:#362d24;--tx:#f3ede4;--mut:#a89a8a;--ac:#e8825a;--onac:#1f0d04;--ok:#6fc596;--warn:#f2c14e;--bad:#ef5350;--r:14px;color-scheme:dark}
-@media(prefers-color-scheme:light){:root{--bg:#f5f7f4;--card:#ffffff;--soft:#f3eee6;--line:#e8dfd2;--tx:#2a2119;--mut:#7b6c5d;--ac:#c8582d;--onac:#ffffff;--ok:#3f9a5e;--warn:#b98310;--bad:#d6403a;color-scheme:light}}
-:root[data-theme="light"]{--bg:#f5f7f4;--card:#ffffff;--soft:#f3eee6;--line:#e8dfd2;--tx:#2a2119;--mut:#7b6c5d;--ac:#c8582d;--onac:#ffffff;--ok:#3f9a5e;--warn:#b98310;--bad:#d6403a;color-scheme:light}
-:root[data-theme="dark"]{--bg:#141e19;--card:#1d1814;--soft:#272019;--line:#362d24;--tx:#f3ede4;--mut:#a89a8a;--ac:#e8825a;--onac:#1f0d04;--ok:#6fc596;--warn:#f2c14e;--bad:#ef5350;--r:14px;color-scheme:dark}
+:root{--bg:#101a2c;--card:#182740;--soft:#202f49;--line:#344762;--tx:#edf3ff;--mut:#a7b7d1;--ac:#80aaff;--onac:#10254a;--ok:#7bc7b1;--warn:#e5bd79;--bad:#f28c98;--r:14px;color-scheme:dark}
+@media(prefers-color-scheme:light){:root{--bg:#f4f7ff;--card:#ffffff;--soft:#eef3fc;--line:#dfe7f5;--tx:#172a47;--mut:#687b98;--ac:#1648b8;--onac:#ffffff;--ok:#328878;--warn:#b47a26;--bad:#c94d5b;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f4f7ff;--card:#ffffff;--soft:#eef3fc;--line:#dfe7f5;--tx:#172a47;--mut:#687b98;--ac:#1648b8;--onac:#ffffff;--ok:#328878;--warn:#b47a26;--bad:#c94d5b;color-scheme:light}
+:root[data-theme="dark"]{--bg:#101a2c;--card:#182740;--soft:#202f49;--line:#344762;--tx:#edf3ff;--mut:#a7b7d1;--ac:#80aaff;--onac:#10254a;--ok:#7bc7b1;--warn:#e5bd79;--bad:#f28c98;--r:14px;color-scheme:dark}
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
 body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.45;padding-bottom:calc(84px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%}
@@ -482,7 +482,7 @@ main>section{animation:none}
 
 <!-- PANTALLA DE INGRESO -->
 <div id="login-modal" class="full en" hidden>
- <div class="en-top"><div class="en-brand"><span class="logo-mark" aria-hidden="true">o.</span>organizador</div><span>Un poco de orden.<br>Un montón de posibilidades.</span></div>
+ <div class="en-top"><div class="en-brand"><img class="brand-mark" src="/icon-192.png" alt="">Organizador</div><span>Un poco de orden.<br>Un montón de posibilidades.</span></div>
  <div class="en-in">
   <div class="en-col">
    <div class="en-brand"><img src="/icon-192.png" alt="" width="32" height="32">Organizador</div>
@@ -620,7 +620,7 @@ main>section{animation:none}
   <div class="vh" style="width:100%"><h2>Editar perfil</h2><button class="x" id="pm-close" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button></div>
   <img id="pm-preview" src="" alt="Avatar" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto;border:2px solid var(--ac)">
   <label class="f" style="text-align:left"><span>Elegir foto</span><input class="in" type="file" id="pm-file" accept="image/*"></label>
-  <p class="sub">Esta foto también es el ícono de la app cuando la agregas a tu pantalla de inicio.</p>
+  <p class="sub">Tu foto se muestra como imagen de perfil en el organizador.</p>
   <button id="pm-save" class="btn" style="width:100%">Actualizar foto</button>
  </div>
 </div>
@@ -628,6 +628,7 @@ main>section{animation:none}
 <div id="app-content" hidden>
  <header><div class="hin">
   <div class="brand">
+   <img class="brand-mark" src="/icon-192.png" alt="">
    <img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden>
    <div><span id="u-name">Mi organizador</span><small>● Sincronizado</small></div>
   </div>
@@ -640,7 +641,7 @@ main>section{animation:none}
  </div></header>
 
  <nav id="nav" aria-label="Navegación principal">
-  <div class="sidebar-brand"><span class="logo-mark" aria-hidden="true">o.</span>organizador</div>
+  <div class="sidebar-brand"><img class="brand-mark" src="/icon-192.png" alt="">Organizador</div>
   <p class="nav-caption">TU ESPACIO PERSONAL</p>
   <button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg>Inicio</button>
   <button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg>Tu día</button>
@@ -659,7 +660,7 @@ main>section{animation:none}
    <div class="page-intro"><div><p class="eyebrow">MENOS RUIDO, MÁS CLARIDAD</p><h1>Tu espacio, en orden.</h1><p>Todo lo que necesitás para darle lugar a lo importante.</p></div><span class="pill">✦ A tu ritmo</span></div>
    <div class="card hero">
     <div class="hero-copy"><p class="hero-label">HACÉ ESPACIO PARA VOS</p><h2>Un buen día empieza con un poco de orden.</h2><p class="hero-caption">Tus planes tienen su lugar. Vos elegís por dónde empezar.</p><button class="btn" data-go="dia">Ver mi agenda <span aria-hidden="true">↗</span></button></div>
-    <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 300 280" fill="none"><circle cx="167" cy="125" r="103" stroke="#91ad67" stroke-width="1"/><circle cx="167" cy="125" r="80" stroke="#91ad67" stroke-width="1"/><path d="M110 191C86 151 91 101 119 81C146 103 153 151 110 191Z" fill="#89a769"/><path d="M119 194C120 144 145 98 187 97C199 138 166 177 119 194Z" fill="#537b4d"/><path d="M124 202C153 163 199 151 231 173C219 215 167 222 124 202Z" fill="#a4bc77"/><path d="M111 215C121 165 137 138 168 118M112 211L115 111M125 205L207 183" stroke="#31523d" stroke-width="2" stroke-linecap="round"/><path d="M242 60v18m-9-9h18M70 48v12m-6-6h12" stroke="#537b4d" stroke-width="2" stroke-linecap="round"/><circle cx="65" cy="173" r="4" fill="#537b4d"/></svg></div>
+    <div class="hero-art" aria-hidden="true"><img class="hero-logo" src="/icon-512.png" alt=""></div>
     <div class="hero-clock"><p class="sub" id="greet">Hola</p><div id="live-clock" class="flap" role="timer" aria-label="Hora actual"></div><p class="sub" id="live-date"></p></div>
    </div>
    <div class="section-label"><h2>Todo a mano</h2><span>Un lugar para cada parte de tu día</span></div>
@@ -862,7 +863,7 @@ main>section{animation:none}
   b.addEventListener('click',function(){
     var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n);
     try{localStorage.setItem('tema',n);}catch(e){}
-    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.removeAttribute('media');m.content=n==='dark'?'#141e19':'#f5f7f4';});
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.removeAttribute('media');m.content=n==='dark'?'#101a2c':'#f4f7ff';});
     paint();
   });
   paint();
@@ -1698,7 +1699,7 @@ $('form-onboard').addEventListener('submit', async e => {
   desbloquear(curUser, nombre, fotoUrl);
 });
 
-/* Recorta al centro en cuadrado y redimensiona. Sirve para la foto guardada y para el ícono de inicio */
+/* Recorta al centro en cuadrado y redimensiona la foto de perfil */
 function squareImg(src, size = 256, type = 'image/jpeg') {
   return new Promise(res => {
     if (/googleusercontent\.com/.test(src)) src = src.replace(/=s\d+-c/, '=s400-c');
@@ -1706,7 +1707,7 @@ function squareImg(src, size = 256, type = 'image/jpeg') {
     img.onload = () => {
       try {
         const c = document.createElement('canvas'); c.width = c.height = size;
-        const x = c.getContext('2d'); x.fillStyle = '#141e19'; x.fillRect(0, 0, size, size);
+        const x = c.getContext('2d'); x.fillStyle = '#101a2c'; x.fillRect(0, 0, size, size);
         const m = Math.min(img.naturalWidth, img.naturalHeight);
         x.drawImage(img, (img.naturalWidth - m) / 2, (img.naturalHeight - m) / 2, m, m, 0, 0, size, size);
         res(c.toDataURL(type, .9));
@@ -1724,20 +1725,6 @@ function initialAvatar(name) {
   x.fillText((name || '?').trim().charAt(0).toUpperCase(), 128, 138);
   return c.toDataURL('image/png');
 }
-/* El ícono del sitio (pestaña y "Agregar a inicio" del iPhone/Android) pasa a ser la foto del usuario */
-async function setAppIcon(src) {
-  if (!src) return;
-  const png = (await squareImg(src, 180, 'image/png')) || src;
-  const put = (rel, sizes) => {
-    let l = document.querySelector(`link[data-appicon="${rel}"]`);
-    if (!l) { l = document.createElement('link'); l.rel = rel; l.dataset.appicon = rel; document.head.appendChild(l); }
-    if (sizes) l.setAttribute('sizes', sizes);
-    l.type = 'image/png'; l.href = png;
-  };
-  document.querySelectorAll('link[rel="icon"]:not([data-appicon])').forEach(l => l.remove());
-  put('apple-touch-icon', '180x180'); put('icon');
-}
-
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -1860,7 +1847,6 @@ $('pm-save').onclick = async () => {
   const newPhoto = $('pm-preview').src;
   await update(ref(db, `users/${curUser.uid}/profile`), { foto: newPhoto });
   $('u-photo').src = newPhoto; $('u-photo').hidden = false;
-  setAppIcon(newPhoto);
   profileModal.hidden = true;
 };
 
@@ -1883,7 +1869,6 @@ function desbloquear(user, name, photoUrl) {
   const ph = $('u-photo');
   const foto = photoUrl || initialAvatar(name);
   ph.src = foto; ph.hidden = false;
-  setAppIcon(foto);
   const l = $('initial-loader'); if (l) { l.style.display = 'flex'; l.style.opacity = '1'; }
   $('login-modal').hidden = true;
   $('app-content').hidden = false;

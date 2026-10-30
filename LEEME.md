@@ -1,12 +1,12 @@
 # Organizador · rediseño
 
-Nueva identidad visual en verde bosque, superficies claras y tipografía Manrope/Outfit. Incluye portada, inicio, navegación lateral, navegación móvil, formularios, calendario, agenda, notas, modales y modo oscuro.
+Identidad visual alineada con el logo azul y blanco, superficies claras y tipografía Manrope/Outfit. Incluye portada, inicio, navegación lateral, navegación móvil, formularios, calendario, agenda, notas, modales y modo oscuro.
 
 ## Archivos
 
 - index.html: estructura y textos actualizados; conserva la integración de Firebase y sus funciones.
 - redesign.css: sistema visual adaptable a celular, tablet y computadora.
-- icon.svg e icon-180/192/512.png: nueva identidad de la aplicación.
+- assets/logo-organizador.png e icon-180/192/512.png: logo y sus variantes para la aplicación.
 - manifest.json: colores actualizados.
 - api/, lib/, sw.js y configuración de alojamiento: conservados del proyecto original.
 
