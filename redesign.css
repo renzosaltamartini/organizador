@@ -28,3 +28,7 @@ main{max-width:1440px;padding:4px 38px 48px;gap:24px}.page-intro{display:flex;ju
 
 :root[data-theme="dark"] .hero{color:#edf3e6}:root[data-theme="dark"] .hero-label,:root[data-theme="dark"] .hero-caption,:root[data-theme="dark"] .hero .sub{color:#c6d6b8}:root[data-theme="dark"] .hero-art{opacity:.4}:root[data-theme="dark"] .en-band{color:#edf3e6}:root[data-theme="dark"] .en-band p{color:#c6d6b8}:root[data-theme="dark"] .stats .stat:last-child b{color:#d9ecc4!important}
 
+
+/* Pizarras de Drive */
+.drive-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.drive-files{display:grid;gap:10px}.drive-file{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border:1px solid var(--line);border-radius:14px;overflow-wrap:anywhere}.drive-file>span{min-width:0}.drive-file .btn{flex-shrink:0}#drive-status{margin:16px 0}#drive-folder{font-size:20px;margin:18px 0}
+@media(max-width:719px){#nav{display:flex;overflow-x:auto;justify-content:flex-start}#nav .nv{flex:0 0 60px}.drive-file{flex-wrap:wrap}}
