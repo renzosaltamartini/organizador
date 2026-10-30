@@ -649,6 +649,7 @@ main>section{animation:none}
   <button class="nv" data-go="ale"><svg class="ic"><use href="#i-alarm"/></svg>Alertas</button>
   <button class="nv" data-go="gas"><svg class="ic"><use href="#i-wal"/></svg>Gastos</button>
   <button class="nv" data-go="not"><svg class="ic"><use href="#i-note"/></svg>Notas</button>
+  <button class="nv" data-go="piz"><svg class="ic"><use href="#i-pdf"/></svg>Pizarras</button>
   <div class="nav-bottom"><b>Un poco más de calma.</b><span>Un lugar para tus planes,<br>tus ideas y tu día a día.</span></div>
  </nav>
 
@@ -673,6 +674,13 @@ main>section{animation:none}
    <div class="home-footer"><span>Un paso a la vez también es avanzar.</span><span>Tu organizador personal</span></div>
   </section>
 
+  <section id="v-piz" class="card" hidden>
+   <div class="vh"><div><h1>Mis pizarras</h1><p class="sub">Los PDF que sincronizás desde Mi Pizarra.</p></div></div>
+   <p class="sub">Conectá la misma cuenta de Google que usás en la app. El permiso permite consultar Drive; acá mostramos tus carpetas MiPizarra.</p>
+   <div class="drive-actions"><button type="button" class="btn" id="drive-connect">Conectar Google Drive</button><button type="button" class="btn" id="drive-refresh" hidden>Actualizar</button><button type="button" class="btn" id="drive-back" hidden>Volver</button></div>
+   <p id="drive-status" role="status" aria-live="polite">Conectá Drive para ver tus pizarras.</p>
+   <h2 id="drive-folder"></h2><div id="drive-files" class="drive-files"></div>
+  </section>
   <!-- TU DÍA -->
   <section id="v-dia" class="card" hidden>
    <div class="vh"><div><h1>Tu día</h1><p class="sub">Agenda en tiempo real</p></div>
@@ -863,7 +871,7 @@ main>section{animation:none}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, push, set, get, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-import { getAuth, signInWithPopup, signInWithRedirect, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, signInWithPopup, signInWithRedirect, reauthenticateWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAXGKWZA8kWaN2NWCK2A9jTlGSq-B2bqWA",
@@ -875,8 +883,10 @@ const firebaseConfig = {
   appId: "1:326750839699:web:3b122315eb61296d99fe66",
   measurementId: "G-XL398QW21P"
 };
+import { setupDrive } from "./lib/drive.js";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app), db = getDatabase(app), provider = new GoogleAuthProvider();
+setupDrive({ auth, GoogleAuthProvider, reauthenticateWithPopup, onAuthStateChanged });
 let base = '', uName = '';
 const R = p => ref(db, base + p);
 
@@ -929,8 +939,8 @@ let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, 
 let drag = null, editA = null, suppressClick = false, alData = {}, editAl = null;
 
 /* ---------- Rutas por Hash (evita errores 404 al recargar) ---------- */
-const VIEWS = ['home', 'dia', 'cal', 'rec', 'ale', 'gas', 'not'];
-const NOMBRES = { dia: 'Tu día', cal: 'Calendario', rec: 'Recordatorios', ale: 'Alertas', gas: 'Gastos', not: 'Notas' };
+const VIEWS = ['home', 'dia', 'cal', 'rec', 'ale', 'gas', 'not', 'piz'];
+const NOMBRES = { dia: 'Tu día', cal: 'Calendario', rec: 'Recordatorios', ale: 'Alertas', gas: 'Gastos', not: 'Notas', piz: 'Mis pizarras' };
 let curUser = null;
 
 function getHashView() {
@@ -941,12 +951,13 @@ function getHashView() {
   if (h === 'panel/recordatorios') return 'rec';
   if (h === 'panel/alertas') return 'ale';
   if (h === 'panel/gastos') return 'gas';
+  if (h === 'panel/pizarras') return 'piz';
   if (h === 'panel/notas') return 'not';
   return VIEWS.includes(h) ? h : 'home';
 }
 
 function go(view) {
-  const RUTA = { dia: 'agenda', cal: 'calendario', rec: 'recordatorios', ale: 'alertas', gas: 'gastos', not: 'notas' };
+  const RUTA = { dia: 'agenda', cal: 'calendario', rec: 'recordatorios', ale: 'alertas', gas: 'gastos', not: 'notas', piz: 'pizarras' };
   const target = view === 'home' ? '#/panel' : `#/panel/${RUTA[view] || 'notas'}`;
   if (location.hash !== target) location.hash = target;
   else onRoute();
