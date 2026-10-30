@@ -37,3 +37,5 @@ main{max-width:1440px;padding:4px 38px 48px;gap:24px}.page-intro{display:flex;ju
 .brand-mark{width:36px;height:36px;display:block;flex:none;object-fit:cover;border:0!important;border-radius:11px!important;box-shadow:none!important;animation:none!important}
 .en-brand .brand-mark{width:36px;height:36px;border-radius:11px!important}
 .en-feat .en-ic{background:color-mix(in srgb,var(--ac) 12%,transparent);color:var(--ac)}
+
+:root[data-theme="light"] #rec-submit{background:#d8a54f;color:#172a47}
