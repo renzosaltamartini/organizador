@@ -8,7 +8,7 @@
 <link rel="icon" href="/icon-192.png" type="image/png">
 <meta name="theme-color" content="#f4f7ff" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#101a2c" media="(prefers-color-scheme: dark)" />
-<script>try{var t=localStorage.getItem("tema");document.documentElement.setAttribute("data-theme",t || "light")}catch(e){}</script>
+<script>(function(){var r=document.documentElement;try{if(localStorage.getItem("tema-light-default-v1")!=="1"){localStorage.setItem("tema","light");localStorage.setItem("tema-light-default-v1","1")}r.setAttribute("data-theme",localStorage.getItem("tema")||"light")}catch(e){r.setAttribute("data-theme","light")}})();</script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -21,7 +21,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
-:root{--bg:#101a2c;--card:#182740;--soft:#202f49;--line:#344762;--tx:#edf3ff;--mut:#a7b7d1;--ac:#80aaff;--onac:#10254a;--ok:#7bc7b1;--warn:#e5bd79;--bad:#f28c98;--r:14px;color-scheme:dark}
+:root{--bg:#f4f7ff;--card:#ffffff;--soft:#eef3fc;--line:#dfe7f5;--tx:#172a47;--mut:#687b98;--ac:#1648b8;--onac:#ffffff;--ok:#328878;--warn:#b47a26;--bad:#c94d5b;--r:14px;color-scheme:light}
 @media(prefers-color-scheme:light){:root{--bg:#f4f7ff;--card:#ffffff;--soft:#eef3fc;--line:#dfe7f5;--tx:#172a47;--mut:#687b98;--ac:#1648b8;--onac:#ffffff;--ok:#328878;--warn:#b47a26;--bad:#c94d5b;color-scheme:light}}
 :root[data-theme="light"]{--bg:#f4f7ff;--card:#ffffff;--soft:#eef3fc;--line:#dfe7f5;--tx:#172a47;--mut:#687b98;--ac:#1648b8;--onac:#ffffff;--ok:#328878;--warn:#b47a26;--bad:#c94d5b;color-scheme:light}
 :root[data-theme="dark"]{--bg:#101a2c;--card:#182740;--soft:#202f49;--line:#344762;--tx:#edf3ff;--mut:#a7b7d1;--ac:#80aaff;--onac:#10254a;--ok:#7bc7b1;--warn:#e5bd79;--bad:#f28c98;--r:14px;color-scheme:dark}
@@ -628,7 +628,6 @@ main>section{animation:none}
 <div id="app-content" hidden>
  <header><div class="hin">
   <div class="brand">
-   <img class="brand-mark" src="/icon-192.png" alt="">
    <img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden>
    <div><span id="u-name">Mi organizador</span><small>● Sincronizado</small></div>
   </div>
@@ -641,7 +640,7 @@ main>section{animation:none}
  </div></header>
 
  <nav id="nav" aria-label="Navegación principal">
-  <div class="sidebar-brand"><img class="brand-mark" src="/icon-192.png" alt="">Organizador</div>
+  <div class="sidebar-brand">Organizador</div>
   <p class="nav-caption">TU ESPACIO PERSONAL</p>
   <button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg>Inicio</button>
   <button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg>Tu día</button>
@@ -660,7 +659,6 @@ main>section{animation:none}
    <div class="page-intro"><div><p class="eyebrow">MENOS RUIDO, MÁS CLARIDAD</p><h1>Tu espacio, en orden.</h1><p>Todo lo que necesitás para darle lugar a lo importante.</p></div><span class="pill">✦ A tu ritmo</span></div>
    <div class="card hero">
     <div class="hero-copy"><p class="hero-label">HACÉ ESPACIO PARA VOS</p><h2>Un buen día empieza con un poco de orden.</h2><p class="hero-caption">Tus planes tienen su lugar. Vos elegís por dónde empezar.</p><button class="btn" data-go="dia">Ver mi agenda <span aria-hidden="true">↗</span></button></div>
-    <div class="hero-art" aria-hidden="true"><img class="hero-logo" src="/icon-512.png" alt=""></div>
     <div class="hero-clock"><p class="sub" id="greet">Hola</p><div id="live-clock" class="flap" role="timer" aria-label="Hora actual"></div><p class="sub" id="live-date"></p></div>
    </div>
    <div class="section-label"><h2>Todo a mano</h2><span>Un lugar para cada parte de tu día</span></div>
@@ -816,7 +814,8 @@ main>section{animation:none}
       <input class="in" id="gasto-concepto" placeholder="Concepto" required>
       <input class="in" type="number" step="0.01" id="gasto-monto" placeholder="$" required inputmode="decimal">
      </div>
-     <button class="btn ok" type="submit"><svg class="ic"><use href="#i-plus"/></svg> Agregar</button>
+     <button class="btn ok" type="submit" id="gasto-submit"><svg class="ic"><use href="#i-plus"/></svg> <span>Agregar</span></button>
+     <button class="btn ghost" type="button" id="gasto-cancel" hidden>Cancelar edición</button>
     </form>
     <ul id="lista-gastos" class="list"></ul>
    </div>
@@ -936,8 +935,16 @@ function renderGas() {
 window.addEventListener('resize', () => { if (!$('v-gas').hidden) renderGas(); });
 const delBtn = path => `<button class="x" data-del="${esc(path)}" aria-label="Eliminar"><svg class="ic"><use href="#i-trash"/></svg></button>`;
 
-let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, notas = [], curId = null, dirty = false, tmr = null, rng = null, needScroll = true, lastRender = 0, calDate = new Date(), ingreso = 0, editP = null, editR = null, lastDet = null, started = false;
+let sel = iso(), selEv = null, agenda = {}, parciales = [], recN = 0, gasT = 0, notas = [], curId = null, dirty = false, tmr = null, rng = null, needScroll = true, lastRender = 0, calDate = new Date(), ingreso = 0, editP = null, editR = null, editG = null, lastDet = null, started = false;
 let drag = null, editA = null, suppressClick = false, alData = {}, editAl = null;
+function resetG() {
+  editG = null;
+  const form = $('form-gasto'); if (!form) return;
+  form.reset();
+  $('gasto-submit').querySelector('span').textContent = 'Agregar';
+  $('gasto-cancel').hidden = true;
+  $('gasto-submit').disabled = false;
+}
 
 /* ---------- Rutas por Hash (evita errores 404 al recargar) ---------- */
 const VIEWS = ['home', 'dia', 'cal', 'rec', 'ale', 'gas', 'not', 'piz'];
@@ -1549,6 +1556,7 @@ document.addEventListener('click', e => {
     selEv = null;
     if (editR && b.dataset.del === 'recordatorios/' + editR) resetR();
     if (editAl && b.dataset.del === 'alertas/' + editAl) resetAl();
+    if (editG && b.dataset.del === 'gastos/' + editG) resetG();
     const li = b.closest('li'); if (li) li.classList.add('leaving');
     setTimeout(() => remove(R(b.dataset.del)), li ? 200 : 0);
   }
@@ -1962,17 +1970,38 @@ function iniciar() {
     const data = snap.val() || {}, keys = Object.keys(data).reverse();
     gasT = keys.reduce((s, k) => s + parseFloat(data[k].monto || 0), 0);
     window._gastosData = data;
+    if (editG && !data[editG]) resetG();
     $('lista-gastos').innerHTML = keys.length ? keys.map(k =>
-      `<li><div>${esc(data[k].concepto)}</div><div style="display:flex;align-items:center;gap:6px;flex:none;max-width:60%"><span class="amount">${money(data[k].monto)}</span>${delBtn('gastos/' + k)}</div></li>`
+      `<li><div>${esc(data[k].concepto)}</div><div class="acts" style="flex:none;max-width:70%"><span class="amount">${money(data[k].monto)}</span>${editBtn(k, 'editg')}${delBtn('gastos/' + k)}</div></li>`
     ).join('') : '<p class="empty">Sin gastos registrados</p>';
     $('lista-gastos').querySelectorAll('.amount').forEach(el => fit(el, 14, 10));
     renderGas();
     renderHome(); cargado('gastos');
   });
-  $('form-gasto').addEventListener('submit', e => {
+  const formGasto = $('form-gasto');
+  $('gasto-cancel').onclick = resetG;
+  $('lista-gastos').addEventListener('click', e => {
+    const b = e.target.closest('[data-editg]'); if (!b) return;
+    const gasto = (window._gastosData || {})[b.dataset.editg]; if (!gasto) return;
+    editG = b.dataset.editg;
+    $('gasto-concepto').value = gasto.concepto || '';
+    $('gasto-monto').value = gasto.monto ?? '';
+    $('gasto-submit').querySelector('span').textContent = 'Guardar cambios';
+    $('gasto-cancel').hidden = false;
+    formGasto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => $('gasto-concepto').focus({ preventScroll: true }), 120);
+  });
+  formGasto.addEventListener('submit', e => {
     e.preventDefault();
-    push(R('gastos'), { concepto: $('gasto-concepto').value.trim(), monto: parseFloat($('gasto-monto').value) });
-    e.target.reset();
+    const gasto = { concepto: $('gasto-concepto').value.trim(), monto: parseFloat($('gasto-monto').value) };
+    const op = editG && (window._gastosData || {})[editG]
+      ? update(R('gastos/' + editG), gasto)
+      : push(R('gastos'), gasto);
+    $('gasto-submit').disabled = true;
+    Promise.resolve(op).then(resetG).catch(() => {
+      $('gasto-submit').disabled = false;
+      alert('No se pudo guardar el gasto. Revisá tu conexión e intentá de nuevo.');
+    });
   });
 
   onValue(R('ingreso'), snap => {
