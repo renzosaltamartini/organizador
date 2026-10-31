@@ -23,8 +23,6 @@ messaging.onBackgroundMessage(payload => {
   const d = payload.data || {};
   return self.registration.showNotification(d.title || 'Organizador', {
     body: d.body || '',
-    icon: '/icon-192.png',
-    badge: '/icon-192.png',
     tag: d.tag || undefined,
     data: { url: d.url || '/#/panel/agenda' }
   });

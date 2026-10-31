@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Organizador Personal</title>
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
-<link rel="icon" href="/assets/logo-light.jpg" type="image/jpeg">
+<link rel="icon" href="data:,">
 <meta name="theme-color" content="#f3f6f8" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#151e24" media="(prefers-color-scheme: dark)" />
 <script>(function(){var r=document.documentElement;try{if(localStorage.getItem("tema-light-default-v1")!=="1"){localStorage.setItem("tema","light");localStorage.setItem("tema-light-default-v1","1")}r.setAttribute("data-theme",localStorage.getItem("tema")||"light")}catch(e){r.setAttribute("data-theme","light")}})();</script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png" data-appicon="apple-touch-icon" />
 <meta name="apple-mobile-web-app-title" content="Organizador" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -483,10 +482,10 @@ main>section{animation:none}
 
 <!-- PANTALLA DE INGRESO -->
 <div id="login-modal" class="full en" hidden>
- <div class="en-top"><div class="en-brand"><img class="brand-mark theme-logo logo-light" src="/assets/logo-light.jpg" alt=""><img class="brand-mark theme-logo logo-dark" src="/assets/logo-dark.jpg" alt="">Organizador</div><a class="en-nav-link" href="#landing-features" onclick="document.getElementById('landing-features').scrollIntoView({behavior:'smooth'});return false">Conocé tu espacio <span aria-hidden="true">↗</span></a></div>
+ <div class="en-top"><div class="en-brand">Organizador</div><a class="en-nav-link" href="#landing-features" onclick="document.getElementById('landing-features').scrollIntoView({behavior:'smooth'});return false">Conocé tu espacio <span aria-hidden="true">↗</span></a></div>
  <div class="en-in">
   <div class="en-col">
-   <div class="en-brand"><img class="theme-logo logo-light" src="/assets/logo-light.jpg" alt="" width="32" height="32"><img class="theme-logo logo-dark" src="/assets/logo-dark.jpg" alt="" width="32" height="32">Organizador</div>
+   <div class="en-brand">Organizador</div>
    <p class="en-eyebrow">MENOS RUIDO. MÁS CLARIDAD.</p>
    <h1 class="en-h">Un poco de orden.<br><em>Más espacio<br>para vos.</em></h1>
    <p class="en-p">Tus planes, tus ideas y tus pendientes, en un mismo lugar. Organizá lo cotidiano y hacé tiempo para lo que te hace bien.</p>
@@ -502,7 +501,7 @@ main>section{animation:none}
   </div>
   <div class="en-wrap" aria-hidden="true">
    <div class="en-av">
-    <img class="theme-logo logo-light" src="/assets/logo-light.jpg" alt=""><img class="theme-logo logo-dark" src="/assets/logo-dark.jpg" alt=""><small>Organizador</small><small>ahora</small>
+    <small>Organizador</small><small>ahora</small>
     <b>Retirar el paquete</b><span id="en-av">Empieza en 10 minutos</span>
    </div>
    <div class="en-dia">
@@ -860,7 +859,7 @@ main>section{animation:none}
 (function(){
   var root=document.documentElement, b=document.getElementById('btn-tema'); if(!b) return;
   var cur=function(){return root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');};
-  var paint=function(){var d=cur()==='dark'; b.querySelector('use').setAttribute('href',d?'#i-sun':'#i-moon'); b.title=d?'Cambiar a modo claro':'Cambiar a modo oscuro'; b.setAttribute('aria-label',b.title); var icon=document.querySelector('link[rel="icon"]'); if(icon) icon.href=d?'/assets/logo-dark.jpg':'/assets/logo-light.jpg';};
+  var paint=function(){var d=cur()==='dark'; b.querySelector('use').setAttribute('href',d?'#i-sun':'#i-moon'); b.title=d?'Cambiar a modo claro':'Cambiar a modo oscuro'; b.setAttribute('aria-label',b.title);};
   b.addEventListener('click',function(){
     var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n);
     try{localStorage.setItem('tema',n);}catch(e){}
@@ -1796,7 +1795,7 @@ async function setupPush() {
     msgListening = true;
     m.onMessage(msgInst, p => {
       const d = p.data || {};
-      reg.showNotification(d.title || 'Organizador', { body: d.body || '', icon: '/icon-192.png', tag: d.tag || undefined, data: { url: d.url || '/#/panel/agenda' } });
+      reg.showNotification(d.title || 'Organizador', { body: d.body || '', tag: d.tag || undefined, data: { url: d.url || '/#/panel/agenda' } });
     });
   }
   updateBell();
@@ -1813,7 +1812,7 @@ async function enablePush() {
   if (perm !== 'granted') { updateBell(); return; }
   try {
     const reg = await setupPush();
-    reg.showNotification('Notificaciones activadas ✅', { body: 'Te vamos a avisar aunque el celular esté bloqueado.', icon: '/icon-192.png', tag: 'bienvenida' });
+    reg.showNotification('Notificaciones activadas ✅', { body: 'Te vamos a avisar aunque el celular esté bloqueado.', tag: 'bienvenida' });
   } catch (err) {
     console.error(err);
     alert('No se pudieron activar las notificaciones.\n' + (err && err.message ? err.message : ''));

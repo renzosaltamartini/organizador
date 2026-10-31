@@ -1,8 +1,8 @@
 /* Public landing: independent light palette and layout, including saved dark themes. */
 #login-modal {
- --bg:#fafaf7;--card:#fff;--soft:#f0f2ec;--line:#e0e4db;
- --tx:#24372e;--mut:#68746b;--ac:#375b45;--onac:#fff;
- --ok:#62856a;--warn:#b79b60;--bad:#b74738;
+ --bg:#fafbfd;--card:#fff;--soft:#eef3fa;--line:#dfe5ef;
+ --tx:#24334b;--mut:#69768a;--ac:#3566a3;--onac:#fff;
+ --ok:#6c8db5;--warn:#b79b60;--bad:#b74738;
  color-scheme:light;background:var(--bg);color:var(--tx);
  display:block;overflow-y:auto;overflow-x:hidden;padding:0 48px;
  scroll-behavior:smooth;scroll-padding-top:32px;
@@ -14,30 +14,30 @@
 #login-modal .en-top{max-width:1120px;min-height:100px;padding:24px 0;border-bottom:1px solid var(--line);margin:0 auto}
 #login-modal .en-brand{font:600 20px/1.2 'DM Sans',sans-serif;letter-spacing:-.8px;gap:10px}
 #login-modal .en-brand img{width:30px;height:30px;border-radius:8px}
-.en-nav-link{color:var(--tx);text-decoration:none;font-size:13px;display:flex;gap:24px;align-items:center;padding:10px 0}
-.en-nav-link:hover{text-decoration:underline;text-underline-offset:5px}
+.en-nav-link{color:var(--ac);background:#eaf0f9;border:1px solid #dce6f5;border-radius:7px;text-decoration:none;font-size:13px;display:flex;gap:24px;align-items:center;padding:12px 18px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease}.en-nav-link span{transition:transform .2s ease}
+.en-nav-link:hover{background:#dce8f8;transform:translateY(-2px);box-shadow:0 6px 16px -9px #3566a366}.en-nav-link:hover span{transform:translate(2px,-2px)}
 #login-modal .en-in{max-width:1120px;margin:0 auto;padding:100px 0 110px;grid-template-columns:1.2fr 1fr;gap:72px;align-items:center}
 #login-modal .en-col{align-items:flex-start;text-align:left;gap:24px}
 #login-modal .en-col>.en-brand{display:none}
 #login-modal .en-eyebrow{font:600 10px/1.5 'DM Sans',sans-serif;letter-spacing:2px;color:var(--mut);margin:0 0 4px;max-width:none}
 #login-modal .en-h{font:500 clamp(44px,5vw,70px)/1.07 'Source Serif 4',Georgia,serif;letter-spacing:-2.8px;max-width:none;text-wrap:initial}
-#login-modal .en-h em{font-style:italic;color:#68806b;font-weight:500}
+#login-modal .en-h em{font-style:italic;color:#6b89b2;font-weight:500}
 #login-modal .en-p{font-size:16px;line-height:1.8;max-width:37ch;color:var(--mut)}
 #login-modal .en-cta{align-items:flex-start;max-width:310px;gap:12px;margin-top:8px}
 #login-modal .en-g{min-height:54px;border-radius:7px;box-shadow:none;font-size:14px;font-weight:500;background:var(--ac);color:white;padding:12px 20px}
 #login-modal .en-g svg{background:white;border-radius:50%;padding:3px;width:24px;height:24px}
-#login-modal .en-g:hover{background:#294a35;filter:none}
+#login-modal .en-g:hover{background:#264f83;filter:none}
 #login-modal .en-micro{font-size:11px;line-height:1.6}
 #login-modal .en-wrap{padding:40px 0 76px;width:100%;max-width:420px;margin:0;justify-self:end}
-#login-modal .en-dia{padding:28px 26px 12px;border-radius:12px;border:1px solid var(--line);box-shadow:0 20px 60px -30px #24372e35;transform:rotate(-2deg)}
+#login-modal .en-dia{padding:28px 26px 12px;border-radius:12px;border:1px solid var(--line);box-shadow:0 20px 60px -30px #24334b35;transform:rotate(-2deg)}
 .en-preview-label{display:flex;justify-content:space-between;font-size:9px;letter-spacing:1.8px;color:var(--mut);margin-bottom:30px}
 #login-modal .en-dh{padding-bottom:24px;align-items:center}
 #login-modal .en-dh b{font:500 42px/1 'Source Serif 4',serif;letter-spacing:-1px}
 #login-modal .en-dh span{font-size:11px}
 #login-modal .en-l li{padding-top:23px;padding-bottom:23px}
 #login-modal .en-l .t{font-size:13px;font-weight:500}
-#login-modal .en-l .ahora{background:#eff3ec;border-radius:5px}
-#login-modal .en-av{top:auto;bottom:22px;left:32px;right:-16px;padding:17px;background:#fff;border:1px solid var(--line);border-radius:9px;box-shadow:0 12px 36px -20px #24372e45;animation:none}
+#login-modal .en-l .ahora{background:#edf3fb;border-radius:5px}
+#login-modal .en-av{top:auto;bottom:22px;left:32px;right:-16px;padding:17px;background:#fff;border:1px solid var(--line);border-radius:9px;box-shadow:0 12px 36px -20px #24334b45;animation:none}
 #login-modal .en-av b{font-size:13px;font-weight:500}
 #login-modal .en-av span{font-size:11px}
 #login-modal .en-more{max-width:1120px;margin:0 auto;gap:100px}
@@ -50,7 +50,7 @@
 #login-modal .en-ic{background:none;color:var(--ac);width:26px;height:26px;border-radius:0}
 #login-modal .en-fc h3{font:500 17px 'DM Sans',sans-serif}
 #login-modal .en-fc p{font-size:13px;line-height:1.8;max-width:30ch}
-#login-modal .en-band{background:#eef1e9;border:0;border-radius:10px;padding:52px;gap:64px}
+#login-modal .en-band{background:#eef3fa;border:0;border-radius:10px;padding:52px;gap:64px}
 #login-modal .en-band h2{font:500 37px/1.2 'Source Serif 4',serif;letter-spacing:-1px;margin:16px 0}
 #login-modal .en-band p:not(.en-eyebrow){font-size:14px;line-height:1.8}
 #login-modal .en-ck{gap:18px}
@@ -73,3 +73,8 @@
 @media(min-width:1600px){#login-modal .en-in{padding-top:120px;padding-bottom:130px}}
 @media(max-width:900px){#login-modal{padding:0 28px}#login-modal .en-in{gap:32px;padding:72px 0 88px}#login-modal .en-h{font-size:48px;letter-spacing:-2px}#login-modal .en-av{left:14px;right:0}#login-modal .en-band{padding:32px;gap:30px}}
 @media(max-width:640px){#login-modal{padding:0 22px}#login-modal .en-top{min-height:80px;padding:20px 0}#login-modal .en-brand{font-size:18px}.en-nav-link{font-size:11px;gap:10px}#login-modal .en-in{grid-template-columns:minmax(0,1fr);padding:54px 0 58px;gap:32px}#login-modal .en-col{gap:22px}#login-modal .en-h{font-size:clamp(40px,10.8vw,60px);letter-spacing:-1.9px}#login-modal .en-p{font-size:14px;max-width:38ch}#login-modal .en-cta{max-width:100%}#login-modal .en-wrap{justify-self:center;max-width:390px;padding:14px 8px 74px}#login-modal .en-dia{padding:24px 20px 10px}#login-modal .en-more{gap:64px}#login-modal .en-feat{grid-template-columns:repeat(2,minmax(0,1fr))}#login-modal .en-fc{padding:24px 14px 24px 0}#login-modal .en-fc p{font-size:12px}#login-modal .en-fc h3{font-size:15px}#login-modal .en-band{grid-template-columns:minmax(0,1fr);padding:28px 22px;gap:24px}#login-modal .en-band h2{font-size:32px}#login-modal .en-steps{grid-template-columns:minmax(0,1fr);gap:8px}#login-modal .en-steps li::before{margin-bottom:14px}#login-modal .en-end{padding:52px 0}#login-modal .en-foot{flex-direction:column;gap:8px}}
+
+/* Notification preview keeps its alignment while the brand has no image. */
+#login-modal .en-av{grid-template-columns:minmax(0,1fr) auto}
+#login-modal .en-av b,#login-modal .en-av span{grid-column:1/-1}
+@media(prefers-reduced-motion:reduce){.en-nav-link,.en-nav-link span{transition:none}.en-nav-link:hover,.en-nav-link:hover span{transform:none}}
