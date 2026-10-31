@@ -678,7 +678,11 @@ main>section{animation:none}
    <p class="sub">Conectá la misma cuenta de Google que usás en la app. El permiso permite consultar Drive; acá mostramos tus carpetas MiPizarra.</p>
    <div class="drive-actions"><button type="button" class="btn" id="drive-connect">Conectar Google Drive</button><button type="button" class="btn" id="drive-refresh" hidden>Actualizar</button><button type="button" class="btn" id="drive-back" hidden>Volver</button></div>
    <p id="drive-status" role="status" aria-live="polite">Conectá Drive para ver tus pizarras.</p>
-   <h2 id="drive-folder"></h2><div id="drive-files" class="drive-files"></div>
+   <nav id="drive-breadcrumbs" class="drive-breadcrumbs" aria-label="Ruta de carpetas"></nav>
+   <div class="drive-library-head"><div><p class="eyebrow">TU BIBLIOTECA</p><h2 id="drive-folder"></h2><p id="drive-count" class="sub"></p></div>
+    <div class="drive-tools"><label class="drive-search"><span class="sr-only">Buscar en esta carpeta</span><input id="drive-search" class="in" type="search" placeholder="Buscar en esta carpeta…"></label>
+    <label><span class="sr-only">Ordenar elementos</span><select id="drive-sort" class="in"><option value="asc">Nombre: A a Z</option><option value="desc">Nombre: Z a A</option></select></label></div></div>
+   <div id="drive-files" class="drive-files" aria-busy="false"></div>
   </section>
   <!-- TU DÍA -->
   <section id="v-dia" class="card" hidden>
@@ -1972,3 +1976,4 @@ function iniciar() {
 </script>
 </body>
 </html>
+
