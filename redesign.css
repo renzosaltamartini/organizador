@@ -475,3 +475,166 @@ label { display: block; margin: 0 0 7px; color: var(--mut); font-size: .76rem; f
   .header-actions { gap: 4px; }
   .ib, .icon-btn { width: 34px !important; height: 34px !important; }
 }
+
+/* Compatibilidad con la estructura real de la pantalla de ingreso */
+#login-modal.full.en {
+  position: fixed !important;
+  inset: 0 !important;
+  display: block !important;
+  min-height: 100vh !important;
+  padding: max(22px, env(safe-area-inset-top)) 22px max(30px, env(safe-area-inset-bottom)) !important;
+  overflow-y: auto !important;
+  background: var(--bg) !important;
+}
+#login-modal.en .en-top {
+  width: min(100%, 1120px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 auto;
+  color: var(--mut);
+  font-size: .76rem;
+  line-height: 1.4;
+}
+#login-modal.en .en-in {
+  width: min(100%, 1120px);
+  margin: clamp(42px, 9vh, 100px) auto 0;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(290px, 390px);
+  align-items: center;
+  gap: clamp(34px, 8vw, 112px);
+}
+#login-modal.en .en-col {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+#login-modal.en .en-brand { margin-bottom: 34px; color: var(--tx) !important; }
+#login-modal.en .en-brand img { width: 32px; height: 32px; border-radius: 9px; }
+#login-modal.en .en-h {
+  max-width: 10ch;
+  margin: 0;
+  color: var(--tx) !important;
+  font-size: clamp(2.7rem, 6vw, 5.45rem) !important;
+  font-weight: 800;
+  line-height: .98;
+  letter-spacing: -.07em;
+}
+#login-modal.en .en-h em { color: var(--ac-deep); font-style: normal; }
+#login-modal.en .en-p {
+  max-width: 39ch;
+  margin: 24px 0 0;
+  color: var(--mut) !important;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+#login-modal.en .en-cta { width: min(100%, 380px); margin-top: 28px; }
+#login-modal.en .en-g {
+  min-height: 50px;
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  color: var(--tx) !important;
+}
+#login-modal.en .en-g:hover { background: var(--soft) !important; border-color: var(--soft-2) !important; }
+#login-modal.en .en-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  margin: 44px 0 0 !important;
+  justify-self: end;
+}
+#login-modal.en .en-dia {
+  padding: 27px 18px 12px !important;
+  border-radius: 18px !important;
+  background: var(--card) !important;
+  box-shadow: var(--shadow) !important;
+}
+#login-modal.en .en-dh b { font-family: "DM Mono", monospace !important; font-size: 2.1rem !important; }
+#login-modal.en ol.en-l {
+  display: block !important;
+  min-height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--tx) !important;
+  box-shadow: none !important;
+}
+#login-modal.en ol.en-l li {
+  display: grid !important;
+  grid-template-columns: 46px 1fr;
+  min-height: 0 !important;
+  gap: 12px;
+  margin: 0 !important;
+  padding: 14px 8px 14px 16px !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--tx) !important;
+  box-shadow: none !important;
+}
+#login-modal.en ol.en-l li:last-child { border-bottom: 0 !important; }
+#login-modal.en ol.en-l li.ahora {
+  margin: 4px -8px !important;
+  padding: 14px 16px 20px 24px !important;
+  border-radius: 11px !important;
+  border-bottom-color: transparent !important;
+  background: var(--ac-soft) !important;
+}
+#login-modal.en .en-av {
+  position: absolute !important;
+  top: -69px;
+  left: 10px;
+  right: 10px;
+  display: grid !important;
+  min-height: 58px;
+  border-radius: 14px !important;
+  background: var(--card) !important;
+  box-shadow: var(--shadow) !important;
+}
+#login-modal.en .en-more {
+  width: min(100%, 1120px);
+  max-width: none !important;
+  margin: 100px auto 0 !important;
+  display: flex !important;
+  flex-direction: column;
+  gap: 74px;
+}
+#login-modal.en .en-sec h2,
+#login-modal.en .en-band h2,
+#login-modal.en .en-end h2 { color: var(--tx) !important; }
+#login-modal.en .en-fc {
+  min-height: 174px;
+  background: var(--card) !important;
+  box-shadow: none !important;
+}
+#login-modal.en .en-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  margin: 0 !important;
+}
+#login-modal.en .en-steps li {
+  min-height: 0 !important;
+  color: var(--tx) !important;
+  border-color: var(--line) !important;
+  background: var(--card) !important;
+}
+#login-modal.en .en-end {
+  padding: 42px 22px !important;
+  color: var(--tx) !important;
+  background: var(--soft) !important;
+}
+@media (max-width: 720px) {
+  #login-modal.full.en { padding-left: 18px !important; padding-right: 18px !important; }
+  #login-modal.en .en-top { align-items: flex-start; }
+  #login-modal.en .en-in { display: block !important; margin-top: 54px; }
+  #login-modal.en .en-h { font-size: clamp(2.8rem, 15vw, 4.25rem) !important; }
+  #login-modal.en .en-wrap { margin: 112px auto 0 !important; }
+  #login-modal.en .en-more { margin-top: 78px !important; gap: 56px; }
+  #login-modal.en .en-steps { grid-template-columns: 1fr !important; }
+}
