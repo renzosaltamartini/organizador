@@ -659,7 +659,7 @@ main>section{animation:none}
   <section id="v-home" style="display:flex;flex-direction:column;gap:16px">
    <div class="page-intro"><div><p class="eyebrow">UN POCO DE ORDEN, MÁS ESPACIO PARA VOS</p><h1>Hoy empieza por acá.</h1><p>Hacé lugar para tus planes, tus ideas y lo que viene.</p></div></div>
    <div class="card hero">
-    <div class="hero-copy"><p class="eyebrow">A TU RITMO</p><h2 id="greet">Hola</h2><p class="hero-message">Un paso a la vez. Tu día no tiene que ser perfecto para ser un buen día.</p><button class="btn" data-go="dia">Abrir mi agenda <span aria-hidden="true">↗</span></button></div><div class="hero-clock"><span class="clock-label">ESTE MOMENTO ES TUYO</span><div id="live-clock" role="timer" aria-label="Hora actual"></div><p class="sub" id="live-date"></p></div>
+    <div class="hero-copy"><p class="eyebrow">A TU RITMO</p><h2 id="greet">Hola</h2><p class="hero-message">Un paso a la vez. Tu día no tiene que ser perfecto para ser un buen día.</p><button class="btn" data-go="dia">Abrir mi agenda <span aria-hidden="true">↗</span></button></div><div class="hero-clock"><span class="clock-label">ESTE MOMENTO ES TUYO</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div><p class="sub" id="live-date"></p></div>
    </div>
    <div class="section-label"><h2>Elegí por dónde seguir</h2><span>Un lugar para cada parte de tu día</span></div>
    <div class="tiles">
@@ -988,12 +988,19 @@ window.addEventListener('hashchange', onRoute);
 /* ---------- Reloj ---------- */
 function tick() {
   const n = new Date(), h = n.getHours();
-  $('live-clock').textContent = n.toTimeString().slice(0, 5);
   $('live-date').textContent = n.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
   $('greet').textContent = `${h < 12 ? 'Buenos días' : h < 20 ? 'Buenas tardes' : 'Buenas noches'}${uName ? ', ' + uName : ''}`;
   if (Date.now() - lastRender > 30000 && !$('app-content').hidden) { render(); renderHome(); if (!$('v-ale').hidden) renderAlertas(); }
 }
 setInterval(tick, 1000); tick();
+// Paint only the clock digits each frame; other home updates keep their own cadence.
+function paintClock() {
+  const now = new Date();
+  $('clock-time').textContent = now.toTimeString().slice(0, 8);
+  $('clock-ms').textContent = '.' + String(now.getMilliseconds()).padStart(3, '0');
+  requestAnimationFrame(paintClock);
+}
+requestAnimationFrame(paintClock);
 
 function renderHome() {
   const t = iso(), n = new Date(), nm = n.getHours() * 60 + n.getMinutes();
@@ -1976,4 +1983,5 @@ function iniciar() {
 </script>
 </body>
 </html>
+
 
