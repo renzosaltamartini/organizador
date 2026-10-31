@@ -1,0 +1,76 @@
+/* Shared accents: blue / yellow / red / orange / green. Light surfaces stay quiet. */
+:root{
+ --blue:#3566a3;--blue-soft:#edf3fc;
+ --yellow:#896519;--yellow-soft:#fff7dc;
+ --red:#b55049;--red-soft:#fcefeb;
+ --orange:#b26432;--orange-soft:#fff1e5;
+ --green:#3e7960;--green-soft:#edf6ee;
+}
+:root,:root[data-theme="light"]{--bg:#fcfbf8;--ok:var(--green);--warn:var(--yellow);--bad:var(--red)}
+#login-modal{--bg:#fcfbf8;--ok:var(--green);--warn:var(--yellow);--bad:var(--red)}
+#app-content header{background:#fcfbf8f2}
+/* The color follows each tool across navigation, cards and its own view. */
+[data-go="home"],[data-go="dia"],#v-dia{--tool:var(--blue);--tool-soft:var(--blue-soft)}
+[data-go="cal"],#v-cal{--tool:var(--orange);--tool-soft:var(--orange-soft)}
+[data-go="rec"],#v-rec{--tool:var(--yellow);--tool-soft:var(--yellow-soft)}
+[data-go="ale"],#v-ale{--tool:var(--red);--tool-soft:var(--red-soft)}
+[data-go="gas"],#v-gas{--tool:var(--green);--tool-soft:var(--green-soft)}
+[data-go="not"],#v-not{--tool:var(--blue);--tool-soft:var(--blue-soft)}
+[data-go="piz"],#v-piz{--tool:var(--orange);--tool-soft:var(--orange-soft)}
+#app-content main>section:not(#v-home){--ac:var(--tool);--soft:var(--tool-soft)}
+#nav .nv .ic{color:var(--tool)}
+#nav .nv.on{color:var(--tool);background:var(--tool-soft)}
+#nav .nv.on .ic{color:var(--tool)}
+#nav .nv:hover:not(.on){background:var(--tool-soft);color:var(--tool)}
+#app-content .tile{background:var(--tool-soft);border-color:transparent}
+#app-content .tile .ti{background:#ffffffc9;color:var(--tool)}
+#app-content .tile:after{color:var(--tool);opacity:.7}
+#app-content .tile:hover{border-color:color-mix(in srgb,var(--tool) 40%,white);box-shadow:0 12px 32px -24px var(--tool)}
+#app-content .hero{background:var(--yellow-soft)}
+.hero-copy .eyebrow{color:var(--yellow)}
+.hero-clock{border-color:#e8dcb9}
+#live-clock{color:var(--green)}
+.clock-label{color:#74826f}
+#app-content .page-intro .eyebrow::before,#login-modal .en-col>.en-eyebrow::before{
+ content:'';display:block;width:72px;height:4px;border-radius:3px;margin-bottom:18px;
+ background:linear-gradient(90deg,var(--blue) 0 20%,#e9bf45 20% 40%,var(--red) 40% 60%,#d98d4f 60% 80%,var(--green) 80%);
+}
+#v-gas .stat:nth-child(1){background:var(--blue-soft)}
+#v-gas .stat:nth-child(2){background:var(--orange-soft)}
+#v-gas .stat:nth-child(3){background:var(--green-soft)}
+#v-gas .stat:nth-child(1) b{color:var(--blue)}
+#v-gas .stat:nth-child(2) b{color:var(--orange)!important}
+#v-gas .stat:nth-child(3) b{color:var(--green)!important}
+#app-content main>section:not(#v-home) .fgrid{background:color-mix(in srgb,var(--tool-soft) 65%,white)}
+#app-content .tab.on{background:var(--tool-soft);border-color:color-mix(in srgb,var(--tool) 35%,white);color:var(--tool)}
+#app-content .tab.on b{color:var(--tool)}
+#v-not .nside{background:#f1f5fc}
+#v-cal .day.sel{background:var(--orange-soft);border-color:#dcae8e}
+#v-cal .day.today{color:var(--orange);border-color:#dcae8e}
+/* Landing: warm title, green notices, and a distinct tint for every feature. */
+#login-modal .en-title-orange{color:var(--orange)}
+#login-modal .en-title-green{color:var(--green)}
+#login-modal .en-nav-link{background:var(--yellow-soft);color:var(--yellow);border-color:#efe0b4}
+#login-modal .en-nav-link:hover{background:#ffedb4;box-shadow:0 6px 16px -9px #89651955}
+#login-modal .en-l .ahora{background:var(--blue-soft)}
+#login-modal .en-av{background:var(--green-soft);border-color:#d5e7d8}
+#login-modal .en-feat{gap:14px;border-top:0}
+#login-modal .en-fc:nth-child(1){--feature:var(--blue);--feature-soft:var(--blue-soft)}
+#login-modal .en-fc:nth-child(2){--feature:var(--orange);--feature-soft:var(--orange-soft)}
+#login-modal .en-fc:nth-child(3){--feature:var(--yellow);--feature-soft:var(--yellow-soft)}
+#login-modal .en-fc:nth-child(4){--feature:var(--red);--feature-soft:var(--red-soft)}
+#login-modal .en-fc:nth-child(5){--feature:var(--green);--feature-soft:var(--green-soft)}
+#login-modal .en-fc:nth-child(6){--feature:var(--blue);--feature-soft:var(--blue-soft)}
+#login-modal .en-fc{background:var(--feature-soft);border:0;border-radius:9px;padding:26px;gap:14px}
+#login-modal .en-ic{background:#ffffffba;border-radius:7px;width:38px;height:38px;color:var(--feature)}
+#login-modal .en-band{background:var(--green-soft)}
+#login-modal .en-band .en-eyebrow,#login-modal .en-ck li:before{color:var(--green)}
+#login-modal .en-steps li:nth-child(1){--step:var(--blue);--step-soft:var(--blue-soft)}
+#login-modal .en-steps li:nth-child(2){--step:var(--orange);--step-soft:var(--orange-soft)}
+#login-modal .en-steps li:nth-child(3){--step:var(--green);--step-soft:var(--green-soft)}
+#login-modal .en-steps li{border-top-color:var(--step)}
+#login-modal .en-steps li:before{color:var(--step);background:var(--step-soft);width:38px;height:38px;display:grid;place-items:center;border-radius:7px}
+#login-modal .en-faq summary:after{color:var(--orange)}
+#login-modal .en-end{background:var(--orange-soft);border:0;border-radius:10px;padding-left:24px;padding-right:24px}
+@media(max-width:719px){.hero-clock{border-color:#e8dcb9}}
+@media(max-width:640px){#login-modal .en-feat{gap:10px}#login-modal .en-fc{padding:20px 15px}}
