@@ -74,3 +74,33 @@
 #login-modal .en-end{background:var(--orange-soft);border:0;border-radius:10px;padding-left:24px;padding-right:24px}
 @media(max-width:719px){.hero-clock{border-color:#e8dcb9}}
 @media(max-width:640px){#login-modal .en-feat{gap:10px}#login-modal .en-fc{padding:20px 15px}}
+
+
+/* Active marker shares the icon and selected surface accent. */
+#nav .nv::before{background:var(--tool,var(--ac))}
+/* A library that scales from a phone to many folders on desktop. */
+#v-piz{min-width:0}
+#v-piz .drive-actions{padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:14px}
+#v-piz #drive-status{font-size:12px;line-height:1.7;color:var(--mut);margin-bottom:24px}
+.drive-breadcrumbs{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.drive-breadcrumbs button{border:0;background:transparent;color:var(--tool);font:inherit;font-size:12px;padding:6px 8px;border-radius:6px;cursor:pointer;max-width:100%;overflow-wrap:anywhere;text-align:left}
+.drive-breadcrumbs button+button:before{content:'/';color:var(--mut);margin-right:14px}
+.drive-breadcrumbs button:hover:not(:disabled){background:var(--tool-soft)}
+.drive-breadcrumbs button[aria-current]{color:var(--tx);font-weight:600;cursor:default}
+.drive-library-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:24px}
+.drive-library-head .eyebrow{margin-bottom:8px}.drive-library-head h2{overflow-wrap:anywhere}.drive-library-head .sub{margin-top:8px}
+.drive-tools{display:flex;gap:10px;flex-wrap:wrap;max-width:100%}.drive-search{flex:1;min-width:180px}.drive-tools .in{width:100%;font-size:13px}
+#v-piz .drive-files{display:flex;flex-direction:column;gap:30px;margin:0}
+.drive-group{min-width:0}.drive-group h3{font:500 12px 'DM Sans',sans-serif;color:var(--mut);margin:0 0 12px}
+.drive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px}
+#v-piz .drive-file{display:flex;align-items:center;gap:14px;width:100%;min-width:0;min-height:100px;padding:20px;text-align:left;text-decoration:none;color:var(--tx);background:var(--card);border:1px solid var(--line);border-radius:10px;cursor:pointer;font:inherit;transition:border-color .16s,box-shadow .16s,background .16s}
+#v-piz .drive-folder-card{background:color-mix(in srgb,var(--tool-soft) 40%,var(--card))}
+#v-piz .drive-file:hover{border-color:var(--tool);background:var(--tool-soft);box-shadow:0 8px 24px -18px var(--tool)}
+.drive-file-icon{flex:none;width:42px;height:46px;display:grid;place-items:center;background:var(--tool-soft);color:var(--tool);border-radius:8px}.drive-file-icon svg{width:25px;height:25px}
+.drive-pdf-card .drive-file-icon{color:var(--red);background:var(--red-soft)}
+.drive-file-copy{min-width:0;display:flex;flex-direction:column;gap:7px}.drive-file-copy strong{font-size:13px;font-weight:500;line-height:1.5;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.drive-file-copy>span{font-size:11px;color:var(--mut)}
+.drive-empty{padding:44px 24px;text-align:center;border:1px dashed var(--line);border-radius:10px;color:var(--mut);font-size:13px;line-height:1.8}
+#v-piz :is(button,a,input,select):focus-visible{outline:2px solid var(--tool);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:719px){.drive-library-head{align-items:stretch;gap:18px}.drive-tools{width:100%}.drive-tools>label{flex:1 1 100%}.drive-breadcrumbs{gap:2px;margin-bottom:20px}#v-piz .drive-file{min-height:88px;padding:16px}.drive-grid{gap:10px}}
+@media(prefers-reduced-motion:reduce){#v-piz .drive-file{transition:none}}
