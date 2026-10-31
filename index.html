@@ -438,6 +438,7 @@ main>section{animation:none}
 }
 </style>
 <link rel="stylesheet" href="/redesign.css">
+<link rel="stylesheet" href="/landing.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -482,12 +483,13 @@ main>section{animation:none}
 
 <!-- PANTALLA DE INGRESO -->
 <div id="login-modal" class="full en" hidden>
- <div class="en-top"><div class="en-brand"><img class="brand-mark theme-logo logo-light" src="/assets/logo-light.jpg" alt=""><img class="brand-mark theme-logo logo-dark" src="/assets/logo-dark.jpg" alt="">Organizador</div><span>Un poco de orden.<br>Un montón de posibilidades.</span></div>
+ <div class="en-top"><div class="en-brand"><img class="brand-mark theme-logo logo-light" src="/assets/logo-light.jpg" alt=""><img class="brand-mark theme-logo logo-dark" src="/assets/logo-dark.jpg" alt="">Organizador</div><a class="en-nav-link" href="#landing-features" onclick="document.getElementById('landing-features').scrollIntoView({behavior:'smooth'});return false">Conocé tu espacio <span aria-hidden="true">↗</span></a></div>
  <div class="en-in">
   <div class="en-col">
    <div class="en-brand"><img class="theme-logo logo-light" src="/assets/logo-light.jpg" alt="" width="32" height="32"><img class="theme-logo logo-dark" src="/assets/logo-dark.jpg" alt="" width="32" height="32">Organizador</div>
-   <h1 class="en-h">Tu día.<br>Más simple.<br><em>Más tuyo.</em></h1>
-   <p class="en-p">Un lugar para organizar tus planes, guardar tus ideas y tener tus cuentas claras. Menos cosas en la cabeza. Más espacio para vos.</p>
+   <p class="en-eyebrow">MENOS RUIDO. MÁS CLARIDAD.</p>
+   <h1 class="en-h">Un poco de orden.<br><em>Más espacio<br>para vos.</em></h1>
+   <p class="en-p">Tus planes, tus ideas y tus pendientes, en un mismo lugar. Organizá lo cotidiano y hacé tiempo para lo que te hace bien.</p>
    <div class="en-cta">
     <button id="btn-google-login" class="en-g">
      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
@@ -504,6 +506,7 @@ main>section{animation:none}
     <b>Retirar el paquete</b><span id="en-av">Empieza en 10 minutos</span>
    </div>
    <div class="en-dia">
+    <div class="en-preview-label"><span>UN VISTAZO A TU DÍA</span><span aria-hidden="true">↗</span></div>
     <div class="en-dh"><b id="en-hora">--:--</b><span id="en-fecha"></span></div>
     <ol class="en-l">
      <li class="hecho" style="--c:var(--ok)"><time id="en-r1">--:--</time><span class="t">Gimnasio</span></li>
@@ -515,9 +518,10 @@ main>section{animation:none}
  </div>
 
  <div class="en-more">
-  <section class="en-sec">
-   <h2>Cada cosa en su lugar.</h2>
-   <p>Seis herramientas pensadas para el día a día, que funcionan juntas y se sienten livianas.</p>
+  <section class="en-sec" id="landing-features">
+   <p class="en-eyebrow">SIMPLE, DE PRINCIPIO A FIN</p>
+   <h2>Todo lo que necesitás.<br>Nada que te distraiga.</h2>
+   <p>Un espacio para cada parte de tu rutina. Elegí por dónde empezar.</p>
    <div class="en-feat">
  <article class="en-fc" style="--c:#d9622b"><span class="en-ic"><svg class="ic"><use href="#i-day"/></svg></span><h3>Tu día</h3><p>Tu agenda en tiempo real. Arrastrá una actividad para cambiarle el horario y mirá en qué momento del día estás.</p></article>
  <article class="en-fc" style="--c:#3f8fa6"><span class="en-ic"><svg class="ic"><use href="#i-cal"/></svg></span><h3>Calendario</h3><p>El mes completo de un vistazo, con tus fechas importantes marcadas.</p></article>
@@ -530,7 +534,7 @@ main>section{animation:none}
 
   <section class="en-band">
    <div>
-    <h2>Avisos que sí llegan</h2>
+    <p class="en-eyebrow">SOLTÁ ESE PENDIENTE</p><h2>No tenés que acordarte de todo.</h2>
     <p>No hace falta tener la app abierta. Recibís la notificación aunque el celular esté bloqueado.</p>
    </div>
    <ul class="en-ck">
@@ -542,7 +546,7 @@ main>section{animation:none}
   </section>
 
   <section class="en-sec">
-   <h2>Cómo empezar</h2>
+   <p class="en-eyebrow">A TU RITMO</p><h2>Empezar también es simple.</h2>
    <p>Tres pasos y ya está funcionando.</p>
    <ol class="en-steps">
     <li><b>Ingresá con Google</b><span>Sin contraseñas ni formularios largos.</span></li>
@@ -566,7 +570,7 @@ main>section{animation:none}
    <button type="button" class="btn" onclick="document.getElementById('btn-google-login').click();document.getElementById('login-modal').scrollTo({top:0,behavior:'smooth'})">Continuar con Google</button>
   </section>
 
-  <p class="en-foot">organizador · Tus planes. Tu espacio. Tu ritmo.</p>
+  <footer class="en-foot"><span>Organizador</span><span>Tus planes. Tu espacio. Tu ritmo.</span></footer>
  </div>
 </div>
 <script>
