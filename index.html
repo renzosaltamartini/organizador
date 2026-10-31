@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Organizador Personal</title>
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
-<link rel="icon" href="/icon-192.png" type="image/png">
-<meta name="theme-color" content="#f4f7ff" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#101a2c" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/assets/logo-light.jpg" type="image/jpeg">
+<meta name="theme-color" content="#f7f6f1" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#171c1d" media="(prefers-color-scheme: dark)" />
 <script>(function(){var r=document.documentElement;try{if(localStorage.getItem("tema-light-default-v1")!=="1"){localStorage.setItem("tema","light");localStorage.setItem("tema-light-default-v1","1")}r.setAttribute("data-theme",localStorage.getItem("tema")||"light")}catch(e){r.setAttribute("data-theme","light")}})();</script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -21,10 +21,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
-:root{--bg:#f4f7ff;--card:#ffffff;--soft:#eef3fc;--line:#dfe7f5;--tx:#172a47;--mut:#687b98;--ac:#1648b8;--onac:#ffffff;--ok:#328878;--warn:#b47a26;--bad:#c94d5b;--r:14px;color-scheme:light}
-@media(prefers-color-scheme:light){:root{--bg:#f4f7ff;--card:#ffffff;--soft:#eef3fc;--line:#dfe7f5;--tx:#172a47;--mut:#687b98;--ac:#1648b8;--onac:#ffffff;--ok:#328878;--warn:#b47a26;--bad:#c94d5b;color-scheme:light}}
-:root[data-theme="light"]{--bg:#f4f7ff;--card:#ffffff;--soft:#eef3fc;--line:#dfe7f5;--tx:#172a47;--mut:#687b98;--ac:#1648b8;--onac:#ffffff;--ok:#328878;--warn:#b47a26;--bad:#c94d5b;color-scheme:light}
-:root[data-theme="dark"]{--bg:#101a2c;--card:#182740;--soft:#202f49;--line:#344762;--tx:#edf3ff;--mut:#a7b7d1;--ac:#80aaff;--onac:#10254a;--ok:#7bc7b1;--warn:#e5bd79;--bad:#f28c98;--r:14px;color-scheme:dark}
+:root{--bg:#f7f6f1;--card:#ffffff;--soft:#f1f0e9;--line:#e4e1d6;--tx:#29343b;--mut:#78827e;--ac:#2878c7;--onac:#ffffff;--ok:#27945c;--warn:#e6a52a;--bad:#d94b45;--r:14px;color-scheme:light}
+@media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--card:#ffffff;--soft:#f1f0e9;--line:#e4e1d6;--tx:#29343b;--mut:#78827e;--ac:#2878c7;--onac:#ffffff;--ok:#27945c;--warn:#e6a52a;--bad:#d94b45;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f7f6f1;--card:#ffffff;--soft:#f1f0e9;--line:#e4e1d6;--tx:#29343b;--mut:#78827e;--ac:#2878c7;--onac:#ffffff;--ok:#27945c;--warn:#e6a52a;--bad:#d94b45;color-scheme:light}
+:root[data-theme="dark"]{--bg:#171c1d;--card:#22292a;--soft:#2a3231;--line:#3b4441;--tx:#f2f2e9;--mut:#a8b0a8;--ac:#5da9f6;--onac:#13263a;--ok:#50bd79;--warn:#f1c44b;--bad:#f06c61;--r:14px;color-scheme:dark}
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
 body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.45;padding-bottom:calc(84px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%}
@@ -482,10 +482,10 @@ main>section{animation:none}
 
 <!-- PANTALLA DE INGRESO -->
 <div id="login-modal" class="full en" hidden>
- <div class="en-top"><div class="en-brand"><img class="brand-mark" src="/icon-192.png" alt="">Organizador</div><span>Un poco de orden.<br>Un montón de posibilidades.</span></div>
+ <div class="en-top"><div class="en-brand"><img class="brand-mark theme-logo logo-light" src="/assets/logo-light.jpg" alt=""><img class="brand-mark theme-logo logo-dark" src="/assets/logo-dark.jpg" alt="">Organizador</div><span>Un poco de orden.<br>Un montón de posibilidades.</span></div>
  <div class="en-in">
   <div class="en-col">
-   <div class="en-brand"><img src="/icon-192.png" alt="" width="32" height="32">Organizador</div>
+   <div class="en-brand"><img class="theme-logo logo-light" src="/assets/logo-light.jpg" alt="" width="32" height="32"><img class="theme-logo logo-dark" src="/assets/logo-dark.jpg" alt="" width="32" height="32">Organizador</div>
    <h1 class="en-h">Tu día.<br>Más simple.<br><em>Más tuyo.</em></h1>
    <p class="en-p">Un lugar para organizar tus planes, guardar tus ideas y tener tus cuentas claras. Menos cosas en la cabeza. Más espacio para vos.</p>
    <div class="en-cta">
@@ -500,7 +500,7 @@ main>section{animation:none}
   </div>
   <div class="en-wrap" aria-hidden="true">
    <div class="en-av">
-    <img src="/icon-192.png" alt=""><small>Organizador</small><small>ahora</small>
+    <img class="theme-logo logo-light" src="/assets/logo-light.jpg" alt=""><img class="theme-logo logo-dark" src="/assets/logo-dark.jpg" alt=""><small>Organizador</small><small>ahora</small>
     <b>Retirar el paquete</b><span id="en-av">Empieza en 10 minutos</span>
    </div>
    <div class="en-dia">
@@ -662,12 +662,12 @@ main>section{animation:none}
    </div>
    <div class="section-label"><h2>Todo a mano</h2><span>Un lugar para cada parte de tu día</span></div>
    <div class="tiles">
-    <button class="card tile" data-go="dia" style="--c:#d9622b"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
-    <button class="card tile" data-go="cal" style="--c:#3f8fa6"><span class="ti"><svg class="ic"><use href="#i-cal"/></svg></span><b>Calendario</b><span class="sub" id="t-cal">…</span></button>
-    <button class="card tile" data-go="rec" style="--c:#e0a43a"><span class="ti"><svg class="ic"><use href="#i-bell"/></svg></span><b>Recordatorios</b><span class="sub" id="t-rec">…</span></button>
-    <button class="card tile" data-go="ale" style="--c:#d0626f"><span class="ti"><svg class="ic"><use href="#i-alarm"/></svg></span><b>Alertas</b><span class="sub" id="t-ale">…</span></button>
-    <button class="card tile" data-go="gas" style="--c:#8a9a3f"><span class="ti"><svg class="ic"><use href="#i-wal"/></svg></span><b>Gastos</b><span class="sub" id="t-gas">…</span></button>
-    <button class="card tile" data-go="not" style="--c:#6b7280"><span class="ti"><svg class="ic"><use href="#i-note"/></svg></span><b>Notas</b><span class="sub" id="t-not">…</span></button>
+    <button class="card tile" data-go="dia" style="--c:#377ec8"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
+    <button class="card tile" data-go="cal" style="--c:#ed8a3a"><span class="ti"><svg class="ic"><use href="#i-cal"/></svg></span><b>Calendario</b><span class="sub" id="t-cal">…</span></button>
+    <button class="card tile" data-go="rec" style="--c:#e2b93b"><span class="ti"><svg class="ic"><use href="#i-bell"/></svg></span><b>Recordatorios</b><span class="sub" id="t-rec">…</span></button>
+    <button class="card tile" data-go="ale" style="--c:#db514e"><span class="ti"><svg class="ic"><use href="#i-alarm"/></svg></span><b>Alertas</b><span class="sub" id="t-ale">…</span></button>
+    <button class="card tile" data-go="gas" style="--c:#43a271"><span class="ti"><svg class="ic"><use href="#i-wal"/></svg></span><b>Gastos</b><span class="sub" id="t-gas">…</span></button>
+    <button class="card tile" data-go="not" style="--c:#747ac5"><span class="ti"><svg class="ic"><use href="#i-note"/></svg></span><b>Notas</b><span class="sub" id="t-not">…</span></button>
    </div>
    <div class="home-footer"><span>Un paso a la vez también es avanzar.</span><span>Tu organizador personal</span></div>
   </section>
@@ -857,11 +857,11 @@ main>section{animation:none}
 (function(){
   var root=document.documentElement, b=document.getElementById('btn-tema'); if(!b) return;
   var cur=function(){return root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');};
-  var paint=function(){var d=cur()==='dark'; b.querySelector('use').setAttribute('href',d?'#i-sun':'#i-moon'); b.title=d?'Cambiar a modo claro':'Cambiar a modo oscuro'; b.setAttribute('aria-label',b.title);};
+  var paint=function(){var d=cur()==='dark'; b.querySelector('use').setAttribute('href',d?'#i-sun':'#i-moon'); b.title=d?'Cambiar a modo claro':'Cambiar a modo oscuro'; b.setAttribute('aria-label',b.title); var icon=document.querySelector('link[rel="icon"]'); if(icon) icon.href=d?'/assets/logo-dark.jpg':'/assets/logo-light.jpg';};
   b.addEventListener('click',function(){
     var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n);
     try{localStorage.setItem('tema',n);}catch(e){}
-    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.removeAttribute('media');m.content=n==='dark'?'#101a2c':'#f4f7ff';});
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.removeAttribute('media');m.content=n==='dark'?'#171c1d':'#f7f6f1';});
     paint();
   });
   paint();

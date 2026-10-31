@@ -7,8 +7,8 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f4f7ff",
-  "theme_color": "#f4f7ff",
+  "background_color": "#f7f6f1",
+  "theme_color": "#f7f6f1",
   "lang": "es",
   "icons": [
     {
@@ -18,15 +18,15 @@
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/assets/logo-light.jpg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/assets/logo-light.jpg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "maskable"
     }
   ]
