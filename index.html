@@ -6,9 +6,8 @@
 <title>Organizador Personal</title>
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
 <link rel="icon" href="data:,">
-<meta name="theme-color" content="#f3f6f8" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#151e24" media="(prefers-color-scheme: dark)" />
-<script>(function(){var r=document.documentElement;try{if(localStorage.getItem("tema-light-default-v1")!=="1"){localStorage.setItem("tema","light");localStorage.setItem("tema-light-default-v1","1")}r.setAttribute("data-theme",localStorage.getItem("tema")||"light")}catch(e){r.setAttribute("data-theme","light")}})();</script>
+<meta name="theme-color" content="#fafbfd" />
+<script>document.documentElement.setAttribute("data-theme","light");try{localStorage.setItem("tema","light")}catch(e){}</script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -23,7 +22,6 @@
 :root{--bg:#f7f6f1;--card:#ffffff;--soft:#f1f0e9;--line:#e4e1d6;--tx:#29343b;--mut:#78827e;--ac:#2878c7;--onac:#ffffff;--ok:#27945c;--warn:#e6a52a;--bad:#d94b45;--r:14px;color-scheme:light}
 @media(prefers-color-scheme:light){:root{--bg:#f7f6f1;--card:#ffffff;--soft:#f1f0e9;--line:#e4e1d6;--tx:#29343b;--mut:#78827e;--ac:#2878c7;--onac:#ffffff;--ok:#27945c;--warn:#e6a52a;--bad:#d94b45;color-scheme:light}}
 :root[data-theme="light"]{--bg:#f7f6f1;--card:#ffffff;--soft:#f1f0e9;--line:#e4e1d6;--tx:#29343b;--mut:#78827e;--ac:#2878c7;--onac:#ffffff;--ok:#27945c;--warn:#e6a52a;--bad:#d94b45;color-scheme:light}
-:root[data-theme="dark"]{--bg:#171c1d;--card:#22292a;--soft:#2a3231;--line:#3b4441;--tx:#f2f2e9;--mut:#a8b0a8;--ac:#5da9f6;--onac:#13263a;--ok:#50bd79;--warn:#f1c44b;--bad:#f06c61;--r:14px;color-scheme:dark}
 *{box-sizing:border-box;margin:0}
 [hidden]{display:none!important}
 body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.45;padding-bottom:calc(84px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%}
@@ -438,6 +436,7 @@ main>section{animation:none}
 </style>
 <link rel="stylesheet" href="/redesign.css">
 <link rel="stylesheet" href="/landing.css">
+<link rel="stylesheet" href="/panel.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -558,7 +557,7 @@ main>section{animation:none}
    <h2>Preguntas frecuentes</h2>
    <details><summary>¿Cómo recibo las notificaciones?</summary><p>Entrá a la app, tocá la campana de la parte superior y aceptá el permiso. En iPhone, primero agregá la app a la pantalla de inicio desde el botón Compartir.</p></details>
    <details><summary>¿Puedo usarla como una app?</summary><p>Sí. Podés agregarla a la pantalla de inicio y se abre a pantalla completa, como cualquier otra app.</p></details>
-   <details><summary>¿Puedo cambiar los colores?</summary><p>Sí. Cada actividad puede tener el color que quieras, ya sea de la paleta o uno personalizado, y podés alternar entre modo claro y oscuro.</p></details>
+   <details><summary>¿Puedo cambiar los colores?</summary><p>Sí. Cada actividad puede tener el color que quieras, ya sea de la paleta o uno personalizado, para identificarla de un vistazo.</p></details>
    <details><summary>¿Qué pasa con mis datos?</summary><p>Entrás con tu cuenta de Google y tus datos quedan asociados a ella. No usamos contraseñas propias.</p></details>
    <details><summary>¿Puedo sacar un resumen de todo?</summary><p>Sí. Desde la app podés descargar un PDF con tu agenda, fechas importantes y recordatorios.</p></details>
   </section>
@@ -632,11 +631,10 @@ main>section{animation:none}
  <header><div class="hin">
   <div class="brand">
    <img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden>
-   <div><span id="u-name">Mi organizador</span><small>● Sincronizado</small></div>
+   <div><span id="u-name">Mi organizador</span><small>Tu espacio personal</small></div>
   </div>
   <div class="header-actions">
    <button id="btn-notif" class="ib" title="Activar notificaciones" aria-label="Activar notificaciones"><svg class="ic"><use href="#i-bell"/></svg></button>
-   <button id="btn-tema" class="ib" title="Cambiar entre modo claro y oscuro" aria-label="Cambiar entre modo claro y oscuro"><svg class="ic"><use href="#i-moon"/></svg></button>
    <button id="btn-share-pdf" class="ib" title="Descargar PDF general" aria-label="Descargar PDF general"><svg class="ic"><use href="#i-pdf"/></svg></button>
    <button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button>
   </div>
@@ -644,7 +642,7 @@ main>section{animation:none}
 
  <nav id="nav" aria-label="Navegación principal">
   <div class="sidebar-brand">Organizador</div>
-  <p class="nav-caption">TU ESPACIO PERSONAL</p>
+  <p class="nav-caption">MI ESPACIO</p>
   <button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg>Inicio</button>
   <button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg>Tu día</button>
   <button class="nv" data-go="cal"><svg class="ic"><use href="#i-cal"/></svg>Calendario</button>
@@ -658,11 +656,11 @@ main>section{animation:none}
  <main>
   <!-- INICIO -->
   <section id="v-home" style="display:flex;flex-direction:column;gap:16px">
-   <div class="page-intro"><div><p class="eyebrow">MENOS RUIDO, MÁS CLARIDAD</p><h1>Tu espacio, en orden.</h1><p>Todo lo que necesitás para darle lugar a lo importante.</p></div><span class="pill">✦ A tu ritmo</span></div>
+   <div class="page-intro"><div><p class="eyebrow">UN POCO DE ORDEN, MÁS ESPACIO PARA VOS</p><h1>Hoy empieza por acá.</h1><p>Hacé lugar para tus planes, tus ideas y lo que viene.</p></div></div>
    <div class="card hero">
-    <div class="hero-copy"><div class="hero-clock"><h2 id="greet">Hola</h2><div id="live-clock" class="flap" role="timer" aria-label="Hora actual"></div><p class="sub" id="live-date"></p></div><button class="btn" data-go="dia">Ver mi agenda <span aria-hidden="true">↗</span></button></div>
+    <div class="hero-copy"><p class="eyebrow">A TU RITMO</p><h2 id="greet">Hola</h2><p class="hero-message">Un paso a la vez. Tu día no tiene que ser perfecto para ser un buen día.</p><button class="btn" data-go="dia">Abrir mi agenda <span aria-hidden="true">↗</span></button></div><div class="hero-clock"><span class="clock-label">ESTE MOMENTO ES TUYO</span><div id="live-clock" role="timer" aria-label="Hora actual"></div><p class="sub" id="live-date"></p></div>
    </div>
-   <div class="section-label"><h2>Todo a mano</h2><span>Un lugar para cada parte de tu día</span></div>
+   <div class="section-label"><h2>Elegí por dónde seguir</h2><span>Un lugar para cada parte de tu día</span></div>
    <div class="tiles">
     <button class="card tile" data-go="dia" style="--c:#377ec8"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
     <button class="card tile" data-go="cal" style="--c:#ed8a3a"><span class="ti"><svg class="ic"><use href="#i-cal"/></svg></span><b>Calendario</b><span class="sub" id="t-cal">…</span></button>
@@ -855,20 +853,6 @@ main>section{animation:none}
  </main>
 </div>
 
-<script>
-(function(){
-  var root=document.documentElement, b=document.getElementById('btn-tema'); if(!b) return;
-  var cur=function(){return root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');};
-  var paint=function(){var d=cur()==='dark'; b.querySelector('use').setAttribute('href',d?'#i-sun':'#i-moon'); b.title=d?'Cambiar a modo claro':'Cambiar a modo oscuro'; b.setAttribute('aria-label',b.title);};
-  b.addEventListener('click',function(){
-    var n=cur()==='dark'?'light':'dark'; root.setAttribute('data-theme',n);
-    try{localStorage.setItem('tema',n);}catch(e){}
-    document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.removeAttribute('media');m.content=n==='dark'?'#171c1d':'#f7f6f1';});
-    paint();
-  });
-  paint();
-})();
-</script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getDatabase, ref, push, set, get, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -982,7 +966,7 @@ function showView(v) {
   if (!VIEWS.includes(v)) v = 'home';
   if (v !== 'not') flush();
   VIEWS.forEach(x => { $('v-' + x).hidden = x !== v; });
-  document.querySelectorAll('.nv').forEach(b => b.classList.toggle('on', b.dataset.go === v));
+  document.querySelectorAll('.nv').forEach(b => { b.classList.toggle('on', b.dataset.go === v); if(b.dataset.go === v) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
   document.title = (NOMBRES[v] ? NOMBRES[v] + ' · ' : '') + 'Organizador Personal';
   if (v === 'dia') { needScroll = true; render(); }
   if (v === 'gas') renderGas();
@@ -997,47 +981,9 @@ document.addEventListener('click', e => {
 window.addEventListener('hashchange', onRoute);
 
 /* ---------- Reloj ---------- */
-/* ---------- Reloj split-flap ---------- */
-let flapEl = null, flapPrev = '';
-function flapBuild(el) {
-  el.innerHTML = '';
-  for (let i = 0; i < 8; i++) {
-    const c = document.createElement('span');
-    if (i === 2 || i === 5) { c.className = 'fl-c'; c.setAttribute('aria-hidden', 'true'); }
-    else {
-      c.className = 'fl'; c.setAttribute('aria-hidden', 'true');
-      c.innerHTML = '<span class="fl-t"><i>0</i></span><span class="fl-b"><i>0</i></span><span class="fl-ft"><i>0</i></span><span class="fl-fb"><i>0</i></span>';
-    }
-    el.appendChild(c);
-  }
-  flapEl = el; flapPrev = '';
-}
-function flapPaint(c, top, bot, ft, fb) {
-  const q = k => c.querySelector('.' + k + ' i');
-  q('fl-t').textContent = top; q('fl-b').textContent = bot; q('fl-ft').textContent = ft; q('fl-fb').textContent = fb;
-}
-function flapFlip(c, from, to) {
-  flapPaint(c, to, from, from, to);
-  c.classList.remove('go'); void c.offsetWidth; c.classList.add('go');
-  clearTimeout(c._t);
-  c._t = setTimeout(() => { flapPaint(c, to, to, to, to); c.classList.remove('go'); }, 380);
-}
-function flapSet(str) {
-  const el = $('live-clock');
-  if (!flapEl || flapEl !== el) flapBuild(el);
-  const cells = el.children;
-  for (let i = 0; i < 8; i++) {
-    const c = cells[i]; if (!c.classList.contains('fl')) continue;
-    const to = str[i], from = flapPrev ? flapPrev[i] : to;
-    if (to === from) { if (!flapPrev) flapPaint(c, to, to, to, to); continue; }
-    if (document.hidden) flapPaint(c, to, to, to, to); else flapFlip(c, from, to);
-  }
-  flapPrev = str;
-}
-
 function tick() {
   const n = new Date(), h = n.getHours();
-  flapSet(n.toTimeString().slice(0, 8));
+  $('live-clock').textContent = n.toTimeString().slice(0, 5);
   $('live-date').textContent = n.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
   $('greet').textContent = `${h < 12 ? 'Buenos días' : h < 20 ? 'Buenas tardes' : 'Buenas noches'}${uName ? ', ' + uName : ''}`;
   if (Date.now() - lastRender > 30000 && !$('app-content').hidden) { render(); renderHome(); if (!$('v-ale').hidden) renderAlertas(); }
