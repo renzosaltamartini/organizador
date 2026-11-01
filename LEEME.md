@@ -1,21 +1,54 @@
-# Organizador · rediseño
+# Organizador Personal
 
-Identidad visual alineada con el logo azul y blanco, superficies claras y tipografía Manrope/Outfit. Incluye portada, inicio, navegación lateral, navegación móvil, formularios, calendario, agenda, notas, modales y modo oscuro.
+Aplicación web con Firebase, agenda, calendario, recordatorios, alertas, gastos, notas y pizarras de Google Drive.
 
-## Archivos
+## Estructura
 
-- index.html: estructura y textos actualizados; conserva la integración de Firebase y sus funciones.
-- redesign.css: sistema visual adaptable a celular, tablet y computadora.
-- assets/logo-organizador.png e icon-180/192/512.png: logo y sus variantes para la aplicación.
-- manifest.json: colores actualizados.
-- api/, lib/, sw.js y configuración de alojamiento: conservados del proyecto original.
+```text
+index.html                    Estructura HTML, vistas y formularios
+assets/
+  css/
+    base.css                  Estilos extraídos del HTML
+    redesign.css              Sistema visual y ajustes adaptables
+    landing.css               Portada e ingreso
+    panel.css                 Panel de la aplicación
+    colors.css                Paleta y ajustes de color
+  js/
+    theme.js                  Tema inicial, antes de pintar la página
+    landing.js                Reloj de la portada y aviso de instalación en iOS
+    app.js                    Inicio, navegación, vistas, formularios y sincronización
+    config/firebase.js        Configuración del cliente de Firebase
+    utils/format.js           Fechas, importes, colores y formato de texto
+    features/
+      alerts.js               Cálculo de próximas alertas y sus etiquetas
+      notifications.js        Permisos, registro y tokens de notificaciones push
+      pdf.js                  Generación del reporte PDF
+  logo-*.jpg                  Imágenes existentes
+  logo-organizador.png
+api/avisos.js                 Endpoint del servidor para avisos
+lib/drive.js                  Integración del navegador con Google Drive
+lib/logica.js                 Procesamiento de avisos en el servidor
+lib/tiempo.js                 Conversión de zonas horarias en el servidor
+sw.js                         Service worker de notificaciones, con alcance raíz
+manifest.json                 Instalación de la aplicación
+icon-*.png                    Iconos de la aplicación
+firebase.json                 Configuración de alojamiento
+package.json                  Dependencias del servidor
+```
 
-## Uso
+## Desarrollo y despliegue
 
-Reemplazá los archivos de tu proyecto por el contenido de esta carpeta y usá tu despliegue habitual. Conservá las variables de entorno del servidor. Para verlo localmente, serví la carpeta con un servidor HTTP; abrir index.html como archivo no reproduce el inicio de sesión de Firebase. Los proveedores y dominios autorizados de Firebase deben corresponder al dominio donde lo publiques.
+No se necesita compilar el frontend ni instalar un framework. Para verlo localmente, ejecutá `python3 -m http.server 8000` desde la raíz y abrí `http://localhost:8000`. Abrir el HTML como archivo no permite cargar correctamente los módulos. Firebase debe autorizar el dominio utilizado para iniciar sesión.
 
-La vista-previa.html entregada por separado es una demostración visual sin conexión a la base de datos y sin guardado.
+Usá el despliegue habitual y conservá las variables de entorno del servidor. Los estilos se cargan en el mismo orden que antes: base, redesign, landing, panel y colors. El tema inicial se ejecuta en el encabezado y el módulo principal se carga después del HTML.
 
-## Verificación
+`sw.js`, el manifiesto y los iconos conservan sus rutas para mantener el alcance del service worker y la instalación existente. Los endpoints del servidor y la integración de Drive también conservan sus rutas.
 
-Revisión de las siete pantallas a 390, 768 y 1440 px, navegación y modo claro/oscuro con datos simulados. No se inició sesión ni se enviaron escrituras a la base real; notificaciones, autenticación y exportación PDF no se validaron contra servicios reales.
+## Datos y compatibilidad
+
+La reorganización conserva el proyecto de Firebase, las rutas `users/<uid>/...`, los campos guardados, el tema almacenado y la navegación por hash. No requiere migrar datos. Para conservar el almacenamiento y los permisos asociados al navegador, mantené el mismo dominio de publicación.
+
+## Verificación de la reorganización
+
+Se compararon el HTML, los estilos y las capturas de la portada y las ocho vistas del panel a 390, 768 y 1440 px con datos simulados. También se compararon las rutas y los datos enviados al guardar gastos e ingresos, y las instrucciones de generación del PDF. No se inició sesión ni se escribieron datos en Firebase real; Google Drive y la entrega real de notificaciones requieren validación con una cuenta y un dispositivo autorizados.
+
