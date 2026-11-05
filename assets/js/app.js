@@ -555,7 +555,7 @@ function renderNotas() {
   const q = $('n-search').value.trim().toLowerCase();
   const rows = notas.map(n => ({ n, l: lines(noteHtml(n)) })).filter(r => !q || r.l.join(' ').toLowerCase().includes(q));
   $('n-list').innerHTML = rows.length ? rows.map(({ n, l }) =>
-    `<button class="ni ${n.id === curId ? 'on' : ''}" data-nid="${n.id}"><b>${esc(l[0] || 'Nueva nota')}</b><span>${n.ts ? fmtN(n.ts) + ' · ' : ''}${esc(l[1] || 'Sin texto adicional')}</span></button>`
+    `<button class="ni ${n.id === curId ? 'on' : ''}" data-nid="${n.id}" aria-pressed="${n.id === curId}"><b>${esc(l[0] || 'Nueva nota')}</b><span class="note-preview">${esc(l.slice(1).join(' ' ).slice(0, 320) || 'Sin texto adicional')}</span><small>${n.ts ? fmtN(n.ts) : 'Sin fecha'}</small></button>`
   ).join('') : `<p class="empty">${q ? 'Sin resultados' : 'Todavía no hay notas'}</p>`;
 }
 function markDirty() {
