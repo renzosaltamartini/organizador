@@ -781,6 +781,11 @@ function hideLoader() {
 }
 function cargado(nombre) {
   cargados.add(nombre);
+  const progress = $('intro-progress');
+  if (progress) {
+    progress.setAttribute('aria-valuenow', String(cargados.size));
+    [...progress.children].forEach((segment, i) => segment.classList.toggle('ready', i < cargados.size));
+  }
   if (cargados.size === 5) hideLoader();
 }
 
