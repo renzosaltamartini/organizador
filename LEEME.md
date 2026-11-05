@@ -1,12 +1,12 @@
-# Organizador Personal · versión 2
+# Organizador Personal
 
 Aplicación con Firebase, agenda, calendario, recordatorios, alertas, gastos, notas y pizarras de Google Drive.
 
 ## Nueva distribución
 
-- Entrada centrada con acceso de Google y una presentación de las herramientas.
+- Entrada con presentación tipográfica y panel de acceso con Google independiente.
 - Navegación superior en escritorio y menú desplegable en dispositivos pequeños.
-- Resumen con agenda de hoy, pendientes, próximo evento, próxima alerta, saldo y notas recientes. Los datos provienen de las mismas colecciones sincronizadas de la aplicación.
+- Resumen con agenda principal, columna de pendientes y notas, próximas fechas y una franja compacta de dinero. Los datos provienen de las mismas colecciones sincronizadas de la aplicación.
 - Accesos para abrir los editores de actividades, recordatorios, gastos y notas desde el resumen.
 - Agenda con línea de tiempo y panel independiente para crear o editar actividades.
 - Calendario con fechas importantes debajo y formulario en una columna propia.
@@ -14,6 +14,10 @@ Aplicación con Firebase, agenda, calendario, recordatorios, alertas, gastos, no
 - Dinero con resumen superior, registro de movimientos y una columna para gastos e ingresos.
 - Notas con biblioteca horizontal y editor de ancho completo.
 - Pizarras con conexión, navegación de carpetas y biblioteca en áreas distintas.
+
+## Diseño
+
+Paleta neutra de blanco, negro y grises. Poppins para textos y controles; Space Grotesk para títulos, marca y cifras. Se conservan los colores personalizados de las actividades y los indicadores de estado.
 
 ## Archivos activos
 
@@ -29,4 +33,4 @@ Se mantiene el alojamiento habitual y las variables de entorno existentes. El pr
 
 ## Estado de esta versión
 
-Preparada en una rama independiente para revisión. No se ejecutaron pruebas automáticas, pruebas de navegador ni operaciones con una cuenta real, por indicación del usuario. La publicación actual no se reemplaza al crear esta propuesta.
+No se ejecutaron pruebas automáticas, pruebas de navegador ni operaciones con una cuenta real, por indicación del usuario. Los cambios de diseño se publican a través del despliegue habitual del repositorio.
