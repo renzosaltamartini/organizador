@@ -94,8 +94,6 @@ function showView(v) {
   document.querySelectorAll('.nv').forEach(b => { b.classList.toggle('on', b.dataset.go === v); if(b.dataset.go === v) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
   const label = { home: 'Resumen', dia: 'Agenda', cal: 'Calendario', rec: 'Pendientes', ale: 'Alertas', gas: 'Dinero', not: 'Notas', piz: 'Pizarras' }[v];
   $('workspace-location').textContent = label;
-  $('mobile-location').textContent = label;
-  if (!matchMedia('(min-width: 900px)').matches) $('workspace-navigation').open = false;
   document.title = (NOMBRES[v] ? NOMBRES[v] + ' · ' : '') + 'Organizador Personal';
   if (v === 'dia') { needScroll = true; render(); }
   if (v === 'gas') renderGas();
@@ -108,12 +106,6 @@ document.addEventListener('click', e => {
   if (g) go(g.dataset.go);
 });
 window.addEventListener('hashchange', onRoute);
-
-// The same tools become a compact menu on smaller screens.
-const workspaceWidth = matchMedia('(min-width: 900px)');
-const arrangeNavigation = () => { $('workspace-navigation').open = workspaceWidth.matches; };
-workspaceWidth.addEventListener('change', arrangeNavigation);
-arrangeNavigation();
 
 // Entry points reuse the original editors and their existing save handlers.
 document.addEventListener('click', e => {
@@ -947,3 +939,4 @@ function iniciar() {
     renderNotas(); renderHome(); cargado('notas');
   });
 }
+
