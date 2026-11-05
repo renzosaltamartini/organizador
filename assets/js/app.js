@@ -40,7 +40,7 @@ function renderGas() {
   setStat('g-ing', money(ingreso));
   setStat('section-total-gastos', money(gasT));
   setStat('g-resta', (r < 0 ? '-' : '') + money(Math.abs(r)));
-  $('g-resta').style.color = r < 0 ? 'var(--bad)' : 'var(--ok)';
+  $('g-resta').style.removeProperty('color');
 }
 window.addEventListener('resize', () => { if (!$('v-gas').hidden) renderGas(); });
 const delBtn = path => `<button class="x" data-del="${esc(path)}" aria-label="Eliminar"><svg class="ic"><use href="#i-trash"/></svg></button>`;
@@ -158,7 +158,6 @@ function renderHome() {
   $('t-rec').textContent = `${recN} ${recN === 1 ? 'pendiente' : 'pendientes'}`;
   const pa = Object.values(alData).filter(a => a && a.activa !== false).map(a => ({ a, p: alProx(a) })).filter(x => x.p).sort((x, y) => x.p - y.p)[0];
   $('t-ale').textContent = pa ? `${pa.a.titulo} · ${alRel(pa.p)}` : 'Sin alertas activas';
-  $('t-gas').textContent = ingreso ? `Te queda ${(ingreso - gasT < 0 ? '-' : '') + money(Math.abs(ingreso - gasT))}` : money(gasT);
   $('t-not').textContent = notas.length ? `${notas.length} ${notas.length === 1 ? 'nota' : 'notas'}` : 'Sin notas todavía';
 
   // Dashboard reads the same synchronized collections as the individual tools.
@@ -174,8 +173,6 @@ function renderHome() {
     const title = item.tituloOpcional || item.detalle || item.titulo || 'Pendiente';
     return `<button class="reminder-row" data-go="rec"><span class="reminder-bullet" aria-hidden="true"></span><span>${esc(String(title).split('\n')[0])}</span><svg class="ic"><use href="#i-r"/></svg></button>`;
   }).join('') : '<div class="dashboard-empty compact"><p>Nada pendiente por acá.</p><button class="text-action" data-create="recordatorio">Anotar algo ↗</button></div>';
-  $('home-income').textContent = money(ingreso);
-  $('home-spent').textContent = money(gasT);
   $('home-balance').textContent = (ingreso - gasT < 0 ? '-' : '') + money(Math.abs(ingreso - gasT));
   $('home-balance').classList.toggle('negative', ingreso - gasT < 0);
   $('home-notes').innerHTML = notas.length ? notas.slice(0, 2).map(note => {

@@ -144,12 +144,9 @@
    <div class="dashboard-heading blue-welcome"><div><p class="overline" id="live-date"></p><h1 id="greet">Tu espacio, hoy.</h1><p class="view-description">Tu agenda y lo importante, de un vistazo.</p></div><div class="dashboard-clock"><span class="overline">AHORA</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div></div></div>
    <div class="quick-capture"><span>AGREGAR</span><button data-create="agenda"><svg class="ic"><use href="#i-plus"/></svg> Actividad</button><button data-create="recordatorio"><svg class="ic"><use href="#i-bell"/></svg> Pendiente</button><button data-create="gasto"><svg class="ic"><use href="#i-wal"/></svg> Gasto</button><button data-create="nota"><svg class="ic"><use href="#i-note"/></svg> Nota</button><button data-go="piz" class="quick-library">Mis pizarras ↗</button></div>
 
-   <article class="money-panel" aria-label="Resumen de tu dinero">
-    <div class="money-title"><svg class="ic"><use href="#i-wal"/></svg><div><h2>Mi dinero</h2><p id="t-gas" class="balance-caption">Resumen de tus cuentas</p></div></div>
+   <article class="money-panel" aria-label="Dinero disponible">
+    <strong id="home-balance" aria-label="Saldo disponible">$0</strong>
     <div class="money-brand"><img src="/assets/mercado-pago.svg" alt="" width="48" height="40"><span>mercado<br>pago</span></div>
-    <div class="money-available"><span class="balance-label">Disponible</span><strong id="home-balance">$0</strong></div>
-    <div class="money-breakdown"><div><span>Ingresó</span><b id="home-income">$0</b></div><div><span>Gastaste</span><b id="home-spent">$0</b></div></div>
-    <button class="money-open" data-go="gas" aria-label="Abrir mis cuentas"><svg class="ic"><use href="#i-r"/></svg></button>
    </article>
    <div class="dashboard-grid">
 <article class="today-panel surface"><div class="panel-heading"><div><p class="overline">TU TIEMPO</p><h2>Agenda de hoy <span class="count-pill" id="home-agenda-count">0</span></h2></div><button class="icon-action" data-create="agenda" aria-label="Agregar una actividad"><svg class="ic"><use href="#i-plus"/></svg></button></div><p class="panel-description" id="t-dia">Tu agenda de hoy</p><div id="home-agenda" class="home-agenda"><p class="empty">Tu agenda aparecerá acá.</p></div><button class="panel-link" data-go="dia">Ver agenda completa <span>↗</span></button></article>

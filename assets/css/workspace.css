@@ -399,3 +399,17 @@ body{background:var(--bg);color:var(--tx)}
  .ed{padding:26px 22px 60px}
 }
 
+/* The home card contains only the available balance and Mercado Pago. */
+.blue-welcome,.money-panel{min-height:156px}
+.money-panel{display:flex;align-items:center;justify-content:space-between;padding:31px 35px;gap:20px;border-radius:15px}
+.money-panel #home-balance,.money-panel #home-balance.negative{min-width:0;margin:0;color:#fff;font-size:clamp(27px,2.8vw,38px);font-weight:500;letter-spacing:-1px;overflow-wrap:anywhere}
+.money-panel .money-brand{flex:none}
+#v-gas #g-resta{color:#fff}
+#v-gas #g-ing{color:#9bffc4}
+#v-gas #section-total-gastos{color:#ffb5be}
+@media(max-width:719px){
+ .blue-welcome,.money-panel{min-height:130px}
+ .money-panel{padding:25px 22px;border-radius:12px}
+ .money-panel #home-balance{font-size:30px}
+}
+
