@@ -7,7 +7,7 @@
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
 <link rel="icon" type="image/svg+xml" href="/assets/icon.svg" />
 <link rel="apple-touch-icon" href="/assets/icon.svg" />
-<meta name="theme-color" content="#fafbfd" />
+<meta name="theme-color" content="#14283f" />
 <script src="/assets/js/theme.js"></script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/assets/css/landing.css">
 <link rel="stylesheet" href="/assets/css/panel.css">
 <link rel="stylesheet" href="/assets/css/colors.css">
+<link rel="stylesheet" href="/assets/css/studio.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -52,29 +53,20 @@
 </svg>
 
 <div id="initial-loader" class="full" role="status" aria-label="Cargando">
- <div class="sk-wrap">
-  <div class="sk-head"><span class="sk sk-av"></span><div class="sk-col"><span class="sk sk-l1"></span><span class="sk sk-l2"></span></div><span class="sk sk-ib"></span><span class="sk sk-ib"></span></div>
-  <div class="sk-card sk-hero"><span class="sk sk-ln" style="width:38%;height:14px"></span><span class="sk sk-ln" style="width:62%"></span><span class="sk sk-ln" style="width:48%"></span></div>
-  <div class="sk-grid">
-   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:60%"></span><span class="sk sk-ln s"></span></div>
-   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:70%"></span><span class="sk sk-ln s"></span></div>
-   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:55%"></span><span class="sk sk-ln s"></span></div>
-   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:65%"></span><span class="sk sk-ln s"></span></div>
-  </div>
-  <div class="sk-bar"></div>
-  <p class="sk-msg">Preparando tu día…</p>
- </div>
+ <div class="boot-brand"><span class="brand-mark" aria-hidden="true">o<span></span></span><strong>organizador<span class="brand-dot">.</span></strong></div>
+ <div class="boot-track" aria-hidden="true"></div>
+ <p class="boot-caption">Abriendo tu espacio</p>
 </div>
 
 <!-- PANTALLA DE INGRESO -->
 <div id="login-modal" class="full en" hidden>
- <div class="en-top"><div class="en-brand">Organizador</div><a class="en-nav-link" href="#landing-features" onclick="document.getElementById('landing-features').scrollIntoView({behavior:'smooth'});return false">Conocé tu espacio <span aria-hidden="true">↗</span></a></div>
+ <div class="en-top"><div class="en-brand">Organizador</div><a class="en-nav-link" href="#landing-features" onclick="document.getElementById('landing-features').scrollIntoView({behavior:'smooth'});return false">Explorá las herramientas <span aria-hidden="true">↗</span></a></div>
  <div class="en-in">
   <div class="en-col">
    <div class="en-brand">Organizador</div>
-   <p class="en-eyebrow">MENOS RUIDO. MÁS CLARIDAD.</p>
-   <h1 class="en-h">Un poco de orden.<br><em><span class="en-title-orange">Más espacio</span><br><span class="en-title-green">para vos.</span></em></h1>
-   <p class="en-p">Tus planes, tus ideas y tus pendientes, en un mismo lugar. Organizá lo cotidiano y hacé tiempo para lo que te hace bien.</p>
+   <p class="en-eyebrow">TU VIDA, EN UN SOLO LUGAR</p>
+   <h1 class="en-h">Todo en orden.<br><em>Vos, a lo tuyo.</em></h1>
+   <p class="en-p">Una agenda para tus planes. Un lugar para tus ideas. Y una cosa menos de la que preocuparte.</p>
    <div class="en-cta">
     <button id="btn-google-login" class="en-g">
      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
@@ -85,13 +77,13 @@
     <p id="en-ios" class="en-ios" hidden>En iPhone, para recibir avisos, agregá esta app a tu pantalla de inicio: tocá Compartir y después "Agregar a pantalla de inicio".</p>
    </div>
   </div>
-  <div class="en-wrap" aria-hidden="true">
+  <div class="en-wrap" aria-hidden="true"><div class="preview-heading"><span class="preview-dot"></span> MI ESPACIO <span>Vista de tu agenda</span></div>
    <div class="en-av">
     <small>Organizador</small><small>ahora</small>
     <b>Retirar el paquete</b><span id="en-av">Empieza en 10 minutos</span>
    </div>
    <div class="en-dia">
-    <div class="en-preview-label"><span>UN VISTAZO A TU DÍA</span><span aria-hidden="true">↗</span></div>
+    <div class="en-preview-label"><span>HOY, DE UN VISTAZO</span><span aria-hidden="true">↗</span></div>
     <div class="en-dh"><b id="en-hora">--:--</b><span id="en-fecha"></span></div>
     <ol class="en-l">
      <li class="hecho" style="--c:var(--ok)"><time id="en-r1">--:--</time><span class="t">Gimnasio</span></li>
@@ -225,11 +217,11 @@
  <main>
   <!-- INICIO -->
   <section id="v-home" style="display:flex;flex-direction:column;gap:16px">
-   <div class="page-intro"><div><p class="eyebrow">UN POCO DE ORDEN, MÁS ESPACIO PARA VOS</p><h1>Hoy empieza por acá.</h1><p>Hacé lugar para tus planes, tus ideas y lo que viene.</p></div></div>
+   <div class="page-intro"><div><p class="eyebrow">TU PANEL PERSONAL</p><h1>Tu día, en perspectiva.</h1><p>Todo lo que tenés en marcha, a mano.</p></div></div>
    <div class="card hero">
-    <div class="hero-copy"><p class="eyebrow">A TU RITMO</p><h2 id="greet">Hola</h2><p class="hero-message">Un paso a la vez. Tu día no tiene que ser perfecto para ser un buen día.</p><button class="btn" data-go="dia">Abrir mi agenda <span aria-hidden="true">↗</span></button></div><div class="hero-clock"><span class="clock-label">ESTE MOMENTO ES TUYO</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div><p class="sub" id="live-date"></p></div>
+    <div class="hero-copy"><p class="eyebrow">HOY</p><h2 id="greet">Hola</h2><p class="hero-message">Consultá tu agenda y encontrá espacio para lo que sigue.</p><button class="btn" data-go="dia">Abrir mi agenda <span aria-hidden="true">↗</span></button></div><div class="hero-clock"><span class="clock-label">HORA LOCAL</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div><p class="sub" id="live-date"></p></div>
    </div>
-   <div class="section-label"><h2>Elegí por dónde seguir</h2><span>Un lugar para cada parte de tu día</span></div>
+   <div class="section-label"><h2>Tus herramientas</h2><span>Acceso directo a tu espacio</span></div>
    <div class="tiles">
     <button class="card tile" data-go="dia" style="--c:#377ec8"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
     <button class="card tile" data-go="cal" style="--c:#ed8a3a"><span class="ti"><svg class="ic"><use href="#i-cal"/></svg></span><b>Calendario</b><span class="sub" id="t-cal">…</span></button>
