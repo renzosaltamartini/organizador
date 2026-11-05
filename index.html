@@ -7,7 +7,7 @@
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
 <link rel="icon" type="image/svg+xml" href="/assets/icon.svg" />
 <link rel="apple-touch-icon" href="/assets/icon.svg" />
-<meta name="theme-color" content="#fafbfd" />
+<meta name="theme-color" content="#f7f7f2" />
 <script src="/assets/js/theme.js"></script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -20,10 +20,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/redesign.css">
-<link rel="stylesheet" href="/assets/css/landing.css">
-<link rel="stylesheet" href="/assets/css/panel.css">
-<link rel="stylesheet" href="/assets/css/colors.css">
+<link rel="stylesheet" href="/assets/css/workspace.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -51,112 +48,34 @@
  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M10 13H8M16 13h-2M10 17H8M16 17h-2"/></symbol>
 </svg>
 
-<div id="initial-loader" class="full" role="status" aria-label="Cargando">
- <div class="sk-wrap">
-  <div class="sk-head"><span class="sk sk-av"></span><div class="sk-col"><span class="sk sk-l1"></span><span class="sk sk-l2"></span></div><span class="sk sk-ib"></span><span class="sk sk-ib"></span></div>
-  <div class="sk-card sk-hero"><span class="sk sk-ln" style="width:38%;height:14px"></span><span class="sk sk-ln" style="width:62%"></span><span class="sk sk-ln" style="width:48%"></span></div>
-  <div class="sk-grid">
-   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:60%"></span><span class="sk sk-ln s"></span></div>
-   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:70%"></span><span class="sk sk-ln s"></span></div>
-   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:55%"></span><span class="sk sk-ln s"></span></div>
-   <div class="sk-card"><span class="sk sk-ic"></span><span class="sk sk-ln" style="width:65%"></span><span class="sk sk-ln s"></span></div>
-  </div>
-  <div class="sk-bar"></div>
-  <p class="sk-msg">Preparando tu día…</p>
- </div>
+<div id="initial-loader" class="full loading-screen" role="status" aria-label="Cargando Organizador">
+ <div class="loading-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+ <p>Organizador<span class="brand-period">.</span></p><span class="loading-label">Abriendo tu espacio</span>
 </div>
 
-<!-- PANTALLA DE INGRESO -->
-<div id="login-modal" class="full en" hidden>
- <div class="en-top"><div class="en-brand">Organizador</div><a class="en-nav-link" href="#landing-features" onclick="document.getElementById('landing-features').scrollIntoView({behavior:'smooth'});return false">Conocé tu espacio <span aria-hidden="true">↗</span></a></div>
- <div class="en-in">
-  <div class="en-col">
-   <div class="en-brand">Organizador</div>
-   <p class="en-eyebrow">MENOS RUIDO. MÁS CLARIDAD.</p>
-   <h1 class="en-h">Un poco de orden.<br><em><span class="en-title-orange">Más espacio</span><br><span class="en-title-green">para vos.</span></em></h1>
-   <p class="en-p">Tus planes, tus ideas y tus pendientes, en un mismo lugar. Organizá lo cotidiano y hacé tiempo para lo que te hace bien.</p>
-   <div class="en-cta">
-    <button id="btn-google-login" class="en-g">
-     <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
-     Continuar con Google
-    </button>
-    <p class="en-micro">Entrás con tu cuenta de Google, sin crear contraseñas.</p>
-    <p id="error-login" class="en-err" role="alert" hidden></p>
-    <p id="en-ios" class="en-ios" hidden>En iPhone, para recibir avisos, agregá esta app a tu pantalla de inicio: tocá Compartir y después "Agregar a pantalla de inicio".</p>
-   </div>
+<div id="login-modal" class="full entry" hidden>
+ <header class="entry-nav"><a href="#" class="wordmark" aria-label="Organizador, inicio"><span class="app-symbol" aria-hidden="true">o</span>organizador<span class="brand-period">.</span></a><a href="#landing-features" class="entry-link">Qué podés hacer <span aria-hidden="true">↓</span></a></header>
+ <section class="entry-intro">
+  <p class="overline"><span class="status-dot"></span> UN ESPACIO PARA TU VIDA COTIDIANA</p>
+  <h1>Mil cosas en la cabeza.<br><span>Un lugar para todas.</span></h1>
+  <p class="entry-description">Planes, cuentas, ideas y ese pendiente que no querés olvidar.<br>Juntalos acá. Después, seguí con tu día.</p>
+  <button id="btn-google-login" class="google-signin">     <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
+<span>Entrar con Google</span><span aria-hidden="true">↗</span></button>
+  <p class="entry-caption">Tu cuenta de siempre. Tu propio espacio.</p>
+  <p id="error-login" class="en-err" role="alert" hidden></p>
+  <p id="en-ios" class="en-ios" hidden>En iPhone, para recibir avisos, agregá esta app a tu pantalla de inicio desde Compartir → Agregar a pantalla de inicio.</p>
+ </section>
+ <section class="entry-workspace" aria-label="Ejemplo de las herramientas de Organizador">
+  <div class="sample-top"><span><i class="status-dot"></i> Un poco de todo. Todo conectado.</span><span class="sample-badge">TU ESPACIO PERSONAL</span></div>
+  <div class="sample-grid">
+   <article class="sample-agenda"><div class="block-heading"><span class="overline">01 / TUS PLANES</span><svg class="ic"><use href="#i-day"/></svg></div><h2>Un día con lugar<br>para lo que importa.</h2><div class="sample-timeline"><div><time>09:00</time><span class="sample-event lavender">Un rato para avanzar<small>Trabajo · 1 hora</small></span></div><div><time>12:30</time><span class="sample-event peach">Almuerzo con amigos<small>Tiempo para vos</small></span></div><div><time>17:00</time><span class="sample-event mint">Salir a caminar<small>Sin pantallas, un rato</small></span></div></div></article>
+   <article class="sample-note"><div class="block-heading"><span class="overline">02 / TUS IDEAS</span><svg class="ic"><use href="#i-note"/></svg></div><h2>Para después.</h2><p>Ese viaje.<br>Una idea nueva.<br>Algo que aprender.</p><span class="sample-note-foot">Anotalo antes de que se escape. ↗</span></article>
+   <article class="sample-money"><div class="block-heading"><span class="overline">03 / TUS CUENTAS</span><svg class="ic"><use href="#i-wal"/></svg></div><h2>Más claridad.<br>Menos cuentas mentales.</h2><div class="sample-money-lines" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><p>Lo que entra. Lo que sale.<br>Lo que te queda.</p></article>
   </div>
-  <div class="en-wrap" aria-hidden="true">
-   <div class="en-av">
-    <small>Organizador</small><small>ahora</small>
-    <b>Retirar el paquete</b><span id="en-av">Empieza en 10 minutos</span>
-   </div>
-   <div class="en-dia">
-    <div class="en-preview-label"><span>UN VISTAZO A TU DÍA</span><span aria-hidden="true">↗</span></div>
-    <div class="en-dh"><b id="en-hora">--:--</b><span id="en-fecha"></span></div>
-    <ol class="en-l">
-     <li class="hecho" style="--c:var(--ok)"><time id="en-r1">--:--</time><span class="t">Gimnasio</span></li>
-     <li class="ahora" style="--c:var(--ac)"><time id="en-r2">--:--</time><span class="t">Reunión de equipo</span><i class="en-prog"></i></li>
-     <li style="--c:var(--warn)"><time id="en-r3">--:--</time><span class="t">Retirar el paquete</span></li>
-    </ol>
-   </div>
-  </div>
- </div>
-
- <div class="en-more">
-  <section class="en-sec" id="landing-features">
-   <p class="en-eyebrow">SIMPLE, DE PRINCIPIO A FIN</p>
-   <h2>Todo lo que necesitás.<br>Nada que te distraiga.</h2>
-   <p>Un espacio para cada parte de tu rutina. Elegí por dónde empezar.</p>
-   <div class="en-feat">
- <article class="en-fc" style="--c:#d9622b"><span class="en-ic"><svg class="ic"><use href="#i-day"/></svg></span><h3>Tu día</h3><p>Tu agenda en tiempo real. Arrastrá una actividad para cambiarle el horario y mirá en qué momento del día estás.</p></article>
- <article class="en-fc" style="--c:#3f8fa6"><span class="en-ic"><svg class="ic"><use href="#i-cal"/></svg></span><h3>Calendario</h3><p>El mes completo de un vistazo, con tus fechas importantes marcadas.</p></article>
- <article class="en-fc" style="--c:#e0a43a"><span class="en-ic"><svg class="ic"><use href="#i-bell"/></svg></span><h3>Recordatorios</h3><p>Anotá lo pendiente y tenelo a mano para que no se te escape nada.</p></article>
- <article class="en-fc" style="--c:#d0626f"><span class="en-ic"><svg class="ic"><use href="#i-alarm"/></svg></span><h3>Alertas</h3><p>Una notificación a la hora exacta, una sola vez o todas las semanas.</p></article>
- <article class="en-fc" style="--c:#8a9a3f"><span class="en-ic"><svg class="ic"><use href="#i-wal"/></svg></span><h3>Gastos</h3><p>Registrá tus gastos y llevá el control de tu plata sin planillas.</p></article>
- <article class="en-fc" style="--c:#6b7280"><span class="en-ic"><svg class="ic"><use href="#i-note"/></svg></span><h3>Notas</h3><p>Un editor para ideas, apuntes y listas con tildes.</p></article>
-   </div>
-  </section>
-
-  <section class="en-band">
-   <div>
-    <p class="en-eyebrow">SOLTÁ ESE PENDIENTE</p><h2>No tenés que acordarte de todo.</h2>
-    <p>No hace falta tener la app abierta. Recibís la notificación aunque el celular esté bloqueado.</p>
-   </div>
-   <ul class="en-ck">
-    <li>Un aviso 10 minutos antes de cada actividad de tu agenda.</li>
-    <li>Otro cuando la actividad empieza.</li>
-    <li>Alertas a la hora exacta, únicas o semanales.</li>
-    <li>Funciona en Android y en iPhone (en iPhone, agregala a la pantalla de inicio).</li>
-   </ul>
-  </section>
-
-  <section class="en-sec">
-   <p class="en-eyebrow">A TU RITMO</p><h2>Empezar también es simple.</h2>
-   <p>Tres pasos y ya está funcionando.</p>
-   <ol class="en-steps">
-    <li><b>Ingresá con Google</b><span>Sin contraseñas ni formularios largos.</span></li>
-    <li><b>Cargá tu agenda</b><span>Sumá actividades, alertas y notas en un par de toques.</span></li>
-    <li><b>Activá los avisos</b><span>Tocá la campana y aceptá el permiso para recibir notificaciones.</span></li>
-   </ol>
-  </section>
-
-  <section class="en-sec en-faq">
-   <h2>Preguntas frecuentes</h2>
-   <details><summary>¿Cómo recibo las notificaciones?</summary><p>Entrá a la app, tocá la campana de la parte superior y aceptá el permiso. En iPhone, primero agregá la app a la pantalla de inicio desde el botón Compartir.</p></details>
-   <details><summary>¿Puedo usarla como una app?</summary><p>Sí. Podés agregarla a la pantalla de inicio y se abre a pantalla completa, como cualquier otra app.</p></details>
-   <details><summary>¿Puedo cambiar los colores?</summary><p>Sí. Cada actividad puede tener el color que quieras, ya sea de la paleta o uno personalizado, para identificarla de un vistazo.</p></details>
-   <details><summary>¿Qué pasa con mis datos?</summary><p>Entrás con tu cuenta de Google y tus datos quedan asociados a ella. No usamos contraseñas propias.</p></details>
-   <details><summary>¿Puedo sacar un resumen de todo?</summary><p>Sí. Desde la app podés descargar un PDF con tu agenda, fechas importantes y recordatorios.</p></details>
-  </section>
-
-  <section class="en-end">
-   <h2>Hacé lugar para un día más simple.</h2>
-   <p class="en-micro">Entrás con tu cuenta de Google en unos segundos.</p>
-   <button type="button" class="btn" onclick="document.getElementById('btn-google-login').click();document.getElementById('login-modal').scrollTo({top:0,behavior:'smooth'})">Continuar con Google</button>
-  </section>
-
-  <footer class="en-foot"><span>Organizador</span><span>Tus planes. Tu espacio. Tu ritmo.</span></footer>
- </div>
+ </section>
+ <section class="entry-tools" id="landing-features"><div><p class="overline">ARMALO A TU MANERA</p><h2>Para cada cosa,<br>su lugar.</h2></div><div class="entry-tools-list"><article><svg class="ic"><use href="#i-cal"/></svg><div><h3>Agenda y calendario</h3><p>Actividades, horarios y fechas importantes.</p></div></article><article><svg class="ic"><use href="#i-bell"/></svg><div><h3>Recordatorios y alertas</h3><p>Pendientes a mano y avisos a la hora que elijas.</p></div></article><article><svg class="ic"><use href="#i-wal"/></svg><div><h3>Gastos</h3><p>Un registro simple de tu dinero.</p></div></article><article><svg class="ic"><use href="#i-note"/></svg><div><h3>Notas y pizarras</h3><p>Ideas, listas y tus PDF de Mi Pizarra.</p></div></article></div></section>
+ <section class="entry-help"><details><summary>¿Cómo entro y dónde quedan mis datos?</summary><p>Ingresá con Google. Tus datos quedan asociados a tu cuenta y se sincronizan en tus dispositivos.</p></details><details><summary>¿Cómo recibo los avisos?</summary><p>Dentro del organizador, activá la campana y aceptá las notificaciones. En iPhone, agregá primero la app a tu pantalla de inicio.</p></details><details><summary>¿Puedo descargar mi información?</summary><p>El botón de PDF del encabezado permite descargar un resumen con tu agenda, fechas importantes y recordatorios.</p></details></section>
+ <footer class="entry-footer"><span class="wordmark">organizador<span class="brand-period">.</span></span><span>Un lugar para lo que tenés en marcha.</span><button class="text-action" type="button" onclick="document.getElementById('btn-google-login').click()">Empezar ↗</button></footer>
 </div>
 <script src="/assets/js/landing.js"></script>
 
@@ -197,67 +116,56 @@
 </div>
 
 <div id="app-content" hidden>
- <header><div class="hin">
-  <div class="brand">
-   <img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden>
-   <div><span id="u-name">Mi organizador</span><small>Tu espacio personal</small></div>
-  </div>
-  <div class="header-actions">
-   <button id="btn-notif" class="ib" title="Activar notificaciones" aria-label="Activar notificaciones"><svg class="ic"><use href="#i-bell"/></svg></button>
-   <button id="btn-share-pdf" class="ib" title="Descargar PDF general" aria-label="Descargar PDF general"><svg class="ic"><use href="#i-pdf"/></svg></button>
-   <button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button>
-  </div>
+ <header class="app-header"><div class="app-header-inner">
+  <button type="button" data-go="home" class="wordmark brand-home"><span class="app-symbol" aria-hidden="true">o</span>organizador<span class="brand-period">.</span></button>
+  <div class="header-location"><span>MI ESPACIO</span><b id="workspace-location">Resumen</b></div>
+  <div class="header-actions"><button id="btn-notif" class="ib" title="Activar notificaciones" aria-label="Activar notificaciones"><svg class="ic"><use href="#i-bell"/></svg></button><button id="btn-share-pdf" class="ib" title="Descargar PDF general" aria-label="Descargar PDF general"><svg class="ic"><use href="#i-pdf"/></svg></button><div class="brand account"><img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden><div><span id="u-name">Mi cuenta</span><small>Espacio personal</small></div></div><button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button></div>
  </div></header>
-
- <nav id="nav" aria-label="Navegación principal">
-  <div class="sidebar-brand">Organizador</div>
-  <p class="nav-caption">MI ESPACIO</p>
-  <button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg>Inicio</button>
-  <button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg>Tu día</button>
-  <button class="nv" data-go="cal"><svg class="ic"><use href="#i-cal"/></svg>Calendario</button>
-  <button class="nv" data-go="rec"><svg class="ic"><use href="#i-bell"/></svg><span class="lg">Recordatorios</span><span class="sh">Recordar</span></button>
-  <button class="nv" data-go="ale"><svg class="ic"><use href="#i-alarm"/></svg>Alertas</button>
-  <button class="nv" data-go="gas"><svg class="ic"><use href="#i-wal"/></svg>Gastos</button>
-  <button class="nv" data-go="not"><svg class="ic"><use href="#i-note"/></svg>Notas</button>
-  <button class="nv" data-go="piz"><svg class="ic"><use href="#i-pdf"/></svg>Pizarras</button>
- </nav>
-
+ <details class="workspace-navigation" id="workspace-navigation" open><summary><svg class="ic"><use href="#i-home"/></svg><span id="mobile-location">Resumen</span><span class="menu-label">Herramientas <svg class="ic"><use href="#i-down"/></svg></span></summary><nav id="nav" aria-label="Navegación principal"><button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg><span>Resumen</span></button>
+<button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg><span>Agenda</span></button>
+<button class="nv" data-go="cal"><svg class="ic"><use href="#i-cal"/></svg><span>Calendario</span></button>
+<button class="nv" data-go="rec"><svg class="ic"><use href="#i-bell"/></svg><span>Pendientes</span></button>
+<button class="nv" data-go="ale"><svg class="ic"><use href="#i-alarm"/></svg><span>Alertas</span></button>
+<button class="nv" data-go="gas"><svg class="ic"><use href="#i-wal"/></svg><span>Dinero</span></button>
+<button class="nv" data-go="not"><svg class="ic"><use href="#i-note"/></svg><span>Notas</span></button>
+<button class="nv" data-go="piz"><svg class="ic"><use href="#i-pdf"/></svg><span>Pizarras</span></button></nav></details>
  <main>
-  <!-- INICIO -->
-  <section id="v-home" style="display:flex;flex-direction:column;gap:16px">
-   <div class="page-intro"><div><p class="eyebrow">UN POCO DE ORDEN, MÁS ESPACIO PARA VOS</p><h1>Hoy empieza por acá.</h1><p>Hacé lugar para tus planes, tus ideas y lo que viene.</p></div></div>
-   <div class="card hero">
-    <div class="hero-copy"><p class="eyebrow">A TU RITMO</p><h2 id="greet">Hola</h2><p class="hero-message">Un paso a la vez. Tu día no tiene que ser perfecto para ser un buen día.</p><button class="btn" data-go="dia">Abrir mi agenda <span aria-hidden="true">↗</span></button></div><div class="hero-clock"><span class="clock-label">ESTE MOMENTO ES TUYO</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div><p class="sub" id="live-date"></p></div>
+  <section id="v-home" class="dashboard">
+   <div class="dashboard-heading"><div><p class="overline" id="live-date"></p><h1 id="greet">Tu espacio, hoy.</h1><p class="view-description">Esto es lo que tenés en marcha.</p></div><div class="dashboard-clock"><span class="overline">AHORA</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div></div></div>
+   <div class="dashboard-grid">
+    <article class="today-panel surface"><div class="panel-heading"><div><p class="overline">TU TIEMPO</p><h2>Agenda de hoy <span class="count-pill" id="home-agenda-count">0</span></h2></div><button class="icon-action" data-create="agenda" aria-label="Agregar una actividad"><svg class="ic"><use href="#i-plus"/></svg></button></div><p class="panel-description" id="t-dia">Tu agenda de hoy</p><div id="home-agenda" class="home-agenda"><p class="empty">Tu agenda aparecerá acá.</p></div><button class="panel-link" data-go="dia">Ver agenda completa <span>↗</span></button></article>
+    <article class="money-panel"><div class="panel-heading"><p class="overline">TU DINERO</p><svg class="ic"><use href="#i-wal"/></svg></div><p class="balance-label">Disponible</p><strong id="home-balance">$0</strong><p id="t-gas" class="balance-caption">Tus cuentas, al día.</p><div class="money-breakdown"><div><span>Ingresó</span><b id="home-income">$0</b></div><div><span>Gastaste</span><b id="home-spent">$0</b></div></div><button class="panel-link" data-go="gas">Abrir mis cuentas <span>↗</span></button></article>
+    <article class="pending-panel surface"><div class="panel-heading"><div><p class="overline">PARA TENER PRESENTE</p><h2>Pendientes</h2></div><span class="count-pill" id="t-rec">0 pendientes</span></div><div id="home-reminders" class="home-reminders"><p class="empty">Tus recordatorios aparecerán acá.</p></div><button class="panel-link" data-go="rec">Todos los pendientes <span>↗</span></button></article>
+    <article class="next-panel surface"><div class="panel-heading"><p class="overline">MIRANDO ADELANTE</p><svg class="ic"><use href="#i-cal"/></svg></div><h2>Lo próximo</h2><div class="next-item"><span class="item-label">FECHA IMPORTANTE</span><p id="t-cal">Sin fechas próximas</p></div><div class="next-item"><span class="item-label">PRÓXIMA ALERTA</span><p id="t-ale">Sin alertas activas</p></div><button class="panel-link" data-go="cal">Abrir calendario <span>↗</span></button></article>
+    <article class="notes-panel"><div class="panel-heading"><div><p class="overline">IDEAS A MANO</p><h2>Tus notas</h2></div><button class="icon-action" data-create="nota" aria-label="Crear una nota"><svg class="ic"><use href="#i-plus"/></svg></button></div><div id="home-notes" class="home-notes"><p>Un lugar para esa idea.</p></div><button class="panel-link" data-go="not"><span id="t-not">Abrir mis notas</span><span>↗</span></button></article>
    </div>
-   <div class="section-label"><h2>Elegí por dónde seguir</h2><span>Un lugar para cada parte de tu día</span></div>
-   <div class="tiles">
-    <button class="card tile" data-go="dia" style="--c:#377ec8"><span class="ti"><svg class="ic"><use href="#i-day"/></svg></span><b>Tu día</b><span class="sub" id="t-dia">…</span></button>
-    <button class="card tile" data-go="cal" style="--c:#ed8a3a"><span class="ti"><svg class="ic"><use href="#i-cal"/></svg></span><b>Calendario</b><span class="sub" id="t-cal">…</span></button>
-    <button class="card tile" data-go="rec" style="--c:#e2b93b"><span class="ti"><svg class="ic"><use href="#i-bell"/></svg></span><b>Recordatorios</b><span class="sub" id="t-rec">…</span></button>
-    <button class="card tile" data-go="ale" style="--c:#db514e"><span class="ti"><svg class="ic"><use href="#i-alarm"/></svg></span><b>Alertas</b><span class="sub" id="t-ale">…</span></button>
-    <button class="card tile" data-go="gas" style="--c:#43a271"><span class="ti"><svg class="ic"><use href="#i-wal"/></svg></span><b>Gastos</b><span class="sub" id="t-gas">…</span></button>
-    <button class="card tile" data-go="not" style="--c:#568dd0"><span class="ti"><svg class="ic"><use href="#i-note"/></svg></span><b>Notas</b><span class="sub" id="t-not">…</span></button>
-   </div>
-   <div class="home-footer"><span>Un paso a la vez también es avanzar.</span><span>Tu organizador personal</span></div>
+   <div class="quick-capture"><span>¿Algo nuevo?</span><button data-create="agenda"><svg class="ic"><use href="#i-plus"/></svg> Actividad</button><button data-create="recordatorio"><svg class="ic"><use href="#i-bell"/></svg> Pendiente</button><button data-create="gasto"><svg class="ic"><use href="#i-wal"/></svg> Gasto</button><button data-create="nota"><svg class="ic"><use href="#i-note"/></svg> Nota</button><button data-go="piz" class="quick-library">Mis pizarras ↗</button></div>
   </section>
 
-  <section id="v-piz" class="card" hidden>
-   <div class="vh"><div><h1>Mis pizarras</h1><p class="sub">Los PDF que sincronizás desde Mi Pizarra.</p></div></div>
-   <p class="sub">Conectá la misma cuenta de Google que usás en la app. El permiso permite consultar Drive; acá mostramos tus carpetas MiPizarra.</p>
+  <section id="v-piz" class="library-view" hidden>
+   <div class="view-heading"><div><p class="overline">CREAR / PIZARRAS</p><h1>Tu biblioteca, conectada.</h1><p class="view-description">Los PDF de Mi Pizarra, organizados en sus carpetas.</p></div></div>
+   <div class="library-connection"><p>Conectá tu cuenta de Google para consultar tus carpetas MiPizarra.</p>
    <div class="drive-actions"><button type="button" class="btn" id="drive-connect">Conectar Google Drive</button><button type="button" class="btn" id="drive-refresh" hidden>Actualizar</button><button type="button" class="btn" id="drive-back" hidden>Volver</button></div>
    <p id="drive-status" role="status" aria-live="polite">Conectá Drive para ver tus pizarras.</p>
-   <nav id="drive-breadcrumbs" class="drive-breadcrumbs" aria-label="Ruta de carpetas"></nav>
+   </div><nav id="drive-breadcrumbs" class="drive-breadcrumbs" aria-label="Ruta de carpetas"></nav>
    <div class="drive-library-head"><div><p class="eyebrow">TU BIBLIOTECA</p><h2 id="drive-folder"></h2><p id="drive-count" class="sub"></p></div>
     <div class="drive-tools"><label class="drive-search"><span class="sr-only">Buscar en esta carpeta</span><input id="drive-search" class="in" type="search" placeholder="Buscar en esta carpeta…"></label>
     <label><span class="sr-only">Ordenar elementos</span><select id="drive-sort" class="in"><option value="asc">Nombre: A a Z</option><option value="desc">Nombre: Z a A</option></select></label></div></div>
    <div id="drive-files" class="drive-files" aria-busy="false"></div>
   </section>
   <!-- TU DÍA -->
-  <section id="v-dia" class="card" hidden>
-   <div class="vh"><div><h1>Tu día</h1><p class="sub">Agenda en tiempo real</p></div>
-    <button class="btn" id="btn-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva actividad</button></div>
-
-   <form id="form-schedule-item" class="fgrid" hidden>
+  <section id="v-dia" hidden><div class="view-heading"><div><p class="overline">PLANIFICAR / AGENDA</p><h1>Tu tiempo, a la vista.</h1><p class="view-description">Elegí un día, acomodá tus actividades y seguí tu ritmo.</p></div></div><div class="agenda-layout"><div class="agenda-content surface">   <div class="nav">
+    <button class="ib" id="d-prev" aria-label="Día anterior"><svg class="ic"><use href="#i-l"/></svg></button>
+    <input type="date" id="schedule-date-picker" class="in" aria-label="Fecha">
+    <button class="ib" id="d-next" aria-label="Día siguiente"><svg class="ic"><use href="#i-r"/></svg></button>
+    <button class="btn ghost" id="d-today">Hoy</button>
+   </div>
+   <div class="tabs" id="schedule-day-tabs"></div>
+   <div class="daybar"><b id="day-label"></b><span class="sub" id="day-count"></span></div>
+   <p class="ev-hint">Tocá una actividad para editarla. Mantenela presionada y arrastrala arriba/abajo para cambiar su horario.</p>
+   <div id="ev-detail" hidden></div>
+   <div id="tl"></div>
+  </div><aside class="agenda-inspector surface"><div class="composer-heading"><p class="overline">HACÉ LUGAR</p><h2>Una actividad más.</h2><p>Elegí el horario, sumá los detalles y listo.</p></div><button class="btn" id="btn-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva actividad</button><form id="form-schedule-item" class="fgrid" hidden>
     <p class="sub" id="form-day"></p>
     <label class="f t"><span>Actividad</span><input class="in" id="sch-titulo" placeholder="Ej. Reunión" required></label>
     <label class="f d"><span>Fecha</span><input class="in" type="date" id="sch-fecha" required></label>
@@ -279,68 +187,29 @@
     </div></div>
     <button class="btn s" type="submit"><svg class="ic"><use href="#i-check"/></svg> <span id="sch-save">Guardar</span></button>
     <button class="btn ghost" type="button" id="sch-cancel" hidden>Cancelar edición</button>
-   </form>
-
-   <div class="nav">
-    <button class="ib" id="d-prev" aria-label="Día anterior"><svg class="ic"><use href="#i-l"/></svg></button>
-    <input type="date" id="schedule-date-picker" class="in" aria-label="Fecha">
-    <button class="ib" id="d-next" aria-label="Día siguiente"><svg class="ic"><use href="#i-r"/></svg></button>
-    <button class="btn ghost" id="d-today">Hoy</button>
-   </div>
-   <div class="tabs" id="schedule-day-tabs"></div>
-   <div class="daybar"><b id="day-label"></b><span class="sub" id="day-count"></span></div>
-   <p class="ev-hint">Tocá una actividad para editarla. Mantenela presionada y arrastrala arriba/abajo para cambiar su horario.</p>
-   <div id="ev-detail" hidden></div>
-   <div id="tl"></div>
-  </section>
+   </form><div class="inspector-note"><svg class="ic"><use href="#i-day"/></svg><p>Podés mover tus actividades directamente en la agenda. Tocá una para editar sus detalles.</p></div></aside></div></section>
 
   <!-- CALENDARIO -->
-  <section id="v-cal" hidden>
-   <div class="split">
-    <div class="card">
-     <div class="vh"><div><h1>Calendario</h1><p class="sub">Toca un día para ver su agenda</p></div>
-      <div class="mnav"><button id="cal-prev" class="ib" aria-label="Mes anterior"><svg class="ic"><use href="#i-l"/></svg></button><b id="cal-mes-anio"></b><button id="cal-next" class="ib" aria-label="Mes siguiente"><svg class="ic"><use href="#i-r"/></svg></button></div></div>
-     <div class="wd"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
-     <div id="cal-grid" class="cal"></div>
-     <div class="legend"><span><i style="background:var(--warn)"></i>Fecha importante</span><span><i style="background:var(--ok)"></i>Con agenda</span></div>
-    </div>
-    <div class="card">
-     <h2>Fechas importantes</h2>
-     <form id="form-parcial" class="fgrid" style="grid-template-columns:1fr">
+  <section id="v-cal" hidden><div class="view-heading"><div><p class="overline">PLANIFICAR / CALENDARIO</p><h1>El mes completo.</h1><p class="view-description">Fechas importantes y actividades, en un solo mapa.</p></div></div><div class="content-composer"><div class="content-stack"><div class="surface calendar-surface"><div class="panel-heading"><h2>Tu calendario</h2><div class="mnav"><button id="cal-prev" class="ib" aria-label="Mes anterior"><svg class="ic"><use href="#i-l"/></svg></button><b id="cal-mes-anio"></b><button id="cal-next" class="ib" aria-label="Mes siguiente"><svg class="ic"><use href="#i-r"/></svg></button></div></div><div class="wd"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div><div id="cal-grid" class="cal"></div><div class="legend"><span><i style="background:var(--warn)"></i>Fecha importante</span><span><i style="background:var(--ok)"></i>Con agenda</span></div></div><div class="surface"><div class="panel-heading"><h2>Fechas importantes</h2></div><ul id="grid-parciales" class="list"></ul></div></div><aside class="composer surface"><div class="composer-heading"><h2>Guardá una fecha.</h2><p>Cumpleaños, entregas, encuentros. Que no se te pase.</p></div><form id="form-parcial" class="fgrid" style="grid-template-columns:1fr">
       <label class="f"><span>Evento</span><input class="in" id="parcial-materia" placeholder="Ej. Reunión importante" required></label>
       <label class="f"><span>Fecha</span><input class="in" type="date" id="parcial-fecha" required></label>
       <label class="f"><span>Descripción (opcional)</span><textarea class="in" id="parcial-desc" rows="2" placeholder="Detalles del evento…"></textarea></label>
       <button class="btn" type="submit" id="parcial-submit"><svg class="ic"><use href="#i-plus"/></svg> <span>Agregar</span></button>
       <button class="btn ghost" type="button" id="parcial-cancel" hidden>Cancelar edición</button>
-     </form>
-     <ul id="grid-parciales" class="list"></ul>
-    </div>
-   </div>
-  </section>
+     </form></aside></div></section>
 
   <!-- RECORDATORIOS -->
-  <section id="v-rec" hidden><div class="narrow">
-   <div class="card">
-    <h1>Recordatorios</h1>
-    <form id="form-recordatorio" class="fgrid" style="grid-template-columns:1fr">
-     <input class="in" id="rec-titulo" placeholder="Título (opcional)">
-     <textarea class="in" id="rec-detalle" rows="2" placeholder="Detalle…" required></textarea>
+  <section id="v-rec" hidden><div class="view-heading"><div><p class="overline">RECORDAR / PENDIENTES</p><h1>Sacalo de tu cabeza.</h1><p class="view-description">Todo eso que tenés que resolver, en un mismo lugar.</p></div></div><div class="content-composer"><div class="surface records-panel"><div class="panel-heading"><h2>Tus pendientes</h2></div><ul id="lista-recordatorios" class="list"></ul></div><aside class="composer surface"><div class="composer-heading"><h2>Anotá un pendiente.</h2><p>Un título, un detalle y una cosa menos para recordar.</p></div><form id="form-recordatorio" class="fgrid" style="grid-template-columns:1fr">
+     <input class="in" id="rec-titulo" aria-label="Título del pendiente" placeholder="Título (opcional)">
+     <textarea class="in" id="rec-detalle" aria-label="Detalle del pendiente" rows="2" placeholder="Detalle…" required></textarea>
      <button class="btn warn" type="submit" id="rec-submit"><svg class="ic"><use href="#i-plus"/></svg> <span>Agregar</span></button>
      <button class="btn ghost" type="button" id="rec-cancel" hidden>Cancelar edición</button>
-    </form>
-    <ul id="lista-recordatorios" class="list"></ul>
-   </div>
-  </div></section>
+    </form></aside></div></section>
 
   <!-- ALERTAS -->
-  <section id="v-ale" hidden><div class="narrow">
-   <div class="card">
-    <h1>Alertas</h1>
-    <p class="sub" style="margin-top:4px">Te enviamos una notificación a la hora exacta: una sola vez o todas las semanas.</p>
-    <div id="al-aviso" class="al-aviso" hidden><span>Las alertas llegan como notificación. Activalas en este dispositivo para recibirlas.</span><button type="button" class="btn warn" id="al-activar" style="min-height:38px;padding:0 14px">Activar</button></div>
-    <form id="form-alerta" class="fgrid" style="grid-template-columns:1fr">
-     <input class="in" id="al-titulo" placeholder="¿Qué querés que te avisemos?" maxlength="80" required>
-     <input class="in" id="al-nota" placeholder="Nota (opcional)" maxlength="140">
+  <section id="v-ale" hidden><div class="view-heading"><div><p class="overline">RECORDAR / ALERTAS</p><h1>Un aviso a tiempo.</h1><p class="view-description">Avisos únicos o semanales, para lo que no puede esperar.</p></div></div><div id="al-aviso" class="al-aviso" hidden><span>Las alertas llegan como notificación. Activalas en este dispositivo para recibirlas.</span><button type="button" class="btn warn" id="al-activar" style="min-height:38px;padding:0 14px">Activar</button></div><div class="content-composer"><div class="surface records-panel"><div class="panel-heading"><h2>Tus avisos</h2></div><ul id="lista-alertas" class="list"></ul></div><aside class="composer surface"><div class="composer-heading"><h2>Programá un aviso.</h2><p>Elegí qué, cuándo y si querés que se repita.</p></div><form id="form-alerta" class="fgrid" style="grid-template-columns:1fr">
+     <input class="in" id="al-titulo" aria-label="Título de la alerta" placeholder="¿Qué querés que te avisemos?" maxlength="80" required>
+     <input class="in" id="al-nota" aria-label="Nota de la alerta" placeholder="Nota (opcional)" maxlength="140">
      <div class="al-seg" role="radiogroup" aria-label="Repetición">
       <label><input type="radio" name="al-tipo" value="unica" checked><span>Una sola vez</span></label>
       <label><input type="radio" name="al-tipo" value="semanal"><span>Se repite</span></label>
@@ -363,45 +232,30 @@
      <p id="al-err" class="en-err" role="alert" hidden></p>
      <button class="btn" type="submit" id="al-submit"><svg class="ic"><use href="#i-plus"/></svg> <span>Agregar alerta</span></button>
      <button class="btn ghost" type="button" id="al-cancel" hidden>Cancelar edición</button>
-    </form>
-    <ul id="lista-alertas" class="list"></ul>
-   </div>
-  </div></section>
+    </form></aside></div></section>
 
   <!-- GASTOS -->
-  <section id="v-gas" hidden><div class="narrow">
-   <div class="card">
-    <h1>Gastos</h1>
-    <form id="form-ingreso" class="fgrid" style="grid-template-columns:1fr">
-     <div class="f"><span>Mi dinero (lo que ingresó)</span>
-      <div class="row2"><input class="in" type="number" step="0.01" min="0" id="ingreso-monto" placeholder="$" required inputmode="decimal"><button class="btn" type="submit">Guardar</button></div></div>
-    </form>
-    <div class="stats">
-     <div class="card stat"><p class="sub">Ingreso</p><b id="g-ing">$0</b></div>
-     <div class="card stat"><p class="sub">Gastado</p><b id="section-total-gastos" style="color:var(--warn)">$0</b></div>
-     <div class="card stat"><p class="sub">Te queda</p><b id="g-resta" style="color:var(--ok)">$0</b></div>
-    </div>
-    <form id="form-gasto" class="fgrid" style="grid-template-columns:1fr">
+  <section id="v-gas" hidden><div class="view-heading"><div><p class="overline">ADMINISTRAR / DINERO</p><h1>Tus cuentas, claras.</h1><p class="view-description">Registrá lo que entra y lo que gastás. El resto queda a la vista.</p></div></div><div class="finance-overview"><div class="finance-total"><span>Disponible</span><b id="g-resta">$0</b><small>Lo que te queda de tu ingreso</small></div><div class="finance-metric"><span>Ingresó</span><b id="g-ing">$0</b></div><div class="finance-metric"><span>Gastaste</span><b id="section-total-gastos">$0</b></div></div><div class="finance-layout"><div class="content-stack"><aside class="composer surface"><div class="composer-heading"><h2>Registrar un gasto</h2><p>¿En qué se fue?</p></div><form id="form-gasto" class="fgrid" style="grid-template-columns:1fr">
      <div class="row2">
-      <input class="in" id="gasto-concepto" placeholder="Concepto" required>
-      <input class="in" type="number" step="0.01" id="gasto-monto" placeholder="$" required inputmode="decimal">
+      <input class="in" id="gasto-concepto" aria-label="Concepto del gasto" placeholder="Concepto" required>
+      <input class="in" type="number" step="0.01" id="gasto-monto" aria-label="Importe del gasto" placeholder="$" required inputmode="decimal">
      </div>
      <button class="btn ok" type="submit" id="gasto-submit"><svg class="ic"><use href="#i-plus"/></svg> <span>Agregar</span></button>
      <button class="btn ghost" type="button" id="gasto-cancel" hidden>Cancelar edición</button>
-    </form>
-    <ul id="lista-gastos" class="list"></ul>
-   </div>
-  </div></section>
+    </form></aside><aside class="composer surface"><div class="composer-heading"><h2>Actualizar ingreso</h2><p>Tu punto de partida.</p></div><form id="form-ingreso" class="fgrid" style="grid-template-columns:1fr">
+     <div class="f"><span>Mi dinero (lo que ingresó)</span>
+      <div class="row2"><input class="in" type="number" step="0.01" min="0" id="ingreso-monto" aria-label="Importe del ingreso" placeholder="$" required inputmode="decimal"><button class="btn" type="submit">Guardar</button></div></div>
+    </form></aside></div><div class="surface ledger"><div class="panel-heading"><div><p class="overline">MOVIMIENTOS</p><h2>Tu registro de gastos</h2></div><svg class="ic"><use href="#i-wal"/></svg></div><ul id="lista-gastos" class="list"></ul></div></div></section>
    <!-- NOTAS -->
-  <section id="v-not" hidden>
+  <section id="v-not" hidden><div class="view-heading"><div><p class="overline">CREAR / NOTAS</p><h1>Dale lugar a esa idea.</h1><p class="view-description">Escribí, armá listas y volvé cuando quieras.</p></div></div>
    <div class="card nbox" id="nbox">
-    <aside class="nside">
-     <div class="nhead"><h1>Notas</h1><button class="btn" id="n-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva</button></div>
-     <input class="in" id="n-search" type="search" placeholder="Buscar">
+    <aside class="nside" aria-label="Biblioteca de notas">
+     <div class="nhead"><h2>Biblioteca</h2><button class="btn" id="n-new"><svg class="ic"><use href="#i-plus"/></svg> Nueva</button></div>
+     <input class="in" id="n-search" aria-label="Buscar notas" type="search" placeholder="Buscar">
      <div id="n-list" class="nlist"></div>
     </aside>
     <div class="nmain">
-     <p class="empty" id="n-empty" style="margin:auto">Elige una nota o crea una nueva</p>
+     <div class="note-blank" id="n-empty"><svg class="ic"><use href="#i-note"/></svg><h2>Todo empieza con una línea.</h2><p>Elegí una nota de tu biblioteca o creá una nueva.</p><button class="btn" data-create="nota">Escribir una nota <span aria-hidden="true">↗</span></button></div>
      <div id="n-pane" hidden>
       <div class="ntool" id="n-tool">
        <button class="ib nback" id="n-back" aria-label="Volver"><svg class="ic"><use href="#i-l"/></svg></button>
