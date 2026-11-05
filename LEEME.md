@@ -6,7 +6,7 @@ Aplicación con Firebase, agenda, calendario, recordatorios, alertas, gastos, no
 
 - Entrada con presentación tipográfica y panel de acceso con Google independiente.
 - Navegación superior en escritorio y menú desplegable en dispositivos pequeños.
-- Resumen con agenda principal, columna de pendientes y notas, próximas fechas y una franja compacta de dinero. Los datos provienen de las mismas colecciones sincronizadas de la aplicación.
+- Resumen con agenda principal, columna de pendientes y notas, próximas fechas y un resumen de dinero sobre el área de trabajo. Los datos provienen de las mismas colecciones sincronizadas de la aplicación.
 - Accesos para abrir los editores de actividades, recordatorios, gastos y notas desde el resumen.
 - Agenda con línea de tiempo y panel independiente para crear o editar actividades.
 - Calendario con fechas importantes debajo y formulario en una columna propia.
@@ -17,7 +17,7 @@ Aplicación con Firebase, agenda, calendario, recordatorios, alertas, gastos, no
 
 ## Diseño
 
-Paleta neutra de blanco, negro y grises. Poppins para textos y controles; Space Grotesk para títulos, marca y cifras. Se conservan los colores personalizados de las actividades y los indicadores de estado.
+Paleta de azul y blanco, con superficies claras y un encabezado azul. Poppins para textos y controles; Space Grotesk para títulos, marca y cifras. Se conservan los colores personalizados de las actividades y los indicadores de estado.
 
 ## Archivos activos
 

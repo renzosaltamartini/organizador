@@ -7,7 +7,7 @@
 <meta name="description" content="Simplificamos tu rutina en simples pasos." />
 <link rel="icon" type="image/svg+xml" href="/assets/icon.svg" />
 <link rel="apple-touch-icon" href="/assets/icon.svg" />
-<meta name="theme-color" content="#ffffff" />
+<meta name="theme-color" content="#2459e0" />
 <script src="/assets/js/theme.js"></script>
 <link rel="manifest" href="/manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -58,13 +58,13 @@
  <div class="entry-frame">
   <section class="entry-intro">
    <p class="overline">ORGANIZADOR PERSONAL</p>
-   <h1>Tu día.<br>Tus cosas.<br><span>En orden.</span></h1>
-   <p class="entry-description">Un espacio simple para tu agenda, tus pendientes y tus ideas. Todo a mano, para seguir con lo tuyo.</p>
-   <div class="entry-index"><span>01 — Planificá</span><span>02 — Recordá</span><span>03 — Creá</span></div>
+   <h1>Todo tu día.<br><span>Un solo lugar.</span></h1>
+   <p class="entry-description">Organizá tus planes, anotá tus ideas y tené tus pendientes a mano. Tu espacio personal, siempre con vos.</p>
+   <div class="entry-index"><span><svg class="ic"><use href="#i-cal"/></svg> Planificá</span><span><svg class="ic"><use href="#i-bell"/></svg> Recordá</span><span><svg class="ic"><use href="#i-note"/></svg> Creá</span></div>
   </section>
   <section class="entry-access" aria-labelledby="access-title">
    <span class="access-icon" aria-hidden="true"><svg class="ic"><use href="#i-home"/></svg></span>
-   <h2 id="access-title">Entrá a tu espacio.</h2>
+   <p class="access-eyebrow">BIENVENIDO A ORGANIZADOR</p><h2 id="access-title">Empecemos.</h2>
    <p>Tu agenda y tus ideas te esperan.</p>
   <button id="btn-google-login" class="google-signin">     <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
 <span>Entrar con Google</span><span aria-hidden="true">↗</span></button>
@@ -141,15 +141,16 @@
 <button class="nv" data-go="piz"><svg class="ic"><use href="#i-pdf"/></svg><span>Pizarras</span></button></nav></details>
  <main>
   <section id="v-home" class="dashboard">
-   <div class="dashboard-heading"><div><p class="overline" id="live-date"></p><h1 id="greet">Tu espacio, hoy.</h1><p class="view-description">Tu agenda y lo importante, de un vistazo.</p></div><div class="dashboard-clock"><span class="overline">AHORA</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div></div></div>
+   <div class="dashboard-heading blue-welcome"><div><p class="overline" id="live-date"></p><h1 id="greet">Tu espacio, hoy.</h1><p class="view-description">Tu agenda y lo importante, de un vistazo.</p></div><div class="dashboard-clock"><span class="overline">AHORA</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div></div></div>
    <div class="quick-capture"><span>AGREGAR</span><button data-create="agenda"><svg class="ic"><use href="#i-plus"/></svg> Actividad</button><button data-create="recordatorio"><svg class="ic"><use href="#i-bell"/></svg> Pendiente</button><button data-create="gasto"><svg class="ic"><use href="#i-wal"/></svg> Gasto</button><button data-create="nota"><svg class="ic"><use href="#i-note"/></svg> Nota</button><button data-go="piz" class="quick-library">Mis pizarras ↗</button></div>
 
+   <article class="money-panel" aria-label="Resumen de tu dinero"><div class="money-title"><svg class="ic"><use href="#i-wal"/></svg><div><h2>Mi dinero</h2><p id="t-gas" class="balance-caption">Resumen de tus cuentas</p></div></div><div class="money-available"><span class="balance-label">Disponible</span><strong id="home-balance">$0</strong></div><div class="money-breakdown"><div><span>Ingresó</span><b id="home-income">$0</b></div><div><span>Gastaste</span><b id="home-spent">$0</b></div></div><button class="money-open" data-go="gas" aria-label="Abrir mis cuentas"><svg class="ic"><use href="#i-r"/></svg></button></article>
    <div class="dashboard-grid">
 <article class="today-panel surface"><div class="panel-heading"><div><p class="overline">TU TIEMPO</p><h2>Agenda de hoy <span class="count-pill" id="home-agenda-count">0</span></h2></div><button class="icon-action" data-create="agenda" aria-label="Agregar una actividad"><svg class="ic"><use href="#i-plus"/></svg></button></div><p class="panel-description" id="t-dia">Tu agenda de hoy</p><div id="home-agenda" class="home-agenda"><p class="empty">Tu agenda aparecerá acá.</p></div><button class="panel-link" data-go="dia">Ver agenda completa <span>↗</span></button></article>
 <div class="dashboard-side"><article class="pending-panel surface"><div class="panel-heading"><div><p class="overline">PARA TENER PRESENTE</p><h2>Pendientes</h2></div><span class="count-pill" id="t-rec">0 pendientes</span></div><div id="home-reminders" class="home-reminders"><p class="empty">Tus recordatorios aparecerán acá.</p></div><button class="panel-link" data-go="rec">Todos los pendientes <span>↗</span></button></article><article class="notes-panel"><div class="panel-heading"><div><p class="overline">IDEAS A MANO</p><h2>Tus notas</h2></div><button class="icon-action" data-create="nota" aria-label="Crear una nota"><svg class="ic"><use href="#i-plus"/></svg></button></div><div id="home-notes" class="home-notes"><p>Un lugar para esa idea.</p></div><button class="panel-link" data-go="not"><span id="t-not">Abrir mis notas</span><span>↗</span></button></article></div>
 <article class="next-panel surface"><div class="panel-heading"><p class="overline">MIRANDO ADELANTE</p><svg class="ic"><use href="#i-cal"/></svg></div><h2>Lo próximo</h2><div class="next-item"><span class="item-label">FECHA IMPORTANTE</span><p id="t-cal">Sin fechas próximas</p></div><div class="next-item"><span class="item-label">PRÓXIMA ALERTA</span><p id="t-ale">Sin alertas activas</p></div><button class="panel-link" data-go="cal">Abrir calendario <span>↗</span></button></article>
 </div>
-<article class="money-panel" aria-label="Resumen de tu dinero"><div class="money-title"><svg class="ic"><use href="#i-wal"/></svg><div><h2>Mi dinero</h2><p id="t-gas" class="balance-caption">Resumen de tus cuentas</p></div></div><div class="money-available"><span class="balance-label">Disponible</span><strong id="home-balance">$0</strong></div><div class="money-breakdown"><div><span>Ingresó</span><b id="home-income">$0</b></div><div><span>Gastaste</span><b id="home-spent">$0</b></div></div><button class="money-open" data-go="gas" aria-label="Abrir mis cuentas"><svg class="ic"><use href="#i-r"/></svg></button></article>
+
   </section>
 
   <section id="v-piz" class="library-view" hidden>
