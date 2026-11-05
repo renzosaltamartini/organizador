@@ -131,12 +131,25 @@ document.addEventListener('click', e => {
 });
 
 
+// Remove only entire agenda dates strictly before today; preserve today and future days.
+let limpiandoAgenda = false;
+async function limpiarAgendaVencida(fechas = Object.keys(agenda)) {
+  if (!curUser || limpiandoAgenda) return;
+  const hoy = iso();
+  const borrar = Object.fromEntries(fechas.filter(f => /^\d{4}-\d{2}-\d{2}$/.test(f) && f < hoy).map(f => [f, null]));
+  if (!Object.keys(borrar).length) return;
+  limpiandoAgenda = true;
+  try { await update(R('agenda'), borrar); }
+  catch (error) { console.error('No se pudo limpiar la agenda anterior:', error); }
+  finally { limpiandoAgenda = false; }
+}
+
 /* ---------- Reloj ---------- */
 function tick() {
   const n = new Date(), h = n.getHours();
   $('live-date').textContent = n.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
   $('greet').textContent = `${h < 12 ? 'Buenos días' : h < 20 ? 'Buenas tardes' : 'Buenas noches'}${uName ? ', ' + uName : ''}`;
-  if (Date.now() - lastRender > 30000 && !$('app-content').hidden) { render(); renderHome(); if (!$('v-ale').hidden) renderAlertas(); }
+  if (Date.now() - lastRender > 30000 && !$('app-content').hidden) { limpiarAgendaVencida(); render(); renderHome(); if (!$('v-ale').hidden) renderAlertas(); }
 }
 setInterval(tick, 1000); tick();
 // Paint only the clock digits each frame; other home updates keep their own cadence.
@@ -819,7 +832,8 @@ function iniciar() {
   onValue(R('agenda'), snap => {
     const data = snap.val() || {};
     agenda = {};
-    Object.keys(data).forEach(f => { agenda[f] = Object.keys(data[f]).map(id => ({ id, ...data[f][id] })); });
+    Object.keys(data).filter(f => f >= iso()).forEach(f => { agenda[f] = Object.keys(data[f]).map(id => ({ id, ...data[f][id] })); });
+    limpiarAgendaVencida(Object.keys(data));
     render(); renderCal(); renderHome(); cargado('agenda');
   });
 
