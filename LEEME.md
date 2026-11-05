@@ -1,54 +1,32 @@
-# Organizador Personal
+# Organizador Personal · versión 2
 
-Aplicación web con Firebase, agenda, calendario, recordatorios, alertas, gastos, notas y pizarras de Google Drive.
+Aplicación con Firebase, agenda, calendario, recordatorios, alertas, gastos, notas y pizarras de Google Drive.
 
-## Estructura
+## Nueva distribución
 
-```text
-index.html                    Estructura HTML, vistas y formularios
-assets/
-  css/
-    base.css                  Estilos extraídos del HTML
-    redesign.css              Sistema visual y ajustes adaptables
-    landing.css               Portada e ingreso
-    panel.css                 Panel de la aplicación
-    colors.css                Paleta y ajustes de color
-  js/
-    theme.js                  Tema inicial, antes de pintar la página
-    landing.js                Reloj de la portada y aviso de instalación en iOS
-    app.js                    Inicio, navegación, vistas, formularios y sincronización
-    config/firebase.js        Configuración del cliente de Firebase
-    utils/format.js           Fechas, importes, colores y formato de texto
-    features/
-      alerts.js               Cálculo de próximas alertas y sus etiquetas
-      notifications.js        Permisos, registro y tokens de notificaciones push
-      pdf.js                  Generación del reporte PDF
-  logo-*.jpg                  Imágenes existentes
-  logo-organizador.png
-api/avisos.js                 Endpoint del servidor para avisos
-lib/drive.js                  Integración del navegador con Google Drive
-lib/logica.js                 Procesamiento de avisos en el servidor
-lib/tiempo.js                 Conversión de zonas horarias en el servidor
-sw.js                         Service worker de notificaciones, con alcance raíz
-manifest.json                 Instalación de la aplicación
-icon-*.png                    Iconos de la aplicación
-firebase.json                 Configuración de alojamiento
-package.json                  Dependencias del servidor
-```
+- Entrada centrada con acceso de Google y una presentación de las herramientas.
+- Navegación superior en escritorio y menú desplegable en dispositivos pequeños.
+- Resumen con agenda de hoy, pendientes, próximo evento, próxima alerta, saldo y notas recientes. Los datos provienen de las mismas colecciones sincronizadas de la aplicación.
+- Accesos para abrir los editores de actividades, recordatorios, gastos y notas desde el resumen.
+- Agenda con línea de tiempo y panel independiente para crear o editar actividades.
+- Calendario con fechas importantes debajo y formulario en una columna propia.
+- Recordatorios y alertas con registros y formularios separados.
+- Dinero con resumen superior, registro de movimientos y una columna para gastos e ingresos.
+- Notas con biblioteca horizontal y editor de ancho completo.
+- Pizarras con conexión, navegación de carpetas y biblioteca en áreas distintas.
+
+## Archivos activos
+
+`index.html` contiene las vistas y los formularios. `assets/css/base.css` conserva los estilos base del editor, la agenda y los controles. `assets/css/workspace.css` define la nueva estructura, sus componentes y las adaptaciones a tamaños de pantalla. Las hojas `redesign.css`, `landing.css`, `panel.css` y `colors.css` anteriores ya no se cargan.
+
+`assets/js/app.js` conserva los manejadores de autenticación, sincronización, navegación, edición y guardado, y añade las lecturas del resumen y los accesos a los editores. `assets/js/landing.js` conserva el aviso de instalación para iOS.
 
 ## Desarrollo y despliegue
 
-No se necesita compilar el frontend ni instalar un framework. Para verlo localmente, ejecutá `python3 -m http.server 8000` desde la raíz y abrí `http://localhost:8000`. Abrir el HTML como archivo no permite cargar correctamente los módulos. Firebase debe autorizar el dominio utilizado para iniciar sesión.
+El frontend no requiere compilación. Para servirlo localmente, ejecutá `python -m http.server 8000` desde la raíz y abrí `http://localhost:8000`. Firebase debe autorizar el dominio utilizado para iniciar sesión.
 
-Usá el despliegue habitual y conservá las variables de entorno del servidor. Los estilos se cargan en el mismo orden que antes: base, redesign, landing, panel y colors. El tema inicial se ejecuta en el encabezado y el módulo principal se carga después del HTML.
+Se mantiene el alojamiento habitual y las variables de entorno existentes. El proyecto de Firebase, las rutas `users/<uid>/...`, los formatos de datos, las notificaciones, el PDF, la integración con Drive y los endpoints del servidor mantienen sus contratos. No se requiere migrar los datos.
 
-`sw.js`, el manifiesto y los iconos conservan sus rutas para mantener el alcance del service worker y la instalación existente. Los endpoints del servidor y la integración de Drive también conservan sus rutas.
+## Estado de esta versión
 
-## Datos y compatibilidad
-
-La reorganización conserva el proyecto de Firebase, las rutas `users/<uid>/...`, los campos guardados, el tema almacenado y la navegación por hash. No requiere migrar datos. Para conservar el almacenamiento y los permisos asociados al navegador, mantené el mismo dominio de publicación.
-
-## Verificación de la reorganización
-
-Se compararon el HTML, los estilos y las capturas de la portada y las ocho vistas del panel a 390, 768 y 1440 px con datos simulados. También se compararon las rutas y los datos enviados al guardar gastos e ingresos, y las instrucciones de generación del PDF. No se inició sesión ni se escribieron datos en Firebase real; Google Drive y la entrega real de notificaciones requieren validación con una cuenta y un dispositivo autorizados.
-
+Preparada en una rama independiente para revisión. No se ejecutaron pruebas automáticas, pruebas de navegador ni operaciones con una cuenta real, por indicación del usuario. La publicación actual no se reemplaza al crear esta propuesta.

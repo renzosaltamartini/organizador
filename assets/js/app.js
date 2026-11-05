@@ -33,7 +33,7 @@ function fit(el, max = 18, min = 10) {
 function setStat(id, txt) {
   const el = $(id);
   if (el.textContent !== txt) { el.textContent = txt; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
-  fit(el);
+  fit(el, id === 'g-resta' ? 40 : 28, 14);
 }
 function renderGas() {
   const r = ingreso - gasT;
@@ -92,6 +92,10 @@ function showView(v) {
   if (v !== 'not') flush();
   VIEWS.forEach(x => { $('v-' + x).hidden = x !== v; });
   document.querySelectorAll('.nv').forEach(b => { b.classList.toggle('on', b.dataset.go === v); if(b.dataset.go === v) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
+  const label = { home: 'Resumen', dia: 'Agenda', cal: 'Calendario', rec: 'Pendientes', ale: 'Alertas', gas: 'Dinero', not: 'Notas', piz: 'Pizarras' }[v];
+  $('workspace-location').textContent = label;
+  $('mobile-location').textContent = label;
+  if (!matchMedia('(min-width: 900px)').matches) $('workspace-navigation').open = false;
   document.title = (NOMBRES[v] ? NOMBRES[v] + ' · ' : '') + 'Organizador Personal';
   if (v === 'dia') { needScroll = true; render(); }
   if (v === 'gas') renderGas();
@@ -104,6 +108,36 @@ document.addEventListener('click', e => {
   if (g) go(g.dataset.go);
 });
 window.addEventListener('hashchange', onRoute);
+
+// The same tools become a compact menu on smaller screens.
+const workspaceWidth = matchMedia('(min-width: 900px)');
+const arrangeNavigation = () => { $('workspace-navigation').open = workspaceWidth.matches; };
+workspaceWidth.addEventListener('change', arrangeNavigation);
+arrangeNavigation();
+
+// Entry points reuse the original editors and their existing save handlers.
+document.addEventListener('click', e => {
+  const action = e.target.closest('[data-create]');
+  const note = e.target.closest('[data-home-note]');
+  if (note) { go('not'); showView('not'); openNote(note.dataset.homeNote); return; }
+  if (!action) return;
+  const target = {
+    agenda: ['dia', 'btn-new', 'sch-titulo'],
+    recordatorio: ['rec', null, 'rec-detalle'],
+    gasto: ['gas', null, 'gasto-concepto'],
+    nota: ['not', 'n-new', 'n-ed']
+  }[action.dataset.create];
+  if (!target) return;
+  go(target[0]); showView(target[0]);
+  if (target[1]) {
+    if (target[0] === 'dia' && !$('form-schedule-item').hidden) {
+      $('sch-titulo').focus();
+    } else $(target[1]).click();
+  }
+  $(target[2]).scrollIntoView({ block: 'center', behavior: 'smooth' });
+  $(target[2]).focus({ preventScroll: true });
+});
+
 
 /* ---------- Reloj ---------- */
 function tick() {
@@ -134,6 +168,29 @@ function renderHome() {
   $('t-ale').textContent = pa ? `${pa.a.titulo} · ${alRel(pa.p)}` : 'Sin alertas activas';
   $('t-gas').textContent = ingreso ? `Te queda ${(ingreso - gasT < 0 ? '-' : '') + money(Math.abs(ingreso - gasT))}` : money(gasT);
   $('t-not').textContent = notas.length ? `${notas.length} ${notas.length === 1 ? 'nota' : 'notas'}` : 'Sin notas todavía';
+
+  // Dashboard reads the same synchronized collections as the individual tools.
+  $('home-agenda-count').textContent = String(its.length);
+  const upcoming = its.filter(i => i.e > nm);
+  const visible = (upcoming.length ? upcoming : its).slice(0, 4);
+  $('home-agenda').innerHTML = visible.length ? visible.map(i => {
+    const ongoing = i.s <= nm && i.e > nm;
+    return `<button class="agenda-row${ongoing ? ' is-current' : ''}${i.e <= nm ? ' is-past' : ''}" data-go="dia"><time>${esc(i.horaInicio)}</time><span class="agenda-row-mark" style="--event-color:${colDe(i.categoria)}"></span><span><strong>${esc(i.titulo)}</strong><small>${esc(i.horaInicio)} — ${esc(i.horaFin)}${ongoing ? ' · En curso' : ''}</small></span><svg class="ic"><use href="#i-r"/></svg></button>`;
+  }).join('') : '<div class="dashboard-empty"><svg class="ic"><use href="#i-day"/></svg><h3>El día está abierto.</h3><p>Sumá tu primera actividad y empezá a darle forma.</p><button class="text-action" data-create="agenda">Agregar actividad ↗</button></div>';
+  const reminders = Object.values(window._recData || {});
+  $('home-reminders').innerHTML = reminders.length ? reminders.slice(0, 3).map(item => {
+    const title = item.tituloOpcional || item.detalle || item.titulo || 'Pendiente';
+    return `<button class="reminder-row" data-go="rec"><span class="reminder-bullet" aria-hidden="true"></span><span>${esc(String(title).split('\n')[0])}</span><svg class="ic"><use href="#i-r"/></svg></button>`;
+  }).join('') : '<div class="dashboard-empty compact"><p>Nada pendiente por acá.</p><button class="text-action" data-create="recordatorio">Anotar algo ↗</button></div>';
+  $('home-income').textContent = money(ingreso);
+  $('home-spent').textContent = money(gasT);
+  $('home-balance').textContent = (ingreso - gasT < 0 ? '-' : '') + money(Math.abs(ingreso - gasT));
+  $('home-balance').classList.toggle('negative', ingreso - gasT < 0);
+  $('home-notes').innerHTML = notas.length ? notas.slice(0, 2).map(note => {
+    const content = lines(noteHtml(note));
+    return `<button class="home-note" data-home-note="${esc(note.id)}"><strong>${esc(content[0] || 'Nueva nota')}</strong><span>${esc(content.slice(1).join(' ').slice(0, 110) || 'Seguir escribiendo…')}</span></button>`;
+  }).join('') : '<div class="dashboard-empty compact"><p>¿Una idea dando vueltas?</p><button class="text-action" data-create="nota">Dale una nota ↗</button></div>';
+
 }
 
 /* ---------- Tu día ---------- */
