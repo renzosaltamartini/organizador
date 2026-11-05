@@ -316,7 +316,4 @@ body{background:var(--bg);color:var(--tx)}
 .icon-action:hover,.money-open:hover{box-shadow:0 0 17px -5px #2459e045}
 .al-seg,.al-seg span,.al-chip span{border-radius:999px}
 .al-seg input:checked+span,.al-chip input:checked+span{box-shadow:0 3px 12px -5px #2459e060}
-#nav .nv{border-bottom:0;border-radius:999px;min-height:38px;margin:8px 0;padding:10px 14px}
-#nav .nv.on{background:#edf3ff;color:#2459e0;box-shadow:0 2px 16px -7px #2459e060}
-@media(max-width:899px){#nav .nv{min-height:65px;margin:0;padding:13px 5px;border-radius:16px}}
 @media(prefers-reduced-motion:reduce){.btn,.google-signin{transition:none}}
