@@ -131,20 +131,26 @@
   <div class="header-location"><span>MI ESPACIO</span><b id="workspace-location">Resumen</b></div>
   <div class="header-actions"><button id="btn-notif" class="ib" title="Activar notificaciones" aria-label="Activar notificaciones"><svg class="ic"><use href="#i-bell"/></svg></button><button id="btn-share-pdf" class="ib" title="Descargar PDF general" aria-label="Descargar PDF general"><svg class="ic"><use href="#i-pdf"/></svg></button><div class="brand account"><img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden><div><span id="u-name">Mi cuenta</span><small>Espacio personal</small></div></div><button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button></div>
  </div></header>
- <details class="workspace-navigation" id="workspace-navigation" open><summary><svg class="ic"><use href="#i-home"/></svg><span id="mobile-location">Resumen</span><span class="menu-label">Herramientas <svg class="ic"><use href="#i-down"/></svg></span></summary><nav id="nav" aria-label="Navegación principal"><button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg><span>Resumen</span></button>
+ <div class="workspace-navigation" id="workspace-navigation"><nav id="nav" aria-label="Navegación principal"><button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg><span>Resumen</span></button>
 <button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg><span>Agenda</span></button>
 <button class="nv" data-go="cal"><svg class="ic"><use href="#i-cal"/></svg><span>Calendario</span></button>
 <button class="nv" data-go="rec"><svg class="ic"><use href="#i-bell"/></svg><span>Pendientes</span></button>
 <button class="nv" data-go="ale"><svg class="ic"><use href="#i-alarm"/></svg><span>Alertas</span></button>
 <button class="nv" data-go="gas"><svg class="ic"><use href="#i-wal"/></svg><span>Dinero</span></button>
 <button class="nv" data-go="not"><svg class="ic"><use href="#i-note"/></svg><span>Notas</span></button>
-<button class="nv" data-go="piz"><svg class="ic"><use href="#i-pdf"/></svg><span>Pizarras</span></button></nav></details>
+<button class="nv" data-go="piz"><svg class="ic"><use href="#i-pdf"/></svg><span>Pizarras</span></button></nav></div>
  <main>
   <section id="v-home" class="dashboard">
    <div class="dashboard-heading blue-welcome"><div><p class="overline" id="live-date"></p><h1 id="greet">Tu espacio, hoy.</h1><p class="view-description">Tu agenda y lo importante, de un vistazo.</p></div><div class="dashboard-clock"><span class="overline">AHORA</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div></div></div>
    <div class="quick-capture"><span>AGREGAR</span><button data-create="agenda"><svg class="ic"><use href="#i-plus"/></svg> Actividad</button><button data-create="recordatorio"><svg class="ic"><use href="#i-bell"/></svg> Pendiente</button><button data-create="gasto"><svg class="ic"><use href="#i-wal"/></svg> Gasto</button><button data-create="nota"><svg class="ic"><use href="#i-note"/></svg> Nota</button><button data-go="piz" class="quick-library">Mis pizarras ↗</button></div>
 
-   <article class="money-panel" aria-label="Resumen de tu dinero"><div class="money-title"><svg class="ic"><use href="#i-wal"/></svg><div><h2>Mi dinero</h2><p id="t-gas" class="balance-caption">Resumen de tus cuentas</p></div></div><div class="money-available"><span class="balance-label">Disponible</span><strong id="home-balance">$0</strong></div><div class="money-breakdown"><div><span>Ingresó</span><b id="home-income">$0</b></div><div><span>Gastaste</span><b id="home-spent">$0</b></div></div><button class="money-open" data-go="gas" aria-label="Abrir mis cuentas"><svg class="ic"><use href="#i-r"/></svg></button></article>
+   <article class="money-panel" aria-label="Resumen de tu dinero">
+    <div class="money-title"><svg class="ic"><use href="#i-wal"/></svg><div><h2>Mi dinero</h2><p id="t-gas" class="balance-caption">Resumen de tus cuentas</p></div></div>
+    <svg class="money-visa" role="img" aria-label="Visa" viewBox="0 8 24 8"><path fill="currentColor" d="M9.112 8.262L5.97 15.758H3.92L2.374 9.775c-.094-.368-.175-.503-.461-.658C1.447 8.864.677 8.627 0 8.479l.046-.217h3.3a.904.904 0 01.894.764l.817 4.338 2.018-5.102zm8.033 5.049c.008-1.979-2.736-2.088-2.717-2.972.006-.269.262-.555.822-.628a3.66 3.66 0 011.913.336l.34-1.59a5.207 5.207 0 00-1.814-.333c-1.917 0-3.266 1.02-3.278 2.479-.012 1.079.963 1.68 1.698 2.04.756.367 1.01.603 1.006.931-.005.504-.602.725-1.16.734-.975.015-1.54-.263-1.992-.473l-.351 1.642c.453.208 1.289.39 2.156.398 2.037 0 3.37-1.006 3.377-2.564m5.061 2.447H24l-1.565-7.496h-1.656a.883.883 0 00-.826.55l-2.909 6.946h2.036l.405-1.12h2.488zm-2.163-2.656l1.02-2.815.588 2.815zm-8.16-4.84l-1.603 7.496H8.34l1.605-7.496z"/></svg>
+    <div class="money-available"><span class="balance-label">Disponible</span><strong id="home-balance">$0</strong></div>
+    <div class="money-breakdown"><div><span>Ingresó</span><b id="home-income">$0</b></div><div><span>Gastaste</span><b id="home-spent">$0</b></div></div>
+    <button class="money-open" data-go="gas" aria-label="Abrir mis cuentas"><svg class="ic"><use href="#i-r"/></svg></button>
+   </article>
    <div class="dashboard-grid">
 <article class="today-panel surface"><div class="panel-heading"><div><p class="overline">TU TIEMPO</p><h2>Agenda de hoy <span class="count-pill" id="home-agenda-count">0</span></h2></div><button class="icon-action" data-create="agenda" aria-label="Agregar una actividad"><svg class="ic"><use href="#i-plus"/></svg></button></div><p class="panel-description" id="t-dia">Tu agenda de hoy</p><div id="home-agenda" class="home-agenda"><p class="empty">Tu agenda aparecerá acá.</p></div><button class="panel-link" data-go="dia">Ver agenda completa <span>↗</span></button></article>
 <div class="dashboard-side"><article class="pending-panel surface"><div class="panel-heading"><div><p class="overline">PARA TENER PRESENTE</p><h2>Pendientes</h2></div><span class="count-pill" id="t-rec">0 pendientes</span></div><div id="home-reminders" class="home-reminders"><p class="empty">Tus recordatorios aparecerán acá.</p></div><button class="panel-link" data-go="rec">Todos los pendientes <span>↗</span></button></article><article class="notes-panel"><div class="panel-heading"><div><p class="overline">IDEAS A MANO</p><h2>Tus notas</h2></div><button class="icon-action" data-create="nota" aria-label="Crear una nota"><svg class="ic"><use href="#i-plus"/></svg></button></div><div id="home-notes" class="home-notes"><p>Un lugar para esa idea.</p></div><button class="panel-link" data-go="not"><span id="t-not">Abrir mis notas</span><span>↗</span></button></article></div>
@@ -296,6 +302,7 @@
 <script type="module" src="/assets/js/app.js"></script>
 </body>
 </html>
+
 
 
 

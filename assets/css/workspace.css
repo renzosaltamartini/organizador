@@ -317,3 +317,38 @@ body{background:var(--bg);color:var(--tx)}
 .al-seg,.al-seg span,.al-chip span{border-radius:999px}
 .al-seg input:checked+span,.al-chip input:checked+span{box-shadow:0 3px 12px -5px #2459e060}
 @media(prefers-reduced-motion:reduce){.btn,.google-signin{transition:none}}
+
+/* Bank-card treatment for the live balance, with the Visa mark embedded locally. */
+.money-panel{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;padding:28px 32px;border:1px solid #ffffff24;border-radius:22px;background:radial-gradient(ellipse at top right,#608bfa66,transparent 65%),linear-gradient(120deg,#102b67,#2459e0);color:#fff;box-shadow:0 12px 32px -16px #123b9b99}
+.money-panel::before{content:"";position:absolute;z-index:-1;width:360px;height:360px;right:-150px;top:-210px;border:1px solid #ffffff1f;border-radius:50%;box-shadow:0 0 0 42px #ffffff06,0 0 0 84px #ffffff04;pointer-events:none}
+.money-title{grid-column:1;grid-row:1}
+.money-title>.ic{background:#ffffff18;color:#fff;border:1px solid #ffffff20;border-radius:12px}
+.money-title h2{color:#fff;font-size:15px}
+.money-title .balance-caption,.money-panel .balance-label,.money-panel .money-breakdown span{color:#d3e0ff}
+.money-visa{grid-column:2;grid-row:1;width:62px;height:24px;color:#fff;align-self:center}
+.money-available{grid-column:1/-1;grid-row:2;border:0;padding:0}
+.money-panel #home-balance{color:#fff;font-size:clamp(32px,4vw,46px);letter-spacing:-1.5px;line-height:1.25;margin-top:5px}
+.money-panel #home-balance.negative{color:#ffd2d9}
+.money-breakdown{grid-column:1;grid-row:3;display:flex;flex-wrap:wrap;gap:18px 44px;margin:0;padding-top:18px;border-top:1px solid #ffffff30}
+.money-panel .money-breakdown b{color:#fff;font-size:16px;font-weight:500}
+.money-open{grid-column:2;grid-row:3;align-self:end;width:44px;height:44px;background:#ffffff14;border:1px solid #ffffff40;color:#fff;border-radius:50%}
+.money-open:hover{background:#ffffff28;box-shadow:none}
+.money-open:focus-visible{outline:2px solid #fff;outline-offset:4px}
+
+/* Restore the always-visible bottom navigation from the earlier mobile layout. */
+@media(max-width:899px){
+ .workspace-navigation{position:fixed;top:auto;bottom:0;left:0;right:0;z-index:70;border:0;border-top:1px solid var(--line);background:#fffffff5;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -6px 24px -12px #18315326;backdrop-filter:blur(15px)}
+ #nav{position:static;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));max-width:none;width:100%;margin:0;padding:0 3px;gap:0;background:none;border:0;box-shadow:none}
+ #nav .nv{position:relative;display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0;min-height:66px;padding:10px 0 8px;border:0;border-radius:0;background:transparent;color:#61738e;font-size:clamp(7px,1.9vw,10px);font-weight:500}
+ #nav .nv .ic{width:20px;height:20px}
+ #nav .nv.on{background:#edf3ff;color:#2459e0;border:0}
+ #nav .nv::before{display:block;top:0;left:27%;right:27%;height:3px;border-radius:0 0 4px 4px;background:#2459e0}
+ #nav .nv:focus-visible{outline:2px solid #2459e0;outline-offset:-3px}
+ #app-content main{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+}
+@media(max-width:719px){
+ .money-panel{padding:23px;gap:22px;border-radius:20px}
+ .money-visa{width:55px;height:21px}
+ .money-breakdown{gap:16px 30px}
+}
+
