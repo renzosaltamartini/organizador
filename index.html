@@ -23,21 +23,21 @@
 <link rel="stylesheet" href="/assets/css/workspace.css">
 <link rel="stylesheet" href="/assets/css/preferences.css">
 <style>
-/* Pantalla de inicio minimalista: respeta el tema y el color de acento de la app. */
-#initial-loader.loading-screen{position:fixed;inset:0;z-index:110;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--tx);padding:24px;letter-spacing:normal;text-transform:none;transition:opacity .4s ease}
+/* Inicio minimalista con animaciones suaves y colores del tema activo. */
+#initial-loader.loading-screen{position:fixed;inset:0;z-index:110;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--tx);padding:24px;letter-spacing:normal;text-transform:none;transition:opacity .45s ease}
 #initial-loader.out{opacity:0;pointer-events:none}
-#initial-loader .simple-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:min(100%,300px);font-family:"Poppins",sans-serif;text-align:center}
-#initial-loader .simple-loader-icon{width:66px;height:66px;display:grid;place-items:center;border-radius:20px;background:color-mix(in srgb,var(--ac) 12%,var(--card));color:var(--ac);box-shadow:0 0 30px color-mix(in srgb,var(--ac) 17%,transparent);margin-bottom:22px}
-#initial-loader .simple-loader-icon .ic{width:31px;height:31px;stroke-width:1.8}
-#initial-loader .simple-loader h1{font-family:"Poppins",sans-serif;font-size:25px;font-weight:600;letter-spacing:-.045em;line-height:1.35;color:var(--tx);margin:0}
+#initial-loader .simple-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(100%,340px);text-align:center}
+#initial-loader .simple-loader h1{font-family:"Poppins",sans-serif;font-size:clamp(28px,6vw,36px);font-style:italic;font-weight:700;letter-spacing:-.055em;line-height:1.35;color:var(--tx);margin:0;animation:loader-enter .7s cubic-bezier(.2,.8,.2,1) both,loader-breathe 3.5s ease-in-out .7s infinite}
 #initial-loader .simple-loader h1 span{color:var(--ac)}
-#initial-loader .simple-loader p{font-family:"Poppins",sans-serif;color:var(--mut);font-size:12px;font-weight:400;letter-spacing:0;margin:8px 0 27px}
-#initial-loader .intro-progress{display:flex;gap:0;width:180px;height:5px;overflow:visible;border-radius:999px;background:color-mix(in srgb,var(--ac) 13%,var(--soft));box-shadow:none}
-#initial-loader .intro-progress span{display:block;flex:1;height:100%;background:transparent;transition:background .35s ease,box-shadow .35s ease}
-#initial-loader .intro-progress span:first-child{border-radius:999px 0 0 999px}
-#initial-loader .intro-progress span:last-child{border-radius:0 999px 999px 0}
-#initial-loader .intro-progress span.ready{background:var(--ac);box-shadow:0 0 10px color-mix(in srgb,var(--ac) 70%,transparent),0 0 20px color-mix(in srgb,var(--ac) 30%,transparent)}
-@media(prefers-reduced-motion:reduce){#initial-loader,#initial-loader .intro-progress span{transition:none}}
+#initial-loader .loader-status{position:relative;height:22px;width:100%;margin-top:13px;font-family:"Space Grotesk",sans-serif;font-size:13px;font-weight:400;letter-spacing:0;color:var(--mut);animation:loader-enter .7s ease .15s both}
+#initial-loader .loader-status span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;white-space:nowrap}
+#initial-loader .loader-status span:first-child{animation:loader-message-first 5.6s ease-in-out infinite}
+#initial-loader .loader-status span:last-child{animation:loader-message-second 5.6s ease-in-out infinite}
+@keyframes loader-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes loader-breathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.86;transform:scale(1.015)}}
+@keyframes loader-message-first{0%,36%{opacity:1;transform:translateY(0)}44%,90%{opacity:0;transform:translateY(-5px)}96%,100%{opacity:1;transform:translateY(0)}}
+@keyframes loader-message-second{0%,39%{opacity:0;transform:translateY(5px)}47%,87%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(-5px)}}
+@media(prefers-reduced-motion:reduce){#initial-loader,#initial-loader .simple-loader h1,#initial-loader .loader-status,#initial-loader .loader-status span{animation:none;transition:none}#initial-loader .loader-status span:last-child{display:none}}
 </style>
 </head>
 <body>
@@ -68,10 +68,11 @@
 
 <div id="initial-loader" class="full loading-screen" role="status" aria-label="Cargando Organizador">
  <div class="simple-loader">
-  <div class="simple-loader-icon" aria-hidden="true"><svg class="ic"><use href="#i-cal"/></svg></div>
   <h1>Organizador<span>.</span></h1>
-  <p>Preparando tu espacio…</p>
-  <div class="intro-progress" id="intro-progress" role="progressbar" aria-label="Progreso de carga" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="loader-status" aria-label="Preparando tu espacio y cargando datos">
+   <span>Preparando tu espacio…</span>
+   <span>Cargando datos…</span>
+  </div>
  </div>
 </div>
 
