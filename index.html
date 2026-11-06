@@ -69,6 +69,14 @@
 [data-theme-toggle].theme-toggle .ic{position:relative;z-index:1;width:15px;height:15px;margin-left:4px;color:var(--onac);pointer-events:none;transition:transform .9s cubic-bezier(.22,1,.36,1)}
 :root[data-theme="dark"] [data-theme-toggle].theme-toggle .ic{transform:translateX(28px)}
 @media(prefers-reduced-motion:reduce){#login-modal.entry{scroll-behavior:auto}#login-modal .entry-help details p{will-change:auto}}
+
+#v-gas .finance-transfer{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px;margin:20px 0;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+#v-gas .finance-transfer h2{font-size:16px;font-weight:650;margin:0 0 5px}
+#v-gas .finance-transfer p{font-size:11px;color:var(--mut);line-height:1.7;margin:0}
+#v-gas .finance-transfer-actions{display:flex;gap:10px;flex-wrap:wrap}
+#v-gas .finance-transfer-actions .btn{white-space:normal;transition:background .65s ease,transform .65s cubic-bezier(.22,1,.36,1)}
+#v-gas .finance-transfer-actions .btn:hover{transform:translateY(-2px)}
+@media(max-width:760px){#v-gas .finance-transfer{flex-direction:column;align-items:stretch}#v-gas .finance-transfer-actions{flex-direction:column}#v-gas .finance-transfer-actions .btn{width:100%}}
 </style>
 </head>
 <body>
@@ -305,7 +313,10 @@
     </form></aside></div></section>
 
   <!-- GASTOS -->
-  <section id="v-gas" hidden><div class="view-heading"><div><p class="overline">ADMINISTRAR / DINERO</p><h1>Mi dinero</h1><p class="view-description">Registrá lo que entra y lo que gastás. El resto queda a la vista.</p></div></div><section class="accounts-panel surface" aria-labelledby="accounts-title"><div class="accounts-heading"><div><p class="overline">TU ESPACIO FINANCIERO</p><h2 id="accounts-title">Mis bancos y billeteras</h2></div><button type="button" class="btn ghost" id="accounts-edit">Elegir bancos y billeteras</button></div><div id="money-institutions" class="money-institutions"><p class="accounts-empty">Elegí dónde manejás tu dinero.</p></div></section><div class="finance-overview"><div class="finance-brand"><span>Mi dinero</span></div><div class="finance-total"><span>Disponible</span><b id="g-resta">$0</b><small>Lo que te queda de tu ingreso</small></div><div class="finance-metric"><span>Ingresó</span><b id="g-ing">$0</b></div><div class="finance-metric"><span>Gastaste</span><b id="section-total-gastos">$0</b></div></div><div class="finance-layout"><div class="finance-forms"><aside class="composer surface"><div class="composer-heading"><h2>Registrar un gasto</h2><p>¿En qué se fue?</p></div><form id="form-gasto" class="fgrid" style="grid-template-columns:1fr">
+  <section id="v-gas" hidden><div class="view-heading"><div><p class="overline">ADMINISTRAR / DINERO</p><h1>Mi dinero</h1><p class="view-description">Registrá lo que entra y lo que gastás. El resto queda a la vista.</p></div></div><section class="accounts-panel surface" aria-labelledby="accounts-title"><div class="accounts-heading"><div><p class="overline">TU ESPACIO FINANCIERO</p><h2 id="accounts-title">Mis bancos y billeteras</h2></div><button type="button" class="btn ghost" id="accounts-edit">Elegir bancos y billeteras</button></div><div id="money-institutions" class="money-institutions"><p class="accounts-empty">Elegí dónde manejás tu dinero.</p></div></section><div class="finance-overview"><div class="finance-brand"><span>Mi dinero</span></div><div class="finance-total"><span>Disponible</span><b id="g-resta">$0</b><small>Lo que te queda de tu ingreso</small></div><div class="finance-metric"><span>Ingresó</span><b id="g-ing">$0</b></div><div class="finance-metric"><span>Gastaste</span><b id="section-total-gastos">$0</b></div></div><div class="finance-transfer surface" aria-label="Importar y exportar gastos">
+ <div><h2>Importar y exportar gastos</h2><p>Guardá el período en PDF o recuperá gastos de un PDF exportado por Organizador.</p></div>
+ <div class="finance-transfer-actions"><button type="button" class="btn ghost" id="gastos-import-btn">Importar gastos</button><button type="button" class="btn" id="gastos-export-btn">Exportar gastos y cerrar período</button><input type="file" id="gastos-import-file" accept="application/pdf,.pdf" hidden></div>
+</div><div class="finance-layout"><div class="finance-forms"><aside class="composer surface"><div class="composer-heading"><h2>Registrar un gasto</h2><p>¿En qué se fue?</p></div><form id="form-gasto" class="fgrid" style="grid-template-columns:1fr">
      <div class="row2">
       <input class="in" id="gasto-concepto" aria-label="Concepto del gasto" placeholder="Concepto" required>
       <input class="in" type="number" step="0.01" id="gasto-monto" aria-label="Importe del gasto" placeholder="$" required inputmode="decimal">
