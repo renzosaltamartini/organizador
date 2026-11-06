@@ -1,3 +1,5 @@
+import { animateAmount } from "./features/amounts.js";
+import { setupAccounts } from "./features/accounts.js";
 import { setupNotifications } from "./features/notifications.js";
 import { generarPDF } from "./features/pdf.js";
 import { DIA_C, DIA_P, hhmm, alDias, alFecha, alProx, alRel, alCuando, alEstado } from "./features/alerts.js";
@@ -14,6 +16,7 @@ const auth = getAuth(app), db = getDatabase(app), provider = new GoogleAuthProvi
 setupDrive({ auth, GoogleAuthProvider, reauthenticateWithPopup, onAuthStateChanged });
 let base = '', uName = '';
 const R = p => ref(db, base + p);
+const accounts = setupAccounts({ $, R, onValue, set });
 
 function setCustom(hex) { const r = $('cat-custom'), cu = r.parentNode; r.value = hex; $('cat-color').value = hex; cu.style.setProperty('--c', hex); cu.classList.add('set'); }
 $('cat-color').addEventListener('input', e => { setCustom(e.target.value); $('cat-custom').checked = true; });
@@ -30,16 +33,15 @@ function fit(el, max = 18, min = 10) {
   while (el.scrollWidth > el.clientWidth && sz > min) { sz--; el.style.fontSize = sz + 'px'; }
   el.style.whiteSpace = 'nowrap';   // si aun así no entra, queda en una línea y se desliza
 }
-function setStat(id, txt) {
+function setStat(id, value) {
   const el = $(id);
-  if (el.textContent !== txt) { el.textContent = txt; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
-  fit(el, id === 'g-resta' ? 40 : 28, 14);
+  animateAmount(el, value, () => fit(el, id === 'g-resta' ? 40 : 28, 14));
 }
 function renderGas() {
   const r = ingreso - gasT;
-  setStat('g-ing', money(ingreso));
-  setStat('section-total-gastos', money(gasT));
-  setStat('g-resta', (r < 0 ? '-' : '') + money(Math.abs(r)));
+  setStat('g-ing', ingreso);
+  setStat('section-total-gastos', gasT);
+  setStat('g-resta', r);
   $('g-resta').style.removeProperty('color');
 }
 window.addEventListener('resize', () => { if (!$('v-gas').hidden) renderGas(); });
@@ -96,7 +98,8 @@ function showView(v) {
   $('workspace-location').textContent = label;
   document.title = (NOMBRES[v] ? NOMBRES[v] + ' · ' : '') + 'Organizador Personal';
   if (v === 'dia') { needScroll = true; render(); }
-  if (v === 'gas') renderGas();
+  if (v === 'home') renderHome();
+  if (v === 'gas') { renderGas(); accounts.onOpen(); }
   if (v === 'ale') renderAlertas();
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
@@ -186,7 +189,7 @@ function renderHome() {
     const title = item.tituloOpcional || item.detalle || item.titulo || 'Pendiente';
     return `<button class="reminder-row" data-go="rec"><span class="reminder-bullet" aria-hidden="true"></span><span>${esc(String(title).split('\n')[0])}</span><svg class="ic"><use href="#i-r"/></svg></button>`;
   }).join('') : '<div class="dashboard-empty compact"><p>Nada pendiente por acá.</p><button class="text-action" data-create="recordatorio">Anotar algo ↗</button></div>';
-  $('home-balance').textContent = (ingreso - gasT < 0 ? '-' : '') + money(Math.abs(ingreso - gasT));
+  animateAmount($('home-balance'), ingreso - gasT);
   $('home-balance').classList.toggle('negative', ingreso - gasT < 0);
   $('home-notes').innerHTML = notas.length ? notas.slice(0, 2).map(note => {
     const content = lines(noteHtml(note));
@@ -826,6 +829,7 @@ function desbloquear(user, name, photoUrl) {
 /* ---------- Sincronización de Datos ---------- */
 let suscrita = false;
 function iniciar() {
+  accounts.connect();
   render(); renderCal(); renderHome();
   if (suscrita) return; suscrita = true;
 

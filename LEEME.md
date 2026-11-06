@@ -34,3 +34,21 @@ Se mantiene el alojamiento habitual y las variables de entorno existentes. El pr
 ## Estado de esta versión
 
 No se ejecutaron pruebas automáticas, pruebas de navegador ni operaciones con una cuenta real, por indicación del usuario. Los cambios de diseño se publican a través del despliegue habitual del repositorio.
+
+## Bancos, billeteras y apariencia
+
+Dinero permite elegir varias entidades, muestra sus logos en Dinero y en Inicio y guarda la selección en `users/<uid>/moneyPreferences`. Los ingresos y gastos existentes mantienen su formato y no se redistribuyen por entidad. La selección personaliza la presentación; no conecta con cuentas bancarias ni consulta saldos externos.
+
+`assets/js/config/institutions.json` incluye 335 opciones: las 73 entidades financieras de la nómina BCRA consultada, 238 proveedores de cuentas de pago únicos (la respuesta oficial tenía 239 filas, una duplicada) y 24 billeteras y plataformas adicionales. La nómina de entidades financieras publicada por BCRA indica julio de 2026; la consulta se realizó el 5 de noviembre de 2026. Es una copia local y requiere actualización para incorporar altas y bajas posteriores.
+
+Fuentes del catálogo:
+- https://www.bcra.gob.ar/api/endpoints/nomina-entidades.php?action=nomina_AAA00&lang=es
+- https://www.bcra.gob.ar/api/endpoints/proveedores-psp.php?tipoPSP=1
+
+Se incluyen 71 logos locales obtenidos de los iconos públicos de los dominios de las marcas mediante el servicio de favicons de Google. Los logos no disponibles usan iniciales, sin simular una marca. Desde la selección se puede agregar una entidad o asignarle un logo propio, escribiendo su mismo nombre. No se solicitan imágenes a terceros al mostrar las selecciones.
+
+`assets/js/features/accounts.js` gestiona selección, búsqueda, categorías, entidades propias y sincronización. `assets/js/features/amounts.js` reemplaza el salto de escala por un contador numérico progresivo y respeta movimiento reducido.
+
+El interruptor de luna/sol está disponible en el ingreso y en el encabezado. `theme.js` conserva la preferencia `tema` en el navegador y, si no hay una elegida, sigue el tema del dispositivo. `preferences.css` contiene las nuevas interfaces y las variantes oscuras.
+
+No se ejecutaron pruebas ni se realizaron operaciones con cuentas reales, por indicación del usuario.

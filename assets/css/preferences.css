@@ -1,0 +1,148 @@
+/* Financial preferences and local entity logos. */
+.entry-header-actions{display:flex;align-items:center;gap:20px}
+.theme-toggle{color:var(--ac);flex:none}
+.accounts-panel{margin-bottom:24px}
+.accounts-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:19px}
+.accounts-heading h2{font-size:20px;margin-top:5px}
+.accounts-heading .btn{font-size:10px}
+.money-institutions{display:flex;align-items:center;flex-wrap:wrap;gap:11px}
+.accounts-empty{font-size:11px;line-height:1.8;color:var(--mut)}
+.institution-pill{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px;font-size:11px;background:var(--card)}
+.institution-logo{display:grid;place-items:center;width:36px;height:36px;flex:none;background:#fff;color:#426184;border:1px solid #e4eaf3;border-radius:10px;overflow:hidden;font:500 12px 'Space Grotesk',sans-serif}
+.institution-logo img{width:25px;height:25px;object-fit:contain}
+.account-brand-summary{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;max-width:210px}
+.account-brand-summary>span{display:inline-flex}
+.account-brand-summary .institution-logo{width:38px;height:38px;border-radius:11px;box-shadow:0 3px 10px #00000012}
+.account-brand-summary .institution-logo img{width:27px;height:27px}
+.account-brand-summary .institution-more{display:grid;place-items:center;min-width:30px;height:30px;font:500 11px 'Poppins',sans-serif;color:#fff;background:#ffffff25;border-radius:50%}
+.summary-choose{border:1px solid #ffffff50;background:#ffffff16;color:#fff;padding:9px 13px;border-radius:999px;font-size:10px}
+.summary-choose:hover{background:#ffffff28}
+.accounts-dialog{max-width:780px;max-height:90dvh;padding:27px;overflow-y:auto;overscroll-behavior:contain;gap:17px}
+.accounts-dialog>.vh{align-items:flex-start;flex-wrap:nowrap}
+.accounts-dialog h2{font-size:26px}
+.accounts-dialog>.sub{font-size:11px;line-height:1.8}
+.accounts-filters{display:grid;grid-template-columns:minmax(0,1fr) 185px;gap:12px;margin-bottom:12px}
+.accounts-filters>*{min-width:0}
+.accounts-filters .in{font-size:12px}
+#accounts-count{font-size:10px;margin-bottom:12px}
+.accounts-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;max-height:340px;overflow-y:auto;padding:4px;min-height:90px;overscroll-behavior:contain}
+.accounts-options>.empty{grid-column:1/-1}
+.institution-option{position:relative;display:flex;align-items:center;gap:10px;min-width:0;min-height:73px;border:1px solid var(--line);border-radius:11px;padding:11px;cursor:pointer;background:var(--card)}
+.institution-option>input{position:absolute;width:18px;height:18px;top:8px;right:8px;opacity:0}
+.institution-option:has(input:checked){background:var(--soft);border-color:#8cacf5;box-shadow:0 0 14px -8px #2459e066}
+.institution-option:has(input:focus-visible){outline:2px solid var(--ac);outline-offset:2px}
+.institution-option>span:not(.institution-logo){min-width:0;flex:1}
+.institution-option strong{display:block;font-size:11px;font-weight:500;overflow-wrap:anywhere}
+.institution-option small{display:block;font-size:9px;color:var(--mut);margin-top:5px}
+.institution-check{width:15px;height:15px;color:var(--ac);opacity:0}
+.institution-option:has(input:checked) .institution-check{opacity:1}
+.accounts-custom{border-top:1px solid var(--line);margin-top:18px;padding-top:17px}
+.accounts-custom>summary{cursor:pointer;font-size:11px;color:var(--ac)}
+.accounts-custom>.sub{font-size:10px;margin:14px 0}
+.accounts-custom>.f{margin:12px 0}
+.accounts-custom .in{font-size:12px}
+.accounts-custom .btn{font-size:10px}
+#accounts-status{font-size:11px;line-height:1.8;margin:13px 0;overflow-wrap:anywhere}
+.accounts-dialog-footer{display:flex;justify-content:flex-end;gap:10px;padding-top:18px;border-top:1px solid var(--line);margin-top:13px}
+#g-ing,#g-resta,#section-total-gastos,#home-income,#home-spent,#home-balance{font-variant-numeric:tabular-nums;animation:none!important;transform:none}
+/* Dark mode overrides literal colors in the original blue-and-white canvas. */
+:root[data-theme="dark"]{--bg:#0c1423;--card:#131f32;--soft:#1b2c47;--line:#263752;--tx:#e4ecfa;--mut:#9aacc6;--ac:#8aafff;--onac:#fff;--ok:#9dbac7;--warn:#a4b7d0;--bad:#f098a0;color-scheme:dark}
+[data-theme="dark"] body{background:var(--bg);color:var(--tx)}
+[data-theme="dark"] :is(.surface,.card,.composer,.agenda-inspector,.dashboard-side>article,.dashboard-side .notes-panel,.money-panel,.modal-box,.full>.card,.accounts-panel){background:var(--card);border-color:var(--line);color:var(--tx)}
+[data-theme="dark"] :is(.app-header,.workspace-navigation){background:#0d1728f5;border-color:var(--line)}
+[data-theme="dark"] #nav{background:transparent}
+[data-theme="dark"] #nav .nv{color:#9aacc6}
+[data-theme="dark"] #nav .nv.on{color:#a9c3ff;border-bottom-color:#8aafff}
+[data-theme="dark"] :is(.wordmark,.panel-heading h2,.money-title h2,.view-heading h1,.composer-heading h2,.entry-access h2,.entry-tools-title h2,.entry-tools-list h3,.blue-welcome h1,.entry-intro h1,.note-blank h2){color:#e4ecfa}
+[data-theme="dark"] :is(.brand-period,.text-action,.panel-link,.entry-footer .text-action,.entry-help summary:after,.drive-breadcrumbs button){color:#9bbaff}
+[data-theme="dark"] .app-symbol{background:#396ce9;color:#fff}
+[data-theme="dark"] .blue-welcome{background:#1b4095;box-shadow:0 8px 35px -12px #2865f530}
+[data-theme="dark"] .blue-welcome :is(#live-date,.overline){color:#b4caff}
+[data-theme="dark"] .blue-welcome .view-description{color:#d0dfff}
+[data-theme="dark"] :is(.entry-description,.view-description,.panel-description,.composer-heading p,.balance-caption,.money-title .balance-caption,.balance-label,.money-breakdown span,.money-panel .overline,.home-note>span,.notes-panel .overline,.item-label,.next-panel .item-label,.overline,.panel-heading .overline,.view-heading .overline,.accounts-empty,.dashboard-empty p,.entry-link,.entry-footer>span:nth-child(2),.entry-tools-list p,.entry-tools-title>.overline,.entry-help p,.entry-help summary,.access-foot,.entry-caption,.entry-access>.entry-caption,.entry-access>p:not(.en-err):not(.en-ios),.institution-option small){color:#9aacc6}
+[data-theme="dark"] :is(.quick-capture>button,.btn.ghost,.ib,.icon-action,.money-open,.notes-panel .icon-action){background:#192840;border-color:#304562;color:#a7c3ff}
+[data-theme="dark"] .header-actions .ib{background:transparent;border-color:transparent}
+[data-theme="dark"] :is(.btn,.btn.ok,.btn.warn,.google-signin){background:#3267e8;color:#fff}
+[data-theme="dark"] :is(.btn:hover,.google-signin:hover){background:#4579f4;color:#fff}
+[data-theme="dark"] .btn.ghost:hover,[data-theme="dark"] .quick-capture>button:hover{background:#223858;color:#c8dbff}
+[data-theme="dark"] :is(.in,.fgrid .in,.nav .in,.drive-tools .in){background:#0f1b2e;border-color:#30435f;color:#e4ecfa}
+[data-theme="dark"] .in::placeholder{color:#8699b7;opacity:1}
+[data-theme="dark"] .in:focus{border-color:#739bf5;outline-color:#385382;box-shadow:0 0 20px -7px #4f84fa55}
+[data-theme="dark"] :is(.count-pill,.tag,.money-title>.ic,.drive-file-icon){background:#203657;color:#adcbff}
+[data-theme="dark"] #home-balance{color:#aac6ff}
+[data-theme="dark"] #home-balance.negative{color:#f098a0}
+[data-theme="dark"] :is(.money-breakdown b,.ledger .amount){color:#c7d8f1}
+[data-theme="dark"] :is(.money-available,.money-breakdown,.panel-description,.panel-link,.home-note+.home-note,.reminder-row,.agenda-row,.list li,.view-heading,.records-panel>.panel-heading,.ledger>.panel-heading,.inspector-note,.quick-capture,.accounts-custom,.accounts-dialog-footer){border-color:var(--line)}
+[data-theme="dark"] :is(.agenda-row time,.agenda-row small,.agenda-row>.ic,.hr span){color:#95aac9}
+[data-theme="dark"] .agenda-row.is-current{background:#1d3358;border-color:#315080;box-shadow:0 0 20px -10px #5891ff45}
+[data-theme="dark"] .agenda-row-mark{background:#5a79a8}
+[data-theme="dark"] .agenda-row.is-current .agenda-row-mark{background:#8aafff}
+[data-theme="dark"] .dashboard-grid>.next-panel{background:#142642;border-color:#294064;color:var(--tx)}
+[data-theme="dark"] .next-panel .next-item{border-color:#294064}
+[data-theme="dark"] .next-panel .next-item p{color:#bad0f0}
+[data-theme="dark"] .reminder-bullet{border-color:#7395c7}
+[data-theme="dark"] .tab{background:#131f32;border-color:#30435f;color:#a9bad3}
+[data-theme="dark"] .tab b{color:#cbd9f1}
+[data-theme="dark"] .tab.on{background:#3267e8;border-color:#4a7cec;color:white}
+[data-theme="dark"] .tab.on b{color:white}
+[data-theme="dark"] :is(#tl,.day){background:#101c2e;border-color:#293b56;color:#d1dff6}
+[data-theme="dark"] .hr{border-color:#22314a}
+[data-theme="dark"] .day.today{border-color:#759cf1;color:#b0caff}
+[data-theme="dark"] .day.sel{background:#243d64;border-color:#759cf1;color:#e4ecfa}
+[data-theme="dark"] .day:hover{background:#1d304c}
+[data-theme="dark"] :is(.al-seg,.al-chip span){background:#101c2e;border-color:#30435f}
+[data-theme="dark"] .al-seg input:checked+span{background:#3267e8;color:white}
+[data-theme="dark"] .al-chip input:checked+span{background:#233c63;color:#c7daff;border-color:#6c93e6}
+[data-theme="dark"] .al-aviso{background:#1b2e4b;border-color:#3b557b}
+[data-theme="dark"] .finance-overview{background:#152a49;border-color:#2d466b;color:#c7dbff}
+[data-theme="dark"] :is(.finance-overview span,.finance-total small){color:#a1b7d9}
+[data-theme="dark"] .finance-metric{border-color:#324d75}
+[data-theme="dark"] .nbox{background:#111d30;border-color:var(--line)}
+[data-theme="dark"] .nside{background:#101a2c;border-color:var(--line)}
+[data-theme="dark"] .ni{background:#16243b;border-color:#2b405e;color:#d9e5f9}
+[data-theme="dark"] .ni.on{background:#233b60;border-color:#6085c6}
+[data-theme="dark"] .ni:hover{background:#1e3353}
+[data-theme="dark"] :is(.ntool,.nstate,.tb){background:#17253b;border-color:#2d405b;color:#cbdcf5}
+[data-theme="dark"] .library-connection{background:#172b48;border-color:#2d4465}
+[data-theme="dark"] :is(.library-connection>p,.library-connection #drive-status){color:#a6bddf}
+[data-theme="dark"] :is(.drive-file,.drive-folder-card){background:#131f32;border-color:var(--line);color:#dce7fa}
+[data-theme="dark"] .drive-file:hover{background:#1d3150;border-color:#6586bd}
+[data-theme="dark"] .drive-breadcrumbs button[aria-current]{color:#dce7fa}
+[data-theme="dark"] :is(.modal-overlay,.accounts-overlay){background:#020714bb}
+[data-theme="dark"] #login-modal.entry{background:#0c1423;color:#e4ecfa}
+[data-theme="dark"] .entry-nav{background:transparent;border-color:var(--line)}
+[data-theme="dark"] .entry-frame{background:#131f32;border-color:#2b405e;box-shadow:0 18px 60px -30px #2764e62e}
+[data-theme="dark"] .entry-intro{background:#183d90;color:#fff}
+[data-theme="dark"] .entry-intro>.overline{color:#b9ceff}
+[data-theme="dark"] .entry-intro h1>span{color:#a8c3ff}
+[data-theme="dark"] .entry-intro .entry-description{color:#c9dbff}
+[data-theme="dark"] .entry-access{background:#131f32}
+[data-theme="dark"] .access-icon{background:#233958;color:#a5c4ff;border-color:#3c567e}
+[data-theme="dark"] .access-foot{border-color:var(--line)}
+[data-theme="dark"] .entry-access .en-ios{background:#172842;border-color:#304764;color:#b0c7e7}
+[data-theme="dark"] .entry-tools-list article,[data-theme="dark"] .entry-tools-list article:last-child{background:#131f32;border-color:var(--line)}
+[data-theme="dark"] .entry-tools-list .ic{color:#9bbaff}
+[data-theme="dark"] :is(.entry-help,.entry-help details,.entry-footer){border-color:var(--line)}
+[data-theme="dark"] .institution-option{background:#131f32;border-color:#2c405f;color:#dce7fa}
+[data-theme="dark"] .institution-option:has(input:checked){background:#21395e;border-color:#719bf1}
+[data-theme="dark"] .institution-pill{background:#1b2c47;border-color:#324a6d;color:#dce7fa}
+[data-theme="dark"] .en-err{color:#f098a0}
+[data-theme="dark"] :is(.money-panel .summary-choose,.finance-overview .summary-choose){border-color:#5374a9;background:#243f66;color:#dce9ff}
+@media(max-width:899px){[data-theme="dark"] #nav{background:#101c2e}[data-theme="dark"] #nav .nv.on{background:#233b60;border-color:#6289cc;color:#c9dbff}}
+@media(max-width:719px){
+ .entry-header-actions{gap:10px}.entry-header-actions .ib{width:31px;height:31px}
+ .entry-header-actions .entry-link{font-size:9px;gap:8px}
+ .accounts-heading{align-items:flex-start;flex-direction:column;gap:14px}.accounts-heading h2{font-size:21px}
+ .institution-pill{font-size:10px;padding-right:12px}.institution-logo{width:32px;height:32px}
+ .accounts-dialog{padding:21px 17px;max-height:94dvh}.accounts-dialog h2{font-size:23px}
+ .accounts-filters{grid-template-columns:minmax(0,1fr);gap:9px}.accounts-filters .in,.accounts-custom .in{font-size:16px}
+ .accounts-options{grid-template-columns:minmax(0,1fr);max-height:38dvh}
+ .institution-option{min-height:66px}.institution-option strong{font-size:12px}
+ .accounts-dialog-footer{justify-content:stretch}.accounts-dialog-footer>.btn{flex:1;font-size:11px;padding:0 12px}
+ .accounts-custom>summary{font-size:11px;line-height:1.8}
+ .account-brand-summary{max-width:128px;gap:5px}
+ .account-brand-summary .institution-logo{width:30px;height:30px;border-radius:8px}
+ .account-brand-summary .institution-logo img{width:22px;height:22px}
+ .summary-choose{font-size:9px;padding:8px 10px;max-width:128px}
+}
+@media(max-width:380px){.app-header-inner{gap:5px}.brand-home{font-size:17px}.brand-home .app-symbol{display:none}.header-actions .ib{width:29px}.entry-header-actions .entry-link{gap:4px}}

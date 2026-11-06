@@ -21,6 +21,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/workspace.css">
+<link rel="stylesheet" href="/assets/css/preferences.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -68,7 +69,7 @@
 </div>
 
 <div id="login-modal" class="full entry" hidden>
- <header class="entry-nav"><a href="#" class="wordmark" aria-label="Organizador, inicio"><span class="app-symbol" aria-hidden="true">o</span>organizador<span class="brand-period">.</span></a><a href="#landing-features" class="entry-link">Qué podés hacer <span aria-hidden="true">↓</span></a></header>
+ <header class="entry-nav"><a href="#" class="wordmark" aria-label="Organizador, inicio"><span class="app-symbol" aria-hidden="true">o</span>organizador<span class="brand-period">.</span></a><div class="entry-header-actions"><button type="button" class="ib theme-toggle" data-theme-toggle aria-label="Activar modo oscuro" aria-pressed="false" title="Activar modo oscuro"><svg class="ic"><use href="#i-moon"/></svg></button><a href="#landing-features" class="entry-link">Qué podés hacer <span aria-hidden="true">↓</span></a></div></header>
  <div class="entry-frame">
   <section class="entry-intro">
    <p class="overline">ORGANIZADOR PERSONAL</p>
@@ -143,7 +144,7 @@
  <header class="app-header"><div class="app-header-inner">
   <button type="button" data-go="home" class="wordmark brand-home"><span class="app-symbol" aria-hidden="true">o</span>organizador<span class="brand-period">.</span></button>
   <div class="header-location"><span>MI ESPACIO</span><b id="workspace-location">Resumen</b></div>
-  <div class="header-actions"><button id="btn-notif" class="ib" title="Activar notificaciones" aria-label="Activar notificaciones"><svg class="ic"><use href="#i-bell"/></svg></button><button id="btn-share-pdf" class="ib" title="Descargar PDF general" aria-label="Descargar PDF general"><svg class="ic"><use href="#i-pdf"/></svg></button><div class="brand account"><img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden><div><span id="u-name">Mi cuenta</span><small>Espacio personal</small></div></div><button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button></div>
+  <div class="header-actions"><button type="button" class="ib theme-toggle" data-theme-toggle aria-label="Activar modo oscuro" aria-pressed="false" title="Activar modo oscuro"><svg class="ic"><use href="#i-moon"/></svg></button><button id="btn-notif" class="ib" title="Activar notificaciones" aria-label="Activar notificaciones"><svg class="ic"><use href="#i-bell"/></svg></button><button id="btn-share-pdf" class="ib" title="Descargar PDF general" aria-label="Descargar PDF general"><svg class="ic"><use href="#i-pdf"/></svg></button><div class="brand account"><img id="u-photo" src="" alt="" referrerpolicy="no-referrer" title="Cambiar foto de perfil" hidden><div><span id="u-name">Mi cuenta</span><small>Espacio personal</small></div></div><button id="btn-logout" class="ib" title="Cerrar sesión" aria-label="Cerrar sesión"><svg class="ic"><use href="#i-out"/></svg></button></div>
  </div></header>
  <div class="workspace-navigation" id="workspace-navigation"><nav id="nav" aria-label="Navegación principal"><button class="nv" data-go="home"><svg class="ic"><use href="#i-home"/></svg><span>Resumen</span></button>
 <button class="nv" data-go="dia"><svg class="ic"><use href="#i-day"/></svg><span>Agenda</span></button>
@@ -160,7 +161,7 @@
 
    <article class="money-panel" aria-label="Dinero disponible">
     <strong id="home-balance" aria-label="Saldo disponible">$0</strong>
-    <div class="money-brand"><img src="/assets/mercado-pago.svg" alt="" width="48" height="40"><span>mercado<br>pago</span></div>
+    <div class="money-brand account-brand-summary" data-selected-institutions aria-label="Mis bancos y billeteras"><button type="button" class="summary-choose" data-go="gas">Elegir mis cuentas ↗</button></div>
    </article>
    <div class="dashboard-grid">
 <article class="today-panel surface"><div class="panel-heading"><div><p class="overline">TU TIEMPO</p><h2>Agenda de hoy <span class="count-pill" id="home-agenda-count">0</span></h2></div><button class="icon-action" data-create="agenda" aria-label="Agregar una actividad"><svg class="ic"><use href="#i-plus"/></svg></button></div><p class="panel-description" id="t-dia">Tu agenda de hoy</p><div id="home-agenda" class="home-agenda"><p class="empty">Tu agenda aparecerá acá.</p></div><button class="panel-link" data-go="dia">Ver agenda completa <span>↗</span></button></article>
@@ -265,7 +266,7 @@
     </form></aside></div></section>
 
   <!-- GASTOS -->
-  <section id="v-gas" hidden><div class="view-heading"><div><p class="overline">ADMINISTRAR / DINERO</p><h1>Mi dinero</h1><p class="view-description">Registrá lo que entra y lo que gastás. El resto queda a la vista.</p></div></div><div class="finance-overview"><div class="finance-brand"><span>Mi dinero</span><div class="money-brand"><img src="/assets/mercado-pago.svg" alt="" width="48" height="40"><span>mercado<br>pago</span></div></div><div class="finance-total"><span>Disponible</span><b id="g-resta">$0</b><small>Lo que te queda de tu ingreso</small></div><div class="finance-metric"><span>Ingresó</span><b id="g-ing">$0</b></div><div class="finance-metric"><span>Gastaste</span><b id="section-total-gastos">$0</b></div></div><div class="finance-layout"><div class="finance-forms"><aside class="composer surface"><div class="composer-heading"><h2>Registrar un gasto</h2><p>¿En qué se fue?</p></div><form id="form-gasto" class="fgrid" style="grid-template-columns:1fr">
+  <section id="v-gas" hidden><div class="view-heading"><div><p class="overline">ADMINISTRAR / DINERO</p><h1>Mi dinero</h1><p class="view-description">Registrá lo que entra y lo que gastás. El resto queda a la vista.</p></div></div><section class="accounts-panel surface" aria-labelledby="accounts-title"><div class="accounts-heading"><div><p class="overline">TU ESPACIO FINANCIERO</p><h2 id="accounts-title">Mis bancos y billeteras</h2></div><button type="button" class="btn ghost" id="accounts-edit">Elegir bancos y billeteras</button></div><div id="money-institutions" class="money-institutions"><p class="accounts-empty">Elegí dónde manejás tu dinero.</p></div></section><div class="finance-overview"><div class="finance-brand"><span>Mi dinero</span><div class="money-brand account-brand-summary" data-selected-institutions aria-label="Mis bancos y billeteras"><button type="button" class="summary-choose" data-go="gas">Elegir mis cuentas ↗</button></div></div><div class="finance-total"><span>Disponible</span><b id="g-resta">$0</b><small>Lo que te queda de tu ingreso</small></div><div class="finance-metric"><span>Ingresó</span><b id="g-ing">$0</b></div><div class="finance-metric"><span>Gastaste</span><b id="section-total-gastos">$0</b></div></div><div class="finance-layout"><div class="finance-forms"><aside class="composer surface"><div class="composer-heading"><h2>Registrar un gasto</h2><p>¿En qué se fue?</p></div><form id="form-gasto" class="fgrid" style="grid-template-columns:1fr">
      <div class="row2">
       <input class="in" id="gasto-concepto" aria-label="Concepto del gasto" placeholder="Concepto" required>
       <input class="in" type="number" step="0.01" id="gasto-monto" aria-label="Importe del gasto" placeholder="$" required inputmode="decimal">
@@ -308,6 +309,21 @@
    </div>
   </section>
  </main>
+</div>
+
+<div id="accounts-modal" class="modal-overlay accounts-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="accounts-modal-title">
+ <div class="modal-box accounts-dialog">
+  <div class="vh"><div><p class="overline">PERSONALIZÁ DINERO</p><h2 id="accounts-modal-title">¿Qué bancos y billeteras usás?</h2></div><button type="button" id="accounts-close" class="x" aria-label="Cerrar selección de cuentas"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <p class="sub">Elegí todas las que uses. Sus logos van a aparecer en tu espacio. Podés cambiarlo cuando quieras.</p>
+  <form id="accounts-form">
+   <div class="accounts-filters"><label><span class="sr-only">Buscar banco o billetera</span><input id="accounts-search" class="in" type="search" placeholder="Mercado Pago, Belo, banco…" autocomplete="off"></label><label><span class="sr-only">Filtrar entidades</span><select class="in" id="accounts-category"><option value="all">Todas</option><option value="bank">Bancos</option><option value="wallet">Billeteras y pagos</option><option value="finance">Financieras</option><option value="selected">Mis seleccionadas</option></select></label></div>
+   <p id="accounts-count" class="sub" aria-live="polite"></p>
+   <div id="accounts-options" class="accounts-options" aria-label="Entidades disponibles"></div>
+   <details class="accounts-custom"><summary>¿No está la tuya o querés agregar su logo?</summary><p class="sub">Agregá otra entidad con su nombre y un logo opcional.</p><label class="f"><span>Nombre</span><input id="accounts-custom-name" class="in" maxlength="80" placeholder="Nombre de tu banco o billetera"></label><label class="f"><span>Logo opcional · PNG, JPG o WebP · hasta 100 KB</span><input type="file" id="accounts-custom-logo" class="in" accept="image/png,image/jpeg,image/webp"></label><button type="button" id="accounts-add" class="btn ghost">Agregar a mi selección</button></details>
+   <p id="accounts-status" class="sub" role="status" aria-live="polite"></p>
+   <div class="accounts-dialog-footer"><button type="button" id="accounts-cancel" class="btn ghost">Ahora no</button><button type="submit" id="accounts-save" class="btn">Guardar selección</button></div>
+  </form>
+ </div>
 </div>
 
 <script type="module" src="/assets/js/app.js"></script>

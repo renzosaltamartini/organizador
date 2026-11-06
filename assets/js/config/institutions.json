@@ -1,0 +1,2663 @@
+{
+  "updated": "2026-11-05",
+  "sources": [
+    "https://www.bcra.gob.ar/api/endpoints/nomina-entidades.php?action=nomina_AAA00&lang=es",
+    "https://www.bcra.gob.ar/api/endpoints/proveedores-psp.php?tipoPSP=1"
+  ],
+  "institutions": [
+    {
+      "id": "bank-7",
+      "name": "Galicia",
+      "kind": "bank",
+      "legal": "BANCO DE GALICIA Y BUENOS AIRES S.A.",
+      "domain": "galicia.ar",
+      "logo": "/assets/institutions/bank-7.png"
+    },
+    {
+      "id": "bank-11",
+      "name": "Banco Nación · BNA+",
+      "kind": "bank",
+      "legal": "BANCO DE LA NACION ARGENTINA",
+      "domain": "bna.com.ar",
+      "logo": "/assets/institutions/bank-11.png"
+    },
+    {
+      "id": "bank-14",
+      "name": "Banco Provincia · Cuenta DNI",
+      "kind": "bank",
+      "legal": "BANCO DE LA PROVINCIA DE BUENOS AIRES",
+      "domain": "bancoprovincia.com.ar",
+      "logo": "/assets/institutions/bank-14.png"
+    },
+    {
+      "id": "bank-15",
+      "name": "ICBC",
+      "kind": "bank",
+      "legal": "INDUSTRIAL AND COMMERCIAL BANK OF CHINA",
+      "domain": "icbc.com.ar"
+    },
+    {
+      "id": "bank-16",
+      "name": "Citi",
+      "kind": "bank",
+      "legal": "CITIBANK N.A.",
+      "domain": "citibank.com",
+      "logo": "/assets/institutions/bank-16.png"
+    },
+    {
+      "id": "bank-17",
+      "name": "BBVA",
+      "kind": "bank",
+      "legal": "BANCO BBVA ARGENTINA S.A.",
+      "domain": "bbva.com.ar",
+      "logo": "/assets/institutions/bank-17.png"
+    },
+    {
+      "id": "bank-20",
+      "name": "Bancor · Taca Taca",
+      "kind": "bank",
+      "legal": "BANCO DE LA PROVINCIA DE CORDOBA S.A.",
+      "domain": "bancor.com.ar",
+      "logo": "/assets/institutions/bank-20.png"
+    },
+    {
+      "id": "bank-27",
+      "name": "Supervielle",
+      "kind": "bank",
+      "legal": "BANCO SUPERVIELLE S.A.",
+      "domain": "supervielle.com.ar"
+    },
+    {
+      "id": "bank-29",
+      "name": "Banco Ciudad",
+      "kind": "bank",
+      "legal": "BANCO DE LA CIUDAD DE BUENOS AIRES",
+      "domain": "bancociudad.com.ar",
+      "logo": "/assets/institutions/bank-29.png"
+    },
+    {
+      "id": "bank-34",
+      "name": "Banco Patagonia",
+      "kind": "bank",
+      "legal": "BANCO PATAGONIA S.A.",
+      "domain": "bancopatagonia.com.ar"
+    },
+    {
+      "id": "bank-44",
+      "name": "Banco Hipotecario",
+      "kind": "bank",
+      "legal": "BANCO HIPOTECARIO S.A.",
+      "domain": "hipotecario.com.ar",
+      "logo": "/assets/institutions/bank-44.png"
+    },
+    {
+      "id": "bank-45",
+      "name": "Banco San Juan",
+      "kind": "bank",
+      "legal": "BANCO DE SAN JUAN S.A.",
+      "domain": "bancosanjuan.com"
+    },
+    {
+      "id": "bank-65",
+      "name": "Banco Municipal de Rosario",
+      "kind": "bank",
+      "legal": "BANCO MUNICIPAL DE ROSARIO",
+      "domain": "bmros.com.ar"
+    },
+    {
+      "id": "bank-72",
+      "name": "Santander",
+      "kind": "bank",
+      "legal": "BANCO SANTANDER ARGENTINA S.A.",
+      "domain": "santander.com.ar",
+      "logo": "/assets/institutions/bank-72.png"
+    },
+    {
+      "id": "bank-83",
+      "name": "Banco del Chubut",
+      "kind": "bank",
+      "legal": "BANCO DEL CHUBUT S.A.",
+      "domain": "bancochubut.com.ar"
+    },
+    {
+      "id": "bank-86",
+      "name": "Banco Santa Cruz",
+      "kind": "bank",
+      "legal": "BANCO DE SANTA CRUZ S.A.",
+      "domain": "bancosantacruz.com"
+    },
+    {
+      "id": "bank-93",
+      "name": "Banco de La Pampa",
+      "kind": "bank",
+      "legal": "BANCO DE LA PAMPA SA",
+      "domain": "bancodelapampa.com.ar",
+      "logo": "/assets/institutions/bank-93.png"
+    },
+    {
+      "id": "bank-94",
+      "name": "Banco de Corrientes",
+      "kind": "bank",
+      "legal": "BANCO DE CORRIENTES S.A.",
+      "domain": "bancodecorrientes.com.ar",
+      "logo": "/assets/institutions/bank-94.png"
+    },
+    {
+      "id": "bank-97",
+      "name": "Banco Provincia del Neuquén",
+      "kind": "bank",
+      "legal": "BANCO PROVINCIA DEL NEUQUÉN SOCIEDAD ANÓ",
+      "domain": "bpn.com.ar",
+      "logo": "/assets/institutions/bank-97.png"
+    },
+    {
+      "id": "bank-131",
+      "name": "Bank of China",
+      "kind": "bank",
+      "legal": "BANK OF CHINA LIMITED SUCURSAL BUENOS AI",
+      "domain": "bankofchina.com"
+    },
+    {
+      "id": "bank-143",
+      "name": "Brubank",
+      "kind": "bank",
+      "legal": "BRUBANK S.A.U.",
+      "domain": "brubank.com",
+      "logo": "/assets/institutions/bank-143.png"
+    },
+    {
+      "id": "bank-147",
+      "name": "Bibank",
+      "kind": "bank",
+      "legal": "BIBANK S.A.",
+      "domain": "bibank.com.ar"
+    },
+    {
+      "id": "bank-165",
+      "name": "JPMorgan Chase",
+      "kind": "bank",
+      "legal": "JPMORGAN CHASE BANK, NATIONAL ASSOCIATIO",
+      "domain": "jpmorgan.com",
+      "logo": "/assets/institutions/bank-165.png"
+    },
+    {
+      "id": "bank-191",
+      "name": "Credicoop",
+      "kind": "bank",
+      "legal": "BANCO CREDICOOP COOPERATIVO LIMITADO",
+      "domain": "bancocredicoop.coop"
+    },
+    {
+      "id": "bank-198",
+      "name": "Banco de Valores",
+      "kind": "bank",
+      "legal": "BANCO DE VALORES S.A.",
+      "domain": "bancodevalores.com.ar"
+    },
+    {
+      "id": "bank-247",
+      "name": "Banco Roela",
+      "kind": "bank",
+      "legal": "BANCO ROELA S.A.",
+      "domain": "bancoroela.com.ar",
+      "logo": "/assets/institutions/bank-247.png"
+    },
+    {
+      "id": "bank-254",
+      "name": "Banco Mariva",
+      "kind": "bank",
+      "legal": "BANCO MARIVA S.A.",
+      "domain": "mariva.com.ar"
+    },
+    {
+      "id": "bank-266",
+      "name": "BNP Paribas",
+      "kind": "bank",
+      "legal": "BNP PARIBAS",
+      "domain": "bnpparibas.com.ar"
+    },
+    {
+      "id": "bank-268",
+      "name": "Banco Tierra del Fuego",
+      "kind": "bank",
+      "legal": "BANCO PROVINCIA DE TIERRA DEL FUEGO",
+      "domain": "btf.com.ar",
+      "logo": "/assets/institutions/bank-268.png"
+    },
+    {
+      "id": "bank-269",
+      "name": "Banco República · BROU",
+      "kind": "bank",
+      "legal": "BANCO DE LA REPUBLICA ORIENTAL DEL URUGU",
+      "domain": "brou.com.uy"
+    },
+    {
+      "id": "bank-277",
+      "name": "Banco Sáenz",
+      "kind": "bank",
+      "legal": "BANCO SAENZ S.A.",
+      "domain": "bancosaenz.com.ar",
+      "logo": "/assets/institutions/bank-277.png"
+    },
+    {
+      "id": "bank-281",
+      "name": "Banco Meridian",
+      "kind": "bank",
+      "legal": "BANCO MERIDIAN S.A.",
+      "domain": "bancomeridian.com.ar"
+    },
+    {
+      "id": "bank-285",
+      "name": "Banco Macro",
+      "kind": "bank",
+      "legal": "BANCO MACRO S.A.",
+      "domain": "macro.com.ar",
+      "logo": "/assets/institutions/bank-285.png"
+    },
+    {
+      "id": "bank-299",
+      "name": "Banco Comafi",
+      "kind": "bank",
+      "legal": "BANCO COMAFI SOCIEDAD ANONIMA",
+      "domain": "comafi.com.ar"
+    },
+    {
+      "id": "bank-300",
+      "name": "BICE",
+      "kind": "bank",
+      "legal": "BANCO DE INVERSION Y COMERCIO EXTERIOR S",
+      "domain": "bice.com.ar"
+    },
+    {
+      "id": "bank-301",
+      "name": "Banco Piano",
+      "kind": "bank",
+      "legal": "BANCO PIANO S.A.",
+      "domain": "piano.com.ar"
+    },
+    {
+      "id": "bank-305",
+      "name": "Banco Julio",
+      "kind": "bank",
+      "legal": "BANCO JULIO SOCIEDAD ANONIMA",
+      "domain": "bancojulio.com"
+    },
+    {
+      "id": "bank-309",
+      "name": "Banco Rioja",
+      "kind": "bank",
+      "legal": "BANCO RIOJA SOCIEDAD ANONIMA UNIPERSONAL",
+      "domain": "bancorioja.com.ar",
+      "logo": "/assets/institutions/bank-309.png"
+    },
+    {
+      "id": "bank-310",
+      "name": "Banco del Sol",
+      "kind": "bank",
+      "legal": "BANCO DEL SOL S.A.",
+      "domain": "bancodelsol.com",
+      "logo": "/assets/institutions/bank-310.png"
+    },
+    {
+      "id": "bank-311",
+      "name": "Nuevo Banco del Chaco",
+      "kind": "bank",
+      "legal": "NUEVO BANCO DEL CHACO S. A.",
+      "domain": "nbch.com.ar",
+      "logo": "/assets/institutions/bank-311.png"
+    },
+    {
+      "id": "bank-312",
+      "name": "Banco Voii",
+      "kind": "bank",
+      "legal": "BANCO VOII S.A.",
+      "domain": "voii.com.ar",
+      "logo": "/assets/institutions/bank-312.png"
+    },
+    {
+      "id": "bank-315",
+      "name": "Banco Formosa",
+      "kind": "bank",
+      "legal": "BANCO DE FORMOSA S.A.",
+      "domain": "bancoformosa.com.ar",
+      "logo": "/assets/institutions/bank-315.png"
+    },
+    {
+      "id": "bank-319",
+      "name": "Banco CMF",
+      "kind": "bank",
+      "legal": "BANCO CMF S.A.",
+      "domain": "bancocmf.com.ar",
+      "logo": "/assets/institutions/bank-319.png"
+    },
+    {
+      "id": "bank-321",
+      "name": "Banco Santiago del Estero",
+      "kind": "bank",
+      "legal": "BANCO DE SANTIAGO DEL ESTERO S.A.",
+      "domain": "bse.com.ar"
+    },
+    {
+      "id": "bank-322",
+      "name": "Banco Industrial · BIND",
+      "kind": "bank",
+      "legal": "BANCO INDUSTRIAL S.A.",
+      "domain": "bind.com.ar"
+    },
+    {
+      "id": "bank-330",
+      "name": "Banco Santa Fe",
+      "kind": "bank",
+      "legal": "NUEVO BANCO DE SANTA FE SOCIEDAD ANONIMA",
+      "domain": "bancosantafe.com.ar"
+    },
+    {
+      "id": "bank-331",
+      "name": "Banco Cetelem",
+      "kind": "bank",
+      "legal": "BANCO CETELEM ARGENTINA S.A.",
+      "domain": "cetelem.com.ar"
+    },
+    {
+      "id": "bank-332",
+      "name": "Carrefour Banco",
+      "kind": "bank",
+      "legal": "BANCO DE SERVICIOS FINANCIEROS CARREFOUR",
+      "domain": "carrefourbanco.com.ar",
+      "logo": "/assets/institutions/bank-332.png"
+    },
+    {
+      "id": "bank-338",
+      "name": "Banco BST",
+      "kind": "bank",
+      "legal": "BANCO DE SERVICIOS Y TRANSACCIONES SAU",
+      "domain": "bst.com.ar"
+    },
+    {
+      "id": "bank-339",
+      "name": "RCI Banque",
+      "kind": "bank",
+      "legal": "RCI BANQUE S.A.",
+      "domain": "mobilize-fs.com.ar"
+    },
+    {
+      "id": "bank-340",
+      "name": "BACS",
+      "kind": "bank",
+      "legal": "BACS BANCO DE CREDITO Y SECURITIZACION S",
+      "domain": "bacs.com.ar",
+      "logo": "/assets/institutions/bank-340.png"
+    },
+    {
+      "id": "bank-341",
+      "name": "Banco Masventas",
+      "kind": "bank",
+      "legal": "BANCO MASVENTAS S.A.",
+      "domain": "bancomasventas.com.ar"
+    },
+    {
+      "id": "bank-384",
+      "name": "Ualá Bank",
+      "kind": "bank",
+      "legal": "UALA BANK S.A.U.",
+      "domain": "uala.com.ar",
+      "logo": "/assets/institutions/bank-384.png"
+    },
+    {
+      "id": "bank-386",
+      "name": "Banco Entre Ríos",
+      "kind": "bank",
+      "legal": "NUEVO BANCO DE ENTRE RÍOS S.A.",
+      "domain": "bancoentrerios.com.ar"
+    },
+    {
+      "id": "bank-389",
+      "name": "Banco Columbia",
+      "kind": "bank",
+      "legal": "BANCO COLUMBIA S.A.",
+      "domain": "bancocolumbia.com.ar"
+    },
+    {
+      "id": "bank-426",
+      "name": "Banco Bica",
+      "kind": "bank",
+      "legal": "BANCO BICA S.A.",
+      "domain": "bancobica.com.ar",
+      "logo": "/assets/institutions/bank-426.png"
+    },
+    {
+      "id": "bank-431",
+      "name": "Banco Coinag",
+      "kind": "bank",
+      "legal": "BANCO COINAG S.A.",
+      "domain": "bancocoinag.com.ar"
+    },
+    {
+      "id": "bank-432",
+      "name": "Banco de Comercio",
+      "kind": "bank",
+      "legal": "BANCO DE COMERCIO S.A.",
+      "domain": "bancodecomercio.com.ar",
+      "logo": "/assets/institutions/bank-432.png"
+    },
+    {
+      "id": "bank-435",
+      "name": "Banco Sucrédito Regional",
+      "kind": "bank",
+      "legal": "BANCO SUCREDITO REGIONAL S.A.U.",
+      "domain": "bancosucredito.com.ar",
+      "logo": "/assets/institutions/bank-435.png"
+    },
+    {
+      "id": "bank-448",
+      "name": "Banco Dino",
+      "kind": "bank",
+      "legal": "BANCO DINO S.A.",
+      "domain": "bancodino.com.ar",
+      "logo": "/assets/institutions/bank-448.png"
+    },
+    {
+      "id": "bank-44077",
+      "name": "Compañia Financiera Argentina S.A.",
+      "kind": "finance",
+      "legal": "COMPAÑIA FINANCIERA ARGENTINA S.A.",
+      "domain": ""
+    },
+    {
+      "id": "bank-44088",
+      "name": "Volkswagen Financial Services Compañia F",
+      "kind": "finance",
+      "legal": "VOLKSWAGEN FINANCIAL SERVICES COMPAÑIA F",
+      "domain": ""
+    },
+    {
+      "id": "bank-44092",
+      "name": "Fca Compañia Financiera S.A.",
+      "kind": "finance",
+      "legal": "FCA COMPAÑIA FINANCIERA S.A.",
+      "domain": ""
+    },
+    {
+      "id": "bank-44093",
+      "name": "Gpat Compañia Financiera S.A.U.",
+      "kind": "finance",
+      "legal": "GPAT COMPAÑIA FINANCIERA S.A.U.",
+      "domain": ""
+    },
+    {
+      "id": "bank-44094",
+      "name": "Mercedes-Benz Compañía Financiera Argent",
+      "kind": "finance",
+      "legal": "MERCEDES-BENZ COMPAÑÍA FINANCIERA ARGENT",
+      "domain": ""
+    },
+    {
+      "id": "bank-44095",
+      "name": "Rombo Compañía Financiera S.A.",
+      "kind": "finance",
+      "legal": "ROMBO COMPAÑÍA FINANCIERA S.A.",
+      "domain": ""
+    },
+    {
+      "id": "bank-44096",
+      "name": "John Deere Credit Compañía Financiera S.",
+      "kind": "finance",
+      "legal": "JOHN DEERE CREDIT COMPAÑÍA FINANCIERA S.",
+      "domain": ""
+    },
+    {
+      "id": "bank-44098",
+      "name": "Psa Finance Argentina Compañía Financier",
+      "kind": "finance",
+      "legal": "PSA FINANCE ARGENTINA COMPAÑÍA FINANCIER",
+      "domain": ""
+    },
+    {
+      "id": "bank-44099",
+      "name": "Toyota Compañía Financiera De Argentina",
+      "kind": "finance",
+      "legal": "TOYOTA COMPAÑÍA FINANCIERA DE ARGENTINA",
+      "domain": ""
+    },
+    {
+      "id": "bank-45030",
+      "name": "Naranja X",
+      "kind": "finance",
+      "legal": "NARANJA DIGITAL COMPAÑÍA FINANCIERA S.A.",
+      "domain": "naranjax.com",
+      "logo": "/assets/institutions/bank-45030.png"
+    },
+    {
+      "id": "bank-45056",
+      "name": "Montemar",
+      "kind": "finance",
+      "legal": "MONTEMAR COMPAÑIA FINANCIERA S.A.",
+      "domain": "montemar.com.ar",
+      "logo": "/assets/institutions/bank-45056.png"
+    },
+    {
+      "id": "bank-45072",
+      "name": "Reba",
+      "kind": "finance",
+      "legal": "REBA COMPAÑIA FINANCIERA S.A.",
+      "domain": "reba.com.ar"
+    },
+    {
+      "id": "bank-65203",
+      "name": "Crédito Regional Compañía Financiera S.A",
+      "kind": "finance",
+      "legal": "CRÉDITO REGIONAL COMPAÑÍA FINANCIERA S.A",
+      "domain": ""
+    },
+    {
+      "id": "psp-33579",
+      "name": "3 Sm S.A.",
+      "kind": "wallet",
+      "legal": "3 SM S.A.",
+      "domain": "",
+      "aliases": "3 SM S.A."
+    },
+    {
+      "id": "psp-34694",
+      "name": "Abundantia",
+      "kind": "wallet",
+      "legal": "ABUNDANTIA SRL",
+      "domain": "",
+      "aliases": "ABUNDANTIA SRL"
+    },
+    {
+      "id": "psp-34700",
+      "name": "Ac Internacional Finanzas",
+      "kind": "wallet",
+      "legal": "AC INTERNACIONAL FINANZAS S. R. L.",
+      "domain": "",
+      "aliases": "AC INTERNACIONAL FINANZAS S. R. L."
+    },
+    {
+      "id": "psp-34762",
+      "name": "Activepay",
+      "kind": "wallet",
+      "legal": "ActivePay SAS",
+      "domain": "",
+      "aliases": "ActivePay SAS"
+    },
+    {
+      "id": "psp-34630",
+      "name": "Adelantos Pay",
+      "kind": "wallet",
+      "legal": "Adelantos Pay S.A.",
+      "domain": "",
+      "aliases": "Adelantos Pay S.A."
+    },
+    {
+      "id": "psp-33520",
+      "name": "PlusPagos",
+      "kind": "wallet",
+      "legal": "ADMINISTRADORA SAN JUAN S.A.",
+      "domain": "pluspagos.com",
+      "aliases": "plus pagos",
+      "logo": "/assets/institutions/psp-33520.png"
+    },
+    {
+      "id": "psp-34688",
+      "name": "Abeja Pagos",
+      "kind": "wallet",
+      "legal": "ADVANCE QUALITY SA",
+      "domain": "",
+      "aliases": "ADVANCE QUALITY SA"
+    },
+    {
+      "id": "psp-33589",
+      "name": "Hooli",
+      "kind": "wallet",
+      "legal": "Airata S.A.",
+      "domain": "",
+      "aliases": "Airata S.A."
+    },
+    {
+      "id": "psp-33549",
+      "name": "Ualá",
+      "kind": "wallet",
+      "legal": "ALAU TECNOLOGIA S. A. U.",
+      "domain": "uala.com.ar",
+      "aliases": "uala",
+      "logo": "/assets/institutions/psp-33549.png"
+    },
+    {
+      "id": "psp-33654",
+      "name": "Qira Pagos",
+      "kind": "wallet",
+      "legal": "ALZ MERCADOS SA",
+      "domain": "",
+      "aliases": "ALZ MERCADOS SA"
+    },
+    {
+      "id": "psp-34540",
+      "name": "Bricks M2V",
+      "kind": "wallet",
+      "legal": "APG ADVISORS SA",
+      "domain": "",
+      "aliases": "APG ADVISORS SA"
+    },
+    {
+      "id": "psp-34696",
+      "name": "Mybe",
+      "kind": "wallet",
+      "legal": "ARG1 PSP S.A.",
+      "domain": "",
+      "aliases": "ARG1 PSP S.A."
+    },
+    {
+      "id": "psp-33765",
+      "name": "Global66",
+      "kind": "wallet",
+      "legal": "ARGPAGOS S.A.",
+      "domain": "global66.com",
+      "aliases": "global 66",
+      "logo": "/assets/institutions/psp-33765.png"
+    },
+    {
+      "id": "psp-34677",
+      "name": "Argypay",
+      "kind": "wallet",
+      "legal": "ARGY PAY S.A",
+      "domain": "",
+      "aliases": "ARGY PAY S.A"
+    },
+    {
+      "id": "psp-34680",
+      "name": "Atom Pay S.A",
+      "kind": "wallet",
+      "legal": "ATOM PAY S.A",
+      "domain": "",
+      "aliases": "ATOM PAY S.A"
+    },
+    {
+      "id": "psp-34704",
+      "name": "Atoq",
+      "kind": "wallet",
+      "legal": "ATOQ Digital S.A.",
+      "domain": "",
+      "aliases": "ATOQ Digital S.A."
+    },
+    {
+      "id": "psp-34753",
+      "name": "Aura",
+      "kind": "wallet",
+      "legal": "Auratica SRL",
+      "domain": "",
+      "aliases": "Auratica SRL"
+    },
+    {
+      "id": "psp-33699",
+      "name": "Bamba",
+      "kind": "wallet",
+      "legal": "Bamba S.A.",
+      "domain": "",
+      "aliases": "Bamba S.A."
+    },
+    {
+      "id": "psp-33584",
+      "name": "Paycloud",
+      "kind": "wallet",
+      "legal": "BCLOUD SA",
+      "domain": "",
+      "aliases": "BCLOUD SA"
+    },
+    {
+      "id": "psp-34745",
+      "name": "Bdc Plus S.A.",
+      "kind": "wallet",
+      "legal": "BDC PLUS S.A.",
+      "domain": "",
+      "aliases": "BDC PLUS S.A."
+    },
+    {
+      "id": "psp-33547",
+      "name": "Benkopay",
+      "kind": "wallet",
+      "legal": "BenkoPay S.A.",
+      "domain": "",
+      "aliases": "BenkoPay S.A."
+    },
+    {
+      "id": "psp-33638",
+      "name": "Billeterapais",
+      "kind": "wallet",
+      "legal": "BILLETERAPAIS S A",
+      "domain": "",
+      "aliases": "BILLETERAPAIS S A"
+    },
+    {
+      "id": "psp-34527",
+      "name": "Bind Psp",
+      "kind": "wallet",
+      "legal": "BIND PSP S.A.",
+      "domain": "",
+      "aliases": "BIND PSP S.A."
+    },
+    {
+      "id": "psp-34616",
+      "name": "Bivo S.A.S.",
+      "kind": "wallet",
+      "legal": "BIVO S.A.S.",
+      "domain": "",
+      "aliases": "BIVO S.A.S."
+    },
+    {
+      "id": "psp-33674",
+      "name": "Bizland Payment Solutions S.A.",
+      "kind": "wallet",
+      "legal": "BIZLAND PAYMENT SOLUTIONS S.A.",
+      "domain": "",
+      "aliases": "BIZLAND PAYMENT SOLUTIONS S.A."
+    },
+    {
+      "id": "psp-34530",
+      "name": "Bk Digital Services",
+      "kind": "wallet",
+      "legal": "BLOCK DIGITAL SERVICES S.A.",
+      "domain": "",
+      "aliases": "BLOCK DIGITAL SERVICES S.A."
+    },
+    {
+      "id": "psp-34566",
+      "name": "Forty",
+      "kind": "wallet",
+      "legal": "BLOCK4BLOCK PAYMENTS RAIL S.A.",
+      "domain": "",
+      "aliases": "BLOCK4BLOCK PAYMENTS RAIL S.A."
+    },
+    {
+      "id": "psp-34516",
+      "name": "n1u",
+      "kind": "wallet",
+      "legal": "Blockchain Payments Rails S.A.",
+      "domain": "n1u.app",
+      "aliases": "n1u level"
+    },
+    {
+      "id": "psp-34631",
+      "name": "Bridge Solutions",
+      "kind": "wallet",
+      "legal": "BRIDGE SOLUTIONS SA",
+      "domain": "",
+      "aliases": "BRIDGE SOLUTIONS SA"
+    },
+    {
+      "id": "psp-34634",
+      "name": "Zimo",
+      "kind": "wallet",
+      "legal": "BUHAPAY S.A.",
+      "domain": "",
+      "aliases": "BUHAPAY S.A."
+    },
+    {
+      "id": "psp-33743",
+      "name": "Finket",
+      "kind": "wallet",
+      "legal": "C-TECH S.A.",
+      "domain": "",
+      "aliases": "C-TECH S.A."
+    },
+    {
+      "id": "psp-34557",
+      "name": "Cardcred",
+      "kind": "wallet",
+      "legal": "CARDCRED DIGITAL S.A.",
+      "domain": "",
+      "aliases": "CARDCRED DIGITAL S.A."
+    },
+    {
+      "id": "psp-34639",
+      "name": "Cencopay",
+      "kind": "wallet",
+      "legal": "CENCOSUD S A",
+      "domain": "cencopay.com.ar",
+      "aliases": "cencosud",
+      "logo": "/assets/institutions/psp-34639.png"
+    },
+    {
+      "id": "psp-34606",
+      "name": "Girox",
+      "kind": "wallet",
+      "legal": "CHI CAPITAL S.A.",
+      "domain": "",
+      "aliases": "CHI CAPITAL S.A."
+    },
+    {
+      "id": "psp-33639",
+      "name": "Chronos",
+      "kind": "wallet",
+      "legal": "CHRONOSWALLET S.A.",
+      "domain": "",
+      "aliases": "CHRONOSWALLET S.A."
+    },
+    {
+      "id": "psp-33700",
+      "name": "Coin",
+      "kind": "wallet",
+      "legal": "Cobro Inmediato Technologies SA",
+      "domain": "",
+      "aliases": "Cobro Inmediato Technologies SA"
+    },
+    {
+      "id": "psp-34623",
+      "name": "Cash Wallet",
+      "kind": "wallet",
+      "legal": "COMPAÑIA ALTAS SIERRAS HERMANAS S.R.L",
+      "domain": "",
+      "aliases": "COMPAÑIA ALTAS SIERRAS HERMANAS S.R.L"
+    },
+    {
+      "id": "psp-34503",
+      "name": "Rampy",
+      "kind": "wallet",
+      "legal": "CONEXION DE ALTURA S. A.",
+      "domain": "",
+      "aliases": "CONEXION DE ALTURA S. A."
+    },
+    {
+      "id": "psp-34708",
+      "name": "Confluencia It",
+      "kind": "wallet",
+      "legal": "Confluencia FTO S.R.L.",
+      "domain": "",
+      "aliases": "Confluencia FTO S.R.L."
+    },
+    {
+      "id": "psp-34717",
+      "name": "Qorp",
+      "kind": "wallet",
+      "legal": "CORPOTECH S.A.",
+      "domain": "",
+      "aliases": "CORPOTECH S.A."
+    },
+    {
+      "id": "psp-33732",
+      "name": "Credencial Argentina",
+      "kind": "wallet",
+      "legal": "CREDENCIAL ARGENTINA S.A.",
+      "domain": "",
+      "aliases": "CREDENCIAL ARGENTINA S.A."
+    },
+    {
+      "id": "psp-34553",
+      "name": "Click+",
+      "kind": "wallet",
+      "legal": "CREDINOS COOPERATIVA DE VIVIENDA, CREDITO, CONSUMO, SERVICIOS ASISTENCIALES Y DE TURISMO LTDA",
+      "domain": "",
+      "aliases": "CREDINOS COOPERATIVA DE VIVIENDA, CREDITO, CONSUMO, SERVICIOS ASISTENCIALES Y DE TURISMO LTDA"
+    },
+    {
+      "id": "psp-33567",
+      "name": "Credisi Online",
+      "kind": "wallet",
+      "legal": "CREDISI SRL",
+      "domain": "",
+      "aliases": "CREDISI SRL"
+    },
+    {
+      "id": "psp-34600",
+      "name": "Cresium",
+      "kind": "wallet",
+      "legal": "CRESIUM SA",
+      "domain": "",
+      "aliases": "CRESIUM SA"
+    },
+    {
+      "id": "psp-33648",
+      "name": "Ultra",
+      "kind": "wallet",
+      "legal": "CUMAR SA",
+      "domain": "",
+      "aliases": "CUMAR SA"
+    },
+    {
+      "id": "psp-33564",
+      "name": "Allaria+",
+      "kind": "wallet",
+      "legal": "Daruma Pagos SA",
+      "domain": "",
+      "aliases": "Daruma Pagos SA"
+    },
+    {
+      "id": "psp-34552",
+      "name": "Data 3.0",
+      "kind": "wallet",
+      "legal": "Data 2000 S.A.",
+      "domain": "",
+      "aliases": "Data 2000 S.A."
+    },
+    {
+      "id": "psp-34665",
+      "name": "Datapay",
+      "kind": "wallet",
+      "legal": "DATAPAY S.A.",
+      "domain": "",
+      "aliases": "DATAPAY S.A."
+    },
+    {
+      "id": "psp-34692",
+      "name": "D-Pay",
+      "kind": "wallet",
+      "legal": "DataPay Solutions SA",
+      "domain": "",
+      "aliases": "DataPay Solutions SA"
+    },
+    {
+      "id": "psp-33631",
+      "name": "Decampopagos",
+      "kind": "wallet",
+      "legal": "DE CAMPO A CAMPO S.R.L.",
+      "domain": "",
+      "aliases": "DE CAMPO A CAMPO S.R.L."
+    },
+    {
+      "id": "psp-34567",
+      "name": "Norpay",
+      "kind": "wallet",
+      "legal": "Del Norte PSP SA",
+      "domain": "",
+      "aliases": "Del Norte PSP SA"
+    },
+    {
+      "id": "psp-33663",
+      "name": "Pedidosya",
+      "kind": "wallet",
+      "legal": "Delivery Hero Financial Services SA",
+      "domain": "",
+      "aliases": "Delivery Hero Financial Services SA"
+    },
+    {
+      "id": "psp-34758",
+      "name": "De Pagos S.A",
+      "kind": "wallet",
+      "legal": "DEPAGOS S.A.",
+      "domain": "",
+      "aliases": "DEPAGOS S.A."
+    },
+    {
+      "id": "psp-34738",
+      "name": "Depay",
+      "kind": "wallet",
+      "legal": "DEPAYMENTS S.A.",
+      "domain": "",
+      "aliases": "DEPAYMENTS S.A."
+    },
+    {
+      "id": "psp-33627",
+      "name": "Digifin",
+      "kind": "wallet",
+      "legal": "DIGIFIN S. A.",
+      "domain": "",
+      "aliases": "DIGIFIN S. A."
+    },
+    {
+      "id": "psp-33717",
+      "name": "Digipayments S.A.U",
+      "kind": "wallet",
+      "legal": "DIGIPAYMENTS SAU",
+      "domain": "",
+      "aliases": "DIGIPAYMENTS SAU"
+    },
+    {
+      "id": "psp-34715",
+      "name": "Digitalpago",
+      "kind": "wallet",
+      "legal": "DIGITALPAGO SRL",
+      "domain": "",
+      "aliases": "DIGITALPAGO SRL"
+    },
+    {
+      "id": "psp-34703",
+      "name": "Mpagos",
+      "kind": "wallet",
+      "legal": "E Servicios SAS",
+      "domain": "",
+      "aliases": "E Servicios SAS"
+    },
+    {
+      "id": "psp-33689",
+      "name": "E-Cobro",
+      "kind": "wallet",
+      "legal": "E-COBRO S.A.",
+      "domain": "",
+      "aliases": "E-COBRO S.A."
+    },
+    {
+      "id": "psp-33670",
+      "name": "Epagos",
+      "kind": "wallet",
+      "legal": "E-PAGOS S.A.",
+      "domain": "",
+      "aliases": "E-PAGOS S.A."
+    },
+    {
+      "id": "psp-34673",
+      "name": "Ecash",
+      "kind": "wallet",
+      "legal": "ECASH MEDIOS DE PAGOS S.A.S",
+      "domain": "",
+      "aliases": "ECASH MEDIOS DE PAGOS S.A.S"
+    },
+    {
+      "id": "psp-33542",
+      "name": "Efectivo Digital S.R.L.",
+      "kind": "wallet",
+      "legal": "EFECTIVO DIGITAL S.R.L.",
+      "domain": "",
+      "aliases": "EFECTIVO DIGITAL S.R.L."
+    },
+    {
+      "id": "psp-34724",
+      "name": "Gallo Pay",
+      "kind": "wallet",
+      "legal": "Estudio Gallo S.R.L",
+      "domain": "",
+      "aliases": "Estudio Gallo S.R.L"
+    },
+    {
+      "id": "psp-34693",
+      "name": "Eterna Finance S.R.L",
+      "kind": "wallet",
+      "legal": "Eterna Finance S.R.L",
+      "domain": "",
+      "aliases": "Eterna Finance S.R.L"
+    },
+    {
+      "id": "psp-34544",
+      "name": "Sys",
+      "kind": "wallet",
+      "legal": "EVAPAR S.A.",
+      "domain": "",
+      "aliases": "EVAPAR S.A."
+    },
+    {
+      "id": "psp-34687",
+      "name": "Excellent Pay",
+      "kind": "wallet",
+      "legal": "Excellent Pay S.R.L.",
+      "domain": "",
+      "aliases": "Excellent Pay S.R.L."
+    },
+    {
+      "id": "psp-34719",
+      "name": "Faber",
+      "kind": "wallet",
+      "legal": "FABER EXPRESS SRL",
+      "domain": "",
+      "aliases": "FABER EXPRESS SRL"
+    },
+    {
+      "id": "psp-33745",
+      "name": "Arpay",
+      "kind": "wallet",
+      "legal": "FCM PAYMENT SOLUTIONS S.A.S.",
+      "domain": "",
+      "aliases": "FCM PAYMENT SOLUTIONS S.A.S."
+    },
+    {
+      "id": "psp-33571",
+      "name": "Facaf",
+      "kind": "wallet",
+      "legal": "FEDERACION ARGENTINA DE CAMARAS DE FARMACIAS",
+      "domain": "",
+      "aliases": "FEDERACION ARGENTINA DE CAMARAS DE FARMACIAS"
+    },
+    {
+      "id": "psp-34508",
+      "name": "Al2",
+      "kind": "wallet",
+      "legal": "FERSI S.A.",
+      "domain": "",
+      "aliases": "FERSI S.A."
+    },
+    {
+      "id": "psp-33646",
+      "name": "Fértil Suma",
+      "kind": "wallet",
+      "legal": "FERTIL FINANZAS S.A.",
+      "domain": "",
+      "aliases": "FERTIL FINANZAS S.A."
+    },
+    {
+      "id": "psp-34667",
+      "name": "Fidufina",
+      "kind": "wallet",
+      "legal": "Fidufina S.A.S.",
+      "domain": "",
+      "aliases": "Fidufina S.A.S."
+    },
+    {
+      "id": "psp-34706",
+      "name": "Finpay",
+      "kind": "wallet",
+      "legal": "Finpay SA",
+      "domain": "",
+      "aliases": "Finpay SA"
+    },
+    {
+      "id": "psp-33757",
+      "name": "Integra Pagos",
+      "kind": "wallet",
+      "legal": "FIRENZE COOPERATIVA DE CREDITO CONSUMO VIVIENDA TURISMO Y SERVICIOS ASISTENCIALES LTDA",
+      "domain": "",
+      "aliases": "FIRENZE COOPERATIVA DE CREDITO CONSUMO VIVIENDA TURISMO Y SERVICIOS ASISTENCIALES LTDA"
+    },
+    {
+      "id": "psp-34539",
+      "name": "Fiwind",
+      "kind": "wallet",
+      "legal": "FIWIND PAY SA",
+      "domain": "fiwind.io",
+      "aliases": "fiwind pay",
+      "logo": "/assets/institutions/psp-34539.png"
+    },
+    {
+      "id": "psp-34746",
+      "name": "Flexigopay",
+      "kind": "wallet",
+      "legal": "Flexigopay S.A.",
+      "domain": "",
+      "aliases": "Flexigopay S.A."
+    },
+    {
+      "id": "psp-34585",
+      "name": "Sipago",
+      "kind": "wallet",
+      "legal": "Fraterna Cooperativa de Provision de Serv. Ltda",
+      "domain": "",
+      "aliases": "Fraterna Cooperativa de Provision de Serv. Ltda"
+    },
+    {
+      "id": "psp-34752",
+      "name": "Chifu",
+      "kind": "wallet",
+      "legal": "FU CHI LI S.A.",
+      "domain": "",
+      "aliases": "FU CHI LI S.A."
+    },
+    {
+      "id": "psp-34520",
+      "name": "Tach",
+      "kind": "wallet",
+      "legal": "FULL ACCESS S.A.",
+      "domain": "",
+      "aliases": "FULL ACCESS S.A."
+    },
+    {
+      "id": "psp-33661",
+      "name": "Garpa Sa",
+      "kind": "wallet",
+      "legal": "GARPA S. A.",
+      "domain": "",
+      "aliases": "GARPA S. A."
+    },
+    {
+      "id": "psp-34668",
+      "name": "Gb Psp Sas",
+      "kind": "wallet",
+      "legal": "GB PSP SAS",
+      "domain": "",
+      "aliases": "GB PSP SAS"
+    },
+    {
+      "id": "psp-33778",
+      "name": "Tera",
+      "kind": "wallet",
+      "legal": "Global Financial And Credit Service SA",
+      "domain": "",
+      "aliases": "Global Financial And Credit Service SA"
+    },
+    {
+      "id": "psp-34563",
+      "name": "Go Pay",
+      "kind": "wallet",
+      "legal": "GO PAY S. A. S.",
+      "domain": "",
+      "aliases": "GO PAY S. A. S."
+    },
+    {
+      "id": "psp-33706",
+      "name": "Goat",
+      "kind": "wallet",
+      "legal": "GOAT S.A.",
+      "domain": "",
+      "aliases": "GOAT S.A."
+    },
+    {
+      "id": "psp-34767",
+      "name": "Golfin",
+      "kind": "wallet",
+      "legal": "Golfin SA",
+      "domain": "",
+      "aliases": "Golfin SA"
+    },
+    {
+      "id": "psp-34726",
+      "name": "Gominpay Srl",
+      "kind": "wallet",
+      "legal": "GOMINPAY SRL",
+      "domain": "",
+      "aliases": "GOMINPAY SRL"
+    },
+    {
+      "id": "psp-33786",
+      "name": "G-Pagos",
+      "kind": "wallet",
+      "legal": "GROW SOLUTIONS SA",
+      "domain": "",
+      "aliases": "GROW SOLUTIONS SA"
+    },
+    {
+      "id": "psp-34565",
+      "name": "Pandapay",
+      "kind": "wallet",
+      "legal": "Grupo Panda SRL",
+      "domain": "",
+      "aliases": "Grupo Panda SRL"
+    },
+    {
+      "id": "psp-34650",
+      "name": "Guavapay",
+      "kind": "wallet",
+      "legal": "GUAVAPAY ARGENTINA S.A",
+      "domain": "",
+      "aliases": "GUAVAPAY ARGENTINA S.A"
+    },
+    {
+      "id": "psp-34658",
+      "name": "F5 Pagos Online",
+      "kind": "wallet",
+      "legal": "HABITO UNO S.A.",
+      "domain": "",
+      "aliases": "HABITO UNO S.A."
+    },
+    {
+      "id": "psp-34718",
+      "name": "Happypay",
+      "kind": "wallet",
+      "legal": "HAPPYPAY S.A.",
+      "domain": "",
+      "aliases": "HAPPYPAY S.A."
+    },
+    {
+      "id": "psp-34649",
+      "name": "Haz Pagos S.A.",
+      "kind": "wallet",
+      "legal": "Haz Pagos S.A.",
+      "domain": "",
+      "aliases": "Haz Pagos S.A."
+    },
+    {
+      "id": "psp-34659",
+      "name": "Her",
+      "kind": "wallet",
+      "legal": "Her Chi SA",
+      "domain": "",
+      "aliases": "Her Chi SA"
+    },
+    {
+      "id": "psp-34728",
+      "name": "Creed",
+      "kind": "wallet",
+      "legal": "Hogo Servicios Fiduciarios S.A.",
+      "domain": "",
+      "aliases": "Hogo Servicios Fiduciarios S.A."
+    },
+    {
+      "id": "psp-34736",
+      "name": "Ibanera",
+      "kind": "wallet",
+      "legal": "IBANERA S.A.",
+      "domain": "",
+      "aliases": "IBANERA S.A."
+    },
+    {
+      "id": "psp-33733",
+      "name": "Ibba",
+      "kind": "wallet",
+      "legal": "IBBA Group SRL",
+      "domain": "",
+      "aliases": "IBBA Group SRL"
+    },
+    {
+      "id": "psp-33751",
+      "name": "Ikepago",
+      "kind": "wallet",
+      "legal": "IKERPAY S.A.",
+      "domain": "",
+      "aliases": "IKERPAY S.A."
+    },
+    {
+      "id": "psp-34548",
+      "name": "Ini",
+      "kind": "wallet",
+      "legal": "INI Pagos SA",
+      "domain": "",
+      "aliases": "INI Pagos SA"
+    },
+    {
+      "id": "psp-34534",
+      "name": "Insight Business",
+      "kind": "wallet",
+      "legal": "INSIGHT BUSINESS S.A.",
+      "domain": "",
+      "aliases": "INSIGHT BUSINESS S.A."
+    },
+    {
+      "id": "psp-33744",
+      "name": "Linkin / Linkingpos",
+      "kind": "wallet",
+      "legal": "INSPIRATIONAL GROWTH S.A.",
+      "domain": "",
+      "aliases": "INSPIRATIONAL GROWTH S.A."
+    },
+    {
+      "id": "psp-34660",
+      "name": "Interpays",
+      "kind": "wallet",
+      "legal": "Interpays SA",
+      "domain": "",
+      "aliases": "Interpays SA"
+    },
+    {
+      "id": "psp-34722",
+      "name": "Ipagos S.A",
+      "kind": "wallet",
+      "legal": "IPAGOS SA",
+      "domain": "",
+      "aliases": "IPAGOS SA"
+    },
+    {
+      "id": "psp-34712",
+      "name": "Janua Pay",
+      "kind": "wallet",
+      "legal": "JANUA SA",
+      "domain": "",
+      "aliases": "JANUA SA"
+    },
+    {
+      "id": "psp-34749",
+      "name": "Kamipay",
+      "kind": "wallet",
+      "legal": "kamiPay SA",
+      "domain": "",
+      "aliases": "kamiPay SA"
+    },
+    {
+      "id": "psp-34751",
+      "name": "Kash U",
+      "kind": "wallet",
+      "legal": "KASHU S.A.",
+      "domain": "",
+      "aliases": "KASHU S.A."
+    },
+    {
+      "id": "psp-34763",
+      "name": "Killb",
+      "kind": "wallet",
+      "legal": "KBI Tech SRL",
+      "domain": "",
+      "aliases": "KBI Tech SRL"
+    },
+    {
+      "id": "psp-34669",
+      "name": "Ki",
+      "kind": "wallet",
+      "legal": "KI ON S.A.",
+      "domain": "",
+      "aliases": "KI ON S.A."
+    },
+    {
+      "id": "psp-34714",
+      "name": "Kiwi Pay S.R.L",
+      "kind": "wallet",
+      "legal": "KIWI PAY S.R.L.",
+      "domain": "",
+      "aliases": "KIWI PAY S.R.L."
+    },
+    {
+      "id": "psp-34538",
+      "name": "Koipay",
+      "kind": "wallet",
+      "legal": "KOIPAY ARGENTINA S.A.",
+      "domain": "",
+      "aliases": "KOIPAY ARGENTINA S.A."
+    },
+    {
+      "id": "psp-33739",
+      "name": "Lb Finanzas S.A.",
+      "kind": "wallet",
+      "legal": "LB FINANZAS S.A.",
+      "domain": "",
+      "aliases": "LB FINANZAS S.A."
+    },
+    {
+      "id": "psp-34727",
+      "name": "Koywe",
+      "kind": "wallet",
+      "legal": "LENGA PAYMENTS S.R.L.",
+      "domain": "",
+      "aliases": "LENGA PAYMENTS S.R.L."
+    },
+    {
+      "id": "psp-34644",
+      "name": "Lista",
+      "kind": "wallet",
+      "legal": "Lista SA",
+      "domain": "",
+      "aliases": "Lista SA"
+    },
+    {
+      "id": "psp-33772",
+      "name": "Lohas",
+      "kind": "wallet",
+      "legal": "LOHAS S.A.S.",
+      "domain": "",
+      "aliases": "LOHAS S.A.S."
+    },
+    {
+      "id": "psp-34710",
+      "name": "Lupo Payments S.A.",
+      "kind": "wallet",
+      "legal": "Lupo Payments S.A.",
+      "domain": "",
+      "aliases": "Lupo Payments S.A."
+    },
+    {
+      "id": "psp-34747",
+      "name": "Cuyo Pay",
+      "kind": "wallet",
+      "legal": "Luxeo Digital Solutions S.A.S.",
+      "domain": "",
+      "aliases": "Luxeo Digital Solutions S.A.S."
+    },
+    {
+      "id": "psp-33658",
+      "name": "Lux 11",
+      "kind": "wallet",
+      "legal": "MAKEKE S.A.S.",
+      "domain": "",
+      "aliases": "MAKEKE S.A.S."
+    },
+    {
+      "id": "psp-34536",
+      "name": "Mamut Pagos S.A.",
+      "kind": "wallet",
+      "legal": "MAMUT PAGOS S.A.",
+      "domain": "",
+      "aliases": "MAMUT PAGOS S.A."
+    },
+    {
+      "id": "psp-34614",
+      "name": "Manguear",
+      "kind": "wallet",
+      "legal": "MANGUEAR S.A.",
+      "domain": "",
+      "aliases": "MANGUEAR S.A."
+    },
+    {
+      "id": "psp-34737",
+      "name": "Mariaspi S. R. L.",
+      "kind": "wallet",
+      "legal": "MARIASPI S. R. L.",
+      "domain": "",
+      "aliases": "MARIASPI S. R. L."
+    },
+    {
+      "id": "psp-33784",
+      "name": "+Simple",
+      "kind": "wallet",
+      "legal": "MAS SIMPLE S.A.",
+      "domain": "massimple.com.ar",
+      "aliases": "mas simple",
+      "logo": "/assets/institutions/psp-33784.png"
+    },
+    {
+      "id": "psp-33796",
+      "name": "Bipagos",
+      "kind": "wallet",
+      "legal": "MASSTRADING SA",
+      "domain": "",
+      "aliases": "MASSTRADING SA"
+    },
+    {
+      "id": "psp-34584",
+      "name": "Max Pay",
+      "kind": "wallet",
+      "legal": "Max Pay S.A.U.",
+      "domain": "",
+      "aliases": "Max Pay S.A.U."
+    },
+    {
+      "id": "psp-34535",
+      "name": "Mecaenpol",
+      "kind": "wallet",
+      "legal": "MECAENPOL S. R. L.",
+      "domain": "",
+      "aliases": "MECAENPOL S. R. L."
+    },
+    {
+      "id": "psp-33535",
+      "name": "Mercado Pago",
+      "kind": "wallet",
+      "legal": "MERCADOLIBRE S.R.L.",
+      "domain": "mercadopago.com.ar",
+      "aliases": "mp mercado libre",
+      "logo": "/assets/institutions/psp-33535.png"
+    },
+    {
+      "id": "psp-33665",
+      "name": "Personal Pay",
+      "kind": "wallet",
+      "legal": "MICRO SISTEMAS S. A.",
+      "domain": "personalpay.com.ar",
+      "aliases": "pp"
+    },
+    {
+      "id": "psp-34734",
+      "name": "Millenium Pay S.A.",
+      "kind": "wallet",
+      "legal": "MILLENIUM PAY S.A.",
+      "domain": "",
+      "aliases": "MILLENIUM PAY S.A."
+    },
+    {
+      "id": "psp-33532",
+      "name": "Mobbex",
+      "kind": "wallet",
+      "legal": "MOBBEX ARGENTINA SRL",
+      "domain": "mobbex.com",
+      "aliases": "mobbex",
+      "logo": "/assets/institutions/psp-33532.png"
+    },
+    {
+      "id": "psp-34546",
+      "name": "Momentum Pagos",
+      "kind": "wallet",
+      "legal": "Momentum Pagos S.A.U.",
+      "domain": "",
+      "aliases": "Momentum Pagos S.A.U."
+    },
+    {
+      "id": "psp-34624",
+      "name": "Moli",
+      "kind": "wallet",
+      "legal": "Money Life S.R.L",
+      "domain": "",
+      "aliases": "Money Life S.R.L"
+    },
+    {
+      "id": "psp-33550",
+      "name": "Moni",
+      "kind": "wallet",
+      "legal": "Moni Online SA",
+      "domain": "moni.com.ar",
+      "aliases": "moni online",
+      "logo": "/assets/institutions/psp-33550.png"
+    },
+    {
+      "id": "psp-33575",
+      "name": "Clickaut",
+      "kind": "wallet",
+      "legal": "MORPHYNG S.A.",
+      "domain": "",
+      "aliases": "MORPHYNG S.A."
+    },
+    {
+      "id": "psp-33729",
+      "name": "Ya Ganaste",
+      "kind": "wallet",
+      "legal": "Movil Carga SA",
+      "domain": "",
+      "aliases": "Movil Carga SA"
+    },
+    {
+      "id": "psp-33587",
+      "name": "Onda Siempre Podés Comprar",
+      "kind": "wallet",
+      "legal": "MOVILCASH S.A.",
+      "domain": "",
+      "aliases": "MOVILCASH S.A."
+    },
+    {
+      "id": "psp-33755",
+      "name": "Via Pago",
+      "kind": "wallet",
+      "legal": "MOVIMIENTO MKT S.R.L.",
+      "domain": "",
+      "aliases": "MOVIMIENTO MKT S.R.L."
+    },
+    {
+      "id": "psp-34713",
+      "name": "Modapago",
+      "kind": "wallet",
+      "legal": "MP PAYMENTS SA",
+      "domain": "",
+      "aliases": "MP PAYMENTS SA"
+    },
+    {
+      "id": "psp-34698",
+      "name": "Mpay S.A",
+      "kind": "wallet",
+      "legal": "MPAY S.A.",
+      "domain": "",
+      "aliases": "MPAY S.A."
+    },
+    {
+      "id": "psp-34729",
+      "name": "Mpayments S.A",
+      "kind": "wallet",
+      "legal": "MPAYMENTS S.A",
+      "domain": "",
+      "aliases": "MPAYMENTS S.A"
+    },
+    {
+      "id": "psp-34594",
+      "name": "Mutual De Socios De La Asociación Médica De Rosario",
+      "kind": "wallet",
+      "legal": "MUTUAL DE SOCIOS DE LA ASOCIACION MEDICA DE ROSARIO",
+      "domain": "",
+      "aliases": "MUTUAL DE SOCIOS DE LA ASOCIACION MEDICA DE ROSARIO"
+    },
+    {
+      "id": "psp-33558",
+      "name": "Hnt",
+      "kind": "wallet",
+      "legal": "myHNT SRL",
+      "domain": "",
+      "aliases": "myHNT SRL"
+    },
+    {
+      "id": "psp-34525",
+      "name": "Natura Pay",
+      "kind": "wallet",
+      "legal": "N&Co Pay Servicios Financieros y Tecnológicos en Pagos Electrónicos S.R.L.",
+      "domain": "",
+      "aliases": "N&Co Pay Servicios Financieros y Tecnológicos en Pagos Electrónicos S.R.L."
+    },
+    {
+      "id": "psp-33555",
+      "name": "SUBE",
+      "kind": "wallet",
+      "legal": "NACION SERVICIOS S A",
+      "domain": "argentina.gob.ar",
+      "aliases": "sube",
+      "logo": "/assets/institutions/psp-33555.png"
+    },
+    {
+      "id": "psp-34705",
+      "name": "Ñandu Pay",
+      "kind": "wallet",
+      "legal": "ÑANDU PAY S.A.",
+      "domain": "",
+      "aliases": "ÑANDU PAY S.A."
+    },
+    {
+      "id": "psp-33785",
+      "name": "Nanowallet",
+      "kind": "wallet",
+      "legal": "Nanowallet SA",
+      "domain": "",
+      "aliases": "Nanowallet SA"
+    },
+    {
+      "id": "psp-33569",
+      "name": "Aqui Cobro",
+      "kind": "wallet",
+      "legal": "NEG ARGENTINA SRL",
+      "domain": "",
+      "aliases": "NEG ARGENTINA SRL"
+    },
+    {
+      "id": "psp-34551",
+      "name": "New Finance S.A.",
+      "kind": "wallet",
+      "legal": "New Finance S.A.",
+      "domain": "",
+      "aliases": "New Finance S.A."
+    },
+    {
+      "id": "psp-34701",
+      "name": "Nova Collect Plus",
+      "kind": "wallet",
+      "legal": "NOVA COLLECT PLUS S.A.",
+      "domain": "",
+      "aliases": "NOVA COLLECT PLUS S.A."
+    },
+    {
+      "id": "psp-34502",
+      "name": "Nvio Argentina",
+      "kind": "wallet",
+      "legal": "NVIO PAGOS ARGENTINA S.A.U.",
+      "domain": "",
+      "aliases": "NVIO PAGOS ARGENTINA S.A.U."
+    },
+    {
+      "id": "psp-34641",
+      "name": "One Touch Pay",
+      "kind": "wallet",
+      "legal": "ONE TOUCH PAY SRL",
+      "domain": "",
+      "aliases": "ONE TOUCH PAY SRL"
+    },
+    {
+      "id": "psp-33754",
+      "name": "Openpay",
+      "kind": "wallet",
+      "legal": "OPENPAY ARGENTINA S.A.",
+      "domain": "",
+      "aliases": "OPENPAY ARGENTINA S.A."
+    },
+    {
+      "id": "psp-33681",
+      "name": "Claro Pay",
+      "kind": "wallet",
+      "legal": "OPM ARGENTINA S A",
+      "domain": "claropay.com.ar",
+      "aliases": "claro",
+      "logo": "/assets/institutions/psp-33681.png"
+    },
+    {
+      "id": "psp-33545",
+      "name": "Clover App",
+      "kind": "wallet",
+      "legal": "ORANGE DATA SA",
+      "domain": "",
+      "aliases": "ORANGE DATA SA"
+    },
+    {
+      "id": "psp-34662",
+      "name": "Pago Flex",
+      "kind": "wallet",
+      "legal": "PAGO FLEX SA",
+      "domain": "",
+      "aliases": "PAGO FLEX SA"
+    },
+    {
+      "id": "psp-33524",
+      "name": "Pago Virtual Del Sur Sa",
+      "kind": "wallet",
+      "legal": "PAGO VIRTUAL DEL SUR S. A.",
+      "domain": "",
+      "aliases": "PAGO VIRTUAL DEL SUR S. A."
+    },
+    {
+      "id": "psp-33588",
+      "name": "Zenrise",
+      "kind": "wallet",
+      "legal": "Pagos Online S.A",
+      "domain": "",
+      "aliases": "Pagos Online S.A"
+    },
+    {
+      "id": "psp-34549",
+      "name": "Pagotech S.A.",
+      "kind": "wallet",
+      "legal": "Pagotech S.A.",
+      "domain": "",
+      "aliases": "Pagotech S.A."
+    },
+    {
+      "id": "psp-34733",
+      "name": "Palopay Srl",
+      "kind": "wallet",
+      "legal": "PALOPAY SRL",
+      "domain": "",
+      "aliases": "PALOPAY SRL"
+    },
+    {
+      "id": "psp-33633",
+      "name": "Tarjeta Palta",
+      "kind": "wallet",
+      "legal": "palta sas",
+      "domain": "",
+      "aliases": "palta sas"
+    },
+    {
+      "id": "psp-33741",
+      "name": "Pago24",
+      "kind": "wallet",
+      "legal": "PATROL & ASOCIADOS S.A.",
+      "domain": "pago24.com.ar",
+      "aliases": "pago 24",
+      "logo": "/assets/institutions/psp-33741.png"
+    },
+    {
+      "id": "psp-33756",
+      "name": "Paxsys",
+      "kind": "wallet",
+      "legal": "paxsys s.a.",
+      "domain": "",
+      "aliases": "paxsys s.a."
+    },
+    {
+      "id": "psp-33529",
+      "name": "Pago TIC",
+      "kind": "wallet",
+      "legal": "PAY PER TIC S. A.",
+      "domain": "pagotic.com",
+      "aliases": "pay per tic",
+      "logo": "/assets/institutions/psp-33529.png"
+    },
+    {
+      "id": "psp-33782",
+      "name": "Payamigo",
+      "kind": "wallet",
+      "legal": "PAY&THINK S.A.U.",
+      "domain": "",
+      "aliases": "PAY&THINK S.A.U."
+    },
+    {
+      "id": "psp-34756",
+      "name": "Pay-Ia Srl",
+      "kind": "wallet",
+      "legal": "PAY-IA S.R.L.",
+      "domain": "",
+      "aliases": "PAY-IA S.R.L."
+    },
+    {
+      "id": "psp-34757",
+      "name": "Payagro Srl",
+      "kind": "wallet",
+      "legal": "PAYAGRO SRL",
+      "domain": "",
+      "aliases": "PAYAGRO SRL"
+    },
+    {
+      "id": "psp-34683",
+      "name": "Payfi",
+      "kind": "wallet",
+      "legal": "Payfi S.A.",
+      "domain": "",
+      "aliases": "Payfi S.A."
+    },
+    {
+      "id": "psp-33556",
+      "name": "Payfun",
+      "kind": "wallet",
+      "legal": "PAYNET BUSINESS S.A.S",
+      "domain": "",
+      "aliases": "PAYNET BUSINESS S.A.S"
+    },
+    {
+      "id": "psp-34577",
+      "name": "Payway",
+      "kind": "wallet",
+      "legal": "Payway SAU",
+      "domain": "payway.com.ar",
+      "aliases": "payway"
+    },
+    {
+      "id": "psp-34597",
+      "name": "Perc",
+      "kind": "wallet",
+      "legal": "PERc SA",
+      "domain": "",
+      "aliases": "PERc SA"
+    },
+    {
+      "id": "psp-34589",
+      "name": "Pro Cash",
+      "kind": "wallet",
+      "legal": "Pesepe Pagos SA",
+      "domain": "",
+      "aliases": "Pesepe Pagos SA"
+    },
+    {
+      "id": "psp-34573",
+      "name": "Raya Cash",
+      "kind": "wallet",
+      "legal": "Philidor SA",
+      "domain": "",
+      "aliases": "Philidor SA"
+    },
+    {
+      "id": "psp-34748",
+      "name": "Rayopagos",
+      "kind": "wallet",
+      "legal": "PI WALLET Y PAGOS SA",
+      "domain": "",
+      "aliases": "PI WALLET Y PAGOS SA"
+    },
+    {
+      "id": "psp-34533",
+      "name": "Plus Billetera",
+      "kind": "wallet",
+      "legal": "Plus Billetera S.A.",
+      "domain": "",
+      "aliases": "Plus Billetera S.A."
+    },
+    {
+      "id": "psp-33712",
+      "name": "Paymovil",
+      "kind": "wallet",
+      "legal": "POTENCIA TU DINERO S. A.",
+      "domain": "",
+      "aliases": "POTENCIA TU DINERO S. A."
+    },
+    {
+      "id": "psp-34596",
+      "name": "Potenciar Psp",
+      "kind": "wallet",
+      "legal": "POTENCIAR FINANZAS S.A.",
+      "domain": "",
+      "aliases": "POTENCIAR FINANZAS S.A."
+    },
+    {
+      "id": "psp-33531",
+      "name": "Pagos360",
+      "kind": "wallet",
+      "legal": "POWDER S.A.",
+      "domain": "pagos360.com",
+      "aliases": "pagos 360",
+      "logo": "/assets/institutions/psp-33531.png"
+    },
+    {
+      "id": "psp-34643",
+      "name": "Pp Servicios De Pagos",
+      "kind": "wallet",
+      "legal": "PP SERVICIOS DE PAGOS S.A.",
+      "domain": "",
+      "aliases": "PP SERVICIOS DE PAGOS S.A."
+    },
+    {
+      "id": "psp-34759",
+      "name": "Payretailers",
+      "kind": "wallet",
+      "legal": "PR Payments Argentina SRL",
+      "domain": "",
+      "aliases": "PR Payments Argentina SRL"
+    },
+    {
+      "id": "psp-33659",
+      "name": "Prex",
+      "kind": "wallet",
+      "legal": "PREX CARD SAS",
+      "domain": "prexcard.com.ar",
+      "aliases": "prex",
+      "logo": "/assets/institutions/psp-33659.png"
+    },
+    {
+      "id": "psp-34735",
+      "name": "Pro Simple",
+      "kind": "wallet",
+      "legal": "PRO SIMPLE S.A.",
+      "domain": "",
+      "aliases": "PRO SIMPLE S.A."
+    },
+    {
+      "id": "psp-33526",
+      "name": "Totalcoin",
+      "kind": "wallet",
+      "legal": "PROCESSING DATA ARGENTINA S. A.",
+      "domain": "",
+      "aliases": "PROCESSING DATA ARGENTINA S. A."
+    },
+    {
+      "id": "psp-33563",
+      "name": "Propago",
+      "kind": "wallet",
+      "legal": "PROPAGO ARGENTINA SRL",
+      "domain": "",
+      "aliases": "PROPAGO ARGENTINA SRL"
+    },
+    {
+      "id": "psp-34611",
+      "name": "Profintech",
+      "kind": "wallet",
+      "legal": "Proserf S.A.",
+      "domain": "",
+      "aliases": "Proserf S.A."
+    },
+    {
+      "id": "psp-34755",
+      "name": "Lebane",
+      "kind": "wallet",
+      "legal": "PSP Para El Desarrollo Inmobiliario SAS",
+      "domain": "",
+      "aliases": "PSP Para El Desarrollo Inmobiliario SAS"
+    },
+    {
+      "id": "psp-34656",
+      "name": "Pyme Fund",
+      "kind": "wallet",
+      "legal": "PYME FUND S.R.L.",
+      "domain": "",
+      "aliases": "PYME FUND S.R.L."
+    },
+    {
+      "id": "psp-34523",
+      "name": "Brisbane",
+      "kind": "wallet",
+      "legal": "QWERTY SA",
+      "domain": "",
+      "aliases": "QWERTY SA"
+    },
+    {
+      "id": "psp-34744",
+      "name": "Red De Pagos Cpa Sau",
+      "kind": "wallet",
+      "legal": "RED DE PAGOS CPA S. A. U.",
+      "domain": "",
+      "aliases": "RED DE PAGOS CPA S. A. U."
+    },
+    {
+      "id": "psp-33651",
+      "name": "Rgm",
+      "kind": "wallet",
+      "legal": "RED GLOBAL MONETARIA SA",
+      "domain": "",
+      "aliases": "RED GLOBAL MONETARIA SA"
+    },
+    {
+      "id": "psp-33566",
+      "name": "Remitee",
+      "kind": "wallet",
+      "legal": "REMITEE S.A.",
+      "domain": "",
+      "aliases": "REMITEE S.A."
+    },
+    {
+      "id": "psp-33544",
+      "name": "Resimple - Dinero En Tu Celular",
+      "kind": "wallet",
+      "legal": "RESIMPLE SA",
+      "domain": "",
+      "aliases": "RESIMPLE SA"
+    },
+    {
+      "id": "psp-34740",
+      "name": "Rixsus",
+      "kind": "wallet",
+      "legal": "RIXSUS ARG SAS",
+      "domain": "",
+      "aliases": "RIXSUS ARG SAS"
+    },
+    {
+      "id": "psp-34574",
+      "name": "Redmagister",
+      "kind": "wallet",
+      "legal": "RM S.A.S.",
+      "domain": "",
+      "aliases": "RM S.A.S."
+    },
+    {
+      "id": "psp-34695",
+      "name": "Pepepay",
+      "kind": "wallet",
+      "legal": "RUAJ BH SA",
+      "domain": "",
+      "aliases": "RUAJ BH SA"
+    },
+    {
+      "id": "psp-34742",
+      "name": "Ruta Pay",
+      "kind": "wallet",
+      "legal": "RUTA PAY SRL",
+      "domain": "",
+      "aliases": "RUTA PAY SRL"
+    },
+    {
+      "id": "psp-33586",
+      "name": "Agil Pagos",
+      "kind": "wallet",
+      "legal": "S.G. FINANCIAL TECHNOLOGY S.A.",
+      "domain": "",
+      "aliases": "S.G. FINANCIAL TECHNOLOGY S.A."
+    },
+    {
+      "id": "psp-34699",
+      "name": "Securepaynet",
+      "kind": "wallet",
+      "legal": "SECUREPAYNET SAS",
+      "domain": "",
+      "aliases": "SECUREPAYNET SAS"
+    },
+    {
+      "id": "psp-33671",
+      "name": "Bezza Pay",
+      "kind": "wallet",
+      "legal": "SERVICIO DE PAGO SAU",
+      "domain": "",
+      "aliases": "SERVICIO DE PAGO SAU"
+    },
+    {
+      "id": "psp-33662",
+      "name": "Servicios Urbanos S.A.",
+      "kind": "wallet",
+      "legal": "SERVICIOS URBANOS SA",
+      "domain": "",
+      "aliases": "SERVICIOS URBANOS SA"
+    },
+    {
+      "id": "psp-34550",
+      "name": "Sidom Pay",
+      "kind": "wallet",
+      "legal": "SIDOM PAY S. A.",
+      "domain": "",
+      "aliases": "SIDOM PAY S. A."
+    },
+    {
+      "id": "psp-34663",
+      "name": "Simple Pay",
+      "kind": "wallet",
+      "legal": "SIMPLE PAYMENTS SAS",
+      "domain": "",
+      "aliases": "SIMPLE PAYMENTS SAS"
+    },
+    {
+      "id": "psp-33735",
+      "name": "Easy Pagos",
+      "kind": "wallet",
+      "legal": "Sistema de Pagos Costa Atlántica S.A.",
+      "domain": "",
+      "aliases": "Sistema de Pagos Costa Atlántica S.A."
+    },
+    {
+      "id": "psp-34764",
+      "name": "Smart Pay S.A.",
+      "kind": "wallet",
+      "legal": "SMART PAY S.A.",
+      "domain": "",
+      "aliases": "SMART PAY S.A."
+    },
+    {
+      "id": "psp-34519",
+      "name": "Farmapay",
+      "kind": "wallet",
+      "legal": "Soluciones de Pago S.A.",
+      "domain": "",
+      "aliases": "Soluciones de Pago S.A."
+    },
+    {
+      "id": "psp-33576",
+      "name": "Sos Genial",
+      "kind": "wallet",
+      "legal": "SOS GENIAL S.A.S",
+      "domain": "",
+      "aliases": "SOS GENIAL S.A.S"
+    },
+    {
+      "id": "psp-34731",
+      "name": "Sowepay",
+      "kind": "wallet",
+      "legal": "Sowepay S.A.",
+      "domain": "",
+      "aliases": "Sowepay S.A."
+    },
+    {
+      "id": "psp-33725",
+      "name": "Evweb Pay",
+      "kind": "wallet",
+      "legal": "STARK SOLUTION SRL",
+      "domain": "",
+      "aliases": "STARK SOLUTION SRL"
+    },
+    {
+      "id": "psp-33546",
+      "name": "Bull Pay",
+      "kind": "wallet",
+      "legal": "STOCKHOLDER S. A.",
+      "domain": "",
+      "aliases": "STOCKHOLDER S. A."
+    },
+    {
+      "id": "psp-34619",
+      "name": "Supefina",
+      "kind": "wallet",
+      "legal": "Supefina Argentina S.A.",
+      "domain": "",
+      "aliases": "Supefina Argentina S.A."
+    },
+    {
+      "id": "psp-34670",
+      "name": "Suprestamo",
+      "kind": "wallet",
+      "legal": "SUPRESTAMO SAS",
+      "domain": "",
+      "aliases": "SUPRESTAMO SAS"
+    },
+    {
+      "id": "psp-33543",
+      "name": "Sur Finanzas",
+      "kind": "wallet",
+      "legal": "SUR FINANZAS PSP S.A.",
+      "domain": "",
+      "aliases": "SUR FINANZAS PSP S.A."
+    },
+    {
+      "id": "psp-34559",
+      "name": "Sustenta Pagos",
+      "kind": "wallet",
+      "legal": "SUSTENTA PAGOS S.A.",
+      "domain": "",
+      "aliases": "SUSTENTA PAGOS S.A."
+    },
+    {
+      "id": "psp-33623",
+      "name": "Pacer",
+      "kind": "wallet",
+      "legal": "SYSWORLD DIGITAL S.A.",
+      "domain": "",
+      "aliases": "SYSWORLD DIGITAL S.A."
+    },
+    {
+      "id": "psp-34765",
+      "name": "Talo",
+      "kind": "wallet",
+      "legal": "Talo Pay SAS",
+      "domain": "",
+      "aliases": "Talo Pay SAS"
+    },
+    {
+      "id": "psp-33522",
+      "name": "TAP",
+      "kind": "wallet",
+      "legal": "TAP BILLETERA S.A.U.",
+      "domain": "tap.com.ar",
+      "aliases": "tap billetera",
+      "logo": "/assets/institutions/psp-33522.png"
+    },
+    {
+      "id": "psp-34732",
+      "name": "Tapago",
+      "kind": "wallet",
+      "legal": "TAPAGO S.A.",
+      "domain": "",
+      "aliases": "TAPAGO S.A."
+    },
+    {
+      "id": "psp-34556",
+      "name": "Tdk Labs Sas",
+      "kind": "wallet",
+      "legal": "TDK Labs SAS",
+      "domain": "",
+      "aliases": "TDK Labs SAS"
+    },
+    {
+      "id": "psp-33669",
+      "name": "Helipagos",
+      "kind": "wallet",
+      "legal": "TEAMSYS SRL",
+      "domain": "",
+      "aliases": "TEAMSYS SRL"
+    },
+    {
+      "id": "psp-33585",
+      "name": "Telepagos",
+      "kind": "wallet",
+      "legal": "TELEPAGOS S.A.",
+      "domain": "",
+      "aliases": "TELEPAGOS S.A."
+    },
+    {
+      "id": "psp-34654",
+      "name": "Pagos.Ar",
+      "kind": "wallet",
+      "legal": "The Angelus SA",
+      "domain": "",
+      "aliases": "The Angelus SA"
+    },
+    {
+      "id": "psp-34587",
+      "name": "+Pay",
+      "kind": "wallet",
+      "legal": "TOTAL PAY S.A.",
+      "domain": "",
+      "aliases": "TOTAL PAY S.A."
+    },
+    {
+      "id": "psp-34590",
+      "name": "Trase",
+      "kind": "wallet",
+      "legal": "TRASE S.A.",
+      "domain": "",
+      "aliases": "TRASE S.A."
+    },
+    {
+      "id": "psp-34635",
+      "name": "Trustfin Technology Sas",
+      "kind": "wallet",
+      "legal": "TrustFin Technology SAS",
+      "domain": "",
+      "aliases": "TrustFin Technology SAS"
+    },
+    {
+      "id": "psp-33723",
+      "name": "Tucash",
+      "kind": "wallet",
+      "legal": "TUTELAR SERVICIOS FINANCIEROS S.A",
+      "domain": "",
+      "aliases": "TUTELAR SERVICIOS FINANCIEROS S.A"
+    },
+    {
+      "id": "psp-34562",
+      "name": "Unex",
+      "kind": "wallet",
+      "legal": "Unex Billetera Capital y Cobranzas S.A.S.",
+      "domain": "",
+      "aliases": "Unex Billetera Capital y Cobranzas S.A.S."
+    },
+    {
+      "id": "psp-33640",
+      "name": "By Urbana",
+      "kind": "wallet",
+      "legal": "URBANA PSP S.A.S.",
+      "domain": "",
+      "aliases": "URBANA PSP S.A.S."
+    },
+    {
+      "id": "psp-34647",
+      "name": "Vamos Pago",
+      "kind": "wallet",
+      "legal": "Vamos Pago S.R.L.",
+      "domain": "",
+      "aliases": "Vamos Pago S.R.L."
+    },
+    {
+      "id": "psp-34761",
+      "name": "Velaris S.A.",
+      "kind": "wallet",
+      "legal": "VELARIS S.A.",
+      "domain": "",
+      "aliases": "VELARIS S.A."
+    },
+    {
+      "id": "psp-34602",
+      "name": "Veriil",
+      "kind": "wallet",
+      "legal": "Veriil SRL",
+      "domain": "",
+      "aliases": "Veriil SRL"
+    },
+    {
+      "id": "psp-34709",
+      "name": "Vexipay",
+      "kind": "wallet",
+      "legal": "VEXIPAY SAS",
+      "domain": "",
+      "aliases": "VEXIPAY SAS"
+    },
+    {
+      "id": "psp-34620",
+      "name": "Vita Wallet S.A",
+      "kind": "wallet",
+      "legal": "VITA WALLET S.A",
+      "domain": "",
+      "aliases": "VITA WALLET S.A"
+    },
+    {
+      "id": "psp-34621",
+      "name": "Waya",
+      "kind": "wallet",
+      "legal": "WAYA",
+      "domain": "",
+      "aliases": "WAYA"
+    },
+    {
+      "id": "psp-33750",
+      "name": "Wayni Movil",
+      "kind": "wallet",
+      "legal": "WAYNICOIN S.A.",
+      "domain": "",
+      "aliases": "WAYNICOIN S.A."
+    },
+    {
+      "id": "psp-33551",
+      "name": "Wibond",
+      "kind": "wallet",
+      "legal": "WIBOND SAS",
+      "domain": "wibond.com",
+      "aliases": "wibond"
+    },
+    {
+      "id": "psp-34572",
+      "name": "Wico Creditos",
+      "kind": "wallet",
+      "legal": "WICO CREDITOS S.A.",
+      "domain": "",
+      "aliases": "WICO CREDITOS S.A."
+    },
+    {
+      "id": "psp-34591",
+      "name": "Okto",
+      "kind": "wallet",
+      "legal": "WML Technologies S.A.",
+      "domain": "",
+      "aliases": "WML Technologies S.A."
+    },
+    {
+      "id": "psp-34569",
+      "name": "Wrex",
+      "kind": "wallet",
+      "legal": "WREXATEC S.A.",
+      "domain": "",
+      "aliases": "WREXATEC S.A."
+    },
+    {
+      "id": "psp-33628",
+      "name": "Xcard",
+      "kind": "wallet",
+      "legal": "XCARD ARGENTINA S.A.U.",
+      "domain": "",
+      "aliases": "XCARD ARGENTINA S.A.U."
+    },
+    {
+      "id": "psp-33635",
+      "name": "Xcoop",
+      "kind": "wallet",
+      "legal": "Xcoop Argentina SA",
+      "domain": "",
+      "aliases": "Xcoop Argentina SA"
+    },
+    {
+      "id": "psp-34558",
+      "name": "Yont S.A.",
+      "kind": "wallet",
+      "legal": "YONT S.A.",
+      "domain": "",
+      "aliases": "YONT S.A."
+    },
+    {
+      "id": "psp-34626",
+      "name": "Ydi",
+      "kind": "wallet",
+      "legal": "YPF Digital SAU",
+      "domain": "",
+      "aliases": "YPF Digital SAU"
+    },
+    {
+      "id": "lemon",
+      "name": "Lemon",
+      "kind": "wallet",
+      "domain": "lemon.me",
+      "aliases": "lemon cash",
+      "logo": "/assets/institutions/lemon.png"
+    },
+    {
+      "id": "belo",
+      "name": "Belo",
+      "kind": "wallet",
+      "domain": "belo.app",
+      "aliases": "belo",
+      "logo": "/assets/institutions/belo.png"
+    },
+    {
+      "id": "astropay",
+      "name": "AstroPay",
+      "kind": "wallet",
+      "domain": "astropay.com",
+      "aliases": "astro pay",
+      "logo": "/assets/institutions/astropay.png"
+    },
+    {
+      "id": "modo",
+      "name": "MODO",
+      "kind": "wallet",
+      "domain": "modo.com.ar",
+      "aliases": "modo",
+      "logo": "/assets/institutions/modo.png"
+    },
+    {
+      "id": "cuentachat",
+      "name": "Cuenta Chat",
+      "kind": "wallet",
+      "domain": "cuentachat.com",
+      "aliases": "cuenta chat"
+    },
+    {
+      "id": "ripio",
+      "name": "Ripio",
+      "kind": "wallet",
+      "domain": "ripio.com",
+      "aliases": "ripio",
+      "logo": "/assets/institutions/ripio.png"
+    },
+    {
+      "id": "buenbit",
+      "name": "Buenbit",
+      "kind": "wallet",
+      "domain": "buenbit.com",
+      "aliases": "buen bit",
+      "logo": "/assets/institutions/buenbit.png"
+    },
+    {
+      "id": "binance",
+      "name": "Binance",
+      "kind": "wallet",
+      "domain": "binance.com",
+      "aliases": "binance",
+      "logo": "/assets/institutions/binance.png"
+    },
+    {
+      "id": "bitso",
+      "name": "Bitso",
+      "kind": "wallet",
+      "domain": "bitso.com",
+      "aliases": "bitso",
+      "logo": "/assets/institutions/bitso.png"
+    },
+    {
+      "id": "takenos",
+      "name": "Takenos",
+      "kind": "wallet",
+      "domain": "takenos.com",
+      "aliases": "takenos",
+      "logo": "/assets/institutions/takenos.png"
+    },
+    {
+      "id": "dolarapp",
+      "name": "DolarApp",
+      "kind": "wallet",
+      "domain": "dolarapp.com",
+      "aliases": "dolar app",
+      "logo": "/assets/institutions/dolarapp.png"
+    },
+    {
+      "id": "letsbit",
+      "name": "LetsBit",
+      "kind": "wallet",
+      "domain": "letsbit.io",
+      "aliases": "lets bit",
+      "logo": "/assets/institutions/letsbit.png"
+    },
+    {
+      "id": "satoshitango",
+      "name": "SatoshiTango",
+      "kind": "wallet",
+      "domain": "satoshitango.com",
+      "aliases": "satoshi tango",
+      "logo": "/assets/institutions/satoshitango.png"
+    },
+    {
+      "id": "cocos",
+      "name": "Cocos",
+      "kind": "wallet",
+      "domain": "cocos.capital",
+      "aliases": "cocos pay",
+      "logo": "/assets/institutions/cocos.png"
+    },
+    {
+      "id": "balanz",
+      "name": "Balanz",
+      "kind": "wallet",
+      "domain": "balanz.com",
+      "aliases": "balanz",
+      "logo": "/assets/institutions/balanz.png"
+    },
+    {
+      "id": "iol",
+      "name": "IOL",
+      "kind": "wallet",
+      "domain": "invertironline.com",
+      "aliases": "invertir online",
+      "logo": "/assets/institutions/iol.png"
+    },
+    {
+      "id": "bullmarket",
+      "name": "Bull Market",
+      "kind": "wallet",
+      "domain": "bullmarketbrokers.com",
+      "aliases": "bull market",
+      "logo": "/assets/institutions/bullmarket.png"
+    },
+    {
+      "id": "invertir",
+      "name": "IEB+",
+      "kind": "wallet",
+      "domain": "iebmas.com.ar",
+      "aliases": "ieb invertir en bolsa",
+      "logo": "/assets/institutions/invertir.png"
+    },
+    {
+      "id": "paypal",
+      "name": "PayPal",
+      "kind": "wallet",
+      "domain": "paypal.com",
+      "aliases": "paypal",
+      "logo": "/assets/institutions/paypal.png"
+    },
+    {
+      "id": "payoneer",
+      "name": "Payoneer",
+      "kind": "wallet",
+      "domain": "payoneer.com",
+      "aliases": "payoneer",
+      "logo": "/assets/institutions/payoneer.png"
+    },
+    {
+      "id": "airtm",
+      "name": "Airtm",
+      "kind": "wallet",
+      "domain": "airtm.com",
+      "aliases": "air tm",
+      "logo": "/assets/institutions/airtm.png"
+    },
+    {
+      "id": "skrill",
+      "name": "Skrill",
+      "kind": "wallet",
+      "domain": "skrill.com",
+      "aliases": "skrill",
+      "logo": "/assets/institutions/skrill.png"
+    },
+    {
+      "id": "neteller",
+      "name": "Neteller",
+      "kind": "wallet",
+      "domain": "neteller.com",
+      "aliases": "neteller"
+    },
+    {
+      "id": "nexo",
+      "name": "Nexo",
+      "kind": "wallet",
+      "domain": "nexo.com",
+      "aliases": "nexo",
+      "logo": "/assets/institutions/nexo.png"
+    }
+  ]
+}
