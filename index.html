@@ -42,6 +42,33 @@
 #v-home .dashboard-side,#v-home .next-panel{display:none!important}
 #v-home .dashboard-grid{display:grid;grid-template-columns:minmax(0,1fr)!important}
 #v-home .dashboard-grid>.today-panel{grid-column:1!important;grid-row:auto!important}
+
+/* Detalles y transiciones solicitados */
+#login-modal.entry{scroll-behavior:smooth}
+#landing-features,#sobre-creador{scroll-margin-top:85px}
+#login-modal .entry-link,#login-modal .creator-link,#login-modal .creator-socials a{transition:color .25s ease,opacity .25s ease,transform .25s ease}
+#login-modal .entry-link:hover,#login-modal .creator-link:hover,#login-modal .creator-socials a:hover{opacity:.72;transform:translateY(-2px)}
+#login-modal .entry-tools-list article,#login-modal .entry-access,#login-modal .entry-help details{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease,background-color .3s ease}
+#login-modal .entry-tools-list article:hover{transform:translateY(-4px)}
+#login-modal .entry-help details p{overflow:hidden;transform-origin:top;will-change:height,opacity}
+#login-modal .entry-help summary{transition:color .25s ease}
+#login-modal .entry-help details[open] summary{color:var(--ac)}
+#login-modal .entry-footer-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+#login-modal .creator-link{font-size:12px;color:var(--tx);text-decoration:none;font-weight:600}
+#login-modal .creator-section{padding:42px 0 60px;border-top:1px solid var(--line);font-family:"Poppins",sans-serif}
+#login-modal .creator-section h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin:9px 0 12px}
+#login-modal .creator-section>p:not(.overline){color:var(--mut);font-size:13px;line-height:1.8}
+#login-modal .creator-socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+#login-modal .creator-socials a{color:var(--tx);border:1px solid var(--line);border-radius:999px;padding:10px 17px;text-decoration:none;font-size:12px}
+#v-gas .money-institutions .institution-pill,#v-gas .money-institutions .institution-logo,#v-gas .account-brand-summary .institution-logo{background:transparent!important;box-shadow:none!important}
+#v-gas .money-institutions .institution-pill{border-color:transparent!important}
+#v-gas .money-institutions .institution-logo,#v-gas .account-brand-summary .institution-logo{border-color:transparent!important}
+[data-theme-toggle].theme-toggle{position:relative!important;width:60px!important;height:32px!important;min-height:32px!important;padding:3px!important;border-radius:999px!important;background:var(--soft)!important;border:1px solid var(--line)!important;display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;transition:background .35s ease,border-color .35s ease!important}
+[data-theme-toggle].theme-toggle:before{content:"";position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:var(--ac);box-shadow:0 2px 6px #0002;transform:translateX(0);transition:transform .38s cubic-bezier(.2,.8,.2,1),background .38s ease}
+:root[data-theme="dark"] [data-theme-toggle].theme-toggle:before{transform:translateX(28px)}
+[data-theme-toggle].theme-toggle .ic{position:relative;z-index:1;width:15px;height:15px;margin-left:4px;color:var(--onac);pointer-events:none;transition:transform .38s ease}
+:root[data-theme="dark"] [data-theme-toggle].theme-toggle .ic{transform:translateX(28px)}
+@media(prefers-reduced-motion:reduce){#login-modal.entry{scroll-behavior:auto}#login-modal .entry-help details p{will-change:auto}}
 </style>
 </head>
 <body>
@@ -90,7 +117,7 @@
    <div class="entry-index"><span><svg class="ic"><use href="#i-cal"/></svg> Planificá</span><span><svg class="ic"><use href="#i-bell"/></svg> Recordá</span><span><svg class="ic"><use href="#i-note"/></svg> Creá</span></div>
   </section>
   <section class="entry-access" aria-labelledby="access-title">
-   <span class="access-icon" aria-hidden="true"><svg class="ic"><use href="#i-home"/></svg></span>
+   
    <p class="access-eyebrow">BIENVENIDO A ORGANIZADOR</p><h2 id="access-title">Empecemos.</h2>
    <p>Tu agenda y tus ideas te esperan.</p>
   <button id="btn-google-login" class="google-signin">     <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.15C3.26 21.3 7.31 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l3.99-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.72-4.96z"/></svg>
@@ -112,7 +139,12 @@
   </div>
  </section>
  <section class="entry-help"><details><summary>¿Cómo entro y dónde quedan mis datos?</summary><p>Ingresá con Google. Tus datos quedan asociados a tu cuenta y se sincronizan en tus dispositivos.</p></details><details><summary>¿Cómo recibo los avisos?</summary><p>Dentro del organizador, activá la campana y aceptá las notificaciones. En iPhone, agregá primero la app a tu pantalla de inicio.</p></details><details><summary>¿Puedo descargar mi información?</summary><p>El botón de PDF del encabezado permite descargar un resumen con tu agenda, fechas importantes y recordatorios.</p></details></section>
- <footer class="entry-footer"><span class="wordmark">organizador<span class="brand-period">.</span></span><span>Un lugar para lo que tenés en marcha.</span><button class="text-action" type="button" onclick="document.getElementById('btn-google-login').click()">Empezar ↗</button></footer>
+ <footer class="entry-footer"><span class="wordmark">organizador<span class="brand-period">.</span></span><span>Un lugar para lo que tenés en marcha.</span><div class="entry-footer-actions"><a href="#sobre-creador" class="creator-link">Sobre el creador</a><button class="text-action" type="button" onclick="document.getElementById('btn-google-login').click()">Empezar ↗</button></div></footer>
+ <section id="sobre-creador" class="creator-section" aria-labelledby="creator-title">
+  <p class="overline">SOBRE EL CREADOR</p><h2 id="creator-title">Renzo Saltamartini</h2>
+  <p>Estudiante de Ingeniería en Informática · 18 años · Buenos Aires, Argentina.</p>
+  <div class="creator-socials"><a href="https://github.com/renzosaltamartini" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.instagram.com/renzo.saltamartini/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div>
+ </section>
 </div>
 <script src="/assets/js/landing.js"></script>
 
