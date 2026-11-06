@@ -2,6 +2,7 @@ import { animateAmount } from "./features/amounts.js";
 import { setupAccounts } from "./features/accounts.js";
 import { setupNotifications } from "./features/notifications.js";
 import { generarPDF } from "./features/pdf.js";
+import { setupExpenseTransfer } from "./features/expense-transfer.js";
 import { DIA_C, DIA_P, hhmm, alDias, alFecha, alProx, alRel, alCuando, alEstado } from "./features/alerts.js";
 import { $, esc, MESES, HEX, colDe, COL, iso, hm, money, fechaTexto, dias, cuando, editBtn, detLines, detHtml } from "./utils/format.js";
 
@@ -916,6 +917,7 @@ function iniciar() {
     renderGas();
     renderHome(); cargado('gastos');
   });
+  setupExpenseTransfer({ $, R, get, update, push, money });
   const formGasto = $('form-gasto');
   $('gasto-cancel').onclick = resetG;
   $('lista-gastos').addEventListener('click', e => {
