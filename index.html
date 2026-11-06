@@ -77,6 +77,14 @@
 #v-gas .finance-transfer-actions .btn{white-space:normal;transition:background .65s ease,transform .65s cubic-bezier(.22,1,.36,1)}
 #v-gas .finance-transfer-actions .btn:hover{transform:translateY(-2px)}
 @media(max-width:760px){#v-gas .finance-transfer{flex-direction:column;align-items:stretch}#v-gas .finance-transfer-actions{flex-direction:column}#v-gas .finance-transfer-actions .btn{width:100%}}
+
+/* Tarjeta de dinero con profundidad 3D, sin alterar el saldo ni sus botones. */
+#v-home{perspective:1100px}
+#v-home .money-panel{position:relative;isolation:isolate;transform-style:preserve-3d;transform:perspective(1100px) rotateX(5deg) rotateY(-5deg) translateZ(0);box-shadow:0 26px 44px -26px rgba(0,0,0,.28),10px 13px 0 -5px rgba(80,95,130,.12),inset 0 1px 0 rgba(255,255,255,.5);transition:transform 1s cubic-bezier(.22,1,.36,1),box-shadow 1s ease;will-change:transform}
+#v-home .money-panel::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(125deg,rgba(255,255,255,.20),transparent 48%,rgba(0,0,0,.045));z-index:-1}
+#v-home .money-panel:hover,#v-home .money-panel:focus-within{transform:perspective(1100px) rotateX(0deg) rotateY(0deg) translateY(-6px) translateZ(15px);box-shadow:0 36px 55px -25px rgba(0,0,0,.32),0 10px 0 -6px rgba(80,95,130,.1)}
+#v-home .money-panel>strong,#v-home .money-panel>.money-brand{transform:translateZ(18px)}
+@media(prefers-reduced-motion:reduce){#v-home .money-panel{transform:none;transition:none;will-change:auto}#v-home .money-panel:hover,#v-home .money-panel:focus-within{transform:none}}
 </style>
 </head>
 <body>
@@ -203,7 +211,7 @@
 <button class="nv" data-go="piz"><svg class="ic"><use href="#i-pdf"/></svg><span>Pizarras</span></button></nav></div>
  <main>
   <section id="v-home" class="dashboard">
-   <div class="dashboard-heading blue-welcome"><div><p class="overline" id="live-date"></p><h1 id="greet">Tu espacio, hoy.</h1><p class="view-description">Tu agenda y lo importante, de un vistazo.</p></div><div class="dashboard-clock"><span class="overline">AHORA</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div></div></div>
+   <div class="dashboard-heading blue-welcome"><div><p class="overline" id="live-date"></p><h1 id="greet">Tu espacio, hoy.</h1></div><div class="dashboard-clock"><span class="overline">AHORA</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div></div></div>
    <div class="quick-capture"><span>AGREGAR</span><button data-create="agenda"><svg class="ic"><use href="#i-plus"/></svg> Actividad</button><button data-create="recordatorio"><svg class="ic"><use href="#i-bell"/></svg> Pendiente</button><button data-create="gasto"><svg class="ic"><use href="#i-wal"/></svg> Gasto</button><button data-create="nota"><svg class="ic"><use href="#i-note"/></svg> Nota</button><button data-go="piz" class="quick-library">Mis pizarras ↗</button></div>
 
    <article class="money-panel" aria-label="Dinero disponible">
