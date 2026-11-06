@@ -28,12 +28,9 @@
 #initial-loader.out{opacity:0;pointer-events:none}
 #initial-loader .simple-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(100%,340px);text-align:center}
 #initial-loader .simple-loader h1{font-family:"Poppins",sans-serif;font-size:clamp(28px,6vw,36px);font-style:italic;font-weight:900;letter-spacing:-.045em;line-height:1.35;color:var(--tx);margin:0;white-space:nowrap}
-#initial-loader .loader-letter{display:inline-block;opacity:0;animation:loader-type 3.6s steps(1,end) infinite;animation-delay:calc(var(--letter) * 90ms)}
-#initial-loader .loader-cursor{display:inline-block;width:2px;height:.85em;background:var(--ac);margin-left:5px;vertical-align:-.02em;animation:loader-caret .65s steps(1,end) infinite}
-@keyframes loader-type{0%,85%,100%{opacity:0}5%,80%{opacity:1}}
-@keyframes loader-caret{50%{opacity:0}}
-#initial-loader .simple-loader h1 .loader-period{color:var(--ac)}
-@media(prefers-reduced-motion:reduce){#initial-loader .loader-letter{animation:none;opacity:1}#initial-loader .loader-cursor{animation:none}#initial-loader{transition:none}}
+#initial-loader .simple-loader h1{padding:0 .12em;background:linear-gradient(110deg,var(--tx) 30%,var(--ac) 46%,var(--tx) 62%);background-size:250% 100%;background-position:100% 0;background-clip:text;-webkit-background-clip:text;color:transparent;animation:loader-shimmer 2.4s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes loader-shimmer{0%,15%{background-position:100% 0}85%,100%{background-position:0% 0}}
+@media(prefers-reduced-motion:reduce){#initial-loader .simple-loader h1{animation:none;background:none;color:var(--tx)}#initial-loader{transition:none}}
 #v-home .dashboard-side,#v-home .next-panel{display:none!important}
 #v-home .dashboard-grid{display:grid;grid-template-columns:minmax(0,1fr)!important}
 #v-home .dashboard-grid>.today-panel{grid-column:1!important;grid-row:auto!important}
@@ -104,7 +101,7 @@
 
 <div id="initial-loader" class="full loading-screen" role="status" aria-label="Cargando Organizador">
  <div class="simple-loader">
-  <h1 aria-hidden="true"><span class="loader-letter" style="--letter:0">O</span><span class="loader-letter" style="--letter:1">R</span><span class="loader-letter" style="--letter:2">G</span><span class="loader-letter" style="--letter:3">A</span><span class="loader-letter" style="--letter:4">N</span><span class="loader-letter" style="--letter:5">I</span><span class="loader-letter" style="--letter:6">Z</span><span class="loader-letter" style="--letter:7">A</span><span class="loader-letter" style="--letter:8">D</span><span class="loader-letter" style="--letter:9">O</span><span class="loader-letter" style="--letter:10">R</span><span class="loader-letter loader-period" style="--letter:11">.</span><span class="loader-cursor"></span></h1>
+  <h1 aria-hidden="true">ORGANIZADOR.</h1>
  </div>
 </div>
 
