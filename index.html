@@ -78,14 +78,8 @@
 #v-gas .finance-transfer-actions .btn:hover{transform:translateY(-2px)}
 @media(max-width:760px){#v-gas .finance-transfer{flex-direction:column;align-items:stretch}#v-gas .finance-transfer-actions{flex-direction:column}#v-gas .finance-transfer-actions .btn{width:100%}}
 
-/* Tarjeta de dinero con profundidad 3D, sin alterar el saldo ni sus botones. */
-#v-home{perspective:1100px}
-#v-home .money-panel{position:relative;isolation:isolate;transform-style:preserve-3d;transform:perspective(1100px) rotateX(5deg) rotateY(-5deg) translateZ(0);box-shadow:0 26px 44px -26px rgba(0,0,0,.28),10px 13px 0 -5px rgba(80,95,130,.12),inset 0 1px 0 rgba(255,255,255,.5);transition:transform 1s cubic-bezier(.22,1,.36,1),box-shadow 1s ease;will-change:transform}
-#v-home .money-panel::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(125deg,rgba(255,255,255,.20),transparent 48%,rgba(0,0,0,.045));z-index:-1}
-#v-home .money-panel:hover,#v-home .money-panel:focus-within{transform:perspective(1100px) rotateX(0deg) rotateY(0deg) translateY(-6px) translateZ(15px);box-shadow:0 36px 55px -25px rgba(0,0,0,.32),0 10px 0 -6px rgba(80,95,130,.1)}
-#v-home .money-panel>strong,#v-home .money-panel>.money-brand{transform:translateZ(18px)}
-@media(prefers-reduced-motion:reduce){#v-home .money-panel{transform:none;transition:none;will-change:auto}#v-home .money-panel:hover,#v-home .money-panel:focus-within{transform:none}}
 </style>
+<link rel="stylesheet" href="assets/css/money-card.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -214,10 +208,22 @@
    <div class="dashboard-heading blue-welcome"><div><p class="overline" id="live-date"></p><h1 id="greet">Tu espacio, hoy.</h1></div><div class="dashboard-clock"><span class="overline">AHORA</span><div id="live-clock" role="timer" aria-label="Hora actual"><span id="clock-time"></span><span id="clock-ms" aria-hidden="true"></span></div></div></div>
    <div class="quick-capture"><span>AGREGAR</span><button data-create="agenda"><svg class="ic"><use href="#i-plus"/></svg> Actividad</button><button data-create="recordatorio"><svg class="ic"><use href="#i-bell"/></svg> Pendiente</button><button data-create="gasto"><svg class="ic"><use href="#i-wal"/></svg> Gasto</button><button data-create="nota"><svg class="ic"><use href="#i-note"/></svg> Nota</button><button data-go="piz" class="quick-library">Mis pizarras ↗</button></div>
 
-   <article class="money-panel" aria-label="Dinero disponible">
-    <strong id="home-balance" aria-label="Saldo disponible">$0</strong>
-    <div class="money-brand account-brand-summary" data-selected-institutions aria-label="Mis bancos y billeteras"><button type="button" class="summary-choose" data-go="gas">Elegir mis cuentas ↗</button></div>
-   </article>
+   <div class="money-card-scene">
+    <article class="money-panel" id="money-card" aria-label="Resumen de dinero">
+     <div class="money-card-rotator">
+      <div class="money-card-face money-card-front">
+       <div><p class="money-card-label">DISPONIBLE</p><strong id="home-balance" aria-label="Saldo disponible">$0</strong></div>
+       <div class="money-brand account-brand-summary" data-selected-institutions aria-label="Mis bancos y billeteras"><button type="button" class="summary-choose" data-go="gas">Elegir mis cuentas ↗</button></div>
+       <button class="money-card-flip" type="button" aria-label="Ver ingresos y gastos" aria-pressed="false">Ver movimientos ↻</button>
+      </div>
+      <div class="money-card-face money-card-back" inert aria-hidden="true">
+       <p class="money-card-label">MI RESUMEN</p>
+       <div class="money-card-totals"><div><span>↓ Ingresos</span><strong id="home-income">$0</strong></div><div><span>↑ Gastos</span><strong id="home-expenses">$0</strong></div></div>
+       <button class="money-card-flip" type="button" aria-label="Volver al saldo" aria-pressed="true">Volver al saldo ↻</button>
+      </div>
+     </div>
+    </article>
+   </div>
    <div class="dashboard-grid">
 <article class="today-panel surface"><div class="panel-heading"><div><p class="overline">TU TIEMPO</p><h2>Agenda de hoy <span class="count-pill" id="home-agenda-count">0</span></h2></div><button class="icon-action" data-create="agenda" aria-label="Agregar una actividad"><svg class="ic"><use href="#i-plus"/></svg></button></div><p class="panel-description" id="t-dia">Tu agenda de hoy</p><div id="home-agenda" class="home-agenda"><p class="empty">Tu agenda aparecerá acá.</p></div><button class="panel-link" data-go="dia">Ver agenda completa <span>↗</span></button></article>
 <div class="dashboard-side"><article class="pending-panel surface"><div class="panel-heading"><div><p class="overline">PARA TENER PRESENTE</p><h2>Pendientes</h2></div><span class="count-pill" id="t-rec">0 pendientes</span></div><div id="home-reminders" class="home-reminders"><p class="empty">Tus recordatorios aparecerán acá.</p></div><button class="panel-link" data-go="rec">Todos los pendientes <span>↗</span></button></article><article class="notes-panel"><div class="panel-heading"><div><p class="overline">IDEAS A MANO</p><h2>Tus notas</h2></div><button class="icon-action" data-create="nota" aria-label="Crear una nota"><svg class="ic"><use href="#i-plus"/></svg></button></div><div id="home-notes" class="home-notes"><p>Un lugar para esa idea.</p></div><button class="panel-link" data-go="not"><span id="t-not">Abrir mis notas</span><span>↗</span></button></article></div>
