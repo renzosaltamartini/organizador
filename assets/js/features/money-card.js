@@ -5,6 +5,8 @@ export function setupMoneyCard() {
   const front = card.querySelector('.money-card-front');
   const back = card.querySelector('.money-card-back');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const rotator = card.querySelector('.money-card-rotator');
+  let turning = false, turnTimer;
   let flipped = false, pointer = null, frame = 0, point = null;
   function reset() {
     cancelAnimationFrame(frame); frame = 0; point = null;
@@ -12,7 +14,7 @@ export function setupMoneyCard() {
     ['--rx', '--ry', '--light-x', '--light-y'].forEach(name => card.style.removeProperty(name));
   }
   function track(event) {
-    if (reduced.matches) return;
+    if (reduced.matches || turning) return;
     point = { x: event.clientX, y: event.clientY };
     if (frame) return;
     frame = requestAnimationFrame(() => {
@@ -29,22 +31,38 @@ export function setupMoneyCard() {
     });
   }
   function flip() {
+    if (turning) return;
+    reset();
+    turning = true;
+    card.classList.add('is-turning');
     const hadFocus = card.contains(document.activeElement);
     flipped = !flipped;
     card.classList.toggle('is-flipped', flipped);
     front.inert = flipped; back.inert = !flipped;
     front.setAttribute('aria-hidden', String(flipped));
     back.setAttribute('aria-hidden', String(!flipped));
-    if (hadFocus) (flipped ? back : front).querySelector('.money-card-flip').focus({ preventScroll: true });
+    function finish() {
+      clearTimeout(turnTimer);
+      turning = false;
+      card.classList.remove('is-turning');
+      rotator.removeEventListener('transitionend', onEnd);
+      if (hadFocus) (flipped ? back : front).querySelector('.money-card-flip').focus({ preventScroll: true });
+    }
+    function onEnd(event) {
+      if (event.target === rotator && event.propertyName === 'transform') finish();
+    }
+    rotator.addEventListener('transitionend', onEnd);
+    turnTimer = setTimeout(finish, reduced.matches ? 0 : 900);
   }
   card.querySelectorAll('.money-card-flip').forEach(button => button.addEventListener('click', flip));
   scene.addEventListener('pointerdown', event => {
-    if (!event.isPrimary || event.button !== 0 || event.target.closest('button,a')) return;
+    if (turning || !event.isPrimary || event.button !== 0 || event.target.closest('button,a')) return;
     pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
     scene.setPointerCapture(event.pointerId);
     track(event); card.classList.add('is-pressed');
   });
   scene.addEventListener('pointermove', event => {
+    if (event.target.closest('button,a')) return;
     if (event.pointerType === 'mouse' || pointer?.id === event.pointerId) track(event);
   });
   scene.addEventListener('pointerup', event => {

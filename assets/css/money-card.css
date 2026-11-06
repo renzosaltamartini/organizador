@@ -19,3 +19,13 @@
 .money-card-totals strong{font-size:clamp(20px,3vw,32px);font-weight:500;overflow-wrap:anywhere;letter-spacing:-1px}
 @media(max-width:719px){#v-home .money-card-face{padding:23px 22px;gap:16px;border-radius:16px}.money-card-totals{gap:14px}}
 @media(prefers-reduced-motion:reduce){#v-home #money-card{transform:none;transition:none}.money-card-rotator{transition:none}}
+
+/* Hide mirrored controls as well as the face in WebKit's 3D compositor. */
+.money-card-face button{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.money-card-front{transform:rotateY(0deg) translateZ(1px)}
+#v-home .money-card-back{transform:rotateY(180deg) translateZ(1px)}
+.money-card-front{pointer-events:auto}
+.money-card-back{pointer-events:none}
+.is-flipped .money-card-front{pointer-events:none}
+.is-flipped .money-card-back{pointer-events:auto}
+.is-turning .money-card-face{pointer-events:none}
