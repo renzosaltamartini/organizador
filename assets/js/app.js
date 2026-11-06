@@ -1093,9 +1093,9 @@ function iniciar() {
         const content = await (await pdf.getPage(page)).getTextContent();
         extracted += ' ' + content.items.map(item => item.str).join(' ');
       }
-      const match = extracted.match(/ORGDATA-BEGIN([\\s\\S]*?)ORGDATA-END/);
+      const match = extracted.match(/ORGDATA-BEGIN([\s\S]*?)ORGDATA-END/);
       if (!match) throw new Error('Este PDF no contiene datos compatibles. Importá un PDF exportado desde Organizador.');
-      const data = fromBase64(match[1].replace(/\\s+/g,''));
+      const data = fromBase64(match[1].replace(/\s+/g,''));
       if (data.app !== 'organizador-gastos' || data.version !== 1 || !Array.isArray(data.entries)) throw new Error('Formato de gastos no compatible.');
       if (data.entries.length > 5000) throw new Error('El archivo tiene demasiados gastos.');
       const entries = data.entries.map(g => ({concepto:String(g.concepto || '').trim(),monto:Number(g.monto)}));
