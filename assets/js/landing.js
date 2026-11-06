@@ -24,7 +24,7 @@
       current = content.animate(
         opening ? [{height:'0px',opacity:0,transform:'translateY(-7px)'},{height:height+'px',opacity:1,transform:'translateY(0)'}] :
                   [{height:height+'px',opacity:1,transform:'translateY(0)'},{height:'0px',opacity:0,transform:'translateY(-7px)'}],
-        {duration:300,easing:'cubic-bezier(.2,.8,.2,1)'}
+        {duration:650,easing:'cubic-bezier(.2,.8,.2,1)'}
       );
       const animation = current;
       animation.onfinish = () => {
