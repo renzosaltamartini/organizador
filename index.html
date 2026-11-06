@@ -22,6 +22,23 @@
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/workspace.css">
 <link rel="stylesheet" href="/assets/css/preferences.css">
+<style>
+/* Pantalla de inicio minimalista: respeta el tema y el color de acento de la app. */
+#initial-loader.loading-screen{position:fixed;inset:0;z-index:110;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--tx);padding:24px;letter-spacing:normal;text-transform:none;transition:opacity .4s ease}
+#initial-loader.out{opacity:0;pointer-events:none}
+#initial-loader .simple-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:min(100%,300px);font-family:"Poppins",sans-serif;text-align:center}
+#initial-loader .simple-loader-icon{width:66px;height:66px;display:grid;place-items:center;border-radius:20px;background:color-mix(in srgb,var(--ac) 12%,var(--card));color:var(--ac);box-shadow:0 0 30px color-mix(in srgb,var(--ac) 17%,transparent);margin-bottom:22px}
+#initial-loader .simple-loader-icon .ic{width:31px;height:31px;stroke-width:1.8}
+#initial-loader .simple-loader h1{font-family:"Poppins",sans-serif;font-size:25px;font-weight:600;letter-spacing:-.045em;line-height:1.35;color:var(--tx);margin:0}
+#initial-loader .simple-loader h1 span{color:var(--ac)}
+#initial-loader .simple-loader p{font-family:"Poppins",sans-serif;color:var(--mut);font-size:12px;font-weight:400;letter-spacing:0;margin:8px 0 27px}
+#initial-loader .intro-progress{display:flex;gap:0;width:180px;height:5px;overflow:visible;border-radius:999px;background:color-mix(in srgb,var(--ac) 13%,var(--soft));box-shadow:none}
+#initial-loader .intro-progress span{display:block;flex:1;height:100%;background:transparent;transition:background .35s ease,box-shadow .35s ease}
+#initial-loader .intro-progress span:first-child{border-radius:999px 0 0 999px}
+#initial-loader .intro-progress span:last-child{border-radius:0 999px 999px 0}
+#initial-loader .intro-progress span.ready{background:var(--ac);box-shadow:0 0 10px color-mix(in srgb,var(--ac) 70%,transparent),0 0 20px color-mix(in srgb,var(--ac) 30%,transparent)}
+@media(prefers-reduced-motion:reduce){#initial-loader,#initial-loader .intro-progress span{transition:none}}
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -50,22 +67,12 @@
 </svg>
 
 <div id="initial-loader" class="full loading-screen" role="status" aria-label="Cargando Organizador">
- <div class="intro-brand" aria-hidden="true"><span class="intro-brand-mark">o</span>organizador<span>.</span></div>
- <div class="intro-center">
-  <div class="intro-scene" aria-hidden="true">
-   <div class="intro-orbit"></div><div class="intro-orbit intro-orbit-inner"></div>
-   <div class="intro-card intro-card-agenda"><svg class="ic"><use href="#i-cal"/></svg><div><i></i><i></i></div><span class="intro-card-check">✓</span></div>
-   <div class="intro-card intro-card-note"><svg class="ic"><use href="#i-note"/></svg><i></i><i></i><i></i></div>
-   <div class="intro-core"><span>o</span><span class="intro-core-dot"></span></div>
-   <span class="intro-spark intro-spark-one"></span><span class="intro-spark intro-spark-two"></span>
-  </div>
-  <p class="intro-eyebrow">UN MOMENTO PARA VOS</p>
-  <h1>Todo en su lugar<span>.</span></h1>
-  <p class="intro-description">Más espacio para lo que importa.</p>
-  <div class="intro-progress" id="intro-progress" role="progressbar" aria-label="Preparando tu espacio" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span></span><span></span><span></span><span></span><span></span></div>
-  <p class="intro-status">Preparando tu espacio<span aria-hidden="true">…</span></p>
+ <div class="simple-loader">
+  <div class="simple-loader-icon" aria-hidden="true"><svg class="ic"><use href="#i-cal"/></svg></div>
+  <h1>Organizador<span>.</span></h1>
+  <p>Preparando tu espacio…</p>
+  <div class="intro-progress" id="intro-progress" role="progressbar" aria-label="Progreso de carga" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span></span><span></span><span></span><span></span><span></span></div>
  </div>
- <div class="intro-footer" aria-hidden="true"><span>TU DÍA. A TU MANERA.</span><span class="intro-footer-line"></span><span>ORGANIZADOR</span></div>
 </div>
 
 <div id="login-modal" class="full entry" hidden>
