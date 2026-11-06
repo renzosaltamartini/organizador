@@ -373,7 +373,29 @@
  </div>
 </div>
 
-<script type="module" src="/assets/js/app.js"></script>
+<script>
+/* Recuperación si falla la inicialización o una versión anterior queda en caché. */
+(function () {
+  var loader = document.getElementById('initial-loader');
+  var login = document.getElementById('login-modal');
+  var app = document.getElementById('app-content');
+  function recover() {
+    if (!loader || !loader.isConnected || getComputedStyle(loader).display === 'none') return;
+    loader.style.pointerEvents = 'none';
+    loader.style.opacity = '0';
+    setTimeout(function () { if (loader.isConnected) loader.remove(); }, 500);
+    if (login && login.hidden && app && app.hidden) login.hidden = false;
+  }
+  window.addEventListener('error', function (event) {
+    if (event.target && event.target.tagName === 'SCRIPT') recover();
+  }, true);
+  window.addEventListener('unhandledrejection', function () {
+    if (app && app.hidden) recover();
+  });
+  setTimeout(recover, 8500);
+})();
+</script>
+<script type="module" src="/assets/js/app.js?v=20261106-fix2"></script>
 </body>
 </html>
 
