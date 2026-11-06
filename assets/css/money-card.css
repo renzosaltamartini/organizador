@@ -29,3 +29,13 @@
 .is-flipped .money-card-front{pointer-events:none}
 .is-flipped .money-card-back{pointer-events:auto}
 .is-turning .money-card-face{pointer-events:none}
+
+.money-card-actions{grid-column:1/-1;display:flex;justify-content:flex-end;align-items:center;gap:10px;position:relative;z-index:1}
+#v-home .money-visibility{display:grid;place-items:center;min-width:40px;min-height:40px;padding:8px;border:1px solid #ffffff45;border-radius:50%;background:#ffffff14;color:white;cursor:pointer}
+.money-visibility:hover{background:#ffffff2a}
+.money-visibility:focus-visible{outline:2px solid white;outline-offset:4px}
+.money-visibility .eye-slash{display:none}
+.amounts-concealed .money-visibility .eye-slash{display:block}
+.private-amount{position:relative;display:block;min-width:0}
+.amounts-concealed .private-amount>strong{visibility:hidden}
+.amounts-concealed .private-amount::after{content:"••••••";position:absolute;left:0;top:50%;transform:translateY(-50%);color:inherit;font-size:28px;letter-spacing:4px}

@@ -1,6 +1,30 @@
 export function setupMoneyCard() {
   const card = document.getElementById('money-card');
   if (!card) return;
+  const visibilityButtons = [...card.querySelectorAll('[data-money-visibility]')];
+  const amounts = [...card.querySelectorAll('.private-amount > strong')];
+  let concealed = false;
+  try { concealed = sessionStorage.getItem('money-concealed') === 'true'; } catch {}
+  function updateVisibility() {
+    card.classList.toggle('amounts-concealed', concealed);
+    amounts.forEach(amount => amount.setAttribute('aria-hidden', String(concealed)));
+    card.querySelectorAll('.private-amount').forEach(wrapper => {
+      if (concealed) wrapper.setAttribute('aria-label', 'Monto oculto');
+      else wrapper.removeAttribute('aria-label');
+    });
+    visibilityButtons.forEach(button => {
+      const label = concealed ? 'Mostrar montos' : 'Ocultar montos';
+      button.setAttribute('aria-label', label);
+      button.setAttribute('title', label);
+      button.setAttribute('aria-pressed', String(concealed));
+    });
+  }
+  visibilityButtons.forEach(button => button.addEventListener('click', () => {
+    concealed = !concealed;
+    updateVisibility();
+    try { sessionStorage.setItem('money-concealed', String(concealed)); } catch {}
+  }));
+  updateVisibility();
   const scene = card.parentElement;
   const front = card.querySelector('.money-card-front');
   const back = card.querySelector('.money-card-back');
