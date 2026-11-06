@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-title" content="Organizador" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,900;1,700;1,800;1,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- jsPDF y AutoTable para reportes PDF profesionales -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -27,7 +27,7 @@
 #initial-loader.loading-screen{position:fixed;inset:0;z-index:110;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--tx);padding:24px;letter-spacing:normal;text-transform:none;transition:opacity .45s ease}
 #initial-loader.out{opacity:0;pointer-events:none}
 #initial-loader .simple-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(100%,340px);text-align:center}
-#initial-loader .simple-loader h1{font-family:"Poppins",sans-serif;font-size:clamp(28px,6vw,36px);font-style:italic;font-weight:700;letter-spacing:-.055em;line-height:1.35;color:var(--tx);margin:0;animation:loader-enter .7s cubic-bezier(.2,.8,.2,1) both,loader-breathe 3.5s ease-in-out .7s infinite}
+#initial-loader .simple-loader h1{font-family:"Poppins",sans-serif;font-size:clamp(28px,6vw,36px);font-style:italic;font-weight:900;letter-spacing:-.045em;line-height:1.35;color:var(--tx);margin:0;animation:loader-enter .7s cubic-bezier(.2,.8,.2,1) both,loader-breathe 3.5s ease-in-out .7s infinite}
 #initial-loader .simple-loader h1 span{color:var(--ac)}
 #initial-loader .loader-status{position:relative;height:22px;width:100%;margin-top:13px;font-family:"Space Grotesk",sans-serif;font-size:13px;font-weight:400;letter-spacing:0;color:var(--mut);animation:loader-enter .7s ease .15s both}
 #initial-loader .loader-status span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;white-space:nowrap}
@@ -38,6 +38,10 @@
 @keyframes loader-message-first{0%,36%{opacity:1;transform:translateY(0)}44%,90%{opacity:0;transform:translateY(-5px)}96%,100%{opacity:1;transform:translateY(0)}}
 @keyframes loader-message-second{0%,39%{opacity:0;transform:translateY(5px)}47%,87%{opacity:1;transform:translateY(0)}95%,100%{opacity:0;transform:translateY(-5px)}}
 @media(prefers-reduced-motion:reduce){#initial-loader,#initial-loader .simple-loader h1,#initial-loader .loader-status,#initial-loader .loader-status span{animation:none;transition:none}#initial-loader .loader-status span:last-child{display:none}}
+/* Resumen: conservar solo la agenda y los accesos principales. Los nodos de datos se mantienen ocultos para no romper el JS. */
+#v-panel .dashboard-side,#v-panel .next-panel{display:none!important}
+#v-panel .dashboard-grid{display:grid;grid-template-columns:minmax(0,1fr)!important}
+#v-panel .dashboard-grid>.today-panel{grid-column:1!important;grid-row:auto!important}
 </style>
 </head>
 <body>
@@ -68,7 +72,7 @@
 
 <div id="initial-loader" class="full loading-screen" role="status" aria-label="Cargando Organizador">
  <div class="simple-loader">
-  <h1>Organizador<span>.</span></h1>
+  <h1>ORGANIZADOR<span>.</span></h1>
   <div class="loader-status" aria-label="Preparando tu espacio y cargando datos">
    <span>Preparando tu espacio…</span>
    <span>Cargando datos…</span>
