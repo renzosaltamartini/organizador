@@ -1,3 +1,4 @@
+import { setupMoneyCard } from "./features/money-card.js";
 import { animateAmount } from "./features/amounts.js";
 import { setupAccounts } from "./features/accounts.js";
 import { setupNotifications } from "./features/notifications.js";
@@ -18,6 +19,7 @@ setupDrive({ auth, GoogleAuthProvider, reauthenticateWithPopup, onAuthStateChang
 let base = '', uName = '';
 const R = p => ref(db, base + p);
 const accounts = setupAccounts({ $, R, onValue, set });
+setupMoneyCard();
 
 function setCustom(hex) { const r = $('cat-custom'), cu = r.parentNode; r.value = hex; $('cat-color').value = hex; cu.style.setProperty('--c', hex); cu.classList.add('set'); }
 $('cat-color').addEventListener('input', e => { setCustom(e.target.value); $('cat-custom').checked = true; });
@@ -191,6 +193,8 @@ function renderHome() {
     return `<button class="reminder-row" data-go="rec"><span class="reminder-bullet" aria-hidden="true"></span><span>${esc(String(title).split('\n')[0])}</span><svg class="ic"><use href="#i-r"/></svg></button>`;
   }).join('') : '<div class="dashboard-empty compact"><p>Nada pendiente por acá.</p><button class="text-action" data-create="recordatorio">Anotar algo ↗</button></div>';
   animateAmount($('home-balance'), ingreso - gasT);
+  animateAmount($('home-income'), ingreso);
+  animateAmount($('home-expenses'), gasT);
   $('home-balance').classList.toggle('negative', ingreso - gasT < 0);
   $('home-notes').innerHTML = notas.length ? notas.slice(0, 2).map(note => {
     const content = lines(noteHtml(note));

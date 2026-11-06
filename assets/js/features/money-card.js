@@ -1,0 +1,60 @@
+export function setupMoneyCard() {
+  const card = document.getElementById('money-card');
+  if (!card) return;
+  const scene = card.parentElement;
+  const front = card.querySelector('.money-card-front');
+  const back = card.querySelector('.money-card-back');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let flipped = false, pointer = null, frame = 0, point = null;
+  function reset() {
+    cancelAnimationFrame(frame); frame = 0; point = null;
+    card.classList.remove('is-tracking', 'is-pressed');
+    ['--rx', '--ry', '--light-x', '--light-y'].forEach(name => card.style.removeProperty(name));
+  }
+  function track(event) {
+    if (reduced.matches) return;
+    point = { x: event.clientX, y: event.clientY };
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      const rect = scene.getBoundingClientRect();
+      const x = Math.max(-1, Math.min(1, (point.x - rect.left) / rect.width * 2 - 1));
+      const y = Math.max(-1, Math.min(1, (point.y - rect.top) / rect.height * 2 - 1));
+      card.classList.add('is-tracking');
+      // The touched edge recedes, like pressing a physical card.
+      card.style.setProperty('--rx', y * 12 + 'deg');
+      card.style.setProperty('--ry', -x * 15 + 'deg');
+      card.style.setProperty('--light-x', (x + 1) * 50 + '%');
+      card.style.setProperty('--light-y', (y + 1) * 50 + '%');
+    });
+  }
+  function flip() {
+    const hadFocus = card.contains(document.activeElement);
+    flipped = !flipped;
+    card.classList.toggle('is-flipped', flipped);
+    front.inert = flipped; back.inert = !flipped;
+    front.setAttribute('aria-hidden', String(flipped));
+    back.setAttribute('aria-hidden', String(!flipped));
+    if (hadFocus) (flipped ? back : front).querySelector('.money-card-flip').focus({ preventScroll: true });
+  }
+  card.querySelectorAll('.money-card-flip').forEach(button => button.addEventListener('click', flip));
+  scene.addEventListener('pointerdown', event => {
+    if (!event.isPrimary || event.button !== 0 || event.target.closest('button,a')) return;
+    pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    scene.setPointerCapture(event.pointerId);
+    track(event); card.classList.add('is-pressed');
+  });
+  scene.addEventListener('pointermove', event => {
+    if (event.pointerType === 'mouse' || pointer?.id === event.pointerId) track(event);
+  });
+  scene.addEventListener('pointerup', event => {
+    if (pointer?.id !== event.pointerId) return;
+    const dx = event.clientX - pointer.x, dy = event.clientY - pointer.y;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) flip();
+    pointer = null; reset();
+  });
+  scene.addEventListener('pointerleave', () => { if (!pointer) reset(); });
+  scene.addEventListener('pointercancel', () => { pointer = null; reset(); });
+  scene.addEventListener('lostpointercapture', () => { pointer = null; reset(); });
+  reduced.addEventListener('change', reset);
+}
